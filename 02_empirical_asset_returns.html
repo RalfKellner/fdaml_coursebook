@@ -1,0 +1,2201 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Empirical analysis of asset returns &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_empirical_asset_returns';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models for univariate asset returns" href="03_univariate_models.html" />
+    <link rel="prev" title="Financial markets" href="01_introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Financial markets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Empirical analysis of asset returns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_univariate_models.html">Models for univariate asset returns</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/02_empirical_asset_returns.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Empirical analysis of asset returns</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-random-variables">Univariate Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-perspective">Time series perspective</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-correlation-and-volatility-clustering">Auto-correlation and volatility clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-over-time">Aggregation over time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stylized-facts-about-asset-returns">Stylized facts about asset returns</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="empirical-analysis-of-asset-returns">
+<h1>Empirical analysis of asset returns<a class="headerlink" href="#empirical-analysis-of-asset-returns" title="Link to this heading">#</a></h1>
+<p>The most obvious measure for analyzing the value of an asset is its price which tells us how much money we need to invest to purchase a unit of the asset. However, prices are hard to compare and come along with undesirable statistical properties. The plot below illustrates the price development for a few stocks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During this course you are often going to see tickers or symbols instead of company names, respectively. Usually, these are abbreviations of the company name which are used on exchanges.</p>
+</div>
+<p>We observe that these prices are on different levels, some of them seem to remain within a certain numerical range while others steadily increase over time. Furthermore, even though the graphic provides some intuition about the price development of an asset, it is rather meaningless if we want to compare the profitability as well as the risk of investments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">df_close</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/fmp/dow_close.csv&quot;</span><span class="p">)</span>
+<span class="n">df_close</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_close</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+<span class="n">df_close</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_volume</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/fmp/dow_volume.csv&quot;</span><span class="p">)</span>
+<span class="n">df_volume</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_volume</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+<span class="n">df_volume</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/fmp/dow_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">df_returns</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+<span class="n">df_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">df_close</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="s2">&quot;CSCO&quot;</span><span class="p">,</span> <span class="s2">&quot;DD&quot;</span><span class="p">,</span> <span class="s2">&quot;PG&quot;</span><span class="p">,</span> <span class="s2">&quot;KO&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Stock prices&quot;</span><span class="p">)</span>
+<span class="c1">#df_returns.loc[:, [&quot;AAPL&quot;, &quot;CSCO&quot;, &quot;DD&quot;, &quot;PG&quot;, &quot;KO&quot;]].plot(ax = axs[1])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1dc97034abec2fffd07f5b1ea2132044444e4b0b4190c63fd259058f5e60e036.png" src="_images/1dc97034abec2fffd07f5b1ea2132044444e4b0b4190c63fd259058f5e60e036.png" />
+</div>
+</div>
+<p>Thus, instead of prices themselves, one usually converts them into discrete returns which are the percentage change over a fixed time period. Given <span class="math notranslate nohighlight">\(s_t\)</span> as the price of an asset at time <span class="math notranslate nohighlight">\(t\)</span>, we calculate the discrete return <span class="math notranslate nohighlight">\(r_t\)</span> by:</p>
+<div class="math notranslate nohighlight">
+\[
+r_t = \frac{s_t - s_{t-1}}{s_{t-1}} = \frac{s_t}{s_{t-1}} - 1
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually one distinguishes between a random variable <span class="math notranslate nohighlight">\(S_t\)</span> and a realization <span class="math notranslate nohighlight">\(s_t\)</span> by using large or small letters. However, to keep the notation simple, we always use small letters and assume the reader is able to distinguish between the concept of random variables and its realizations.</p>
+</div>
+<p>Below, we observe the discrete returns which correspond to the prices above. They seem to wander around zero over time and remain withing a numerical range. These are better properties when comparing them and are going to be formalized later in the course by the concept of stationarity. They are called discrete because the way how they are calculated assume that prices are tracked at discrete points in time. If one assumes continuous trading over time, the value change is quantified by log-returns <span class="math notranslate nohighlight">\(z_t\)</span> which are determined by:</p>
+<div class="math notranslate nohighlight">
+\[
+z_t = \ln \left( \frac{s_t}{s_{t-1}} \right) = \ln \left(s_t\right) - \ln \left(s_{t-1}\right)
+\]</div>
+<p>For the moment, just keep in mind that discrete and log-returns are very similar if the value change of the corresponding price is not too large and the both have different mathematical properties which can be of advantage for different applications. The mathematical relationship between both return definitions is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+z_t = \ln \left(1 + r_t\right) \\
+r_t = e^{z_t} - 1
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">df_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="s2">&quot;CSCO&quot;</span><span class="p">,</span> <span class="s2">&quot;DD&quot;</span><span class="p">,</span> <span class="s2">&quot;PG&quot;</span><span class="p">,</span> <span class="s2">&quot;KO&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Discrete asset returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a23d5b02dc30fa44f844578de5430c41e246f4a1caba09d235ae9c16e8a5ba7f.png" src="_images/a23d5b02dc30fa44f844578de5430c41e246f4a1caba09d235ae9c16e8a5ba7f.png" />
+</div>
+</div>
+<section id="random-variables">
+<h2>Random variables<a class="headerlink" href="#random-variables" title="Link to this heading">#</a></h2>
+<p>Asset returns are random variables so let us quickly review the concept of a random variable. If an outcome of an event is uncertain, we try to quantify this uncertainty via probabilities for all possible outcomes. Formally, a probability distribution and the concept of a random variable is based upon:</p>
+<ol class="arabic simple">
+<li><p>A set of all possible outcomes <span class="math notranslate nohighlight">\(\Omega = \{ \omega_1, ..., \omega_n  \}\)</span></p></li>
+<li><p><strong>Events</strong> which are subsets <span class="math notranslate nohighlight">\(A \subseteq \Omega\)</span> and a set of events <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> called <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra, which fulfills three requirements:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega \in \mathcal{F}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A \in \mathcal{F} \Rightarrow \bar{A} \in \mathcal{F}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A_1, A_2, ... \in \mathcal{F} \Rightarrow \bigcup\limits_{i \in \mathbb{N}} A_i \in \mathcal{F}\)</span></p></li>
+</ol>
+</li>
+<li><p>A mapping called <strong>probability</strong> <span class="math notranslate nohighlight">\(P: \mathcal{F} \rightarrow [0,1]\)</span>  which assigns numbers <span class="math notranslate nohighlight">\([0,1]\)</span> to every event <span class="math notranslate nohighlight">\(A\)</span>. The probability mapping must fulfill the axioms of probability:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(P(A \geq 0)~ \forall A_i~ \in \mathcal{F}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\Omega) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left(\bigcup\limits_{i = 1}^{\infty} A_i \right) = \sum_{i = 1}^{\infty} P(A_i) \forall A_i \in \mathcal{F}\)</span> with <span class="math notranslate nohighlight">\(A_j \cap A_k = \emptyset\)</span>, <span class="math notranslate nohighlight">\(j \neq k\)</span></p></li>
+</ol>
+</li>
+</ol>
+<p>Usually, we are not interested in the event itself but in a number associated with the event, e.g., units sold, revenue, price, … We call these numbers <strong>random numbers</strong> which are realizations of <strong>random variables</strong>. A one-dimensional random variable <span class="math notranslate nohighlight">\(x\)</span> maps the set of outcomes <span class="math notranslate nohighlight">\(\Omega\)</span> to real numbers:</p>
+<div class="math notranslate nohighlight">
+\[x: \Omega \to \mathbb{R}\]</div>
+<div class="math notranslate nohighlight">
+\[\omega \to x(\omega)\]</div>
+<p>For instance a coin tossing game with outcomes <span class="math notranslate nohighlight">\(\omega_1\)</span>: <em>head</em> and <span class="math notranslate nohighlight">\(\omega_2\)</span>: <em>tail</em>. If <em>head</em> is the outcome, we win 5 bucks and if <em>tail</em> is the outcome we loose 5 bucks. The random number <span class="math notranslate nohighlight">\(x\)</span> describing our profit for a coin toss is defined by:</p>
+<p><span class="math notranslate nohighlight">\(x(\omega_1) = 5\)</span> and <span class="math notranslate nohighlight">\(x(\omega_2) = -5\)</span>. More technically speaking <span class="math notranslate nohighlight">\(x\)</span> must be <strong>measurable</strong>. Given a subset of <span class="math notranslate nohighlight">\(B \in \mathbb{R}\)</span>, the inverse image of <span class="math notranslate nohighlight">\(B\)</span> with respect to <span class="math notranslate nohighlight">\(X\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[x^{-1}(B) = \lbrace \omega \in \Omega | x(\omega) \in B \rbrace \]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> be a set of subsets from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(x\)</span> is measurable if <span class="math notranslate nohighlight">\(x^{-1}(B) \in \mathcal{F}\)</span> for all <span class="math notranslate nohighlight">\(B \in \mathcal{B}\)</span>. For the probability measure of <span class="math notranslate nohighlight">\(x\)</span>, it holds that:</p>
+<div class="math notranslate nohighlight">
+\[P_x(x \in B) = P(x^{-1}(B)), B \in \mathcal{B}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(x\)</span> is not just a measure mapping outcomes to numbers, but rather maps from one probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, P)\)</span> to probability space <span class="math notranslate nohighlight">\((\mathbb{R}, \mathcal{B}, P_x)\)</span>.</p>
+<section id="univariate-random-variables">
+<h3>Univariate Random Variables<a class="headerlink" href="#univariate-random-variables" title="Link to this heading">#</a></h3>
+<p>Random variables can be <strong>discrete</strong> or <strong>continuous</strong>. The former has only a finite amount of realizations (or infinite countable realizations), while the latter can exhibit an infinite amount of different realizations.</p>
+<p>For a discrete random variable, the function assigning probabilities to its realizations is called <strong>probability mass function</strong> and is given by a list-alike definition:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+			P_x(\{ x \}) &amp; \text{for } x  \\
+			0 &amp; \, \text{else}
+         \end{cases}
+\end{split}\]</div>
+<p>The function</p>
+<div class="math notranslate nohighlight">
+\[
+F(x)  = P_x\left( (-\infty, x] \right) = \sum_{x_i \leq x} f(x_i)
+\]</div>
+<p>is called <strong>cumulative distribution function</strong>.</p>
+<p>For a continuous random variable, the probability of a concrete realization is equal to 0, <span class="math notranslate nohighlight">\(P(x = 0) = 0\)</span>. Instead of directly defining a function mapping probabilities to subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, we define a <strong>probability density function</strong> <span class="math notranslate nohighlight">\(f(x)\)</span> which enables us to determine probabilities by integration. The domain of this function must be the set of all possibles states of <span class="math notranslate nohighlight">\(x\)</span>. Furthermore, it must hold the <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> and that <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x)dx = 1\)</span>. With this definition the corresponding cumulative distribution function is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = \int_{-\infty}^{x} f(t)dt
+\]</div>
+<p>Probability distributions can be compared by numbers which summarize their characteristics such as location, variation, shape and so on. For this purpose, ordinary and central moments of the distributions are used.</p>
+<p>The <strong>expectation</strong> or <strong>expected value</strong> of a random variable if defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+E(x) = \begin{cases}
+			\sum_i x_i \cdot f(x_i) &amp;  x   \text{ discrete} \\
+			\int_{-\infty}^{\infty} x \cdot f(x) dx &amp; x \text{ continuous}
+       \end{cases}
+\end{split}\]</div>
+<p>The expectation is linear which means: <span class="math notranslate nohighlight">\(E(x + y) = E(x) + E(y)\)</span> and <span class="math notranslate nohighlight">\(E(ax) = a E(x)\)</span> holds. In addition the relation <span class="math notranslate nohighlight">\(E(a + bx) = a + b E(x)\)</span> can be useful in some cases.</p>
+<p>The <strong>variance</strong> measures how much realizations of a random variable vary and is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Var(x) = E(x-E(x))^2 =
+			\begin{cases}
+			\sum_i (x_i - E(x))^2 \cdot f(x_i)   &amp; x \text{ discrete} \\
+			\int_{-\infty}^{\infty} (x - E(x))^2 \cdot f(x) dx  &amp; x \text{ continuous}
+			\end{cases}
+\end{split}\]</div>
+<p>For the variance, it holds that <span class="math notranslate nohighlight">\(Var(a + bx) = b^2 Var(x)\)</span>. The square root of the variance defines the <strong>standard deviation</strong> which is often denoted by the symbol <span class="math notranslate nohighlight">\(\sigma_x\)</span>.</p>
+<p>If a probability distribution is not symmetric it is skewed. To quantify <strong>skewness</strong>, we use:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{E \left[\left(x - E(x)\right)^3 \right]}{\sigma_x^3}  
+\]</div>
+<p>For negative values, the distribution is left skewed and for positive values, the distribution is right skewed. In addition of skewness, <strong>kurtosis</strong> is also often used for the characterization of probability distributions.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{E \left[\left(x - E(x)\right)^4 \right]}{\sigma_x^4}  
+\]</div>
+<p>To characterize the level of kurtosis, the normal distribution is usually taken as a reference. It exhibits a kurtosis of <span class="math notranslate nohighlight">\(3\)</span>. If distributions exhibit higher kurtosis than <span class="math notranslate nohighlight">\(3\)</span>, we speak of excess kurtosis and leptokurtic distributions. These distributions are characterized by higher probability mass in the tails of the distribution. This means, extreme outcomes of the random variable are more likely. If a distribution exhibits a kurtosis lower then <span class="math notranslate nohighlight">\(3\)</span>, we say it is platokurtic.</p>
+<p>Besides those four characteristic measures, quantiles of probability distributions can be used for informational purposes. Let us denote <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span> as the inverse of the cumulative probability density function. Given some probability <span class="math notranslate nohighlight">\(\alpha\)</span>, we say <span class="math notranslate nohighlight">\(x_{\alpha}\)</span> is the <span class="math notranslate nohighlight">\(\alpha\)</span> <strong>quantile</strong> of <span class="math notranslate nohighlight">\(x\)</span>, if:</p>
+<div class="math notranslate nohighlight">
+\[
+1 - F(x_{\alpha}) \geq 1 - \alpha ~~\text{and } F(x_{\alpha}) \geq \alpha
+\]</div>
+<p>For instance assume you own an insurance company and <span class="math notranslate nohighlight">\(x\)</span> represents losses in million due to damages of houses for a year. A value of <span class="math notranslate nohighlight">\(x_{0.95} = 1000\)</span> tells us that losses higher than 1000 will only be exceeded with a probability of 95%. If another company has a value which is higher, e.g., 1100, we immediately know that the latter company faces a greater probability of high losses. At the same time it is possible that both companies have the same expectation for such losses.</p>
+</section>
+</section>
+<section id="descriptive-statistics">
+<h2>Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
+<p>If asset returns are understood as a random variable, the question arises which distributions are suitable for modeling asset returns. In order to investigate this question, we first look at the empirical distribution of daily returns of Apple shares as an example. We observe a distribution which seems to be centered around zero and is rather symmetric. However, negative returns seem to be a little bit more extreme than their positive counterparts. Comparing the empirical densities with the one of a normal distribution also reveals excess kurtosis indicating a leptokurtic distribution. While the visualization is quite informative, we run into problems if we want to compare a larger number of asset return distributions. This is why descriptive statistics are used to quantify characteristics of empirical data such as the center, the variation, skewness and excess kurtosis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">norm</span>
+
+<span class="c1"># Selecting Apple</span>
+<span class="n">aapl_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot the histogram for AAPL returns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;AAPL Returns&#39;</span><span class="p">)</span>
+
+<span class="c1"># Normal Distribution Fit</span>
+<span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal Dist Fit&#39;</span><span class="p">)</span>
+
+<span class="c1"># t distribution fit</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">p_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_t</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;T Dist Fit&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/90f763b6a25c9f2761fbce0ba8139dabc28f2319ebbb64677f7c5a7f89f3d7a6.png" src="_images/90f763b6a25c9f2761fbce0ba8139dabc28f2319ebbb64677f7c5a7f89f3d7a6.png" />
+</div>
+</div>
+<p>Important descriptive statistics are the sample mean, standard deviation, skewness and kurtosis. The sample mean (<span class="math notranslate nohighlight">\(\bar{x}\)</span>) is calculated as the sum of all observed values <span class="math notranslate nohighlight">\(\lbrace x_1, ..., x_n \rbrace\)</span> divided by the number of observations <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\]</div>
+<p>The sample standard deviation (s) is calculated as the square root of the sample variance, which in turn is the sum of squared deviations from the mean, divided by the number of observations (minus one):</p>
+<div class="math notranslate nohighlight">
+\[
+s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+\]</div>
+<p>The skewness is the average of standardized observations to the power of three. To avoid bias, the definition for the skewness (g1​) below is calculated using the adjusted Fisher-Pearson standardized moment coefficient:</p>
+<div class="math notranslate nohighlight">
+\[
+g_1 = \frac{n}{(n-1)(n-2)} \sum \left( \frac{x_i - \bar{x}}{s} \right)^3
+\]</div>
+<p>Kurtosis is the average of standardized observations to the power of four. Again, controlling for bias, the empirical estimator is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+g_2 = \left( \frac{n(n+1)}{(n-1)(n-2)(n-3)} \sum \left( \frac{x_i - \bar{x}}{s} \right)^4 \right) - \frac{3(n-1)^2}{(n-2)(n-3)}
+\]</div>
+<p>In short, the sample mean provides information regarding the center of the distribution, the standard deviation quantifies the average level of deviations from the mean, negative (positive) values for <span class="math notranslate nohighlight">\(g_1\)</span> indicate a left-skewed (right-skewed) distribution, a value higher than <span class="math notranslate nohighlight">\(3\)</span> for <span class="math notranslate nohighlight">\(g_2\)</span> indicates excess kurtosis and a leptokurtic distribution. Leptokurtic distributions have more probability mass in the tails of the distribution. This means that extreme negative or positive realizations tend to occur more often. Especially the combination of a heavy tailed left-skewed distribution implies more risk for investors as negative values tend to be higher in absolute terms than positive values. To examine extreme values in more detail, one can take a look at empirical quantiles at levels such as <span class="math notranslate nohighlight">\(1\%, 5\%, 95\%, 99\%\)</span>.</p>
+<p>The table below shows the sample mean, standard deviation, skewness, kurtosis, the <span class="math notranslate nohighlight">\(5\%\)</span> and <span class="math notranslate nohighlight">\(95\%\)</span> quantile for the discrete daily returns of companies which have been in the Dow Jones since 2019 (and which exited since then). We observe that the mean is close to zero for all companies, approximately the half of all companies have left skewed distributions while all distributions are leptokurtic. Extreme values seem to start around <span class="math notranslate nohighlight">\(0.02\)</span> in absolute size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mssk_daily</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">df_returns</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">skew</span><span class="p">(),</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(),</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mssk_daily</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;q05&quot;</span><span class="p">,</span> <span class="s2">&quot;q95&quot;</span><span class="p">]</span>
+<span class="n">mssk_daily</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>skewness</th>
+      <th>kurtosis</th>
+      <th>q05</th>
+      <th>q95</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>0.0013</td>
+      <td>0.0200</td>
+      <td>-0.0362</td>
+      <td>5.3284</td>
+      <td>-0.0305</td>
+      <td>0.0308</td>
+    </tr>
+    <tr>
+      <th>AMGN</th>
+      <td>0.0005</td>
+      <td>0.0159</td>
+      <td>0.5581</td>
+      <td>6.7786</td>
+      <td>-0.0223</td>
+      <td>0.0236</td>
+    </tr>
+    <tr>
+      <th>AXP</th>
+      <td>0.0010</td>
+      <td>0.0234</td>
+      <td>1.2444</td>
+      <td>18.3518</td>
+      <td>-0.0307</td>
+      <td>0.0326</td>
+    </tr>
+    <tr>
+      <th>BA</th>
+      <td>0.0001</td>
+      <td>0.0314</td>
+      <td>0.2573</td>
+      <td>12.3020</td>
+      <td>-0.0430</td>
+      <td>0.0427</td>
+    </tr>
+    <tr>
+      <th>CAT</th>
+      <td>0.0011</td>
+      <td>0.0203</td>
+      <td>-0.2173</td>
+      <td>4.4383</td>
+      <td>-0.0307</td>
+      <td>0.0323</td>
+    </tr>
+    <tr>
+      <th>CRM</th>
+      <td>0.0009</td>
+      <td>0.0239</td>
+      <td>0.7651</td>
+      <td>13.8813</td>
+      <td>-0.0350</td>
+      <td>0.0346</td>
+    </tr>
+    <tr>
+      <th>CSCO</th>
+      <td>0.0004</td>
+      <td>0.0175</td>
+      <td>-0.5776</td>
+      <td>12.0480</td>
+      <td>-0.0243</td>
+      <td>0.0240</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>0.0007</td>
+      <td>0.0220</td>
+      <td>-0.2623</td>
+      <td>22.4888</td>
+      <td>-0.0279</td>
+      <td>0.0306</td>
+    </tr>
+    <tr>
+      <th>DD</th>
+      <td>0.0003</td>
+      <td>0.0224</td>
+      <td>0.1582</td>
+      <td>8.6776</td>
+      <td>-0.0326</td>
+      <td>0.0316</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>0.0003</td>
+      <td>0.0210</td>
+      <td>0.4819</td>
+      <td>8.8903</td>
+      <td>-0.0299</td>
+      <td>0.0323</td>
+    </tr>
+    <tr>
+      <th>DOW</th>
+      <td>0.0006</td>
+      <td>0.0235</td>
+      <td>-0.4171</td>
+      <td>13.8651</td>
+      <td>-0.0321</td>
+      <td>0.0358</td>
+    </tr>
+    <tr>
+      <th>GS</th>
+      <td>0.0010</td>
+      <td>0.0203</td>
+      <td>0.2396</td>
+      <td>10.3928</td>
+      <td>-0.0277</td>
+      <td>0.0300</td>
+    </tr>
+    <tr>
+      <th>HD</th>
+      <td>0.0009</td>
+      <td>0.0177</td>
+      <td>-1.0515</td>
+      <td>18.3706</td>
+      <td>-0.0247</td>
+      <td>0.0243</td>
+    </tr>
+    <tr>
+      <th>HON</th>
+      <td>0.0006</td>
+      <td>0.0168</td>
+      <td>0.1353</td>
+      <td>11.4106</td>
+      <td>-0.0251</td>
+      <td>0.0238</td>
+    </tr>
+    <tr>
+      <th>IBM</th>
+      <td>0.0007</td>
+      <td>0.0166</td>
+      <td>-0.3020</td>
+      <td>10.2161</td>
+      <td>-0.0210</td>
+      <td>0.0228</td>
+    </tr>
+    <tr>
+      <th>INTC</th>
+      <td>0.0004</td>
+      <td>0.0245</td>
+      <td>-0.2603</td>
+      <td>9.2241</td>
+      <td>-0.0348</td>
+      <td>0.0342</td>
+    </tr>
+    <tr>
+      <th>JNJ</th>
+      <td>0.0003</td>
+      <td>0.0123</td>
+      <td>0.2140</td>
+      <td>8.5165</td>
+      <td>-0.0164</td>
+      <td>0.0164</td>
+    </tr>
+    <tr>
+      <th>JPM</th>
+      <td>0.0008</td>
+      <td>0.0197</td>
+      <td>0.3889</td>
+      <td>13.7358</td>
+      <td>-0.0280</td>
+      <td>0.0282</td>
+    </tr>
+    <tr>
+      <th>KO</th>
+      <td>0.0004</td>
+      <td>0.0133</td>
+      <td>-0.7339</td>
+      <td>9.0997</td>
+      <td>-0.0174</td>
+      <td>0.0185</td>
+    </tr>
+    <tr>
+      <th>MCD</th>
+      <td>0.0006</td>
+      <td>0.0144</td>
+      <td>0.4149</td>
+      <td>36.4045</td>
+      <td>-0.0176</td>
+      <td>0.0187</td>
+    </tr>
+    <tr>
+      <th>MMM</th>
+      <td>-0.0001</td>
+      <td>0.0177</td>
+      <td>-0.4014</td>
+      <td>8.2716</td>
+      <td>-0.0249</td>
+      <td>0.0256</td>
+    </tr>
+    <tr>
+      <th>MRK</th>
+      <td>0.0007</td>
+      <td>0.0144</td>
+      <td>-0.1012</td>
+      <td>6.5922</td>
+      <td>-0.0204</td>
+      <td>0.0211</td>
+    </tr>
+    <tr>
+      <th>MSFT</th>
+      <td>0.0013</td>
+      <td>0.0189</td>
+      <td>-0.0097</td>
+      <td>7.1988</td>
+      <td>-0.0284</td>
+      <td>0.0281</td>
+    </tr>
+    <tr>
+      <th>NKE</th>
+      <td>0.0004</td>
+      <td>0.0206</td>
+      <td>0.2306</td>
+      <td>9.6163</td>
+      <td>-0.0290</td>
+      <td>0.0294</td>
+    </tr>
+    <tr>
+      <th>PFE</th>
+      <td>-0.0000</td>
+      <td>0.0168</td>
+      <td>0.2927</td>
+      <td>4.3899</td>
+      <td>-0.0240</td>
+      <td>0.0273</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>0.0006</td>
+      <td>0.0131</td>
+      <td>0.1823</td>
+      <td>12.2132</td>
+      <td>-0.0176</td>
+      <td>0.0171</td>
+    </tr>
+    <tr>
+      <th>RTX</th>
+      <td>0.0006</td>
+      <td>0.0205</td>
+      <td>0.0731</td>
+      <td>12.0318</td>
+      <td>-0.0285</td>
+      <td>0.0284</td>
+    </tr>
+    <tr>
+      <th>TRV</th>
+      <td>0.0008</td>
+      <td>0.0176</td>
+      <td>-1.5273</td>
+      <td>23.3698</td>
+      <td>-0.0234</td>
+      <td>0.0244</td>
+    </tr>
+    <tr>
+      <th>UNH</th>
+      <td>0.0008</td>
+      <td>0.0184</td>
+      <td>-0.0529</td>
+      <td>13.1886</td>
+      <td>-0.0248</td>
+      <td>0.0249</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>0.0007</td>
+      <td>0.0174</td>
+      <td>0.2556</td>
+      <td>10.4159</td>
+      <td>-0.0258</td>
+      <td>0.0243</td>
+    </tr>
+    <tr>
+      <th>VZ</th>
+      <td>0.0001</td>
+      <td>0.0130</td>
+      <td>0.3037</td>
+      <td>7.0280</td>
+      <td>-0.0199</td>
+      <td>0.0185</td>
+    </tr>
+    <tr>
+      <th>WBA</th>
+      <td>-0.0005</td>
+      <td>0.0216</td>
+      <td>-0.1337</td>
+      <td>4.6792</td>
+      <td>-0.0326</td>
+      <td>0.0328</td>
+    </tr>
+    <tr>
+      <th>WMT</th>
+      <td>0.0007</td>
+      <td>0.0137</td>
+      <td>-0.0294</td>
+      <td>15.2414</td>
+      <td>-0.0183</td>
+      <td>0.0184</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>0.0008</td>
+      <td>0.0212</td>
+      <td>0.0495</td>
+      <td>4.8271</td>
+      <td>-0.0317</td>
+      <td>0.0340</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="time-series-perspective">
+<h2>Time series perspective<a class="headerlink" href="#time-series-perspective" title="Link to this heading">#</a></h2>
+<p>The histogram and descriptive statistics provide an unconditional perspective. In this context, unconditional means we examine certain characteristics over time without taking into account the current situation at time <span class="math notranslate nohighlight">\(t\)</span>. However, financial markets tend to move through varying market conditions such as booming periods as well as times of financial turmoil and crisis. Given, we are currently in a tensed economic situation, our expectation regarding profits and risk may be different in comparison to a booming period with promising economic conditions. This is a conditional perspective. <em>Conditional</em> we are in a good (adverse) state, we expect different things. This is what can be better examined when we illustrate the time-series of asset returns. A time series is sequence of observations in chronological order.</p>
+<section id="auto-correlation-and-volatility-clustering">
+<h3>Auto-correlation and volatility clustering<a class="headerlink" href="#auto-correlation-and-volatility-clustering" title="Link to this heading">#</a></h3>
+<p>In the figure below, we observe the time series of daily returns and absolute daily returns for Dow Jones constituents over the past years. While the illustration does not allow to precisely follow individual developments, it reveals an important pattern. It appears that absolute return levels vary over time and occur in clusters. As the mean of daily returns is close to zero, this means that deviations from the mean vary over time and exhibit some form of time-specific dependence. This phenomenon is known as <em>volatility clustering</em>. Conditional, we currently observe a large deviation form the mean, tomorrow’s deviation from the mean may also be large.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># First plot for daily returns</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_returns</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Daily Returns of Dow Jones Industrial Average Components&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Daily Returns&#39;</span><span class="p">)</span>
+
+<span class="c1"># Second plot for absolute values over time</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_returns</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>  <span class="c1"># Use .abs() for absolute values</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Absolute Daily Returns of Dow Jones Industrial Average Components&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absolute Daily Returns&#39;</span><span class="p">)</span>
+
+<span class="c1"># Place a legend outside of the figure</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">),</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fc4306b50d33985248f16dfc83dd0a6bfd68a819b9340b35c921ed8f27bed386.png" src="_images/fc4306b50d33985248f16dfc83dd0a6bfd68a819b9340b35c921ed8f27bed386.png" />
+</div>
+</div>
+<p>To quantify and examine the extent of dependence between observations, we can use the auto-covariance or auto-correlation, respectively. Remember, that the covariance between two random numbers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Cov}(x, y) = E\left[ (x - \mu_x)(y - \mu_y) \right]
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_x, \mu_y\)</span> are the mean of <span class="math notranslate nohighlight">\(x, y\)</span>, respectively. The Bravais-Pearson correlation is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{x,y} = \frac{\text{Cov}(x, y)}{\sigma_x \sigma_y}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y\)</span> are the standard deviation of <span class="math notranslate nohighlight">\(x, y\)</span>, respectively. The correlation is the standardized version of covariance and is bounded in the range <span class="math notranslate nohighlight">\([-1, 1]\)</span>. Covariance and correlation quantify the level of linear dependence between two random variables.</p>
+<p>For a time-series, we can adapt this concept and quantify the auto-covariance. The auto-covariance function measures the covariance of a process with itself at different times. For a time series <span class="math notranslate nohighlight">\(x_t\)</span>​, the auto-covariance for lags <span class="math notranslate nohighlight">\(k\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma(k) = E\left[ (x_{t+k} - \mu)(x_t - \mu) \right]
+\]</div>
+<p>This gives us the formula for auto-correlation:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(k) = \frac{\gamma(k)}{\gamma(0)}
+\]</div>
+<p>The auto-covariance and auto-correlation can be estimated by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\gamma}(k) = \frac{1}{n} \sum_{t=1}^{n-k} \left( x_{t+k} - \bar{x} \right) \left( x_{t} - \bar{x} \right) \\
+\hat{\rho(k)} = \frac{\hat{\gamma}(k)}{\hat{\gamma}(0)}
+\end{split}\]</div>
+<p>The plot below exhibits the auto-correlation for daily discrete returns and absolute daily discrete returns of the Apple stock. We observe low auto-correlation for the returns, however, higher correlation for absolute values. This pattern is true for many different assets. Its implication is that we usually have a hard time to estimate the future direction of returns based upon their history, however, we may be able to predict the absolute level of returns in better ways. This implies that volatility can be predicted to a certain level based upon historical data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">AAPL</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Autocorrelation daily returns&quot;</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">AAPL</span><span class="o">.</span><span class="n">abs</span><span class="p">(),</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Autocorrelation absolute daily returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b75fb2ab0d404fd5ada44f8a0724731ac0e13f25ac3745b29c56fdab71c5dd4d.png" src="_images/b75fb2ab0d404fd5ada44f8a0724731ac0e13f25ac3745b29c56fdab71c5dd4d.png" />
+</div>
+</div>
+<p>To test if auto-correlation is statistically significant different from zero (up to certain lags), we can use the Ljung-Box test. Its null hypothesis is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+H_0:&amp; \quad \rho{1} = \rho(2) = ... = \rho(k) = 0 \\
+H_a:&amp; \quad \text{Any } \rho(j) \neq 0
+\end{align*}
+\end{split}\]</div>
+<p>If the Ljung-Box test rejects the null hypothesis, we conclude that at least the auto-correlation for one lage between <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(k\)</span> is different from zero. The table below exhibits p-values for the Ljung-Box test using a lag <span class="math notranslate nohighlight">\(k=1\)</span> of daily returns and daily absolute returns. For instance, conducting each test at a significance level of <span class="math notranslate nohighlight">\(0.05\)</span>, we observe that some tests for returns would not reject the null hypothesis while the null hypothesis would be rejected for all companies when analyzing the auto-correlation of absolute returns. This underlines the common empirical finding of lower auto-correlation for returns and higher auto-correlation of absolute returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+
+
+<span class="n">lb_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lb_abs_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">lb_returns</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;returns&quot;</span><span class="p">,</span> <span class="s2">&quot;absolute returns &quot;</span><span class="p">]</span>
+<span class="n">lb_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>returns</th>
+      <th>absolute returns</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>AMGN</th>
+      <td>0.0005</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>AXP</th>
+      <td>0.0079</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>BA</th>
+      <td>0.0106</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>CAT</th>
+      <td>0.4160</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>CRM</th>
+      <td>0.3345</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>CSCO</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>DD</th>
+      <td>0.0732</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>0.0064</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>DOW</th>
+      <td>0.1694</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>GS</th>
+      <td>0.0008</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>HD</th>
+      <td>0.0001</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>HON</th>
+      <td>0.0871</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>IBM</th>
+      <td>0.0063</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>INTC</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>JNJ</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>JPM</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>KO</th>
+      <td>0.1176</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>MCD</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>MMM</th>
+      <td>0.0640</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>MRK</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>MSFT</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>NKE</th>
+      <td>0.8529</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>PFE</th>
+      <td>0.0264</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>RTX</th>
+      <td>0.1555</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>TRV</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>UNH</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>VZ</th>
+      <td>0.0054</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>WBA</th>
+      <td>0.3240</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>WMT</th>
+      <td>0.0027</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>0.2655</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="aggregation-over-time">
+<h3>Aggregation over time<a class="headerlink" href="#aggregation-over-time" title="Link to this heading">#</a></h3>
+<p>So far, we examined daily returns which are usually relatively small due to the short time interval. To determine the return over a longer time period, one needs to distinguish between discrete and log-returns. Let us define the discrete gross return by <span class="math notranslate nohighlight">\(\left(1 + r_t\right)\)</span>. The discrete gross return over the last <span class="math notranslate nohighlight">\(h\)</span> periods is the product of the last <span class="math notranslate nohighlight">\(h\)</span> gross returns:</p>
+<div class="math notranslate nohighlight">
+\[
+1 + r_t(h) = \left(1 + r_{t-h+1}\right) \cdot ... \cdot \left(1 + r_{t}\right) = \prod_{i = t-h+1}^t \left(1 + r_i\right)
+\]</div>
+<p>This means the discrete return for <span class="math notranslate nohighlight">\(h\)</span> periods is: <span class="math notranslate nohighlight">\(r_t(h) = \prod_{i = t-h+1}^t \left(1 + r_i\right) - 1\)</span>. To determine the log-return for <span class="math notranslate nohighlight">\(h\)</span> periods, we can use previous definitions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+z_t(h) &amp; = \ln \left(1+ r_t(h)\right) = \\
+&amp; =  \ln \left(\left(1 + r_{t-h+1}\right) \cdot ... \cdot \left(1 + r_{t}\right) \right) = \\
+&amp; = \ln \left(1 + r_{t-h+1}\right) + ... +\ln \left(1 + r_{t}\right) = \\
+&amp; = z_{t-h+1} + ... + z_t = \\
+&amp; = \sum_{i = t-h+1}^t z_i
+\end{split}
+\end{split}\]</div>
+<p>The log-return is additive over time which means we simply can sum over the single period’s log-returns to determine the log-return for the full period. This simplifies the calculation for common time periods such as weekly, monthly or annual returns. The simpler calculation is the reason why we often observe the usage of log-returns if value development is quantified over time. Morever, aggregated log-returns can be converted back to discrete returns.</p>
+<p>The tables and figures below exhibit all quantities from the analysis of daily returns before. Most notably, is the less extreme behavior, the decrease of excess kurtosis as well as the vanishing auto-correlation of returns and absolute returns. Overall, returns tend to behave more <em>normal</em> over longer time periods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_returns_log</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">))</span>
+<span class="n">df_monthly_returns_log</span> <span class="o">=</span> <span class="n">df_returns_log</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="s2">&quot;ME&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_monthly_returns</span>  <span class="o">=</span> <span class="n">df_monthly_returns_log</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">mssk_monthly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">skew</span><span class="p">(),</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(),</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mssk_monthly</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;q05&quot;</span><span class="p">,</span> <span class="s2">&quot;q95&quot;</span><span class="p">]</span>
+<span class="n">mssk_monthly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>skewness</th>
+      <th>kurtosis</th>
+      <th>q05</th>
+      <th>q95</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>0.0011</td>
+      <td>0.0040</td>
+      <td>-0.2040</td>
+      <td>-0.8709</td>
+      <td>-0.0059</td>
+      <td>0.0068</td>
+    </tr>
+    <tr>
+      <th>AMGN</th>
+      <td>0.0004</td>
+      <td>0.0034</td>
+      <td>0.1273</td>
+      <td>-0.2048</td>
+      <td>-0.0041</td>
+      <td>0.0054</td>
+    </tr>
+    <tr>
+      <th>AXP</th>
+      <td>0.0008</td>
+      <td>0.0042</td>
+      <td>-0.2290</td>
+      <td>1.5549</td>
+      <td>-0.0062</td>
+      <td>0.0073</td>
+    </tr>
+    <tr>
+      <th>BA</th>
+      <td>-0.0003</td>
+      <td>0.0068</td>
+      <td>-0.6398</td>
+      <td>3.6557</td>
+      <td>-0.0098</td>
+      <td>0.0101</td>
+    </tr>
+    <tr>
+      <th>CAT</th>
+      <td>0.0009</td>
+      <td>0.0043</td>
+      <td>0.1033</td>
+      <td>0.3702</td>
+      <td>-0.0056</td>
+      <td>0.0082</td>
+    </tr>
+    <tr>
+      <th>CRM</th>
+      <td>0.0006</td>
+      <td>0.0048</td>
+      <td>0.5109</td>
+      <td>1.0165</td>
+      <td>-0.0069</td>
+      <td>0.0084</td>
+    </tr>
+    <tr>
+      <th>CSCO</th>
+      <td>0.0002</td>
+      <td>0.0037</td>
+      <td>-0.0579</td>
+      <td>-0.2800</td>
+      <td>-0.0060</td>
+      <td>0.0062</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>0.0005</td>
+      <td>0.0044</td>
+      <td>0.2267</td>
+      <td>1.2765</td>
+      <td>-0.0066</td>
+      <td>0.0089</td>
+    </tr>
+    <tr>
+      <th>DD</th>
+      <td>0.0001</td>
+      <td>0.0050</td>
+      <td>-0.0614</td>
+      <td>0.8535</td>
+      <td>-0.0102</td>
+      <td>0.0060</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>0.0001</td>
+      <td>0.0049</td>
+      <td>0.1781</td>
+      <td>-0.1600</td>
+      <td>-0.0081</td>
+      <td>0.0091</td>
+    </tr>
+    <tr>
+      <th>DOW</th>
+      <td>0.0004</td>
+      <td>0.0047</td>
+      <td>-0.8276</td>
+      <td>1.5888</td>
+      <td>-0.0081</td>
+      <td>0.0076</td>
+    </tr>
+    <tr>
+      <th>GS</th>
+      <td>0.0008</td>
+      <td>0.0043</td>
+      <td>-0.2641</td>
+      <td>0.1706</td>
+      <td>-0.0055</td>
+      <td>0.0077</td>
+    </tr>
+    <tr>
+      <th>HD</th>
+      <td>0.0007</td>
+      <td>0.0034</td>
+      <td>-0.2484</td>
+      <td>-0.0050</td>
+      <td>-0.0047</td>
+      <td>0.0058</td>
+    </tr>
+    <tr>
+      <th>HON</th>
+      <td>0.0004</td>
+      <td>0.0034</td>
+      <td>0.2868</td>
+      <td>1.5029</td>
+      <td>-0.0044</td>
+      <td>0.0050</td>
+    </tr>
+    <tr>
+      <th>IBM</th>
+      <td>0.0006</td>
+      <td>0.0032</td>
+      <td>0.0156</td>
+      <td>-0.2654</td>
+      <td>-0.0040</td>
+      <td>0.0059</td>
+    </tr>
+    <tr>
+      <th>INTC</th>
+      <td>0.0001</td>
+      <td>0.0046</td>
+      <td>-0.2158</td>
+      <td>0.1026</td>
+      <td>-0.0073</td>
+      <td>0.0059</td>
+    </tr>
+    <tr>
+      <th>JNJ</th>
+      <td>0.0003</td>
+      <td>0.0023</td>
+      <td>-0.0408</td>
+      <td>-0.1992</td>
+      <td>-0.0033</td>
+      <td>0.0032</td>
+    </tr>
+    <tr>
+      <th>JPM</th>
+      <td>0.0007</td>
+      <td>0.0038</td>
+      <td>-0.4553</td>
+      <td>1.0106</td>
+      <td>-0.0060</td>
+      <td>0.0068</td>
+    </tr>
+    <tr>
+      <th>KO</th>
+      <td>0.0003</td>
+      <td>0.0025</td>
+      <td>-1.0739</td>
+      <td>1.7848</td>
+      <td>-0.0042</td>
+      <td>0.0034</td>
+    </tr>
+    <tr>
+      <th>MCD</th>
+      <td>0.0004</td>
+      <td>0.0025</td>
+      <td>-0.0109</td>
+      <td>1.4513</td>
+      <td>-0.0037</td>
+      <td>0.0041</td>
+    </tr>
+    <tr>
+      <th>MMM</th>
+      <td>-0.0002</td>
+      <td>0.0036</td>
+      <td>-0.1091</td>
+      <td>-0.5935</td>
+      <td>-0.0064</td>
+      <td>0.0051</td>
+    </tr>
+    <tr>
+      <th>MRK</th>
+      <td>0.0006</td>
+      <td>0.0029</td>
+      <td>-0.1338</td>
+      <td>0.5975</td>
+      <td>-0.0039</td>
+      <td>0.0046</td>
+    </tr>
+    <tr>
+      <th>MSFT</th>
+      <td>0.0011</td>
+      <td>0.0029</td>
+      <td>-0.1614</td>
+      <td>-0.3288</td>
+      <td>-0.0033</td>
+      <td>0.0055</td>
+    </tr>
+    <tr>
+      <th>NKE</th>
+      <td>0.0003</td>
+      <td>0.0042</td>
+      <td>-0.3542</td>
+      <td>-0.1525</td>
+      <td>-0.0060</td>
+      <td>0.0062</td>
+    </tr>
+    <tr>
+      <th>PFE</th>
+      <td>-0.0002</td>
+      <td>0.0036</td>
+      <td>0.5255</td>
+      <td>0.4436</td>
+      <td>-0.0056</td>
+      <td>0.0068</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>0.0005</td>
+      <td>0.0024</td>
+      <td>-0.1802</td>
+      <td>-0.3621</td>
+      <td>-0.0040</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>RTX</th>
+      <td>0.0004</td>
+      <td>0.0042</td>
+      <td>-0.3641</td>
+      <td>3.5108</td>
+      <td>-0.0054</td>
+      <td>0.0055</td>
+    </tr>
+    <tr>
+      <th>TRV</th>
+      <td>0.0006</td>
+      <td>0.0029</td>
+      <td>-0.4289</td>
+      <td>0.7885</td>
+      <td>-0.0042</td>
+      <td>0.0039</td>
+    </tr>
+    <tr>
+      <th>UNH</th>
+      <td>0.0006</td>
+      <td>0.0030</td>
+      <td>0.4750</td>
+      <td>-0.1754</td>
+      <td>-0.0034</td>
+      <td>0.0057</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>0.0006</td>
+      <td>0.0033</td>
+      <td>-0.0714</td>
+      <td>-0.5813</td>
+      <td>-0.0046</td>
+      <td>0.0051</td>
+    </tr>
+    <tr>
+      <th>VZ</th>
+      <td>-0.0000</td>
+      <td>0.0025</td>
+      <td>0.0590</td>
+      <td>-0.2809</td>
+      <td>-0.0042</td>
+      <td>0.0041</td>
+    </tr>
+    <tr>
+      <th>WBA</th>
+      <td>-0.0006</td>
+      <td>0.0045</td>
+      <td>0.9518</td>
+      <td>1.1865</td>
+      <td>-0.0069</td>
+      <td>0.0069</td>
+    </tr>
+    <tr>
+      <th>WMT</th>
+      <td>0.0006</td>
+      <td>0.0024</td>
+      <td>-0.6958</td>
+      <td>1.1917</td>
+      <td>-0.0032</td>
+      <td>0.0043</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>0.0007</td>
+      <td>0.0047</td>
+      <td>-0.0924</td>
+      <td>1.0534</td>
+      <td>-0.0062</td>
+      <td>0.0096</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># First plot for daily returns</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_monthly_returns</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Daily Returns of Dow Jones Industrial Average Components&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Daily Returns&#39;</span><span class="p">)</span>
+
+<span class="c1"># Second plot for absolute values over time</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_monthly_returns</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>  <span class="c1"># Use .abs() for absolute values</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Absolute Daily Returns of Dow Jones Industrial Average Components&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absolute Daily Returns&#39;</span><span class="p">)</span>
+
+<span class="c1"># Place a legend outside of the figure</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">),</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/42329353b4a77410e84956d796ce03a82b17615ee3bdbed497e61a438a0e1ed8.png" src="_images/42329353b4a77410e84956d796ce03a82b17615ee3bdbed497e61a438a0e1ed8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+
+
+<span class="n">lb_returns</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lb_abs_returns</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">lb_returns</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;returns&quot;</span><span class="p">,</span> <span class="s2">&quot;absolute returns &quot;</span><span class="p">]</span>
+<span class="n">lb_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>returns</th>
+      <th>absolute returns</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>0.6467</td>
+      <td>0.9008</td>
+    </tr>
+    <tr>
+      <th>AMGN</th>
+      <td>0.3668</td>
+      <td>0.5463</td>
+    </tr>
+    <tr>
+      <th>AXP</th>
+      <td>0.9739</td>
+      <td>0.5433</td>
+    </tr>
+    <tr>
+      <th>BA</th>
+      <td>0.6472</td>
+      <td>0.8323</td>
+    </tr>
+    <tr>
+      <th>CAT</th>
+      <td>0.5780</td>
+      <td>0.7139</td>
+    </tr>
+    <tr>
+      <th>CRM</th>
+      <td>0.4935</td>
+      <td>0.3831</td>
+    </tr>
+    <tr>
+      <th>CSCO</th>
+      <td>0.5235</td>
+      <td>0.6895</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>0.3029</td>
+      <td>0.2087</td>
+    </tr>
+    <tr>
+      <th>DD</th>
+      <td>0.4662</td>
+      <td>0.0011</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>0.4129</td>
+      <td>0.5711</td>
+    </tr>
+    <tr>
+      <th>DOW</th>
+      <td>0.6133</td>
+      <td>0.4153</td>
+    </tr>
+    <tr>
+      <th>GS</th>
+      <td>0.3934</td>
+      <td>0.0230</td>
+    </tr>
+    <tr>
+      <th>HD</th>
+      <td>0.4440</td>
+      <td>0.1233</td>
+    </tr>
+    <tr>
+      <th>HON</th>
+      <td>0.5458</td>
+      <td>0.9103</td>
+    </tr>
+    <tr>
+      <th>IBM</th>
+      <td>0.6647</td>
+      <td>0.9601</td>
+    </tr>
+    <tr>
+      <th>INTC</th>
+      <td>0.4389</td>
+      <td>0.9912</td>
+    </tr>
+    <tr>
+      <th>JNJ</th>
+      <td>0.6752</td>
+      <td>0.1080</td>
+    </tr>
+    <tr>
+      <th>JPM</th>
+      <td>0.9962</td>
+      <td>0.2359</td>
+    </tr>
+    <tr>
+      <th>KO</th>
+      <td>0.5685</td>
+      <td>0.0929</td>
+    </tr>
+    <tr>
+      <th>MCD</th>
+      <td>0.4988</td>
+      <td>0.1280</td>
+    </tr>
+    <tr>
+      <th>MMM</th>
+      <td>0.4718</td>
+      <td>0.5002</td>
+    </tr>
+    <tr>
+      <th>MRK</th>
+      <td>0.4041</td>
+      <td>0.4527</td>
+    </tr>
+    <tr>
+      <th>MSFT</th>
+      <td>0.5521</td>
+      <td>0.0594</td>
+    </tr>
+    <tr>
+      <th>NKE</th>
+      <td>0.9886</td>
+      <td>0.7440</td>
+    </tr>
+    <tr>
+      <th>PFE</th>
+      <td>0.8269</td>
+      <td>0.9036</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>0.9288</td>
+      <td>0.6541</td>
+    </tr>
+    <tr>
+      <th>RTX</th>
+      <td>0.5718</td>
+      <td>0.3580</td>
+    </tr>
+    <tr>
+      <th>TRV</th>
+      <td>0.6946</td>
+      <td>0.5113</td>
+    </tr>
+    <tr>
+      <th>UNH</th>
+      <td>0.3743</td>
+      <td>0.5351</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>0.0724</td>
+      <td>0.4620</td>
+    </tr>
+    <tr>
+      <th>VZ</th>
+      <td>0.3575</td>
+      <td>0.7323</td>
+    </tr>
+    <tr>
+      <th>WBA</th>
+      <td>0.5684</td>
+      <td>0.7685</td>
+    </tr>
+    <tr>
+      <th>WMT</th>
+      <td>0.4098</td>
+      <td>0.9080</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>0.9087</td>
+      <td>0.2000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The implications of these observations are that predictions for the volatility are far more promising for a shorter time horizon. Furthermore, for a longer investment perspective less extreme statistical distributions are needed for an adequate model. However, given the existence of volatility clustering and partly extreme behavior of daily returns, one may need to pay attention to these characteristics for considerations which are in need of quick reactions and actions such as risk management strategies.</p>
+<p>In the next chapter, we are going to look at reasonable statistical models for asset returns. More concrete, which distributions seem to be suited for modeling asset returns and how can we include characteristics such as auto-correlation into the model.</p>
+</section>
+<section id="stylized-facts-about-asset-returns">
+<h3>Stylized facts about asset returns<a class="headerlink" href="#stylized-facts-about-asset-returns" title="Link to this heading">#</a></h3>
+<p>Stylized facts are empirical results which tend to repeat for the majority of asset returns. In this chapter, we already examined the following which are often found for daily returns:</p>
+<ul class="simple">
+<li><p>Non-normality: asset return distributions tend to exhibit heavy tails which makes extreme movements more likely</p></li>
+<li><p>Skewness: many empirical analyses observe that the majority of asset return distributions are left-skewed</p></li>
+<li><p>Auto-correlation and volatility clustering: asset returns seem not to be independent over time, this is more pronounced regarding absolute returns which explains observed clusters of more volatile periods</p></li>
+<li><p>Normality for longer periods: effects of non-normality, skewness, auto-correlation and volatility clustering are less pronounced for asset returns of longer periods such as monthly returns</p></li>
+</ul>
+<p>Further examples which are often detected are weekday or seasonality effects. For instance, previous analyses detected that stocks performed significantly better at the beginning of a years, i.e., the January effect. Another example is positive correlation between trading volume and absolute returns which implies larger price changes on days with more trading.</p>
+<p>For our example with Dow Jones companies, let us quickly examine these aspects, at least descriptively or visually.</p>
+<p>Positive correlation between trading volume and absolute daily returns seems to exist.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corrs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="n">col</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_volume</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="n">col</span><span class="p">]],</span> <span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">corrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">corrs</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vol_abs_return_corr&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>vol_abs_return_corr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAPL</th>
+      <td>0.546848</td>
+    </tr>
+    <tr>
+      <th>AMGN</th>
+      <td>0.466502</td>
+    </tr>
+    <tr>
+      <th>AXP</th>
+      <td>0.650066</td>
+    </tr>
+    <tr>
+      <th>BA</th>
+      <td>0.575894</td>
+    </tr>
+    <tr>
+      <th>CAT</th>
+      <td>0.577648</td>
+    </tr>
+    <tr>
+      <th>CRM</th>
+      <td>0.585797</td>
+    </tr>
+    <tr>
+      <th>CSCO</th>
+      <td>0.554440</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>0.485310</td>
+    </tr>
+    <tr>
+      <th>DD</th>
+      <td>0.384137</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>0.633372</td>
+    </tr>
+    <tr>
+      <th>DOW</th>
+      <td>0.510114</td>
+    </tr>
+    <tr>
+      <th>GS</th>
+      <td>0.566743</td>
+    </tr>
+    <tr>
+      <th>HD</th>
+      <td>0.521240</td>
+    </tr>
+    <tr>
+      <th>HON</th>
+      <td>0.449686</td>
+    </tr>
+    <tr>
+      <th>IBM</th>
+      <td>0.595514</td>
+    </tr>
+    <tr>
+      <th>INTC</th>
+      <td>0.557582</td>
+    </tr>
+    <tr>
+      <th>JNJ</th>
+      <td>0.250314</td>
+    </tr>
+    <tr>
+      <th>JPM</th>
+      <td>0.660987</td>
+    </tr>
+    <tr>
+      <th>KO</th>
+      <td>0.495354</td>
+    </tr>
+    <tr>
+      <th>MCD</th>
+      <td>0.533105</td>
+    </tr>
+    <tr>
+      <th>MMM</th>
+      <td>0.362081</td>
+    </tr>
+    <tr>
+      <th>MRK</th>
+      <td>0.434310</td>
+    </tr>
+    <tr>
+      <th>MSFT</th>
+      <td>0.619450</td>
+    </tr>
+    <tr>
+      <th>NKE</th>
+      <td>0.631994</td>
+    </tr>
+    <tr>
+      <th>PFE</th>
+      <td>0.549142</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>0.472145</td>
+    </tr>
+    <tr>
+      <th>RTX</th>
+      <td>0.541935</td>
+    </tr>
+    <tr>
+      <th>TRV</th>
+      <td>0.538274</td>
+    </tr>
+    <tr>
+      <th>UNH</th>
+      <td>0.554857</td>
+    </tr>
+    <tr>
+      <th>V</th>
+      <td>0.559092</td>
+    </tr>
+    <tr>
+      <th>VZ</th>
+      <td>0.552536</td>
+    </tr>
+    <tr>
+      <th>WBA</th>
+      <td>0.483262</td>
+    </tr>
+    <tr>
+      <th>WMT</th>
+      <td>0.595396</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>0.579554</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A January effect seems not to be present for these companies, either a November effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_by_month</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">returns_by_month</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;January&quot;</span><span class="p">,</span> <span class="s2">&quot;February&quot;</span><span class="p">,</span> <span class="s2">&quot;March&quot;</span><span class="p">,</span> <span class="s2">&quot;April&quot;</span><span class="p">,</span> <span class="s2">&quot;May&quot;</span><span class="p">,</span> <span class="s2">&quot;June&quot;</span><span class="p">,</span> <span class="s2">&quot;July&quot;</span><span class="p">,</span> <span class="s2">&quot;August&quot;</span><span class="p">,</span> <span class="s2">&quot;September&quot;</span><span class="p">,</span> <span class="s2">&quot;October&quot;</span><span class="p">,</span> <span class="s2">&quot;November&quot;</span><span class="p">,</span> <span class="s2">&quot;December&quot;</span>
+<span class="p">]</span>
+<span class="n">returns_by_month</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d2878d842ffbb0f9ce7e1790aa1809619b732e5248eedab0adeb6ab4fa7bc424.png" src="_images/d2878d842ffbb0f9ce7e1790aa1809619b732e5248eedab0adeb6ab4fa7bc424.png" />
+</div>
+</div>
+<p>Regarding weekdays, it rather looks like Mondays and Fridays exhibit higher returns for these companies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_by_weekday</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">weekday</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">returns_by_weekday</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span> <span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span> <span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span> <span class="s2">&quot;Thursday&quot;</span><span class="p">,</span> <span class="s2">&quot;Friday&quot;</span><span class="p">]</span>
+<span class="n">returns_by_weekday</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/56506f677846de29858281c0fedb29d00600b310ef6a01d07ba3d8aae06e453d.png" src="_images/56506f677846de29858281c0fedb29d00600b310ef6a01d07ba3d8aae06e453d.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Financial markets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_univariate_models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Models for univariate asset returns</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-random-variables">Univariate Random Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-perspective">Time series perspective</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-correlation-and-volatility-clustering">Auto-correlation and volatility clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-over-time">Aggregation over time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stylized-facts-about-asset-returns">Stylized facts about asset returns</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
