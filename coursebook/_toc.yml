@@ -1,9 +1,0 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
-format: jb-book
-root: 00_welcome
-chapters:
-- file: 01_introduction
-- file: 02_empirical_asset_returns
-- file: 03_univariate_models
