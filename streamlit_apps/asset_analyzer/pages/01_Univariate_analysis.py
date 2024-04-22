@@ -53,10 +53,10 @@ if ticker:
     df_returns = df.loc[:, ["r_t"]]
     df_returns.columns = ["r_t"]
     df_returns_log = df_returns.apply(lambda x: np.log(1 + x))
-    df_weekly_returns_log = df_returns_log.reset_index().groupby(pd.Grouper(key = 'Date', freq = "W")).mean()
+    df_weekly_returns_log = df_returns_log.reset_index().groupby(pd.Grouper(key = 'Date', freq = "W")).sum()
     df_weekly_returns  = df_weekly_returns_log.apply(lambda x: np.exp(x) - 1)
     df_weekly_returns.columns = ["r_t"]
-    df_monthly_returns_log = df_returns_log.reset_index().groupby(pd.Grouper(key = 'Date', freq = "ME")).mean()
+    df_monthly_returns_log = df_returns_log.reset_index().groupby(pd.Grouper(key = 'Date', freq = "ME")).sum()
     df_monthly_returns  = df_monthly_returns_log.apply(lambda x: np.exp(x) - 1)
     df_monthly_returns.columns = ["r_t"]
     skewness_estimates = [df_returns.skew().values[0], df_weekly_returns.skew().values[0], df_monthly_returns.skew().values[0]]
