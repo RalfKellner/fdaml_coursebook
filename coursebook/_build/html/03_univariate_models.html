@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modeling univariate asset return distributions &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_univariate_models';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Empirical analysis of asset returns" href="02_empirical_asset_returns.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Financial markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_empirical_asset_returns.html">Empirical analysis of asset returns</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modeling univariate asset return distributions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_univariate_models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modeling univariate asset return distributions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution">Normal distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-t-distribution">Student t distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flexibility-of-distributional-families">Flexibility of distributional families</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation">Maximum likelihood estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Normal distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modeling-univariate-asset-return-distributions">
+<h1>Modeling univariate asset return distributions<a class="headerlink" href="#modeling-univariate-asset-return-distributions" title="Link to this heading">#</a></h1>
+<p>The last chapter highlights some interesting empirical facts about asset returns. This chapter aims to demonstrate how to develop reasonable stochastic models for asset returns. What is meant by this is a probabilistic model which allows us to quantify the probabilities for certain events of the asset return and gives us the chance to simulate realistic data for asset returns. Nowadays, many machine learning models have an emphasis on prediction, e.g., can we predict tomorrow’s asset return, given some information today. This usually gives us the conditional expected value of a random variable. However, if we are interested in more than just that, we may favor the use of a model which fully describes the distribution. For instance, if you want to to assess the probability for a loss exceeding a certain level, you need the full distributional model, or, if you want to simulate data in order to determine the variability of investment strategies you can use the advantages of distributional models.</p>
+<p>In the first part of this chapter, we are going to focus on <em>unconditional</em> models for asset returns. This term describes the fact that we derive a model which is capturing what is happening over time, so during good and bad economic conditions. You may picture the outcome of such a model as a way to determine what is happing on average during these times. To do so, we learn about parametric distributions, how to estimate them by maximum likelihood estimation and how to compare different parametric models.</p>
+<p>In the second part of this chapter, we are going to focus on the <em>conditional</em> perspective of asset return modeling. If you follow price developments on financial markets, you observe different characteristics which depend on the market phase. For instance, starting from the last quarter in 2007 until the beginning of 2009, financial markets experienced financial turmoil and below average performance for the majority of investments which has been triggered by the great financial crisis. This period is followed by a long time of increasing asset prices (at least on stock and some other markets) which has only been stopped by the Covid period that mostly caused price deteriorations in the first half of 2020. The point is, depending on the current state of the market, our expectation regarding the next asset return, its deviation from the mean or its probability for exceeding certain loss levels, may differ. You already observed the phenomena of volatility clustering in the past chapter. So given we observe large deviations from the expected value recently, would you predict rather large deviations in the near future as well? The answer is yes, because this is how asset returns usually behave.</p>
+<p>Finally, we should note that both perspectives, <em>unconditional</em> and <em>conditional</em> are valid and needed. The unconditional perspective is in line with a long term investment point of view. If you assume you hold an asset for a long time, you are more interested in the characteristics what is happening over time. However, to better understand what can happen with your investment in time, you need the conditional perspective, e.g., if a financial crisis occurs, which loss levels are common and how long do we need to wait until the market recovers.</p>
+<section id="parametric-models">
+<h2>Parametric models<a class="headerlink" href="#parametric-models" title="Link to this heading">#</a></h2>
+<p>A parametric model is a model which is fully specified by a finite number of parameters. For instance, assuming asset returns are normally distributed, the model is fully specified by the two parameters of the normal distribution - <span class="math notranslate nohighlight">\(\mu, \sigma\)</span>. Usually, models which use a higher number of parameters are more flexible in terms of how easy the model can be adjusted to data. At the same time, parameters must be estimated by empirical data. The estimation process is prone to statistical uncertainty which is higher for models with a higher number of parameters, increasing the variance of estimation. At the same time, models with less parameters and lower flexibility are more exposed to bias.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More precise definitions of bias and variance in estimation follow later.</p>
+</div>
+<p>A term which is often used to describe the goal of parametric models is <em>parsimony</em>. This refers to desire that a model should use little parameters if possible, however, it should be able to capture characteristics of empirical data.</p>
+<p>Based on certain empirical characteristics which we observed in the past chapter, a broader list of parametric distribution can be taken into account for financial data, i.e., asset returns. Two popular choices are the normal and the (Student) t distribution. Both are symmetric, while the t distribution has heavy tails and, thus, is usually better for capturing occurrences of extreme values for asset returns. Below, we take a look at an example of the empirical distribution of Apple returns which is contrasted with a normal and a t distribution. Visually, we already see the better fit of the t distribution. Note that both distributions are symmetric which may be a problem if the asset return distribution is highly skewed in reality. Python’s scipy package comes along with a large number of continuous distributions and even more distributions (especially skewed ones) are available in packages from other statistical languages such as R (especially the fGarch or rugarch package, if you are interested). Let us exemplarily take a look at these two distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">norm</span>
+
+<span class="n">df_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/fmp/dow_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">df_returns</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_returns</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+<span class="n">df_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">aapl_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;AAPL Returns&#39;</span><span class="p">)</span>
+<span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal Dist Fit&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">p_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_t</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;T Dist Fit&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/90f763b6a25c9f2761fbce0ba8139dabc28f2319ebbb64677f7c5a7f89f3d7a6.png" src="_images/90f763b6a25c9f2761fbce0ba8139dabc28f2319ebbb64677f7c5a7f89f3d7a6.png" />
+</div>
+</div>
+<section id="normal-distribution">
+<h3>Normal distribution<a class="headerlink" href="#normal-distribution" title="Link to this heading">#</a></h3>
+<p>The normal distribution is specified by two parameters <span class="math notranslate nohighlight">\(\mu, \sigma^2\)</span>. The probability density function for a normal distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)
+\]</div>
+<p>For the normal distribution, <span class="math notranslate nohighlight">\(\mu\)</span> is equal to the expected value and <span class="math notranslate nohighlight">\(\sigma^2\)</span> is equal to the variance of the random variable.</p>
+</section>
+<section id="student-t-distribution">
+<h3>Student t distribution<a class="headerlink" href="#student-t-distribution" title="Link to this heading">#</a></h3>
+<p>The standardized form of the t distribution is specified by the degrees of freedom parameter <span class="math notranslate nohighlight">\(\nu\)</span> and the probability density function is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x | \nu) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi}\Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\Gamma\)</span> is the gamma function. While the t distribution is defined for values <span class="math notranslate nohighlight">\(\nu &gt; 0\)</span>, the variance of a t distributed variable is only finite if <span class="math notranslate nohighlight">\(\nu &gt; 2\)</span>. The variance is equal to <span class="math notranslate nohighlight">\(\frac{\nu}{\nu - 2}\)</span> and the mean is equal to zero. To provide more flexibility regarding the mean and variance of the distribution its values can be transformed by a location and scale parameter. This is how, the t distribution is implemented in the scipy package. One important characteristic of the t distribution are its heavy tails. We spare the technical illustration of heavy tailed distributions here, however, heavy tailed distributions are leptocurtic and have more probabilty mass in the tails of the distribution. This means, more extreme events tend to occur more often in comparison to what we would expect of, e.g., a normal distributed variable.</p>
+</section>
+<section id="flexibility-of-distributional-families">
+<h3>Flexibility of distributional families<a class="headerlink" href="#flexibility-of-distributional-families" title="Link to this heading">#</a></h3>
+<p>Given a density <span class="math notranslate nohighlight">\(f(x)\)</span> of a random variable <span class="math notranslate nohighlight">\(x\)</span>, the distribution can become more flexible in terms of location, scale and skewness. Let us take a look at this by assuming a random variable <span class="math notranslate nohighlight">\(x\)</span> which has an expected value <span class="math notranslate nohighlight">\(\mu_x\)</span> and variance <span class="math notranslate nohighlight">\(\sigma_x^2\)</span>. If we add a constant value <span class="math notranslate nohighlight">\(l\)</span> to it a new variable can be defined by: <span class="math notranslate nohighlight">\(y = x + l\)</span>, this variable has an expected value of <span class="math notranslate nohighlight">\(\mu_y = \mu_x + l\)</span> and a variance equal to <span class="math notranslate nohighlight">\(\sigma_y^2 = \sigma_y^2\)</span>. If we further rescale the variable by:</p>
+<div class="math notranslate nohighlight">
+\[
+y = l + s \cdot x
+\]</div>
+<p>its variance is <span class="math notranslate nohighlight">\(\sigma_y^2 = s^2 \sigma_y^2\)</span>. This means, by location shifting and scaling the mean and variance of every random variable can be adjusted. For instance, for the t distribution, this gives us a more flexible distribution with three parameters, i.e., location, scale and degrees of freedom <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = \lbrace l, s, \nu \rbrace\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Technical background
+In general, every density function must fulfill the following conditions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) &gt; 0\)</span> <span class="math notranslate nohighlight">\(\forall x \in \mathbb{R}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x) dx = 1\)</span></p></li>
+</ul>
+<p>if <span class="math notranslate nohighlight">\(x\)</span> has density <span class="math notranslate nohighlight">\(f(x)\)</span>, then <span class="math notranslate nohighlight">\(y = l + s \cdot x\)</span> has density <span class="math notranslate nohighlight">\(f \left( \frac{x - l}{s} \right) \frac{1}{s}\)</span></p>
+</div>
+<p>In analogous ways skewed distributions can be created out of symmetric ones. This requires the use of another parameter. The figure below demonstrates how location, scale, kurtosis and shape impact the density of the distribution of a continuous random variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">skewnorm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;l = 0&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;l = -2&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;l = 2&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Impact of location&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;s = 1&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">2</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;s = 2&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">3</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;s = 3&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Impact of scale&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;normal distribution&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;t with 10 dof&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;t with 4 dof&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Impact of heavy tails&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;no skewness&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;left skewed&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;right skewed&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Impact of skewness&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/896c7613d93df5fc1d33e22ea32d7bc0da8a3fb39d47ca66705feec7f69c6284.png" src="_images/896c7613d93df5fc1d33e22ea32d7bc0da8a3fb39d47ca66705feec7f69c6284.png" />
+</div>
+</div>
+<p>Assuming, we decide which distribution we want to use for modeling an asset return distribution, the important question is how can we select reasonable values for its parameters which finally specify the asset return model. Usually, the parameters are calibrated using data samples from the past. The estimation can be done in different ways, but one popular choice is maximum likelihood estimation which we now discuss.</p>
+</section>
+</section>
+<section id="maximum-likelihood-estimation">
+<h2>Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Link to this heading">#</a></h2>
+<p>Given a sequence of data <span class="math notranslate nohighlight">\(\lbrace x_1, ..., x_T \rbrace \)</span>, we may assume that each observation is independent from its previous ones and is identical for every observation <span class="math notranslate nohighlight">\(x_t\)</span>. Let <span class="math notranslate nohighlight">\(f\)</span> be the density function of the distribution, e.g., the normal distribution, and <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> the vector of all parameters for this distribution, e.g., <span class="math notranslate nohighlight">\(\begin{pmatrix} \mu &amp; \sigma \end{pmatrix}^{'}\)</span>. Given the assumption of independence, the so called likelihood of the data can be determined by the product of the density function value of each observation:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\boldsymbol{\theta}) = \prod_{t = 1}^{T} f(x_t | \boldsymbol{\theta})
+\]</div>
+<p>It is important to understand that the values for <span class="math notranslate nohighlight">\(x_t\)</span> are fixed observed values from an empirical sample and the value for <span class="math notranslate nohighlight">\(L\)</span> can only be adjusted by choosing different values for the distribution’s parameters. The goal of maximum likelihood estimation is to find parameters which result in the highest possible value for <span class="math notranslate nohighlight">\(L\)</span>. Accordingly, we find ourselves in an optimization problem. As optimization is often done by determining the derivatives of the objective function, the function from above is transformed by the natural log to maximum log-likelihood optimization:</p>
+<div class="math notranslate nohighlight">
+\[
+\log\left( L(\boldsymbol{\theta}) \right) = \sum_{i = 1}^{T} \log \left(f(y_t | \boldsymbol{\theta})\right)
+\]</div>
+<p>This is a technical trick which simplifies the calculation of derivatives and as the log-transformation is strictly monotone, the parameters which maximize <span class="math notranslate nohighlight">\(\log\left( L(\boldsymbol{\theta}) \right)\)</span> are the same as the ones which maximize <span class="math notranslate nohighlight">\(L(\boldsymbol{\theta})\)</span></p>
+<p>The parameter estimator is:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}_{ML} = \arg \max_{\boldsymbol{\theta}} \log\left( L(\boldsymbol{\theta}) \right)
+\]</div>
+<p>The outcome of this maximization process are parameter estimates which make the occurrence of the observed data set the most plausible. While explicit formulas for the maximum likelihood estimator can be derived for a few models such as the normal distribution, this is not the case for many other distributions. For these models, the estimates are found by numerical optimization of the log-likelihood function.</p>
+<section id="bernoulli-distribution">
+<h3>Bernoulli distribution<a class="headerlink" href="#bernoulli-distribution" title="Link to this heading">#</a></h3>
+<p>Let us take a look at a small example to understand the basic principles of maximum likelihood estimation. For our example, we want to build a model for up and down movements of asset prices. This means, if the asset price at time <span class="math notranslate nohighlight">\(t\)</span> is higher than at time <span class="math notranslate nohighlight">\(t-1\)</span> the random variable is <span class="math notranslate nohighlight">\(x_t = 1\)</span> and <span class="math notranslate nohighlight">\(x_t = 0\)</span>, otherwise. A reasonable probability distribution for such a random variable is the Bernoulli distribution. It is fully classified by a single parameter <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> and has the probability mass function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x_t | \theta) = 
+\begin{cases}
+    \theta &amp; \text{if } x_t = 1 \\
+    1 - \theta &amp; \text{else}
+\end{cases}
+\end{split}\]</div>
+<p>this can also be expressed by a single line equation:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x_t | \theta) = \theta^{x_t} \left(1 - \theta \right)^{1 - x_t}
+\]</div>
+<p>The cell below shows ten realizations for <span class="math notranslate nohighlight">\(x_t\)</span> of the Apple stock price, they are: <span class="math notranslate nohighlight">\(\lbrace 0, 1, 1, 1, 0, 1, 0, 0, 1, 0 \rbrace\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/fmp/dow_returns.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">apple_up_and_down</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">AAPL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+<span class="n">apple_up_and_down</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+2024-03-15    0
+2024-03-18    1
+2024-03-19    1
+2024-03-20    1
+2024-03-21    0
+2024-03-22    1
+2024-03-25    0
+2024-03-26    0
+2024-03-27    1
+2024-03-28    0
+Name: AAPL, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assuming these observations are independent and identically distributed (iid), the likelihood for these ten observations is:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) = \left(1 - \theta\right) \cdot \theta \cdot \theta \cdot \theta \cdot \left(1 - \theta\right) \cdot \theta \cdot \left(1 - \theta\right) \cdot \left(1 - \theta\right)  \cdot \theta   \cdot \left(1 - \theta\right)
+\]</div>
+<p>Let us write this in a shorter form, hereby, <span class="math notranslate nohighlight">\(T = 10\)</span> is the number of all observations:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) = \theta^{\sum_t x_t} \cdot \left(1 - \theta\right)^{T - \sum_t x_t}
+\]</div>
+<p>Now, applying the log-transformation, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L \left( \theta \right) = \sum_t x_t \log \theta + \left( T - \sum_t x_t \right) \log \left(1 - \theta\right)
+\]</div>
+<p>The task which needs to be solved is to find the parameter which maximizes the log-likelihood for a given data sample. In our example the log-likelihood function is:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L \left( \theta \right) = 5 \log \theta + \left( 10 - 5 \right) \log \left(1 - \theta\right)
+\]</div>
+<p>Possible values for <span class="math notranslate nohighlight">\(\theta\)</span> lie in the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>. The graphic below illustrates the variation of <span class="math notranslate nohighlight">\(\log L \left( \theta \right)\)</span> depending on <span class="math notranslate nohighlight">\(\theta\)</span> and indicates reasonable parameter estimates should be in the range around <span class="math notranslate nohighlight">\(0.50\)</span>. To solve this properly, one needs to conduct optimization which can be done analytically for some distributions and needs to be done numerically for others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">theta_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ll</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta_values</span><span class="p">,</span> <span class="n">ll</span><span class="p">(</span><span class="n">theta_values</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log L(\theta)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e741aee9735e8a9bdfbd3351b5e1ba9e0472806f2f3bf74ec2396f77532ca074.png" src="_images/e741aee9735e8a9bdfbd3351b5e1ba9e0472806f2f3bf74ec2396f77532ca074.png" />
+</div>
+</div>
+<p>For the Bernoulli distribution, we can derive the maximum likelihood estimator for the Bernoulli distribution analytically, so let us do this. The first derivative is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{d \theta} \log L(\theta) = \frac{\sum_t x_t}{\theta} - \frac{T - \sum_t x_t}{1-\theta}
+\]</div>
+<p>Setting the derivative to zero and solving brings us:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sum_t x_t(1-\theta) = \theta(T - \sum_t x_t) \\
+\sum_t x_t - \sum_t x_t \theta = T \theta - \sum_t x_t \theta \\
+\sum_t x_t = T \theta \\
+\theta = \frac{\sum_t x_t}{T}
+\end{split}\]</div>
+<p>The second derivative is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d^2}{d^2 \theta} \log L(\theta) = - \frac{\sum_t x_t}{\theta^2} - \frac{T - \sum_t x_t}{\left( 1-\theta \right)^2} &lt; 0
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(\frac{d^2}{d^2 \theta} \log L(\theta) &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\theta = \frac{\sum_t x_t}{T}\)</span> is the argument which maximizes the likelihood. As you may have already realized this value is just the average value of all observations for <span class="math notranslate nohighlight">\(x_t\)</span>. For our example this gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\theta} =  \frac{5}{10} = 0.50
+\]</div>
+<p>This is the parameter which makes the occurrence of the sample most plausible. In this setting, the parameter represents the probability for the stock price to increase in comparison to the previous day. A value of <span class="math notranslate nohighlight">\(0.50\)</span> indicates a strong similarity to a coin toss with a fair coin.</p>
+</section>
+<section id="id1">
+<h3>Normal distribution<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>While the random variable with two possible outcomes <span class="math notranslate nohighlight">\(\lbrace 0, 1 \rbrace\)</span> is discrete, asset returns are continuous random variables. Let us take a look at its maximum likelihood estimation for the two parameters of the normal distribution. The likelihood function is:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\mu, \sigma^2) = \prod_{t=1}^T \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x_t - \mu)^2}{2\sigma^2}\right)
+\]</div>
+<p>and after log-transformation the Log-likelihood function:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L(\mu, \sigma^2) = \sum_{t=1}^T \log \left(\frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x_t - \mu)^2}{2\sigma^2}\right)\right)
+\]</div>
+<p>which can be simplified to:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L(\mu, \sigma^2) = -\frac{T}{2} \log (2\pi \sigma^2) - \frac{1}{2\sigma^2} \sum_{t=1}^T (x_t - \mu)^2
+\]</div>
+<p>By deriving the derivative w.r.t. <span class="math notranslate nohighlight">\(\mu\)</span>, setting it to zero and solving it, we get the maximum likelihood estimator for it:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial}{\partial \mu} \log L(\mu, \sigma^2) = \frac{1}{\sigma^2} \sum_{t=1}^T (x_t - \mu) = 0 \\
+\sum_{t=1}^T x_t - T \mu = 0 \Rightarrow \mu = \frac{1}{T} \sum_{t=1}^T x_i
+\end{split}\]</div>
+<p>By deriving the derivative w.r.t. <span class="math notranslate nohighlight">\(\sigma^2\)</span>, setting it to zero and solving it, we get the maximum likelihood estimator for it:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial}{\partial \sigma^2} \log L(\mu, \sigma^2) = -\frac{T}{2\sigma^2} + \frac{1}{2(\sigma^2)^2} \sum_{t=1}^T (x_t - \mu)^2 = 0 \\
+\frac{T}{2\sigma^2} = \frac{1}{2(\sigma^2)^2} \sum_{t=1}^T (x_t - \mu)^2 \Rightarrow \sigma^2 = \frac{1}{T} \sum_{t=1}^T (x_t - \mu)^2
+\end{split}\]</div>
+<p>Finally, this means the maximum likelihood estimator for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> are the arithmetic mean and the empirical variance (without bias correction):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\mu} = \frac{1}{T} \sum_t x_t \\
+\hat{\sigma}^2 = \frac{1}{T} \sum_t \left( x_t - \hat{\mu} \right)^2
+\end{split}\]</div>
+<p>The emphasis of this course is not the derivation of different maximum likelihood estimators, however, by providing these analytical examples, the general mechanism which stands behind it should be demonstrated. Now, let us take a look, how the parameters for different distributions can be done with python’s scipy package. Below, we continue the example for Apple’s asset returns. First you can see the estimated parameters for the normal, skewed normal, t and skewed t distribution. As the distributions are parametrized in different ways, no comparison can be draw. Given, the distribution is specified by its parameters, its moments can be determined. In the next cell, you can see the estimates for the mean, variance, skewness and kurtosis. Note, that the kurtosis is infinite for the t distribution if the degrees of freedom are below <span class="math notranslate nohighlight">\(4\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">skewnorm</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">nct</span>
+
+<span class="n">aapl_returns_train</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">)]</span>
+<span class="n">aapl_returns_test</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">):]</span>
+
+<span class="n">theta_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">)</span>
+<span class="n">theta_skewnorm</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">)</span>
+<span class="n">theta_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">)</span>
+<span class="n">theta_nct</span> <span class="o">=</span> <span class="n">nct</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">)</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">distrs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed t&quot;</span><span class="p">]</span>
+<span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;skewed normal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">theta_t</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;skewed t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">parameters</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;normal&#39;: array([0.0023, 0.0215]),
+ &#39;skewed normal&#39;: array([-0.9029,  0.0157,  0.0253]),
+ &#39;t&#39;: array([3.1408e+00, 2.5000e-03, 1.3600e-02]),
+ &#39;skewed t&#39;: array([ 3.153e+00, -3.960e-02,  3.100e-03,  1.370e-02])}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">moments_overview</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed t&quot;</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">])</span>
+<span class="n">moments_overview</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+<span class="n">moments_overview</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;skewed normal&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+<span class="n">moments_overview</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">theta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+<span class="n">moments_overview</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;skewed t&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">nct</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+<span class="n">moments_overview</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>variance</th>
+      <th>skewness</th>
+      <th>kurtosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>normal</th>
+      <td>0.002261</td>
+      <td>0.000461</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>skewed normal</th>
+      <td>0.002165</td>
+      <td>0.000459</td>
+      <td>-0.108725</td>
+      <td>0.04539</td>
+    </tr>
+    <tr>
+      <th>t</th>
+      <td>0.002474</td>
+      <td>0.000513</td>
+      <td>0.000000</td>
+      <td>inf</td>
+    </tr>
+    <tr>
+      <th>skewed t</th>
+      <td>0.002339</td>
+      <td>0.000511</td>
+      <td>-0.636173</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="evaluation-of-parametric-models">
+<h2>Evaluation of parametric models<a class="headerlink" href="#evaluation-of-parametric-models" title="Link to this heading">#</a></h2>
+<p>The remaining question is which model is better at capturing the data. When we use maximum likelihood estimation, the likelihood function value for the estimated model can be used as a higher value means it makes the current data sample more plausible. However, remembering that models with more parameters are more flexible, a performance metric should control for this aspect in order to be fair. Two popular metrics with this respect are the Akaike information criterion (AIC) and the Bayesian information criterion (BIC):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+AIC = -2 \log L(\boldsymbol{\theta}) + 2p \\
+BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p 
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(T\)</span> being the number of observations and <span class="math notranslate nohighlight">\(p\)</span> the number of parameters. The higher the likelihood the smaller <span class="math notranslate nohighlight">\(-2 \log L(\boldsymbol{\theta})\)</span>, thus, the lower the value of the AIC and the BIC, the better. By adding <span class="math notranslate nohighlight">\(2p\)</span> and <span class="math notranslate nohighlight">\(\log(T)p\)</span>, models with a higher number of parameters are penalized to a larger extent. Hereby, the BIC is more conservative towards more flexible models with a higher number of parameters.</p>
+<p>It is important to understand that the parameters are maximized in the sense that they make the current empirical sample most plausible. Usually, this is not true for new and unseen data due to the randomness when drawing empirical samples. This is why it is also very important to compare performance metrics for out of sample data which usually is called <em>test</em> data, while data which is used for estimation is called <em>training</em> data. The table below illustrates metrics for training data (2019-2022) and test data (2022-2024/3). For both data sets, we get a consistent result which shows us that the t distribution is best when using the AIC or BIC. While there are many other distributions which can be used for comparison, the t distribution is often a good choice for daily asset returns due to its simplicity (as it only uses three parameters) and its ability to capture heavy tails which helps to assess probabilities for extreme events.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ll_norm_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">,</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ll_skewnorm_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">skewnorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">,</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">ll_t_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">,</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">ll_nct_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nct</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">,</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">ll_norm_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_test</span><span class="p">,</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ll_skewnorm_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">skewnorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_test</span><span class="p">,</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_skewnorm</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">ll_t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_test</span><span class="p">,</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">ll_nct_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nct</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns_test</span><span class="p">,</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">theta_nct</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">aic_norm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">aic_skewnorm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_skewnorm_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">)</span>
+<span class="n">aic_t_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+<span class="n">aic_nct_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_nct_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">)</span>
+
+<span class="n">aic_norm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">aic_skewnorm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_skewnorm_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">)</span>
+<span class="n">aic_t_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+<span class="n">aic_nct_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_nct_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">)</span>
+
+<span class="n">T_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aapl_returns_train</span><span class="p">)</span>
+<span class="n">bic_norm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">bic_skewnorm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_skewnorm_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">)</span>
+<span class="n">bic_t_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+<span class="n">bic_nct_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_nct_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">)</span>
+
+<span class="n">T_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aapl_returns_test</span><span class="p">)</span>
+<span class="n">bic_norm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">bic_skewnorm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_skewnorm_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_skewnorm</span><span class="p">)</span>
+<span class="n">bic_t_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+<span class="n">bic_nct_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_nct_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_nct</span><span class="p">)</span>
+
+
+<span class="n">eval_distrs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;skewed t&quot;</span><span class="p">],</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LL (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;AIC (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;BIC (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;LL (test)&quot;</span><span class="p">,</span> <span class="s2">&quot;AIC (test)&quot;</span><span class="p">,</span> <span class="s2">&quot;BIC (test)&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;LL (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_norm_train</span><span class="p">,</span> <span class="n">ll_skewnorm_train</span><span class="p">,</span> <span class="n">ll_t_train</span><span class="p">,</span> <span class="n">ll_nct_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;AIC (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aic_norm_train</span><span class="p">,</span> <span class="n">aic_skewnorm_train</span><span class="p">,</span> <span class="n">aic_t_train</span><span class="p">,</span> <span class="n">aic_nct_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;BIC (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bic_norm_train</span><span class="p">,</span> <span class="n">bic_skewnorm_train</span><span class="p">,</span> <span class="n">bic_t_train</span><span class="p">,</span> <span class="n">bic_nct_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;LL (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_norm_test</span><span class="p">,</span> <span class="n">ll_skewnorm_test</span><span class="p">,</span> <span class="n">ll_t_test</span><span class="p">,</span> <span class="n">ll_nct_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;AIC (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aic_norm_test</span><span class="p">,</span> <span class="n">aic_skewnorm_test</span><span class="p">,</span> <span class="n">aic_t_test</span><span class="p">,</span> <span class="n">aic_nct_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;BIC (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bic_norm_test</span><span class="p">,</span> <span class="n">bic_skewnorm_test</span><span class="p">,</span> <span class="n">bic_t_test</span><span class="p">,</span> <span class="n">bic_nct_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LL (train)</th>
+      <th>AIC (train)</th>
+      <th>BIC (train)</th>
+      <th>LL (test)</th>
+      <th>AIC (test)</th>
+      <th>BIC (test)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>normal</th>
+      <td>1830.839849</td>
+      <td>-3657.679699</td>
+      <td>-3648.423616</td>
+      <td>1448.355703</td>
+      <td>-2892.711407</td>
+      <td>-2884.044848</td>
+    </tr>
+    <tr>
+      <th>skewed normal</th>
+      <td>1833.708094</td>
+      <td>-3661.416188</td>
+      <td>-3647.532064</td>
+      <td>1447.720324</td>
+      <td>-2889.440648</td>
+      <td>-2876.440809</td>
+    </tr>
+    <tr>
+      <th>t</th>
+      <td>1918.162858</td>
+      <td>-3830.325716</td>
+      <td>-3816.441591</td>
+      <td>1477.516490</td>
+      <td>-2949.032980</td>
+      <td>-2936.033141</td>
+    </tr>
+    <tr>
+      <th>skewed t</th>
+      <td>1918.200589</td>
+      <td>-3828.401178</td>
+      <td>-3809.889012</td>
+      <td>1477.613655</td>
+      <td>-2947.227310</td>
+      <td>-2929.894192</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="the-bias-variance-tradeoff">
+<h2>The bias-variance tradeoff<a class="headerlink" href="#the-bias-variance-tradeoff" title="Link to this heading">#</a></h2>
+<p>Since we have just discussed the different values of estimates for different data sets, we would like to take this opportunity to briefly discuss a very important principle for the estimation of models - the bias-variance tradeoff. To keep things simple, let’s use a more general example - the toss of a fair coin. A proper distribution for a coin coss would be the Bernoulli distribution whose parameter <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> if the coin is fair. Assume that we toss a coin <span class="math notranslate nohighlight">\(n\)</span> times to create a single data set. For every data set, we compare two estimators. Estimator one is the one we derived by maximum likelihood estimation and it is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Estimator one: } \hat{\theta} = \frac{1}{n} \sum_i x_i
+\]</div>
+<p>Without a reasonable derivation, we also try to estimate the true parameter by another estimator which is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Estimator two: } \hat{\theta} = \frac{1}{n+5} \sum_i x_i
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(n = 100\)</span>, however, we not only conduct our estimation experiment once, we repeat it <span class="math notranslate nohighlight">\(10,000\)</span> times and record all estimates for estimator one and two for every data sample. Below, we first take a look at the empirical distributions of these estimates. We can see that the realizations for estimator two seem to be systematically lower than the ones for estimator two. At the same time, the distribution for estimator one realizations seems to be a little wider.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">estimator_one</span><span class="p">,</span> <span class="n">estimator_two</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">x_tmp</span> <span class="o">=</span> <span class="n">bernoulli</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">estimator_one</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_tmp</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">estimator_two</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_tmp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">estimator_one</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Estimator one&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">estimator_two</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Estimator two&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of estimates&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3fe26c98deb255711e01cb51fe880ceafc9143997422bfa318fc63ebc08f3f6c.png" src="_images/3fe26c98deb255711e01cb51fe880ceafc9143997422bfa318fc63ebc08f3f6c.png" />
+</div>
+</div>
+<p>These observations can be quantified by calculating the arithmetic mean and variance for realizations of estimator one and two, respectively. While estimates of estimator one are almost perfectly equal to the true parameter value, estimates for estimator two estimates are on average below the true parameter value. This systematic underestimation is called bias (systematic overestimation is also called bias). Formally let <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> be the estimator for an unkown parameter value, then the bias is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{bias}(\hat{\theta}) = E(\hat{\theta}) - \theta 
+\]</div>
+<p>However, the variance of estimator two is lower. This is a desirable property. Given that we only use a single data set in real life applications to estimate parameters, it is of great value that these estimates tend to vary less for different data sets, otherwise, decision which are based on these estimates are exposed to the randomness in data. The variance of an estimator is formally defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{variance}(\hat{\theta}) = E \left[ \left( \hat{\theta} - E(\hat{\theta}) \right)^2 \right]
+\]</div>
+<p>In our example, the variance of the biased estimator two is lower than the one for estimator. This exposes us to the classical bias-variance tradeoff as we need to decide among an unbiased estimator with higher variation and a biased estimator with lower variation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">estimator_one</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">estimator_two</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">estimator_one</span><span class="p">,</span> <span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">estimator_two</span><span class="p">,</span> <span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)]],</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Avg. of estimates&quot;</span><span class="p">,</span> <span class="s2">&quot;Std. of estimates&quot;</span><span class="p">],</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Estimator one&quot;</span><span class="p">,</span> <span class="s2">&quot;Estimator two&quot;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimator one</th>
+      <th>Estimator two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Avg. of estimates</th>
+      <td>0.4999</td>
+      <td>0.4761</td>
+    </tr>
+    <tr>
+      <th>Std. of estimates</th>
+      <td>0.0025</td>
+      <td>0.0022</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Usually, in realistic scenarios, this leads to a decision between simpler and more complex models. Usually, the latter have more parameters and are exposed to higher statistical uncertainty when estimating these parameters which increases the variation of these models. However, simpler models are often not flexible enough to capture real-world dynamics adequately which introduces systematic mis-specifications, i.e., bias.</p>
+</section>
+<section id="use-cases-for-parametric-models-of-asset-returns">
+<h2>Use cases for parametric models of asset returns<a class="headerlink" href="#use-cases-for-parametric-models-of-asset-returns" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_empirical_asset_returns.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Empirical analysis of asset returns</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution">Normal distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-t-distribution">Student t distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flexibility-of-distributional-families">Flexibility of distributional families</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation">Maximum likelihood estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Normal distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
