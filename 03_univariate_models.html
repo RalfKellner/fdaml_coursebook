@@ -352,6 +352,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-investors-evaluate-asset-return-distributions">How investors evaluate asset return distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
 </ul>
             </nav>
@@ -919,7 +920,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/46f4d3f9fca5192aae7ff5805a6b32ba505c7b2a46257cae0589113255d65268.png" src="_images/46f4d3f9fca5192aae7ff5805a6b32ba505c7b2a46257cae0589113255d65268.png" />
+<img alt="_images/9a31acc76652e72dadcee291ed1237bec3958537740cc16a0e62e7eead53e9b2.png" src="_images/9a31acc76652e72dadcee291ed1237bec3958537740cc16a0e62e7eead53e9b2.png" />
 </div>
 </div>
 <p>These observations can be quantified by calculating the arithmetic mean and variance for realizations of estimator one and two, respectively. While estimates of estimator one are almost perfectly equal to the true parameter value, estimates for estimator two estimates are on average below the true parameter value. This systematic underestimation is called bias (systematic overestimation is also called bias). Formally let <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> be the estimator for an unkown parameter value, then the bias is defined by:</p>
@@ -969,8 +970,8 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
   <tbody>
     <tr>
       <th>Avg. of estimates</th>
-      <td>0.4994</td>
-      <td>0.4756</td>
+      <td>0.4998</td>
+      <td>0.4760</td>
     </tr>
     <tr>
       <th>Std. of estimates</th>
@@ -982,6 +983,35 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </div></div></div>
 </div>
 <p>Usually, in realistic scenarios, this leads to a decision between simpler and more complex models. Usually, the latter have more parameters and are exposed to higher statistical uncertainty when estimating these parameters which increases the variation of these models. However, simpler models are often not flexible enough to capture real-world dynamics adequately which introduces systematic mis-specifications, i.e., bias.</p>
+</section>
+<section id="how-investors-evaluate-asset-return-distributions">
+<h2>How investors evaluate asset return distributions<a class="headerlink" href="#how-investors-evaluate-asset-return-distributions" title="Link to this heading">#</a></h2>
+<p>So far, we discussed the technical aspect of a parametric model for an asset return distribution. But what is important for investors when they examine return distributions, either by empirical estimates or by a parametric model. In short, traditional financial theories have a large emphasis on the mean and the standard deviation of return distributions. The former represents the profitability of an investments. Higher values for the return’s mean imply a higher growth in value over time. The standard deviation is used to quantify the risk of an investment. But wait! The standard deviation is the square root of the variance which is the expected value of squared deviations from the mean. A negative deviation from the mean is likely to be considered as something negative from an investor’s perspective as the value development of an asset is below average. However, a positive deviation is obviously a good day for an investor because the investment grows larger than expected. Given higher variance for an investment, we may have a higher chance for negative days, however to the same extent also the chance for very good days as well, so why is this considered to be more risky in terms of something investors tend to fear or avoid to a certain degree?</p>
+<p>The reason is that investors tend to be <em>risk averse</em>. Risk aversion is a concept which comes from utility theory. Let <span class="math notranslate nohighlight">\(w\)</span> be the wealth we have and <span class="math notranslate nohighlight">\(U\)</span> a function which assigns the utility for having wealth <span class="math notranslate nohighlight">\(w\)</span>. If an investor is risk averse, her utility function is a concave function like the one visualized below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">uw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">uw</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$w$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$U(w)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b631b1681fd2c14af6a5b9cb808f0ab8c2ae43c8d35c7774c2ef5eda596cb28.png" src="_images/0b631b1681fd2c14af6a5b9cb808f0ab8c2ae43c8d35c7774c2ef5eda596cb28.png" />
+</div>
+</div>
+<p>If the utility function is concave, it means the increase in utility from one more unit of <span class="math notranslate nohighlight">\(w\)</span> is smaller than the decrease in utility from the loss of one unit of <span class="math notranslate nohighlight">\(w\)</span>. If this is true, than investors put a larger weight on potential (high) losses than the corresponding potential (high) gains. Only under these circumstances, high variation becomes something which reduces utility and needs to be avoided to a certain extent.</p>
+<p>Given that not all investors have exactly the same utility function, some may be willing to bear more risks than others. Another important thought in this context is the relation between profit and risk. More profitable assets are more risky if all market participants behave rational. Intuitively, this can be explained by the following example. Assume, two assets exist which are identically profitable, while the second asset has a higher risk level. In this scenario, no rational investor would purchase asset number two. Thus, asset number two can only exist if it becomes more profitable than asset number one. The relation between profitability and risk is almost a natural law on financial markets. However, in real-life, it is not as easy as it sounds, as profitability and risk of an asset is unknown and needs to be estimated. Furthermore, risk may be more than “just” the standard deviation, and, some sources of risk may be less important to investors than others. While we come back to the last point later, let us quickly discuss risk metrics different from standard deviation.</p>
+<p>VaR, ES, Expectiles, Aximos….</p>
 </section>
 <section id="use-cases-for-parametric-models-of-asset-returns">
 <h2>Use cases for parametric models of asset returns<a class="headerlink" href="#use-cases-for-parametric-models-of-asset-returns" title="Link to this heading">#</a></h2>
@@ -1056,6 +1086,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-investors-evaluate-asset-return-distributions">How investors evaluate asset return distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
 </ul>
   </nav></div>
