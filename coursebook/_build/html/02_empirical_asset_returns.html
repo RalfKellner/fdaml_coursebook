@@ -1030,16 +1030,19 @@ H_0:&amp; \quad \rho{1} = \rho(2) = ... = \rho(k) = 0 \\
 H_a:&amp; \quad \text{Any } \rho(j) \neq 0
 \end{align*}
 \end{split}\]</div>
-<p>If the Ljung-Box test rejects the null hypothesis, we conclude that at least the auto-correlation for one lage between <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(k\)</span> is different from zero. The table below exhibits p-values for the Ljung-Box test using a lag <span class="math notranslate nohighlight">\(k=1\)</span> of daily returns and daily absolute returns. For instance, conducting each test at a significance level of <span class="math notranslate nohighlight">\(0.05\)</span>, we observe that some tests for returns would not reject the null hypothesis while the null hypothesis would be rejected for all companies when analyzing the auto-correlation of absolute returns. This underlines the common empirical finding of lower auto-correlation for returns and higher auto-correlation of absolute returns.</p>
+<p>If the Ljung-Box test rejects the null hypothesis, we conclude that at least the auto-correlation for one lage between <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(k\)</span> is different from zero. The table below exhibits autocorrelation and p-values for the Ljung-Box test using a lag <span class="math notranslate nohighlight">\(k=1\)</span> of daily returns and daily absolute returns. For instance, conducting each test at a significance level of <span class="math notranslate nohighlight">\(0.05\)</span>, we observe that some tests for returns would not reject the null hypothesis while the null hypothesis would be rejected for all companies when analyzing the auto-correlation of absolute returns. This underlines the common empirical finding of lower auto-correlation for returns and higher auto-correlation of absolute returns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span>
 
+<span class="n">ac_lag_one</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">())[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">abs_ac_lag_one</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">())[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">lb_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">lb_abs_returns</span> <span class="o">=</span> <span class="n">df_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">lb_returns</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;returns&quot;</span><span class="p">,</span> <span class="s2">&quot;absolute returns &quot;</span><span class="p">]</span>
+<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">ac_lag_one</span><span class="p">,</span> <span class="n">lb_returns</span><span class="p">,</span> <span class="n">abs_ac_lag_one</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ac returns lag=1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_value&quot;</span><span class="p">,</span> <span class="s2">&quot;ac absolute returns lag=1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_value&quot;</span><span class="p">]</span>
 <span class="n">lb_test</span>
 </pre></div>
 </div>
@@ -1063,179 +1066,249 @@ H_a:&amp; \quad \text{Any } \rho(j) \neq 0
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>returns</th>
-      <th>absolute returns</th>
+      <th>ac returns lag=1</th>
+      <th>p_value</th>
+      <th>ac absolute returns lag=1</th>
+      <th>p_value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>AAPL</th>
+      <td>-0.120865</td>
       <td>0.0000</td>
+      <td>0.210125</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>AMGN</th>
+      <td>-0.096045</td>
       <td>0.0005</td>
+      <td>0.238588</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>AXP</th>
+      <td>-0.073092</td>
       <td>0.0079</td>
+      <td>0.341812</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>BA</th>
+      <td>0.070304</td>
       <td>0.0106</td>
+      <td>0.378597</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CAT</th>
+      <td>-0.022380</td>
       <td>0.4160</td>
+      <td>0.165356</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CRM</th>
+      <td>-0.026554</td>
       <td>0.3345</td>
+      <td>0.209375</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CSCO</th>
+      <td>-0.139037</td>
       <td>0.0000</td>
+      <td>0.309159</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>CVX</th>
+      <td>-0.123477</td>
       <td>0.0000</td>
+      <td>0.256751</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>DD</th>
+      <td>-0.049286</td>
       <td>0.0732</td>
+      <td>0.233687</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>DIS</th>
+      <td>-0.074999</td>
       <td>0.0064</td>
+      <td>0.206865</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>DOW</th>
+      <td>-0.038589</td>
       <td>0.1694</td>
+      <td>0.281932</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>GS</th>
+      <td>-0.092553</td>
       <td>0.0008</td>
+      <td>0.342285</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>HD</th>
+      <td>-0.106765</td>
       <td>0.0001</td>
+      <td>0.306747</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>HON</th>
+      <td>-0.047071</td>
       <td>0.0871</td>
+      <td>0.388241</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>IBM</th>
+      <td>-0.075153</td>
       <td>0.0063</td>
+      <td>0.206794</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>INTC</th>
+      <td>-0.136593</td>
       <td>0.0000</td>
+      <td>0.258849</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>JNJ</th>
+      <td>-0.114909</td>
       <td>0.0000</td>
+      <td>0.291803</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>JPM</th>
+      <td>-0.132703</td>
       <td>0.0000</td>
+      <td>0.418630</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>KO</th>
+      <td>-0.043055</td>
       <td>0.1176</td>
+      <td>0.314675</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>MCD</th>
+      <td>-0.150509</td>
       <td>0.0000</td>
+      <td>0.255981</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>MMM</th>
+      <td>-0.050958</td>
       <td>0.0640</td>
+      <td>0.193796</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>MRK</th>
+      <td>-0.129388</td>
       <td>0.0000</td>
+      <td>0.174784</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>MSFT</th>
+      <td>-0.189648</td>
       <td>0.0000</td>
+      <td>0.320138</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>NKE</th>
+      <td>-0.005102</td>
       <td>0.8529</td>
+      <td>0.186433</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>PFE</th>
+      <td>-0.061101</td>
       <td>0.0264</td>
+      <td>0.220272</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>PG</th>
+      <td>-0.124468</td>
       <td>0.0000</td>
+      <td>0.346689</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>RTX</th>
+      <td>-0.039084</td>
       <td>0.1555</td>
+      <td>0.297242</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>TRV</th>
+      <td>-0.217677</td>
       <td>0.0000</td>
+      <td>0.432395</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>UNH</th>
+      <td>-0.125079</td>
       <td>0.0000</td>
+      <td>0.309437</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>V</th>
+      <td>-0.136539</td>
       <td>0.0000</td>
+      <td>0.331032</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>VZ</th>
+      <td>-0.076505</td>
       <td>0.0054</td>
+      <td>0.220420</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>WBA</th>
+      <td>-0.027138</td>
       <td>0.3240</td>
+      <td>0.230750</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>WMT</th>
+      <td>-0.082407</td>
       <td>0.0027</td>
+      <td>0.294540</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>XOM</th>
+      <td>-0.030635</td>
       <td>0.2655</td>
+      <td>0.224558</td>
       <td>0.0</td>
     </tr>
   </tbody>
@@ -1648,12 +1721,15 @@ z_t(h) &amp; = \ln \left(1+ r_t(h)\right) = \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span>
 
+<span class="n">ac_lag_one</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">())[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">abs_ac_lag_one</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">())[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">lb_returns</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">lb_abs_returns</span> <span class="o">=</span> <span class="n">df_monthly_returns</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">lb_pvalue</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">lb_returns</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;returns&quot;</span><span class="p">,</span> <span class="s2">&quot;absolute returns &quot;</span><span class="p">]</span>
+<span class="n">lb_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">ac_lag_one</span><span class="p">,</span> <span class="n">lb_returns</span><span class="p">,</span> <span class="n">abs_ac_lag_one</span><span class="p">,</span> <span class="n">lb_abs_returns</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lb_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ac returns lag=1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_value&quot;</span><span class="p">,</span> <span class="s2">&quot;ac absolute returns lag=1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_value&quot;</span><span class="p">]</span>
 <span class="n">lb_test</span>
 </pre></div>
 </div>
@@ -1677,179 +1753,249 @@ z_t(h) &amp; = \ln \left(1+ r_t(h)\right) = \\
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>returns</th>
-      <th>absolute returns</th>
+      <th>ac returns lag=1</th>
+      <th>p_value</th>
+      <th>ac absolute returns lag=1</th>
+      <th>p_value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>AAPL</th>
+      <td>0.062922</td>
       <td>0.6091</td>
+      <td>0.064471</td>
       <td>0.6003</td>
     </tr>
     <tr>
       <th>AMGN</th>
+      <td>-0.109709</td>
       <td>0.3726</td>
+      <td>-0.091491</td>
       <td>0.4571</td>
     </tr>
     <tr>
       <th>AXP</th>
+      <td>-0.017553</td>
       <td>0.8866</td>
+      <td>0.046763</td>
       <td>0.7039</td>
     </tr>
     <tr>
       <th>BA</th>
+      <td>0.034107</td>
       <td>0.7816</td>
+      <td>0.020750</td>
       <td>0.8661</td>
     </tr>
     <tr>
       <th>CAT</th>
+      <td>-0.069894</td>
       <td>0.5700</td>
+      <td>0.047846</td>
       <td>0.6974</td>
     </tr>
     <tr>
       <th>CRM</th>
+      <td>-0.100502</td>
       <td>0.4141</td>
+      <td>-0.134187</td>
       <td>0.2755</td>
     </tr>
     <tr>
       <th>CSCO</th>
+      <td>-0.089900</td>
       <td>0.4650</td>
+      <td>-0.041053</td>
       <td>0.7386</td>
     </tr>
     <tr>
       <th>CVX</th>
+      <td>-0.152101</td>
       <td>0.2164</td>
+      <td>0.122996</td>
       <td>0.3175</td>
     </tr>
     <tr>
       <th>DD</th>
+      <td>-0.097434</td>
       <td>0.4284</td>
+      <td>0.371302</td>
       <td>0.0025</td>
     </tr>
     <tr>
       <th>DIS</th>
+      <td>-0.099154</td>
       <td>0.4203</td>
+      <td>0.075390</td>
       <td>0.5401</td>
     </tr>
     <tr>
       <th>DOW</th>
+      <td>-0.092566</td>
       <td>0.4519</td>
+      <td>0.114339</td>
       <td>0.3528</td>
     </tr>
     <tr>
       <th>GS</th>
+      <td>-0.119328</td>
       <td>0.3322</td>
+      <td>0.279319</td>
       <td>0.0232</td>
     </tr>
     <tr>
       <th>HD</th>
+      <td>0.075611</td>
       <td>0.5389</td>
+      <td>0.192701</td>
       <td>0.1173</td>
     </tr>
     <tr>
       <th>HON</th>
+      <td>-0.076220</td>
       <td>0.5356</td>
+      <td>0.028136</td>
       <td>0.8191</td>
     </tr>
     <tr>
       <th>IBM</th>
+      <td>-0.064154</td>
       <td>0.6021</td>
+      <td>-0.003719</td>
       <td>0.9759</td>
     </tr>
     <tr>
       <th>INTC</th>
+      <td>-0.088690</td>
       <td>0.4710</td>
+      <td>0.014684</td>
       <td>0.9050</td>
     </tr>
     <tr>
       <th>JNJ</th>
+      <td>-0.064066</td>
       <td>0.6026</td>
+      <td>-0.201932</td>
       <td>0.1008</td>
     </tr>
     <tr>
       <th>JPM</th>
+      <td>-0.018006</td>
       <td>0.8837</td>
+      <td>0.136006</td>
       <td>0.2690</td>
     </tr>
     <tr>
       <th>KO</th>
+      <td>-0.076970</td>
       <td>0.5316</td>
+      <td>0.196215</td>
       <td>0.1108</td>
     </tr>
     <tr>
       <th>MCD</th>
+      <td>-0.099612</td>
       <td>0.4182</td>
+      <td>0.148323</td>
       <td>0.2280</td>
     </tr>
     <tr>
       <th>MMM</th>
+      <td>-0.096729</td>
       <td>0.4318</td>
+      <td>0.089856</td>
       <td>0.4652</td>
     </tr>
     <tr>
       <th>MRK</th>
+      <td>-0.110076</td>
       <td>0.3710</td>
+      <td>0.101937</td>
       <td>0.4074</td>
     </tr>
     <tr>
       <th>MSFT</th>
+      <td>-0.090908</td>
       <td>0.4600</td>
+      <td>-0.231058</td>
       <td>0.0604</td>
     </tr>
     <tr>
       <th>NKE</th>
+      <td>0.006932</td>
       <td>0.9551</td>
+      <td>0.066267</td>
       <td>0.5902</td>
     </tr>
     <tr>
       <th>PFE</th>
+      <td>0.016168</td>
       <td>0.8955</td>
+      <td>-0.008773</td>
       <td>0.9432</td>
     </tr>
     <tr>
       <th>PG</th>
+      <td>-0.019202</td>
       <td>0.8760</td>
+      <td>-0.052862</td>
       <td>0.6675</td>
     </tr>
     <tr>
       <th>RTX</th>
+      <td>-0.096837</td>
       <td>0.4313</td>
+      <td>0.091782</td>
       <td>0.4557</td>
     </tr>
     <tr>
       <th>TRV</th>
+      <td>0.028334</td>
       <td>0.8179</td>
+      <td>0.039628</td>
       <td>0.7474</td>
     </tr>
     <tr>
       <th>UNH</th>
+      <td>-0.110515</td>
       <td>0.3691</td>
+      <td>0.062120</td>
       <td>0.6137</td>
     </tr>
     <tr>
       <th>V</th>
+      <td>-0.226559</td>
       <td>0.0656</td>
+      <td>0.082816</td>
       <td>0.5009</td>
     </tr>
     <tr>
       <th>VZ</th>
+      <td>-0.105274</td>
       <td>0.3922</td>
+      <td>0.052601</td>
       <td>0.6690</td>
     </tr>
     <tr>
       <th>WBA</th>
+      <td>-0.074249</td>
       <td>0.5462</td>
+      <td>0.028664</td>
       <td>0.8158</td>
     </tr>
     <tr>
       <th>WMT</th>
+      <td>-0.118461</td>
       <td>0.3357</td>
+      <td>0.008505</td>
       <td>0.9449</td>
     </tr>
     <tr>
       <th>XOM</th>
+      <td>-0.022659</td>
       <td>0.8539</td>
+      <td>0.102984</td>
       <td>0.4026</td>
     </tr>
   </tbody>
@@ -2052,7 +2198,171 @@ z_t(h) &amp; = \ln \left(1+ r_t(h)\right) = \\
 <span class="n">returns_by_month</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;January&quot;</span><span class="p">,</span> <span class="s2">&quot;February&quot;</span><span class="p">,</span> <span class="s2">&quot;March&quot;</span><span class="p">,</span> <span class="s2">&quot;April&quot;</span><span class="p">,</span> <span class="s2">&quot;May&quot;</span><span class="p">,</span> <span class="s2">&quot;June&quot;</span><span class="p">,</span> <span class="s2">&quot;July&quot;</span><span class="p">,</span> <span class="s2">&quot;August&quot;</span><span class="p">,</span> <span class="s2">&quot;September&quot;</span><span class="p">,</span> <span class="s2">&quot;October&quot;</span><span class="p">,</span> <span class="s2">&quot;November&quot;</span><span class="p">,</span> <span class="s2">&quot;December&quot;</span>
 <span class="p">]</span>
-<span class="n">returns_by_month</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">returns_by_month</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>January</th>
+      <th>February</th>
+      <th>March</th>
+      <th>April</th>
+      <th>May</th>
+      <th>June</th>
+      <th>July</th>
+      <th>August</th>
+      <th>September</th>
+      <th>October</th>
+      <th>November</th>
+      <th>December</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+      <td>34.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.009170</td>
+      <td>-0.009084</td>
+      <td>0.006756</td>
+      <td>0.027405</td>
+      <td>-0.006120</td>
+      <td>0.010640</td>
+      <td>0.023566</td>
+      <td>0.001102</td>
+      <td>-0.035383</td>
+      <td>0.029053</td>
+      <td>0.059411</td>
+      <td>0.028017</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.030528</td>
+      <td>0.025391</td>
+      <td>0.032055</td>
+      <td>0.035424</td>
+      <td>0.016968</td>
+      <td>0.024486</td>
+      <td>0.028470</td>
+      <td>0.023398</td>
+      <td>0.018834</td>
+      <td>0.026614</td>
+      <td>0.035191</td>
+      <td>0.024664</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.056711</td>
+      <td>-0.059689</td>
+      <td>-0.075931</td>
+      <td>-0.078743</td>
+      <td>-0.041405</td>
+      <td>-0.027631</td>
+      <td>-0.033479</td>
+      <td>-0.053045</td>
+      <td>-0.076003</td>
+      <td>-0.027991</td>
+      <td>0.002328</td>
+      <td>-0.066476</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.002290</td>
+      <td>-0.025924</td>
+      <td>-0.009913</td>
+      <td>0.012070</td>
+      <td>-0.018822</td>
+      <td>-0.001636</td>
+      <td>0.009072</td>
+      <td>-0.015809</td>
+      <td>-0.050899</td>
+      <td>0.011140</td>
+      <td>0.030917</td>
+      <td>0.022283</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.005062</td>
+      <td>-0.014239</td>
+      <td>0.006764</td>
+      <td>0.039632</td>
+      <td>-0.005240</td>
+      <td>0.007401</td>
+      <td>0.030306</td>
+      <td>0.000039</td>
+      <td>-0.030037</td>
+      <td>0.025574</td>
+      <td>0.060378</td>
+      <td>0.029948</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.026391</td>
+      <td>0.012078</td>
+      <td>0.033672</td>
+      <td>0.049321</td>
+      <td>0.006502</td>
+      <td>0.023129</td>
+      <td>0.038531</td>
+      <td>0.013960</td>
+      <td>-0.022688</td>
+      <td>0.046463</td>
+      <td>0.078390</td>
+      <td>0.038837</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.084357</td>
+      <td>0.038084</td>
+      <td>0.069536</td>
+      <td>0.073403</td>
+      <td>0.025368</td>
+      <td>0.077983</td>
+      <td>0.101586</td>
+      <td>0.067705</td>
+      <td>-0.006916</td>
+      <td>0.096286</td>
+      <td>0.198722</td>
+      <td>0.082483</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_by_month</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

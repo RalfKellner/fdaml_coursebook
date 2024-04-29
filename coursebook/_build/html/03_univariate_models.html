@@ -352,8 +352,9 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-investors-evaluate-asset-return-distributions">How investors evaluate asset return distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-relationship-between-profit-and-risk">The relationship between profit and risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interim-conclusion-examining-the-unconditional-asset-return-distribution">Interim conclusion: Examining the unconditional asset return distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a></li>
 </ul>
             </nav>
         </div>
@@ -886,7 +887,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </section>
 <section id="the-bias-variance-tradeoff">
 <h2>The bias-variance tradeoff<a class="headerlink" href="#the-bias-variance-tradeoff" title="Link to this heading">#</a></h2>
-<p>Since we have just discussed the different values of estimates for different data sets, we would like to take this opportunity to briefly discuss a very important principle for the estimation of models - the bias-variance tradeoff. To keep things simple, let’s use a more general example - the toss of a fair coin. A proper distribution for a coin coss would be the Bernoulli distribution whose parameter <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> if the coin is fair. Assume that we toss a coin <span class="math notranslate nohighlight">\(n\)</span> times to create a single data set. For every data set, we compare two estimators. Estimator one is the one we derived by maximum likelihood estimation and it is given by:</p>
+<p>Since we have just discussed the topic of different estimates for different data sets, let us take this opportunity to briefly discuss a very important principle for the estimation of models - the bias-variance tradeoff. To keep things simple, let’s use a more general example - the toss of a fair coin. A proper distribution for a coin coss would be the Bernoulli distribution whose parameter <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> if the coin is fair. Assume that we toss a coin <span class="math notranslate nohighlight">\(n\)</span> times to create a single data set. For every data set, we compare two estimators. Estimator one is the one we derived by maximum likelihood estimation and it is given by:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{Estimator one: } \hat{\theta} = \frac{1}{n} \sum_i x_i
@@ -920,7 +921,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9a31acc76652e72dadcee291ed1237bec3958537740cc16a0e62e7eead53e9b2.png" src="_images/9a31acc76652e72dadcee291ed1237bec3958537740cc16a0e62e7eead53e9b2.png" />
+<img alt="_images/f5e996487b4d03146e76991da54b4a384b6162fb6bca440d93a998959921c6e4.png" src="_images/f5e996487b4d03146e76991da54b4a384b6162fb6bca440d93a998959921c6e4.png" />
 </div>
 </div>
 <p>These observations can be quantified by calculating the arithmetic mean and variance for realizations of estimator one and two, respectively. While estimates of estimator one are almost perfectly equal to the true parameter value, estimates for estimator two estimates are on average below the true parameter value. This systematic underestimation is called bias (systematic overestimation is also called bias). Formally let <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> be the estimator for an unkown parameter value, then the bias is defined by:</p>
@@ -970,8 +971,8 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
   <tbody>
     <tr>
       <th>Avg. of estimates</th>
-      <td>0.4998</td>
-      <td>0.4760</td>
+      <td>0.4988</td>
+      <td>0.4751</td>
     </tr>
     <tr>
       <th>Std. of estimates</th>
@@ -984,10 +985,10 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </div>
 <p>Usually, in realistic scenarios, this leads to a decision between simpler and more complex models. Usually, the latter have more parameters and are exposed to higher statistical uncertainty when estimating these parameters which increases the variation of these models. However, simpler models are often not flexible enough to capture real-world dynamics adequately which introduces systematic mis-specifications, i.e., bias.</p>
 </section>
-<section id="how-investors-evaluate-asset-return-distributions">
-<h2>How investors evaluate asset return distributions<a class="headerlink" href="#how-investors-evaluate-asset-return-distributions" title="Link to this heading">#</a></h2>
-<p>So far, we discussed the technical aspect of a parametric model for an asset return distribution. But what is important for investors when they examine return distributions, either by empirical estimates or by a parametric model. In short, traditional financial theories have a large emphasis on the mean and the standard deviation of return distributions. The former represents the profitability of an investments. Higher values for the return’s mean imply a higher growth in value over time. The standard deviation is used to quantify the risk of an investment. But wait! The standard deviation is the square root of the variance which is the expected value of squared deviations from the mean. A negative deviation from the mean is likely to be considered as something negative from an investor’s perspective as the value development of an asset is below average. However, a positive deviation is obviously a good day for an investor because the investment grows larger than expected. Given higher variance for an investment, we may have a higher chance for negative days, however to the same extent also the chance for very good days as well, so why is this considered to be more risky in terms of something investors tend to fear or avoid to a certain degree?</p>
-<p>The reason is that investors tend to be <em>risk averse</em>. Risk aversion is a concept which comes from utility theory. Let <span class="math notranslate nohighlight">\(w\)</span> be the wealth we have and <span class="math notranslate nohighlight">\(U\)</span> a function which assigns the utility for having wealth <span class="math notranslate nohighlight">\(w\)</span>. If an investor is risk averse, her utility function is a concave function like the one visualized below:</p>
+<section id="the-relationship-between-profit-and-risk">
+<h2>The relationship between profit and risk<a class="headerlink" href="#the-relationship-between-profit-and-risk" title="Link to this heading">#</a></h2>
+<p>So far, we discussed the technical aspect of a parametric model for an asset return distribution. But what is important for investors when they examine return distributions, either by empirical estimates or by a parametric model. In short, traditional financial theories have a large emphasis on the mean and the standard deviation of return distributions. The former represents the profitability of an investment. Higher values for the return’s mean imply a higher growth in value over time. The standard deviation is used to quantify the risk of an investment. But why? The standard deviation is the square root of the variance which is the expected value of squared deviations from the mean. A negative deviation from the mean is likely to be considered as something negative from an investor’s perspective as the value development of an asset is below average. However, a positive deviation is obviously a good day for an investor because the investment grows larger than expected. Given higher variance for an investment, we may have a higher chance for bad days, however to the same extent also the chance for very good days as well, so why is this considered to be more risky in terms of something investors tend to fear or avoid to a certain degree?</p>
+<p>The reason is that investors usually are <em>risk averse</em>. Risk aversion is a concept which comes from utility theory. Let <span class="math notranslate nohighlight">\(w\)</span> be the wealth we have and <span class="math notranslate nohighlight">\(U\)</span> a function which assigns the utility for having wealth <span class="math notranslate nohighlight">\(w\)</span>. If an investor is risk averse, her utility function is a concave function like the one visualized below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1009,12 +1010,403 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 <img alt="_images/0b631b1681fd2c14af6a5b9cb808f0ab8c2ae43c8d35c7774c2ef5eda596cb28.png" src="_images/0b631b1681fd2c14af6a5b9cb808f0ab8c2ae43c8d35c7774c2ef5eda596cb28.png" />
 </div>
 </div>
-<p>If the utility function is concave, it means the increase in utility from one more unit of <span class="math notranslate nohighlight">\(w\)</span> is smaller than the decrease in utility from the loss of one unit of <span class="math notranslate nohighlight">\(w\)</span>. If this is true, than investors put a larger weight on potential (high) losses than the corresponding potential (high) gains. Only under these circumstances, high variation becomes something which reduces utility and needs to be avoided to a certain extent.</p>
-<p>Given that not all investors have exactly the same utility function, some may be willing to bear more risks than others. Another important thought in this context is the relation between profit and risk. More profitable assets are more risky if all market participants behave rational. Intuitively, this can be explained by the following example. Assume, two assets exist which are identically profitable, while the second asset has a higher risk level. In this scenario, no rational investor would purchase asset number two. Thus, asset number two can only exist if it becomes more profitable than asset number one. The relation between profitability and risk is almost a natural law on financial markets. However, in real-life, it is not as easy as it sounds, as profitability and risk of an asset is unknown and needs to be estimated. Furthermore, risk may be more than “just” the standard deviation, and, some sources of risk may be less important to investors than others. While we come back to the last point later, let us quickly discuss risk metrics different from standard deviation.</p>
-<p>VaR, ES, Expectiles, Aximos….</p>
+<p>If the utility function is concave, it means the increase in utility from one more unit of <span class="math notranslate nohighlight">\(w\)</span> is smaller than the decrease in utility from the loss of one unit of <span class="math notranslate nohighlight">\(w\)</span>. If this is true, than investors put a larger weight on potential (high) losses than the corresponding potential (high) gains. Only under these circumstances, high variation becomes something which reduces utility and needs to be avoided to a certain extent. Given that not all investors have exactly the same utility function, some may be willing to bear more risks than others (while all are still risk averse).</p>
+<p>Another important thought in this context is the relation between profit and risk. More profitable assets are more risky if all market participants behave rational. Intuitively, this can be explained by the following thought. Assume, two assets exist which are identically profitable, while the second asset has a higher risk level. In this scenario, no rational investor would purchase asset number two. Thus, asset number two can only exist if it becomes more profitable than asset number one. The relation between profitability and risk is almost a natural law on financial markets. However, in real-life, it is not as easy as it sounds, as profitability and risk of an asset is unknown and needs to be estimated. Furthermore, risk may be more than “just” the standard deviation, and, some sources of risk may be less important to investors than others. While we come back to the last point later, let us quickly discuss risk metrics different from standard deviation.</p>
+<p>Other risk measures have a greater focus on the potential downside of investment and business decisions. Examples for so called <em>downside</em> risk measures are the <em>Value-at-Risk (VaR)</em>, <em>Expected Shortfall (ES)</em>, <em>Lower Partial Moments (LMP)</em> or <em>Expectiles</em>. The most popular ones are likely the VaR and the ES as both also play important roles in the regulation of financial markets. It is common to define both from the perspective of a loss function. For an asset return, the random loss variable can simply be redefined by: <span class="math notranslate nohighlight">\(l_t = -r_t\)</span>, thus, profits are negative and losses are positive values. The VaR is the upper <span class="math notranslate nohighlight">\(\alpha\)</span> quantile of the loss distribution, so technically:</p>
+<div class="math notranslate nohighlight">
+\[
+VaR_t^{\alpha}(l_t) = F_l^{(-1)}(\alpha) = \inf \lbrace l_t | F_l(l_t) \geq \alpha \rbrace
+\]</div>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> is often called the confidence level in this context. Furthermore, the verbal VaR definition usually includes the time dimension. For instance if we determine the VaR based on daily returns (<span class="math notranslate nohighlight">\(l_t = -r_t\)</span>), then, the <span class="math notranslate nohighlight">\(VaR_t^{\alpha}(l_t)\)</span> is the loss which is only exceeded with a probability of <span class="math notranslate nohighlight">\(1 - \alpha\)</span> within a given day. Note that the VaR can directly be determined by the return distribution, given the distribution function is continuous and strictly monotone:</p>
+<div class="math notranslate nohighlight">
+\[
+VaR_t^{\alpha}(l_t) = -VaR_t^{1 - \alpha}(r_t) = F_r^{-1}(1-\alpha)
+\]</div>
+<p>One potential disadvantage of the VaR is that it does not include the information for losses being higher than itself. This means two loss distributions which have the same <span class="math notranslate nohighlight">\(\alpha\)</span> quantile are equally risky even though one of them may have higher probability mass in the tail beyond the quantile. If this is true, losses which exceed the quantile will be higher on average. This would not be ignored if we further quantify the risk by the Expected Shortfall which is the expected loss, conditional the loss exceeds a (critical) level. Formally, it can be defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+ES_t^{\alpha}(l_t) = \frac{1}{1 - \alpha} \int_\alpha^1 F_l^{-1}(u) du
+\]</div>
+<p>So empirically, it is the average of losses which exceed the Value-at-Risk. Popular confidence levels for the VaR are <span class="math notranslate nohighlight">\(99\)</span>% and <span class="math notranslate nohighlight">\(97.5\)</span>% for the ES. We leave it with the presentation of these two risk measures. Both have interesting (and partly different properties). During the course, we sometimes may come back to these, but mostly focus on volatility first and report the VaR indirectly by taking reporting lower quantiles of the return distribution.</p>
 </section>
-<section id="use-cases-for-parametric-models-of-asset-returns">
-<h2>Use cases for parametric models of asset returns<a class="headerlink" href="#use-cases-for-parametric-models-of-asset-returns" title="Link to this heading">#</a></h2>
+<section id="interim-conclusion-examining-the-unconditional-asset-return-distribution">
+<h2>Interim conclusion: Examining the unconditional asset return distribution<a class="headerlink" href="#interim-conclusion-examining-the-unconditional-asset-return-distribution" title="Link to this heading">#</a></h2>
+<p>So what might be useful if we analyze an unconditional asset return distribution? We can visualize the asset return distribution and we can make use of empirical estimates for metrics which characterize the distribution. We can furhter determine these estimates under the assumption of a parametric model and we can use a parametric model to simulate asset return data. The question if it is better to use empirical estimates or a parametric model leads to a discussion without a clear winner. Both approaches have advantages and disadvantages. Empirical estimates do not make and restricting assumptions and are very flexible. At the same time, they need more data to reduce the exposure to statistical uncertainty and it is difficult to extrapolate data which is not present in the empirical data sample. Parametric models are usually a simplification of reality and sometimes maybe too restrictive which can lead to bias in assessments made by the parametric model. At the same time, they often allow simpler calculations and, thus, can be very efficient from a computational perspective. This is why including estimates from both approaches may be desirable if possible. For instance, we can compare empirical estimates to the ones of a reasonable parametric distribution. Including multiple approaches creates resilience towards the risk of choosing the wrong model and it can create further create insights when exploring the source of differences for these estimates.</p>
+<p>As we discussed in the last chapter, even though a graphic can say more than 1,000 metrics, visualizations become unhandy if we need to analyze a larger number of asset return distributions at the same time (e.g., all stocks from the Nasdaq 100). This is why we focus on metrics from the distribution. Taking together all we learned so far, we may agree upon the following ones:</p>
+<ul class="simple">
+<li><p>mean</p></li>
+<li><p>volatility</p></li>
+<li><p>skewness</p></li>
+<li><p>kurtosis</p></li>
+<li><p>lower and upper quantiles</p></li>
+</ul>
+<p>So let us take a look at our example which examine Apple’s daily returns for the past five years:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">])</span>
+<span class="n">aapl_returns</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span>
+<span class="n">aapl_returns</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">()</span>
+<span class="n">descriptives</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">])</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;skew&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">()</span>
+<span class="n">descriptives</span> <span class="o">=</span> <span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;1%&quot;</span><span class="p">,</span> <span class="s2">&quot;2.5%&quot;</span><span class="p">,</span> <span class="s2">&quot;97.5%&quot;</span><span class="p">,</span> <span class="s2">&quot;99%&quot;</span><span class="p">]]</span>
+<span class="n">descriptives</span> <span class="o">=</span> <span class="n">descriptives</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;empirical&quot;</span><span class="p">)</span>
+
+<span class="n">norm_fit</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">t_fit</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+<span class="n">nct_fit</span> <span class="o">=</span> <span class="n">nct</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">)</span>
+
+<span class="n">ll_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">norm_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">norm_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ll_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">ll_nct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nct</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+<span class="n">aic_norm</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">norm_fit</span><span class="p">)</span>
+<span class="n">aic_t</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">t_fit</span><span class="p">)</span>
+<span class="n">aic_nct</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_nct</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">nct_fit</span><span class="p">)</span>
+
+<span class="n">norm_quantiles</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span> <span class="n">norm_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">norm_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">norm_moments</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">norm_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">norm_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+
+<span class="n">t_quantiles</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">t_moments</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">t_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+
+<span class="n">nct_quantiles</span> <span class="o">=</span> <span class="n">nct</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">nct_moments</span> <span class="o">=</span> <span class="n">nct</span><span class="o">.</span><span class="n">stats</span><span class="p">(</span><span class="n">nct_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nct_fit</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">moments</span> <span class="o">=</span> <span class="s2">&quot;mvsk&quot;</span><span class="p">)</span>
+
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">:,</span> <span class="s2">&quot;normal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm_moments</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">])</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;1%&quot;</span><span class="p">:,</span> <span class="s2">&quot;normal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm_quantiles</span>
+
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">:,</span> <span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_moments</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">])</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;1%&quot;</span><span class="p">:,</span> <span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_quantiles</span>
+
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">:,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nct_moments</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">])</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;1%&quot;</span><span class="p">:,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nct_quantiles</span>
+
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LL&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;AIC&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;LL&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_norm</span><span class="p">,</span> <span class="n">ll_t</span><span class="p">,</span> <span class="n">ll_nct</span><span class="p">]</span>
+<span class="n">descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;AIC&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;skew_t&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aic_norm</span><span class="p">,</span> <span class="n">aic_t</span><span class="p">,</span> <span class="n">aic_nct</span><span class="p">]</span>
+<span class="n">descriptives</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>empirical</th>
+      <th>normal</th>
+      <th>t</th>
+      <th>skew_t</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean</th>
+      <td>0.001348</td>
+      <td>0.001348</td>
+      <td>0.001515</td>
+      <td>0.001338</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.020042</td>
+      <td>0.020035</td>
+      <td>0.020538</td>
+      <td>0.020516</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>-0.036195</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-0.275566</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>5.328365</td>
+      <td>0.000000</td>
+      <td>inf</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1%</th>
+      <td>-0.052571</td>
+      <td>-0.045260</td>
+      <td>-0.053083</td>
+      <td>-0.054289</td>
+    </tr>
+    <tr>
+      <th>2.5%</th>
+      <td>-0.038561</td>
+      <td>-0.037919</td>
+      <td>-0.038270</td>
+      <td>-0.039036</td>
+    </tr>
+    <tr>
+      <th>97.5%</th>
+      <td>0.037571</td>
+      <td>0.040615</td>
+      <td>0.041300</td>
+      <td>0.040490</td>
+    </tr>
+    <tr>
+      <th>99%</th>
+      <td>0.051358</td>
+      <td>0.047956</td>
+      <td>0.056113</td>
+      <td>0.054763</td>
+    </tr>
+    <tr>
+      <th>LL</th>
+      <td>NaN</td>
+      <td>3283.601280</td>
+      <td>3396.110267</td>
+      <td>3396.272700</td>
+    </tr>
+    <tr>
+      <th>AIC</th>
+      <td>NaN</td>
+      <td>-6563.202561</td>
+      <td>-6786.220534</td>
+      <td>-6784.545400</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The mean and standard deviation are rather similar for the empirical estimate and corresponding estimates from the parametric models. The distribution seems to be leptokurtic and slightly left-skewed. Rare but rather extreme observations for the asset return are beyond <span class="math notranslate nohighlight">\(0.035\)</span> on an absolute scale. Comparing the parametric models according to the AIC favors the t distribution. The normal distribution is the worst which is likely due to its inability to adequatly capture the frequency of more extreme realizations. If Apple is a favorable investment in comparison to others depends on the corresponding metrics of alternatives and the way how we evaluate it. This is something which we are going to discuss later in the course in line with the discussion of some fundamental financial market theories.</p>
+</section>
+<section id="conditional-parametric-models-for-asset-returns">
+<h2>Conditional parametric models for asset returns<a class="headerlink" href="#conditional-parametric-models-for-asset-returns" title="Link to this heading">#</a></h2>
+<p>From the last chapter we learned that return seem to behave different over time. When we ignore this fact, we say a return is independent and identically distributed. This means if we simulate data for a time series of asset returns, we draw one random number for every point in time <span class="math notranslate nohighlight">\(t\)</span> from the same distribution. Let us do this for the best distribution found in the example above, the t distribution. Below you can see that simulated data fails to capture the behavior during the Covid crisis. Especially the level of variation is too low for simulated data points. This indicates that asset returns seem not to be independent and identically distributed over time. While the autocorrelation is rather low for returns, but higher for absolute values, the assumption of an identical distribution seems to be wrong because at least the level of variation is not identical over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;true returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">t_fit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t_fit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">size</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;simulated returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Apple returns (true and simulated ones)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6115e7173994f9b3556020016da6e126eb407e291545c0e27fe5b0fa92e6d211.png" src="_images/6115e7173994f9b3556020016da6e126eb407e291545c0e27fe5b0fa92e6d211.png" />
+</div>
+</div>
+<p>Popular models that capture time-varying properties of distributions often are of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+r_t = \mu_t +  \epsilon_t \\
+\epsilon_t = \sigma_t e_t
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\sigma_t\)</span> are the time-varying mean and standard deviation of <span class="math notranslate nohighlight">\(r_t\)</span> and <span class="math notranslate nohighlight">\(e_t\)</span> is a random variable with a mean of zero and a variance of 1. The distribution of <span class="math notranslate nohighlight">\(e_t\)</span> may have further parameters which can impact its shape, but, these are assumed to be identical over time. The formula basically decomposes the distribution of <span class="math notranslate nohighlight">\(r_t\)</span> into three components: its mean <span class="math notranslate nohighlight">\(\mu_t\)</span>, its standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> and its random variation after it has been filtered for its mean and standard deviation.</p>
+<p>We only take a look at one popular model for the mean and the standard deviation to illustrate how time-varying parametric models can be constructed. To model a time-varying mean, we take a look at the autoregressive process of order one AR(1):</p>
+<div class="math notranslate nohighlight">
+\[
+r_t = \mu + \phi * r_{t-1} + \epsilon_t
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\phi \in (-1, 1)\)</span> are parameters which impact the time-conditional mean of <span class="math notranslate nohighlight">\(r_t\)</span> because independent of <span class="math notranslate nohighlight">\(\epsilon\)</span>, the expected value at time <span class="math notranslate nohighlight">\(t\)</span> is determined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{t} = \mu + \phi * r_{t-1}
+\]</div>
+<p>This model creates time series data with correlation if <span class="math notranslate nohighlight">\(\phi \neq 0\)</span>. For <span class="math notranslate nohighlight">\(\phi &gt; 0\)</span>, today’s expectation is higher (lower) for higher (lower) values of the return from the previous time period <span class="math notranslate nohighlight">\(t-1\)</span>. The reverse is true for <span class="math notranslate nohighlight">\(\phi &lt; 0\)</span>. This model can be extended to autoregressive processes of order <span class="math notranslate nohighlight">\(p\)</span>, AR(<span class="math notranslate nohighlight">\(p\)</span>) by including more lagged values from the present.</p>
+<p>To capture the time-varying nature of the standard deviation, one models the variance in a similar manner. A popular model with this respect  is the GARCH model which stands for <em>generalizd autogressive conditional heteroscedasticity</em>. The GARCH(1,1) model defines the time-varying variance by:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2
+\]</div>
+<p><span class="math notranslate nohighlight">\(\omega &gt; 0, \alpha \geq 0, \beta \geq 0\)</span> are parameters of the variance model. Re-arranging the return process equation to:</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon_t = r_t - \mu_t
+\]</div>
+<p>highlights that the conditional variance is higher (lower) if the deviation from the mean in the previous period has been higher (lower) and if the conditional variance has been higher (lower) in the previous time step. To define he asset return model completely, we need to make an assumption for the distribution of <span class="math notranslate nohighlight">\(e_t\)</span>. For instance, <span class="math notranslate nohighlight">\(e_t\)</span> can be assumed to be normally distributed or to follow a standardized (with zero mean and unit variance) student t distribution which is defined by an additional parameter which impacts the kurtosis of the distribution.</p>
+<p>Technically, this defines a model for a stochastic process, and, usually <em>(weakly) stationary</em> processes are used for asset returns. In general, a process <span class="math notranslate nohighlight">\(r_1, r_2, ..., \)</span> is called weakly stationary, if:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E(r_t) = \mu, ~ \forall t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Var(r_t) = \sigma^2, ~ \forall t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Cov(r_t, r_s) = \gamma(|t -s|), ~ \forall t, s\)</span> and some function <span class="math notranslate nohighlight">\(\gamma(k)\)</span></p></li>
+</ul>
+<p>Weakly stationary makes sure that the return distribution has identical characteristics over time, but, not in time. <strong>This distinction is very important in my opinion to understand the difference between the unconditional and the conditional perspective</strong>. Let us illustrate this with the expected value. Formally, the difference between</p>
+<div class="math notranslate nohighlight">
+\[
+E(r_t) = \mu
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+E(r_t | \mathcal{F}_{t-1}) = \mu_t
+\]</div>
+<p>highlights that different perspectives influence the expectation for time <span class="math notranslate nohighlight">\(t\)</span>. Loosely speaking, <span class="math notranslate nohighlight">\(\mu\)</span> is what we expect on average over time, while <span class="math notranslate nohighlight">\(\mu_t\)</span> uses the current information <span class="math notranslate nohighlight">\(\mathcal{F}_{t-1}\)</span>, to build the expectation for today. You may picture it like this, given positive autocorrelation of returns, we would expect the return for today to be higher (lower), if yesterday’s return has been higher (lower). This is a conditional perspective and what <span class="math notranslate nohighlight">\(\mu_t\)</span> represents. The unconditional counterpart <span class="math notranslate nohighlight">\(\mu\)</span> ignores yesterday’s return and builds its estimate by including returns after days with high and low returns. In an analogue way, you can think the same way about the distinction between <span class="math notranslate nohighlight">\(\sigma_t\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<ul class="simple">
+<li><p>Note, technical info on parameters and unconditional estimates</p></li>
+<li><p>ML estimation</p></li>
+<li><p>Prediction</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arch</span> <span class="kn">import</span> <span class="n">arch_model</span>
+
+
+<span class="n">am</span> <span class="o">=</span> <span class="n">arch_model</span><span class="p">(</span><span class="n">aapl_returns</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration:      1,   Func. Count:      7,   Neg. LLF: 24320.91322035501
+Iteration:      2,   Func. Count:     17,   Neg. LLF: 49156169630.488976
+Iteration:      3,   Func. Count:     26,   Neg. LLF: 89923270780.04474
+Iteration:      4,   Func. Count:     35,   Neg. LLF: 3409.256689934908
+Iteration:      5,   Func. Count:     43,   Neg. LLF: 2885.623758324985
+Iteration:      6,   Func. Count:     51,   Neg. LLF: 2654.4518341595767
+Iteration:      7,   Func. Count:     58,   Neg. LLF: 2620.2519735078013
+Iteration:      8,   Func. Count:     65,   Neg. LLF: 2619.8374267418453
+Iteration:      9,   Func. Count:     71,   Neg. LLF: 2619.8364060858994
+Iteration:     10,   Func. Count:     77,   Neg. LLF: 2619.836365356433
+Iteration:     11,   Func. Count:     82,   Neg. LLF: 2619.8363653568904
+Optimization terminated successfully    (Exit mode 0)
+            Current function value: 2619.836365356433
+            Iterations: 11
+            Function evaluations: 82
+            Gradient evaluations: 11
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>AR - GARCH Model Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>AAPL</td>        <th>  R-squared:         </th>  <td>   0.007</td> 
+</tr>
+<tr>
+  <th>Mean Model:</th>            <td>AR</td>         <th>  Adj. R-squared:    </th>  <td>   0.006</td> 
+</tr>
+<tr>
+  <th>Vol Model:</th>            <td>GARCH</td>       <th>  Log-Likelihood:    </th> <td>  -2619.84</td>
+</tr>
+<tr>
+  <th>Distribution:</th>        <td>Normal</td>       <th>  AIC:               </th> <td>   5249.67</td>
+</tr>
+<tr>
+  <th>Method:</th>        <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>   5275.59</td>
+</tr>
+<tr>
+  <th></th>                        <td></td>          <th>  No. Observations:  </th>    <td>1317</td>   
+</tr>
+<tr>
+  <th>Date:</th>           <td>Mon, Apr 29 2024</td>  <th>  Df Residuals:      </th>    <td>1315</td>   
+</tr>
+<tr>
+  <th>Time:</th>               <td>15:18:51</td>      <th>  Df Model:          </th>      <td>2</td>    
+</tr>
+</table>
+<table class="simpletable">
+<caption>Mean Model</caption>
+<tr>
+     <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>    <th>95.0% Conf. Int.</th>  
+</tr>
+<tr>
+  <th>Const</th>   <td>    0.2200</td> <td>5.050e-02</td> <td>    4.356</td> <td>1.322e-05</td>  <td>[  0.121,  0.319]</td> 
+</tr>
+<tr>
+  <th>AAPL[1]</th> <td>   -0.0392</td> <td>3.193e-02</td> <td>   -1.226</td> <td>    0.220</td> <td>[ -0.102,2.343e-02]</td>
+</tr>
+</table>
+<table class="simpletable">
+<caption>Volatility Model</caption>
+<tr>
+      <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>        <th>P>|t|</th>    <th>95.0% Conf. Int.</th>  
+</tr>
+<tr>
+  <th>omega</th>    <td>    0.1321</td> <td>4.968e-02</td> <td>    2.660</td>  <td>7.825e-03</td> <td>[3.475e-02,  0.229]</td>
+</tr>
+<tr>
+  <th>alpha[1]</th> <td>    0.1067</td> <td>2.646e-02</td> <td>    4.033</td>  <td>5.517e-05</td> <td>[5.484e-02,  0.159]</td>
+</tr>
+<tr>
+  <th>beta[1]</th>  <td>    0.8587</td> <td>3.161e-02</td> <td>   27.167</td> <td>1.595e-162</td>  <td>[  0.797,  0.921]</td> 
+</tr>
+</table><br/><br/>Covariance estimator: robust</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forecasts</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">horizon</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">forecasts</span><span class="o">.</span><span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>h.1</th>
+      <th>h.2</th>
+      <th>h.3</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-03-28</th>
+      <td>0.261353</td>
+      <td>0.209781</td>
+      <td>0.2118</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.0392</span> <span class="o">+</span> <span class="mf">0.22</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2613917678079074
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -1086,8 +1478,9 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-parametric-models">Evaluation of parametric models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-investors-evaluate-asset-return-distributions">How investors evaluate asset return distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases-for-parametric-models-of-asset-returns">Use cases for parametric models of asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-relationship-between-profit-and-risk">The relationship between profit and risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interim-conclusion-examining-the-unconditional-asset-return-distribution">Interim conclusion: Examining the unconditional asset return distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a></li>
 </ul>
   </nav></div>
 
