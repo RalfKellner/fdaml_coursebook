@@ -354,7 +354,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-relationship-between-profit-and-risk">The relationship between profit and risk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interim-conclusion-examining-the-unconditional-asset-return-distribution">Interim conclusion: Examining the unconditional asset return distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-ar-garch-models">Estimation of AR-GARCH models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sample-calculation-and-prediction">In sample calculation and prediction</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -921,7 +925,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f5e996487b4d03146e76991da54b4a384b6162fb6bca440d93a998959921c6e4.png" src="_images/f5e996487b4d03146e76991da54b4a384b6162fb6bca440d93a998959921c6e4.png" />
+<img alt="_images/99a88b0c7bbe1715f91826f6c9036ce0bc1c7f0d38fcebd3e928101cd8335908.png" src="_images/99a88b0c7bbe1715f91826f6c9036ce0bc1c7f0d38fcebd3e928101cd8335908.png" />
 </div>
 </div>
 <p>These observations can be quantified by calculating the arithmetic mean and variance for realizations of estimator one and two, respectively. While estimates of estimator one are almost perfectly equal to the true parameter value, estimates for estimator two estimates are on average below the true parameter value. This systematic underestimation is called bias (systematic overestimation is also called bias). Formally let <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> be the estimator for an unkown parameter value, then the bias is defined by:</p>
@@ -971,8 +975,8 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(T)p
   <tbody>
     <tr>
       <th>Avg. of estimates</th>
-      <td>0.4988</td>
-      <td>0.4751</td>
+      <td>0.5001</td>
+      <td>0.4763</td>
     </tr>
     <tr>
       <th>Std. of estimates</th>
@@ -1196,7 +1200,7 @@ ES_t^{\alpha}(l_t) = \frac{1}{1 - \alpha} \int_\alpha^1 F_l^{-1}(u) du
 </section>
 <section id="conditional-parametric-models-for-asset-returns">
 <h2>Conditional parametric models for asset returns<a class="headerlink" href="#conditional-parametric-models-for-asset-returns" title="Link to this heading">#</a></h2>
-<p>From the last chapter we learned that return seem to behave different over time. When we ignore this fact, we say a return is independent and identically distributed. This means if we simulate data for a time series of asset returns, we draw one random number for every point in time <span class="math notranslate nohighlight">\(t\)</span> from the same distribution. Let us do this for the best distribution found in the example above, the t distribution. Below you can see that simulated data fails to capture the behavior during the Covid crisis. Especially the level of variation is too low for simulated data points. This indicates that asset returns seem not to be independent and identically distributed over time. While the autocorrelation is rather low for returns, but higher for absolute values, the assumption of an identical distribution seems to be wrong because at least the level of variation is not identical over time.</p>
+<p>From the last chapter we learned that returns seem to behave different over time. When we ignore this fact, we say a return is independent and identically distributed. This means if we simulate data for a time series of asset returns, we draw one random number for every point in time <span class="math notranslate nohighlight">\(t\)</span> from the same distribution. Let us do this for the best distribution found in the example above, the t distribution. Below you can see that simulated data fails to capture the behavior during the Covid crisis. Especially the level of variation is too low for simulated data points. This indicates that asset returns seem not to be independent and identically distributed over time. While the autocorrelation is rather low for returns, it is higher for absolute values. The assumption of an identical distribution seems to be wrong because at least the level of variation is not identical over time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">aapl_returns</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;true returns&quot;</span><span class="p">)</span>
@@ -1217,19 +1221,19 @@ ES_t^{\alpha}(l_t) = \frac{1}{1 - \alpha} \int_\alpha^1 F_l^{-1}(u) du
 r_t = \mu_t +  \epsilon_t \\
 \epsilon_t = \sigma_t e_t
 \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\sigma_t\)</span> are the time-varying mean and standard deviation of <span class="math notranslate nohighlight">\(r_t\)</span> and <span class="math notranslate nohighlight">\(e_t\)</span> is a random variable with a mean of zero and a variance of 1. The distribution of <span class="math notranslate nohighlight">\(e_t\)</span> may have further parameters which can impact its shape, but, these are assumed to be identical over time. The formula basically decomposes the distribution of <span class="math notranslate nohighlight">\(r_t\)</span> into three components: its mean <span class="math notranslate nohighlight">\(\mu_t\)</span>, its standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> and its random variation after it has been filtered for its mean and standard deviation.</p>
-<p>We only take a look at one popular model for the mean and the standard deviation to illustrate how time-varying parametric models can be constructed. To model a time-varying mean, we take a look at the autoregressive process of order one AR(1):</p>
+<p>where <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\sigma_t\)</span> are the time-varying mean and standard deviation of <span class="math notranslate nohighlight">\(r_t\)</span> and <span class="math notranslate nohighlight">\(e_t\)</span> is a random variable with zero mean and unit variance; <span class="math notranslate nohighlight">\(\sigma_t\)</span> are denoted as the residuals and <span class="math notranslate nohighlight">\(e_t\)</span> are often called the innovations. The distribution of <span class="math notranslate nohighlight">\(e_t\)</span> may have further parameters which can impact its shape, but, these are assumed to be identical over time. The formula basically decomposes the distribution of <span class="math notranslate nohighlight">\(r_t\)</span> into three components: its mean <span class="math notranslate nohighlight">\(\mu_t\)</span>, its standard deviation <span class="math notranslate nohighlight">\(\sigma_t\)</span> and its random variation after it has been filtered for its mean and standard deviation.</p>
+<p>We only take a look at one popular model for the mean and the standard deviation each to illustrate how time-varying parametric models can be constructed. To model a time-varying mean, we take a look at the autoregressive process of order one AR(1):</p>
 <div class="math notranslate nohighlight">
 \[
-r_t = \mu + \phi * r_{t-1} + \epsilon_t
+r_t = \mu + \phi r_{t-1} + \epsilon_t
 \]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\phi \in (-1, 1)\)</span> are parameters which impact the time-conditional mean of <span class="math notranslate nohighlight">\(r_t\)</span> because independent of <span class="math notranslate nohighlight">\(\epsilon\)</span>, the expected value at time <span class="math notranslate nohighlight">\(t\)</span> is determined by:</p>
 <div class="math notranslate nohighlight">
 \[
-\mu_{t} = \mu + \phi * r_{t-1}
+\mu_{t} = \mu + \phi r_{t-1}
 \]</div>
 <p>This model creates time series data with correlation if <span class="math notranslate nohighlight">\(\phi \neq 0\)</span>. For <span class="math notranslate nohighlight">\(\phi &gt; 0\)</span>, today’s expectation is higher (lower) for higher (lower) values of the return from the previous time period <span class="math notranslate nohighlight">\(t-1\)</span>. The reverse is true for <span class="math notranslate nohighlight">\(\phi &lt; 0\)</span>. This model can be extended to autoregressive processes of order <span class="math notranslate nohighlight">\(p\)</span>, AR(<span class="math notranslate nohighlight">\(p\)</span>) by including more lagged values from the present.</p>
-<p>To capture the time-varying nature of the standard deviation, one models the variance in a similar manner. A popular model with this respect  is the GARCH model which stands for <em>generalizd autogressive conditional heteroscedasticity</em>. The GARCH(1,1) model defines the time-varying variance by:</p>
+<p>To capture the time-varying nature of the standard deviation, one models the variance in a similar manner. A popular model with this respect  is the GARCH model which stands for <em>generalized autoregressive conditional heteroscedasticity</em>. The GARCH(1,1) model defines the time-varying variance by:</p>
 <div class="math notranslate nohighlight">
 \[
 \sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2
@@ -1239,7 +1243,7 @@ r_t = \mu + \phi * r_{t-1} + \epsilon_t
 \[
 \epsilon_t = r_t - \mu_t
 \]</div>
-<p>highlights that the conditional variance is higher (lower) if the deviation from the mean in the previous period has been higher (lower) and if the conditional variance has been higher (lower) in the previous time step. To define he asset return model completely, we need to make an assumption for the distribution of <span class="math notranslate nohighlight">\(e_t\)</span>. For instance, <span class="math notranslate nohighlight">\(e_t\)</span> can be assumed to be normally distributed or to follow a standardized (with zero mean and unit variance) student t distribution which is defined by an additional parameter which impacts the kurtosis of the distribution.</p>
+<p>highlights that the conditional variance is higher (lower) if the deviation from the mean in the previous period has been higher (lower) and if the conditional variance has been higher (lower) in the previous time step. To define the asset return model completely, we need to make an assumption for the distribution of <span class="math notranslate nohighlight">\(e_t\)</span>. For instance, <span class="math notranslate nohighlight">\(e_t\)</span> can be assumed to be normally distributed or to follow a standardized (with zero mean and unit variance) student t distribution which is defined by an additional parameter which impacts the kurtosis of the distribution.</p>
 <p>Technically, this defines a model for a stochastic process, and, usually <em>(weakly) stationary</em> processes are used for asset returns. In general, a process <span class="math notranslate nohighlight">\(r_1, r_2, ..., \)</span> is called weakly stationary, if:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(E(r_t) = \mu, ~ \forall t\)</span></p></li>
@@ -1257,78 +1261,102 @@ E(r_t) = \mu
 E(r_t | \mathcal{F}_{t-1}) = \mu_t
 \]</div>
 <p>highlights that different perspectives influence the expectation for time <span class="math notranslate nohighlight">\(t\)</span>. Loosely speaking, <span class="math notranslate nohighlight">\(\mu\)</span> is what we expect on average over time, while <span class="math notranslate nohighlight">\(\mu_t\)</span> uses the current information <span class="math notranslate nohighlight">\(\mathcal{F}_{t-1}\)</span>, to build the expectation for today. You may picture it like this, given positive autocorrelation of returns, we would expect the return for today to be higher (lower), if yesterday’s return has been higher (lower). This is a conditional perspective and what <span class="math notranslate nohighlight">\(\mu_t\)</span> represents. The unconditional counterpart <span class="math notranslate nohighlight">\(\mu\)</span> ignores yesterday’s return and builds its estimate by including returns after days with high and low returns. In an analogue way, you can think the same way about the distinction between <span class="math notranslate nohighlight">\(\sigma_t\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<ul class="simple">
-<li><p>Note, technical info on parameters and unconditional estimates</p></li>
-<li><p>ML estimation</p></li>
-<li><p>Prediction</p></li>
-</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While we only quickly discuss these models, please note that these models come from the field of time series analysis which discusses many interesting properties of stochastic processes that are useful in the financial domain.</p>
+<p>Further note that <span class="math notranslate nohighlight">\( |\phi| &lt; 1\)</span> is a necessary condition for the AR(1) process to be stationary and <span class="math notranslate nohighlight">\(\omega &gt; 0, \alpha \geq 0, \beta \geq 0\)</span> are necessary restrictions for the variance to be positive.</p>
+</div>
+<section id="estimation-of-ar-garch-models">
+<h3>Estimation of AR-GARCH models<a class="headerlink" href="#estimation-of-ar-garch-models" title="Link to this heading">#</a></h3>
+<p>The parameters of the AR-GARCH model can also be estimated by maximum likelihood estimation. Let us take a look how this would be done if we assume that returns are assumed to be normally distributed, i.e., <span class="math notranslate nohighlight">\(r_t \sim N\left( \mu_t, \sigma_t \right) \)</span>. At any point in time <span class="math notranslate nohighlight">\(t\)</span>, wen can determine according to the formulas from above, given we set the parameters <span class="math notranslate nohighlight">\(\mu, \phi, \omega, \alpha, \beta\)</span>.</p>
+<p>The likelihood is:</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\mu, \phi, \omega, \alpha, \beta \right) = \prod_{t=1}^T f(r_t | \mu, \phi, \omega, \alpha, \beta) = \prod_{t=1}^T f(r_t | \mu_t, \sigma_t)
+\]</div>
+<p>The values for <span class="math notranslate nohighlight">\(\mu_t, \sigma_t^2\)</span> need to be calculated recursively which is fairly easy except for the first observation. For <span class="math notranslate nohighlight">\(t = 1\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{1} = \mu + \phi r_{0}
+\]</div>
+<p>Depending on how we interpret it, <span class="math notranslate nohighlight">\(r_0\)</span> is not observable. Thus a reasonable starting value for <span class="math notranslate nohighlight">\(\mu_1\)</span> must be set. Different values can be proposed, however a common choice could be the unconditional mean estimate of the time series. In a similar way, a starting value for <span class="math notranslate nohighlight">\(\sigma_0^2\)</span> must be set. Again, different values can be tested, e.g., the unconditional variance estimate. Given these starting values, it gets easy to determine <span class="math notranslate nohighlight">\(\mu_t, \sigma_t^2\)</span> for all points in time and determine the likelihood value at every point in time. The estimation searches for the parameter values for <span class="math notranslate nohighlight">\(\mu, \phi, \omega, \alpha, \beta\)</span> which result in the highest likelihood value. Note that these parameters usually are also consistent and unbiased even <span class="math notranslate nohighlight">\(r_t\)</span> is not normally distributed in reality. Furthermore, the process can easily be defined for other parametric distributions with further parameters. For instance, for a student t distribution, we only need to further estimate the degrees of freedom which would be considered to be constant over time.</p>
+</section>
+<section id="in-sample-calculation-and-prediction">
+<h3>In sample calculation and prediction<a class="headerlink" href="#in-sample-calculation-and-prediction" title="Link to this heading">#</a></h3>
+<p>After the parameters are estimated, we can take a look at the parameters of the model and analyze the variation in the mean and standard deviation over time. The output below provides a summary of the AR(1)-GARCH(1, 1) model which has been estimated to Apple’s returns between 2019 and 2021. The value for <span class="math notranslate nohighlight">\(\hat{\phi} = -0.1044\)</span> indicates moderate autocorrelation with varying above and below average returns over time. The parameters of the GARCH(1,1) model indicate a rather strong relationship between current the deviation from the mean at time <span class="math notranslate nohighlight">\(t-1\)</span> and <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arch</span> <span class="kn">import</span> <span class="n">arch_model</span>
 
+<span class="n">aapl_returns_ts</span> <span class="o">=</span> <span class="n">aapl_returns</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">aapl_returns_ts_train</span> <span class="o">=</span> <span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">)]</span>
+<span class="n">aapl_returns_ts_test</span> <span class="o">=</span> <span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">):]</span>
 
-<span class="n">am</span> <span class="o">=</span> <span class="n">arch_model</span><span class="p">(</span><span class="n">aapl_returns</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">end_training_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2021-12-31&quot;</span><span class="p">)</span>
+<span class="n">am</span> <span class="o">=</span> <span class="n">arch_model</span><span class="p">(</span><span class="n">aapl_returns_ts</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vol</span> <span class="o">=</span> <span class="s2">&quot;GARCH&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s2">&quot;StudentsT&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">last_obs</span> <span class="o">=</span> <span class="n">end_training_date</span><span class="p">)</span>
 <span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration:      1,   Func. Count:      7,   Neg. LLF: 24320.91322035501
-Iteration:      2,   Func. Count:     17,   Neg. LLF: 49156169630.488976
-Iteration:      3,   Func. Count:     26,   Neg. LLF: 89923270780.04474
-Iteration:      4,   Func. Count:     35,   Neg. LLF: 3409.256689934908
-Iteration:      5,   Func. Count:     43,   Neg. LLF: 2885.623758324985
-Iteration:      6,   Func. Count:     51,   Neg. LLF: 2654.4518341595767
-Iteration:      7,   Func. Count:     58,   Neg. LLF: 2620.2519735078013
-Iteration:      8,   Func. Count:     65,   Neg. LLF: 2619.8374267418453
-Iteration:      9,   Func. Count:     71,   Neg. LLF: 2619.8364060858994
-Iteration:     10,   Func. Count:     77,   Neg. LLF: 2619.836365356433
-Iteration:     11,   Func. Count:     82,   Neg. LLF: 2619.8363653568904
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration:      1,   Func. Count:      8,   Neg. LLF: 12785.182362045536
+Iteration:      2,   Func. Count:     19,   Neg. LLF: 30209.621230879457
+Iteration:      3,   Func. Count:     28,   Neg. LLF: 11919.307278771486
+Iteration:      4,   Func. Count:     38,   Neg. LLF: 1721.7366089674938
+Iteration:      5,   Func. Count:     48,   Neg. LLF: 1637.3888267981383
+Iteration:      6,   Func. Count:     57,   Neg. LLF: 1498.612322499288
+Iteration:      7,   Func. Count:     64,   Neg. LLF: 1498.5657293905033
+Iteration:      8,   Func. Count:     71,   Neg. LLF: 1498.555925174687
+Iteration:      9,   Func. Count:     78,   Neg. LLF: 1498.553068549892
+Iteration:     10,   Func. Count:     85,   Neg. LLF: 1498.5527279992957
+Iteration:     11,   Func. Count:     92,   Neg. LLF: 1498.5526964219978
+Iteration:     12,   Func. Count:     99,   Neg. LLF: 1498.5526947481756
+Iteration:     13,   Func. Count:    105,   Neg. LLF: 1498.5526947481749
 Optimization terminated successfully    (Exit mode 0)
-            Current function value: 2619.836365356433
-            Iterations: 11
-            Function evaluations: 82
-            Gradient evaluations: 11
+            Current function value: 1498.5526947481756
+            Iterations: 13
+            Function evaluations: 105
+            Gradient evaluations: 13
 </pre></div>
 </div>
 <div class="output text_html"><table class="simpletable">
 <caption>AR - GARCH Model Results</caption>
 <tr>
-  <th>Dep. Variable:</th>        <td>AAPL</td>        <th>  R-squared:         </th>  <td>   0.007</td> 
+  <th>Dep. Variable:</th>           <td>AAPL</td>           <th>  R-squared:         </th>  <td>   0.029</td> 
 </tr>
 <tr>
-  <th>Mean Model:</th>            <td>AR</td>         <th>  Adj. R-squared:    </th>  <td>   0.006</td> 
+  <th>Mean Model:</th>               <td>AR</td>            <th>  Adj. R-squared:    </th>  <td>   0.028</td> 
 </tr>
 <tr>
-  <th>Vol Model:</th>            <td>GARCH</td>       <th>  Log-Likelihood:    </th> <td>  -2619.84</td>
+  <th>Vol Model:</th>               <td>GARCH</td>          <th>  Log-Likelihood:    </th> <td>  -1498.55</td>
 </tr>
 <tr>
-  <th>Distribution:</th>        <td>Normal</td>       <th>  AIC:               </th> <td>   5249.67</td>
+  <th>Distribution:</th>  <td>Standardized Student's t</td> <th>  AIC:               </th> <td>   3009.11</td>
 </tr>
 <tr>
-  <th>Method:</th>        <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>   5275.59</td>
+  <th>Method:</th>           <td>Maximum Likelihood</td>    <th>  BIC:               </th> <td>   3036.86</td>
 </tr>
 <tr>
-  <th></th>                        <td></td>          <th>  No. Observations:  </th>    <td>1317</td>   
+  <th></th>                           <td></td>             <th>  No. Observations:  </th>     <td>754</td>   
 </tr>
 <tr>
-  <th>Date:</th>           <td>Mon, Apr 29 2024</td>  <th>  Df Residuals:      </th>    <td>1315</td>   
+  <th>Date:</th>              <td>Tue, May 07 2024</td>     <th>  Df Residuals:      </th>     <td>752</td>   
 </tr>
 <tr>
-  <th>Time:</th>               <td>15:18:51</td>      <th>  Df Model:          </th>      <td>2</td>    
+  <th>Time:</th>                  <td>11:26:41</td>         <th>  Df Model:          </th>      <td>2</td>    
 </tr>
 </table>
 <table class="simpletable">
 <caption>Mean Model</caption>
 <tr>
-     <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>    <th>95.0% Conf. Int.</th>  
+     <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>     <th>95.0% Conf. Int.</th>  
 </tr>
 <tr>
-  <th>Const</th>   <td>    0.2200</td> <td>5.050e-02</td> <td>    4.356</td> <td>1.322e-05</td>  <td>[  0.121,  0.319]</td> 
+  <th>Const</th>   <td>    0.3169</td> <td>5.684e-02</td> <td>    5.575</td> <td>2.478e-08</td>   <td>[  0.205,  0.428]</td> 
 </tr>
 <tr>
-  <th>AAPL[1]</th> <td>   -0.0392</td> <td>3.193e-02</td> <td>   -1.226</td> <td>    0.220</td> <td>[ -0.102,2.343e-02]</td>
+  <th>AAPL[1]</th> <td>   -0.1044</td> <td>3.704e-02</td> <td>   -2.819</td> <td>4.811e-03</td> <td>[ -0.177,-3.183e-02]</td>
 </tr>
 </table>
 <table class="simpletable">
@@ -1337,15 +1365,249 @@ Optimization terminated successfully    (Exit mode 0)
       <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>        <th>P>|t|</th>    <th>95.0% Conf. Int.</th>  
 </tr>
 <tr>
-  <th>omega</th>    <td>    0.1321</td> <td>4.968e-02</td> <td>    2.660</td>  <td>7.825e-03</td> <td>[3.475e-02,  0.229]</td>
+  <th>omega</th>    <td>    0.1721</td> <td>5.920e-02</td> <td>    2.907</td>  <td>3.652e-03</td> <td>[5.605e-02,  0.288]</td>
 </tr>
 <tr>
-  <th>alpha[1]</th> <td>    0.1067</td> <td>2.646e-02</td> <td>    4.033</td>  <td>5.517e-05</td> <td>[5.484e-02,  0.159]</td>
+  <th>alpha[1]</th> <td>    0.1234</td> <td>3.112e-02</td> <td>    3.964</td>  <td>7.370e-05</td> <td>[6.237e-02,  0.184]</td>
 </tr>
 <tr>
-  <th>beta[1]</th>  <td>    0.8587</td> <td>3.161e-02</td> <td>   27.167</td> <td>1.595e-162</td>  <td>[  0.797,  0.921]</td> 
+  <th>beta[1]</th>  <td>    0.8368</td> <td>3.282e-02</td> <td>   25.494</td> <td>2.279e-143</td>  <td>[  0.772,  0.901]</td> 
+</tr>
+</table>
+<table class="simpletable">
+<caption>Distribution</caption>
+<tr>
+   <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>       <th>P>|t|</th>   <th>95.0% Conf. Int.</th> 
+</tr>
+<tr>
+  <th>nu</th> <td>    5.4945</td> <td>    1.017</td> <td>    5.404</td> <td>6.523e-08</td> <td>[  3.502,  7.487]</td>
 </tr>
 </table><br/><br/>Covariance estimator: robust</div></div>
+</div>
+<p>The figure below illustrates the asset returns and compares them to a few time-varying metrics which are derived by means of the AR(1)-GARCH(1,1) model. In the plots in the first row, we can compare the realizations to the conditional mean and standard deviation. Especially the right plot shows the capability of the GARCH(1,1) model to capture the time-varying behavior of the volatility.</p>
+<p>The plots in the second row show the time-varying 5% quantile which can be derived by:</p>
+<div class="math notranslate nohighlight">
+\[
+r_{t, 0.05} = \mu_t + \sigma_t e_{t, 0.05}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(e_{t, 0.05}\)</span> is the quantile of the innnovation’s distribution. One can either determine the quantile by the assumed distribution of the process or empirically after the parameters are estimated and realizations for <span class="math notranslate nohighlight">\(e_t\)</span> can be calculated. The latter is called filtered historical simulation. The meaning for this name comes from the mechanism of the model. The residuals <span class="math notranslate nohighlight">\(\epsilon_t = r_t - \mu_t\)</span> have a mean of zero (approximately for empirical data), thus, <span class="math notranslate nohighlight">\(\epsilon_t\)</span> are mean filtered realizations of <span class="math notranslate nohighlight">\(r_t\)</span>. If we further determine the innovations by: <span class="math notranslate nohighlight">\(e_t = \epsilon_t / \sigma_t\)</span>, the realizations are volatility filtered as well which is why <span class="math notranslate nohighlight">\(e_t\)</span> have unit variance (and zero mean).</p>
+<p>The orange line in the left plot of the second row represents adverse return levels over time. If the mean is lower and standard deviation is higher during a critical market phase such as the Covid period in the beginning of 2020, lower quantile levels are lower as well. In case of the 5% quantile, we determine a return realization for which even lower returns occur with a probability of 5%. During the Covid period, this level is aroung <span class="math notranslate nohighlight">\(-0.12\)</span>. In comparison, the unconditional 5% quantile is only <span class="math notranslate nohighlight">\(-0.03\)</span>. This implicitly shows us that return levels which would be considered to be rather extreme over time occur more often during a crisis period. These observations highlight the difference between the unconditional and conditional perspective. Even though a return of around <span class="math notranslate nohighlight">\(-0.03\)</span> is a rather rare event over the whole time period, we should be prepared for more extreme and adverse events, given we currently observed large deviations from the mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">mu_t</span> <span class="o">=</span> <span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span>
+<span class="n">sigma_t</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">conditional_volatility</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span>
+<span class="n">e_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span> <span class="o">/</span> <span class="n">sigma_t</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">e_t</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">q_t</span> <span class="o">=</span> <span class="n">mu_t</span> <span class="o">+</span> <span class="n">sigma_t</span> <span class="o">*</span> <span class="n">q</span>  
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$r_t$&quot;</span><span class="p">)</span>
+<span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$r_t$&quot;</span><span class="p">)</span>
+<span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$r_t$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$q_</span><span class="si">{0.05}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">end_training_date</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$r_t$&quot;</span><span class="p">)</span>
+<span class="n">q_t</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$q_{t, 0.05}$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">e_t</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$e_t$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">mu_t</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\mu_t$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">sigma_t</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$\sigma_t$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f4c82c4ece0c26395bdeb7c2319120d45cd21e30ec2acbd1228056d7bce02f8b.png" src="_images/f4c82c4ece0c26395bdeb7c2319120d45cd21e30ec2acbd1228056d7bce02f8b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forecasts</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+<span class="n">cond_mean</span> <span class="o">=</span> <span class="n">forecasts</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="n">end_training_date</span><span class="p">:]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">cond_var</span> <span class="o">=</span> <span class="n">forecasts</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="n">end_training_date</span><span class="p">:]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">distribution</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value_at_risk</span> <span class="o">=</span> <span class="n">cond_mean</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cond_var</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">q</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">value_at_risk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">value_at_risk</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;1%&quot;</span><span class="p">,</span> <span class="s2">&quot;5%&quot;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">cond_var</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">end_training_date</span><span class="p">:]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">value_at_risk</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/d7d5ef45545a51a10dc708ddbb2126efd5fa818ad8da54d3245b31a20fea92aa.png" src="_images/d7d5ef45545a51a10dc708ddbb2126efd5fa818ad8da54d3245b31a20fea92aa.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value_at_risk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1%</th>
+      <th>5%</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-12-31</th>
+      <td>-3.890922</td>
+      <td>-2.220583</td>
+    </tr>
+    <tr>
+      <th>2022-01-03</th>
+      <td>-3.757626</td>
+      <td>-2.151763</td>
+    </tr>
+    <tr>
+      <th>2022-01-04</th>
+      <td>-4.313994</td>
+      <td>-2.607216</td>
+    </tr>
+    <tr>
+      <th>2022-01-05</th>
+      <td>-3.860584</td>
+      <td>-2.177163</td>
+    </tr>
+    <tr>
+      <th>2022-01-06</th>
+      <td>-4.371997</td>
+      <td>-2.432100</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2024-03-22</th>
+      <td>-4.485665</td>
+      <td>-2.443223</td>
+    </tr>
+    <tr>
+      <th>2024-03-25</th>
+      <td>-4.644490</td>
+      <td>-2.728304</td>
+    </tr>
+    <tr>
+      <th>2024-03-26</th>
+      <td>-4.315766</td>
+      <td>-2.472466</td>
+    </tr>
+    <tr>
+      <th>2024-03-27</th>
+      <td>-4.166706</td>
+      <td>-2.388266</td>
+    </tr>
+    <tr>
+      <th>2024-03-28</th>
+      <td>-4.485002</td>
+      <td>-2.695967</td>
+    </tr>
+  </tbody>
+</table>
+<p>563 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">aapl_returns_ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">end_training_date</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="n">value_at_risk</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06571936056838366
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#(aapl_returns*100).plot()</span>
+<span class="p">(</span><span class="n">aapl_returns</span><span class="o">*</span><span class="mi">100</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/82b21c6e5cc69f47d90ca5015347afe206e1fcfde3df8c9307a5f9e87acf1003.png" src="_images/82b21c6e5cc69f47d90ca5015347afe206e1fcfde3df8c9307a5f9e87acf1003.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">.</span><span class="n">resid</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+2019-01-03         NaN
+2019-01-04    2.912022
+2019-01-07   -0.093692
+2019-01-08    1.566209
+2019-01-09    1.580380
+                ...   
+2024-03-22         NaN
+2024-03-25         NaN
+2024-03-26         NaN
+2024-03-27         NaN
+2024-03-28         NaN
+Name: resid, Length: 1318, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">res</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9caaf9afaae6cf1c25f1e22f308961b1a4b908d3f2594448b3e936ebdad05be4.png" src="_images/9caaf9afaae6cf1c25f1e22f308961b1a4b908d3f2594448b3e936ebdad05be4.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1387,9 +1649,9 @@ Optimization terminated successfully    (Exit mode 0)
   <tbody>
     <tr>
       <th>2024-03-28</th>
-      <td>0.261353</td>
-      <td>0.209781</td>
-      <td>0.2118</td>
+      <td>0.427111</td>
+      <td>0.272257</td>
+      <td>0.288427</td>
     </tr>
   </tbody>
 </table>
@@ -1397,16 +1659,17 @@ Optimization terminated successfully    (Exit mode 0)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.0392</span> <span class="o">+</span> <span class="mf">0.22</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl_returns</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span> <span class="o">*</span> <span class="o">-</span><span class="mf">0.031384</span> <span class="o">+</span> <span class="mf">0.185337</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2613917678079074
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.21847575614498382
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -1480,7 +1743,11 @@ Optimization terminated successfully    (Exit mode 0)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The bias-variance tradeoff</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-relationship-between-profit-and-risk">The relationship between profit and risk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interim-conclusion-examining-the-unconditional-asset-return-distribution">Interim conclusion: Examining the unconditional asset return distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-parametric-models-for-asset-returns">Conditional parametric models for asset returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-of-ar-garch-models">Estimation of AR-GARCH models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sample-calculation-and-prediction">In sample calculation and prediction</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
