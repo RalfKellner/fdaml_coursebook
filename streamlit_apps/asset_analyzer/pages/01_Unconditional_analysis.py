@@ -176,14 +176,16 @@ if ticker:
     elif frequency == "monthly":
         fig_acf = make_acf_plot(df_monthly_returns)
 
-    st.title("Descriptive and visual analysis")
+    st.title("Descriptive, parametric and visual analysis")
     st.markdown("""
                 We start with some simple descriptive statistics and visualizations. Below you can see the number of observations,
                 mean, standard deviation, minimum, maximum, some quantiles, skewness and kurtosis. These statistics provide a first
                 insight how profitable and risky an asset may be. While the mean quantifies profitability and standard deviation the risk, 
                 examining skewness, kurtosis and estimates for more extreme price movements can be used to estimate the so called tail
-                risks of an investment. Left skewed distributions with high excess kurtosis come along with higher occurence probabilities for
-                negative return realizations.
+                risks of an investment. Left skewed distributions with high excess kurtosis come along with higher occurrence probabilities for
+                negative return realizations. The quantiles provide an impression of potential extreme return levels. The comparison of 
+                descriptive statistics and the corresponding metrics for the parametric models further deepen the understanding of the 
+                return distribution.
                 """)
 
     st.markdown("**Descriptive statistics**")

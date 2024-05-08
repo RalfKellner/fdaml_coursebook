@@ -45,12 +45,12 @@ def make_ts_hist_plot(df_rt):
     return fig
 
 st.title("Asset analyzer")
-st.markdown("""The following is a *demo* for to play around with different elements of the univariate asset return analysis.
+st.markdown("""The following is a *demo* to play around with different elements of the univariate asset return analysis.
             Go to [yahoo finance](https://finance.yahoo.com/), search for an asset of your interest in the search bar and find the
             corresponding ticker symbol. Enter this ticker symbol in the left.\n\n I am going to
             try to add more course relevant analyses to this page as we discuss corresponding methods in the course. On the left you
-            can navigate through different analysis types. This is meant to give you the ability to experience the methods discusses
-            througout the course.
+            can navigate through different analysis types. This is meant to give you the ability to experience the methods discussed
+            throughout the course.
             """)
 
 
