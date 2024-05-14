@@ -7,3 +7,4 @@ chapters:
 - file: 01_introduction
 - file: 02_empirical_asset_returns
 - file: 03_univariate_models
+- file: 04_dependence_matters

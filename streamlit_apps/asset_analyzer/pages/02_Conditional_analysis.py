@@ -86,6 +86,7 @@ fig.add_trace(go.Scatter(x=mu_t.index, y=mu_t/100, marker_color = "#660066", nam
 
 fig.add_trace(go.Scatter(x=returns_ts.index, y=returns_ts/100, marker_color = '#636EFA', name="r_t"), row=1, col=2)
 fig.add_trace(go.Scatter(x=sigma_t.index, y=sigma_t/100, marker_color = "#660066", name="sigma_t"), row=1, col=2)
+fig.add_trace(go.Scatter(x=returns_ts.index, y=[returns_ts.std(ddof = 1)/100]*returns_ts.shape[0], name="std", marker_color = "#660066", line=dict(dash='dash')), row=1, col=2)
 
 # r_t in the third subplot with quantile line
 fig.add_trace(go.Scatter(x=returns_ts.index, y=returns_ts/100, marker_color = '#636EFA', name="r_t"), row=2, col=1)
