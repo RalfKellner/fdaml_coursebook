@@ -178,6 +178,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Empirical analysis of asset returns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_univariate_models.html">Modeling univariate asset return distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_dependence_matters.html">Multivariate analysis - dependence matters!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_machine_learning.html">Machine learning</a></li>
 </ul>
 
     </div>
@@ -518,7 +519,7 @@ Var(x) = E(x-E(x))^2 =
 \frac{E \left[\left(x - E(x)\right)^4 \right]}{\sigma_x^4}  
 \]</div>
 <p>To characterize the level of kurtosis, the normal distribution is usually taken as a reference. It exhibits a kurtosis of <span class="math notranslate nohighlight">\(3\)</span>. If distributions exhibit higher kurtosis than <span class="math notranslate nohighlight">\(3\)</span>, we speak of excess kurtosis and leptokurtic distributions. These distributions are characterized by higher probability mass in the tails of the distribution. This means, extreme outcomes of the random variable are more likely. If a distribution exhibits a kurtosis lower then <span class="math notranslate nohighlight">\(3\)</span>, we say it is platokurtic.</p>
-<p>Besides those four characteristic measures, quantiles of probability distributions can be used for informational purposes. Let us denote <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span> as the inverse of the cumulative distribution function. Given some probability <span class="math notranslate nohighlight">\(\alpha\)</span>, we say <span class="math notranslate nohighlight">\(x_{\alpha}\)</span> is the <span class="math notranslate nohighlight">\(\alpha\)</span> <strong>quantile</strong> of <span class="math notranslate nohighlight">\(x\)</span>, if:</p>
+<p>Besides those four characteristic measures, quantiles of probability distributions can be used for informational purposes. Let us denote <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span> as the inverse of the cumulative distribution function. Given some probability <span class="math notranslate nohighlight">\(\alpha\)</span>, we say <span class="math notranslate nohighlight">\(x_{\alpha} = F^{-1}(\alpha)\)</span> is the <span class="math notranslate nohighlight">\(\alpha\)</span> <strong>quantile</strong> of <span class="math notranslate nohighlight">\(x\)</span>, if:</p>
 <div class="math notranslate nohighlight">
 \[
 1 - F(x_{\alpha}) \geq 1 - \alpha ~~\text{and } F(x_{\alpha}) \geq \alpha
