@@ -1,0 +1,1430 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine learning &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_machine_learning';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Multivariate analysis - dependence matters!" href="04_dependence_matters.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Financial markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_empirical_asset_returns.html">Empirical analysis of asset returns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_univariate_models.html">Modeling univariate asset return distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_dependence_matters.html">Multivariate analysis - dependence matters!</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/05_machine_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differences-between-machine-learning-and-traditional-statistical-analysis">Differences Between Machine Learning and Traditional Statistical Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-tasks">Machine learning tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-classification">Multi-classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-and-generalization-of-supervised-learning-models">Validation and generalization of supervised learning models</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning">
+<h1>Machine learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h1>
+<p>So far, we analyzed financial data with an emphasis on stock market data and a few of its fundamental empirical characteristics and theories. For this purpose, we utilized statistical analysis including estimators and a few statistical models such as linear and auto-regressive regression. Due to the increasing success and importance of machine learning algorithms in various fields, they also gained more and more interest in the financial domain. While some of them may improve the understanding of financial characteristics, these algorithms also experience limitations which do not exist in other disciplines. An example is the limited ability to predict future developments of asset prices which is given due to the efficient and immediate processing of new information on financial markets.</p>
+<section id="differences-between-machine-learning-and-traditional-statistical-analysis">
+<h2>Differences Between Machine Learning and Traditional Statistical Analysis<a class="headerlink" href="#differences-between-machine-learning-and-traditional-statistical-analysis" title="Link to this heading">#</a></h2>
+<p>Machine learning (ML) and traditional statistical analysis share common ground in their use of data to make predictions and uncover patterns. However, there are several key differences between the two approaches, particularly in their focus, methodology, and objectives.</p>
+<ul class="simple">
+<li><p>Focus and Objectives</p>
+<ul>
+<li><p>Machine Learning:</p>
+<ul>
+<li><p>Focus: The primary goal is to build models that can make accurate predictions or classifications based on input data. The emphasis is on the performance of the model on unseen data.</p></li>
+<li><p>Objectives: Machine learning aims to maximize predictive accuracy, often through iterative training and testing, with less concern about the interpretability of individual variables.</p></li>
+</ul>
+</li>
+<li><p>Traditional Statistical Analysis:</p>
+<ul>
+<li><p>Focus: The main goal is to understand the relationships between variables and to test hypotheses about these relationships. There is a strong emphasis on the statistical significance of variables.</p></li>
+<li><p>Objectives: Traditional statistical analysis seeks to infer the underlying relationships within the data, providing insights into causality and the significance of predictors.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Methodology</p>
+<ul>
+<li><p>Machine Learning:</p>
+<ul>
+<li><p>Data Handling: ML models can handle large, high-dimensional datasets and are capable of processing unstructured data (e.g., images, text).</p></li>
+<li><p>Model Training: Emphasizes training models on a portion of the data and validating performance on separate test sets. Techniques such as cross-validation are commonly used.</p></li>
+<li><p>Algorithms: Utilizes a wide range of algorithms, including decision trees, support vector machines, neural networks, and ensemble methods, which often require substantial computational resources.
+Evaluation: Performance is evaluated based on metrics like accuracy, precision, recall, F1 score, and area under the ROC curve (AUC), focusing on how well the model generalizes to new data.</p></li>
+</ul>
+</li>
+<li><p>Traditional Statistical Analysis:</p>
+<ul>
+<li><p>Data Handling: Often deals with smaller datasets and structured data, with a focus on ensuring data meets assumptions required by statistical models (e.g., normality, homoscedasticity).</p></li>
+<li><p>Model Training: Involves fitting models to the entire dataset, with an emphasis on parameter estimation and hypothesis testing.</p></li>
+<li><p>Algorithms: Commonly uses linear models (e.g., linear regression, logistic regression), generalized linear models, and time series analysis, which are computationally less intensive.
+Evaluation: Focuses on the significance of individual variables using p-values, confidence intervals, and R-squared values to assess the fit of the model.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Interpretability and Significance</p>
+<ul>
+<li><p>Machine Learning:</p>
+<ul>
+<li><p>Interpretability: Often, ML models, especially complex ones like deep neural networks, are seen as “black boxes” with less emphasis on the interpretability of individual parameters.</p></li>
+<li><p>Variable Importance: Techniques such as feature importance scores, SHAP values, and partial dependence plots can be used to interpret the influence of variables, but these are typically secondary to predictive performance.</p></li>
+</ul>
+</li>
+<li><p>Traditional Statistical Analysis:</p>
+<ul>
+<li><p>Interpretability: High priority is given to understanding and interpreting the coefficients of the model. The relationships between variables and outcomes are explicitly described.</p></li>
+<li><p>Statistical Significance: Emphasis on determining the statistical significance of predictors using tests like t-tests for coefficients, ensuring that the relationships are not due to random chance.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Use Cases</p>
+<ul>
+<li><p>Machine Learning:</p>
+<ul>
+<li><p>Applications: Well-suited for tasks requiring high predictive accuracy, such as image and speech recognition, recommendation systems, and fraud detection.</p></li>
+<li><p>Adaptability: Capable of handling complex, non-linear relationships and large-scale data, making it adaptable to various domains.</p></li>
+</ul>
+</li>
+<li><p>Traditional Statistical Analysis:</p>
+<ul>
+<li><p>Applications: Ideal for scenarios where understanding the relationship between variables is crucial, such as in experimental studies, clinical trials, and econometric analyses.</p></li>
+<li><p>Rigorous Testing: Provides rigorous testing of hypotheses and clearer insights into causal relationships, which is essential in scientific research.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>While both machine learning and traditional statistical analysis leverage data to derive insights and make predictions, they differ significantly in their focus, methodology, and objectives. Machine learning prioritizes predictive accuracy and handling complex, large-scale data, often at the expense of interpretability. Traditional statistical analysis, on the other hand, emphasizes understanding the relationships between variables and the statistical significance of these relationships, providing clear, interpretable models. Each approach has its strengths and is suited to different types of problems and contexts.</p>
+</section>
+<section id="machine-learning-tasks">
+<h2>Machine learning tasks<a class="headerlink" href="#machine-learning-tasks" title="Link to this heading">#</a></h2>
+<p>In this chapter, we are going to study a few fundamental algorithms of machine learning. Where appropriate, we compare the use of models for machine learning and for statistical analysis. Afterwards, we examine applications of machine learning methods in the field of finance.</p>
+<p>Machine Learning is a branch of artificial intelligence that focuses on developing algorithms and statistical models that enable computers to perform tasks without explicit instructions. Instead of following a pre-defined program, these systems learn from data and improve their performance over time through experience. This ability to learn and adapt makes machine learning a powerful tool for solving complex problems in various fields, from healthcare to finance to robotics.
+Definition of Machine Learning</p>
+<p>Machine learning is defined as the study of computer algorithms that improve automatically through experience and the use of data. It involves the development of models that can recognize patterns and make decisions with minimal human intervention. The process typically involves training a model on a dataset, validating its performance, and then applying it to new data for prediction or classification.</p>
+<p>Traditionally, the most three important sub-fields of machine learning are:</p>
+<ul class="simple">
+<li><p>Supervised learning: In supervised learning, the model is trained on a labeled dataset, which means each training example is paired with an output label. The algorithm learns to map inputs to outputs based on this labeled data. Sometimes the labeling process simply includes to define a target variable, sometime the labeling process needs to be done by humans which usually is time-consuming and costly. Examples in the financial domain are credit default prediction, earning forecasts or macroeconomic forecasting.</p></li>
+<li><p>Unsupervised learning: Unsupervised learning involves training a model on data without labeled responses. The goal is to identify hidden patterns or intrinsic structures in the input data. Examples in the financial domain are relative company valuation by means of clustering or statistical factor modeling.</p></li>
+<li><p>Reinforcement learning: In reinforcement learning, an agent interacts with an environment and learns to perform actions to maximize cumulative rewards in the future. Examples in the financial domain are hedging or order processing for asset trading.</p></li>
+</ul>
+</section>
+<section id="supervised-learning">
+<h2>Supervised learning<a class="headerlink" href="#supervised-learning" title="Link to this heading">#</a></h2>
+<p>Supervised learning may further be split into regression and classification tasks, whereby, the latter can be either binary, multi-class or multi-label classification. We are going to study fundamental algorithms for both tasks in this sub-chapter. While a plethora of supervised learning algorithms exist, I think the analysis of these baseline algorithms provides a good understanding how these and other algorithms work.</p>
+<p>In general, the overall goal of an supervised learning algorithm is to identify a functional relationship between feature variables <span class="math notranslate nohighlight">\(\boldsymbol{x} \)</span> and the target variable <span class="math notranslate nohighlight">\(y\)</span>. The functional relationship is unknown and must be approximated by a parametric model which is calibrated by a set of parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>. Deviations from the functional relationship are assumed to be random and are usually denoted by <span class="math notranslate nohighlight">\(\epsilon\)</span>. Putting this together, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+y = f_{\boldsymbol{\theta}}\left(\boldsymbol{x}\right) + \epsilon
+\]</div>
+<p>Together with <span class="math notranslate nohighlight">\(\epsilon\)</span> this defines the full model for <span class="math notranslate nohighlight">\(y\)</span>. The predictions themselves are made by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = f_{\boldsymbol{\theta}}\left(\boldsymbol{x}\right)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is common to use <span class="math notranslate nohighlight">\(\beta\)</span> for parameters of regression models, we denote all parameters with <span class="math notranslate nohighlight">\(\theta\)</span> for the description of the machine learning models. Furthermore, while variables are often called independent or dependent variables in statistical analysis, they are named feature and target variables in the machine learning domain.</p>
+</div>
+<section id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h3>
+<p>For regression problems, the target variable is on a metric scale. The linear regression model may be considered as one of the most popular regression models. While it is rather limited in its ability to capture complex relationships, it is easy to estimate and creates predictions which can be interpreted with a large degree of transparency.</p>
+<p><strong>Prediction</strong></p>
+<p>When using linear regression, the aim is to predict values for <span class="math notranslate nohighlight">\(y\)</span>, given a linear relationship between <span class="math notranslate nohighlight">\(y\)</span> and features <span class="math notranslate nohighlight">\(\boldsymbol{x} = (x_{1}, ..., x_{n})\)</span>. The regression line is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\boldsymbol{\theta}}(\boldsymbol{x}) = \hat{y} = \boldsymbol{\theta}^T \boldsymbol{x} = \theta_1 \cdot x_{1} + ... + \theta_n \cdot x_{n} + \theta_0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> need to be estimated.</p>
+<p><strong>Model estimation</strong></p>
+<p>This is usually done by minimizing squared deviations between predictions and observed values for the target variable. I.e., the function to be minimized by calibrating the model parameters is:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\boldsymbol{\theta}) = \sum_{i = 1}^m \left( y_i - \boldsymbol{\theta}^T \boldsymbol{x}_i \right)^2
+\]</div>
+<p>where, <span class="math notranslate nohighlight">\(m\)</span> is the number of samples in the data set. This function is often called the <strong>loss function</strong> or the <strong>cost function</strong>. The optimization problem can be solved analytically. This means a closed form solution exists that returns parameter estimates if we insert observed data into a formula. For the linear regression, the estimator for the parameters of the regression line is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{\theta}} = \left( X^T X \right)^{-1} X^T \boldsymbol{y}
+\]</div>
+<p>where, <span class="math notranslate nohighlight">\(X\)</span> is the matrix with feature variables of the data sample and <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is the vector with realizations of the target variable.  In general, closed form solution do not exist for the majority of supervised learning algorithms, however, optimization which provide numerical solutions are implemented within popular python packages.</p>
+<p>The linear regression model is only captures linear relationships adequately, and, thus, is often a biased estimator in the presence of non-linear relationships between feature and target variables. However, an advantage is its simple interpretation. If the feature variable is numerical, positive values <span class="math notranslate nohighlight">\(\theta_j &gt; 0\)</span> indicate a positive linear relationship and <span class="math notranslate nohighlight">\(\theta_j\)</span> quantifies the change in the target variable if <span class="math notranslate nohighlight">\(x_j\)</span> increases by one unit. In analogy, values for <span class="math notranslate nohighlight">\(\theta_j &lt; 0\)</span> can be interpreted. If all feature variables are within the same numerical range (by, e.g., standardization of numerical feature variables before parameter estimation), the absolute value for <span class="math notranslate nohighlight">\(\theta_j\)</span> can be interpreted as the feature importance of <span class="math notranslate nohighlight">\(x_j\)</span> for <span class="math notranslate nohighlight">\(y\)</span>. If feature variables are categorical, one usually transfers them by dummy or one-hot encoding.</p>
+<p>If a variable has <span class="math notranslate nohighlight">\(K\)</span> categories, it is transformed to <span class="math notranslate nohighlight">\(K-1\)</span> or <span class="math notranslate nohighlight">\(K\)</span> binary <span class="math notranslate nohighlight">\(0/1\)</span> variables for its dummy or one-hot encoded representation, respectively. the binary variable is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x^{(k)} = 
+\begin{cases}
+1 &amp; \text{if } x = k \\
+0 &amp; \text{else}
+\end{cases}
+\end{split}\]</div>
+<p>For instance, when using dummy encoding, the data set:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Observation</p></th>
+<th class="head"><p>Sentiment</p></th>
+<th class="head"><p>Target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Positive</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Negative</p></td>
+<td><p>-10</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Positive</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Negative</p></td>
+<td><p>-8</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Positive</p></td>
+<td><p>12</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Negative</p></td>
+<td><p>-7</p></td>
+</tr>
+</tbody>
+</table>
+<p>If we create a dummy encoded version for the “Sentiment” feature:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Observation</p></th>
+<th class="head"><p>Sentiment</p></th>
+<th class="head"><p>Target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>-10</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>-8</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>12</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>-7</p></td>
+</tr>
+</tbody>
+</table>
+<p>And we create a dummy encoded version for the “Sentiment” feature:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Observation</p></th>
+<th class="head"><p>Sentiment</p></th>
+<th class="head"><p>Target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>The regression line for the dummy encoding is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \theta_0 + \theta_1 x^{\text{positive}}
+\]</div>
+<p>The regression line for the one-hot encoding is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \theta + \theta_1 x^{\text{positive}} + \theta_2 x^{\text{negative}}
+\]</div>
+<p>The choice is yours as your findings are consistent no matter which version is used. However, the interpretation differs. For the dummy encoded model <span class="math notranslate nohighlight">\(\theta_0\)</span> is the prediction for the target variable if the sentiment is negative and <span class="math notranslate nohighlight">\(\theta_0 + \theta_1\)</span> is the prediction for observations with positive sentiment. For the dummy encoded version, <span class="math notranslate nohighlight">\(\theta_0 + \theta_1\)</span> is the prediction for positive sentiment and <span class="math notranslate nohighlight">\(\theta_0 + \theta_2\)</span> for negative sentiment. Thus <span class="math notranslate nohighlight">\(\theta_1\)</span> is the deviation from the baseline <span class="math notranslate nohighlight">\(\theta_0\)</span> for observations with positive sentiment and <span class="math notranslate nohighlight">\(\theta_2\)</span> the deviation for observations with negative sentiment.</p>
+<p><strong>Model evaluation</strong></p>
+<p>Once a model is estimated, we want to assess its performance by means of metrics which need to be selected w.r.t. to the task at hand. For regression type problems, the goal is that predicted values should be close to actual observations. This makes the mean absolute deviation (<span class="math notranslate nohighlight">\(MAD\)</span>) and mean squared error (<span class="math notranslate nohighlight">\(MSE\)</span>) natural candidates:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+MAD = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y}_i| \\
+MSE = \frac{1}{m} \sum_{i=1}^m \left( y_i - \hat{y}_i \right)^2
+\end{split}\]</div>
+<p>However, values for <span class="math notranslate nohighlight">\(MAE, MSE\)</span> are only meaningful if they can be compared to other models. Thus, it is reasonable to include a benchmark in a performance metric. An example is the coefficient of determination <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\sum_i \left( y_i - \hat{y}_i \right)^2}{\sum_i \left( y_i - \bar{y} \right)^2}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\({\bar{y}}\)</span> is the average of target variable realizations. If a model which uses feature variables for prediction (<span class="math notranslate nohighlight">\(\hat{y}_i\)</span>) generates better predictions than a model which does not use the information of feature variables (<span class="math notranslate nohighlight">\(\bar{y}\)</span>), the sum of <span class="math notranslate nohighlight">\(\left( y_i - \hat{y}_i \right)^2\)</span> should be smaller than the sum of <span class="math notranslate nohighlight">\(\left( y_i - \bar{y} \right)^2\)</span>. Thus the fraction in the formula is smaller than one. The better the model the more converges the fraction towards <span class="math notranslate nohighlight">\(0\)</span>, thus values close to <span class="math notranslate nohighlight">\(1\)</span> would speak for a high performance of the model which uses feature information.</p>
+<p>An important misunderstanding in this context is the believe that models with values that are not close to <span class="math notranslate nohighlight">\(1\)</span> exhibit a bad performance. This is only true if the relationship between feature variables and the target variable is fully deterministic and not also impacted by randomness in the form of <span class="math notranslate nohighlight">\(\epsilon\)</span>. For instance, if a relationship is plagued by a lot of noise, values in the range of around 5% may already be seen as a significant improvement regarding the predictive performance of the model.</p>
+<p><strong>Model assumptions</strong></p>
+<p>The linear regression is one of the most applied and most popular models for statistical analysis. This is why its model assumptions and the failure to meet have been intensively studied. Depending if we want to use the linear regression model for the purpose of statistical analysis or prediction, only, the importance of failed assumptions and the way how to handle them differs. The most important model assumptions of the linear regression model are:</p>
+<ul class="simple">
+<li><p>Linear relationship between the independent and the dependent variable.</p></li>
+<li><p>Normal distribution of the dependent variable</p></li>
+<li><p>Homoscedasticity</p></li>
+<li><p>Independent error terms</p></li>
+<li><p>Low correlation of the independent variables (low or no multicollinearity)</p></li>
+</ul>
+<p>In short, if assumptions do not hold, the variance for the parameter estimator is usually mis-specified, mostly being underestimated. However, the estimator is usually asymptotically consistent. This means, parameter estimates likely do not systematically under- or overestimate the impact of feature variables. However, if the estimator’s standard error is falsely quantified, statistical inference regarding the impact of feature variables may be falsely assessed. Depending on the assumption this can be corrected, however, this is not discussed in more detail for this course.</p>
+<p>Below, we see the output for a regression which regresses Apple’s daily returns on the three Fama-French risk factors. The method from the <em>statsmodels</em> package is used which has a greater emphasis on statistical analysis. The output includes the <span class="math notranslate nohighlight">\(R^2\)</span> value, parameter estimates and a few statistical tests.</p>
+<ul class="simple">
+<li><p>F-test:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(H_0: \theta_1 = ... = \theta_n = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1: \theta_j \neq 0\)</span>, at least for one <span class="math notranslate nohighlight">\(j\)</span></p></li>
+</ul>
+</li>
+<li><p>t-test:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(H_0: \theta_j = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1: \theta_j \neq 0\)</span></p></li>
+</ul>
+</li>
+<li><p>Omnibus and Jarque-Bera:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(H_0: \text{Residuals are normally distributed}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1: \text{Residuals are not normally distributed}\)</span></p></li>
+</ul>
+</li>
+<li><p>Durbin Watson:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(H_0: \text{There is no autocorrelation in the residuals}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1: \text{There is autocorrelation in the residuals}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>The latter is not rejected for values around <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>With the output below, we find that the three factors seem to be capable for explaining the variation of Apple’s returns (due to a good value for <span class="math notranslate nohighlight">\(R^2\)</span>). The distribution of Apple’s returns seems not to be normally distributed (p-values around zero for the Jarque-Bera and Omnibus test). Autocorrelation for the residuals seems to be moderate (as the Durbin-Watson test statistic is not that far away from <span class="math notranslate nohighlight">\(2\)</span>). <span class="math notranslate nohighlight">\(\theta_0, \theta_{SMB}\)</span> are not statistically different from zero for a significance level of 5%. However, Apple’s returns behave similar with the market and like a growth stock (due to the negative sign of <span class="math notranslate nohighlight">\(\theta_{HML}\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/yfinance/sp500_1y.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;AAPL&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;RF&quot;</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.418
+Model:                            OLS   Adj. R-squared:                  0.410
+Method:                 Least Squares   F-statistic:                     51.87
+Date:                Thu, 23 May 2024   Prob (F-statistic):           2.57e-25
+Time:                        15:49:55   Log-Likelihood:                 725.28
+No. Observations:                 221   AIC:                            -1443.
+Df Residuals:                     217   BIC:                            -1429.
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.0009      0.001     -1.508      0.133      -0.002       0.000
+Mkt-RF         0.9243      0.088     10.491      0.000       0.751       1.098
+SMB           -0.0244      0.095     -0.256      0.798      -0.213       0.164
+HML           -0.4845      0.101     -4.808      0.000      -0.683      -0.286
+==============================================================================
+Omnibus:                       45.805   Durbin-Watson:                   1.685
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              103.299
+Skew:                          -0.962   Prob(JB):                     3.71e-23
+Kurtosis:                       5.742   Cond. No.                         200.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the model assumption of a normal distribution is violated and we have an indication of (positive) autocorrelation, we can and should estimate standard errors with the Heteroskedasticity and Autocorrelation Consistent - HAC estimator. This is done in the cell below. We observe that the p-values for individual coefficient estimates change. However, they would not impact the statistical inference for this scenario. Of course, this can be different for other analyses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;HC3&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.418
+Model:                            OLS   Adj. R-squared:                  0.410
+Method:                 Least Squares   F-statistic:                     51.92
+Date:                Thu, 23 May 2024   Prob (F-statistic):           2.47e-25
+Time:                        15:49:55   Log-Likelihood:                 725.28
+No. Observations:                 221   AIC:                            -1443.
+Df Residuals:                     217   BIC:                            -1429.
+Df Model:                           3                                         
+Covariance Type:                  HC3                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.0009      0.001     -1.543      0.123      -0.002       0.000
+Mkt-RF         0.9243      0.090     10.270      0.000       0.748       1.101
+SMB           -0.0244      0.101     -0.241      0.810      -0.223       0.174
+HML           -0.4845      0.106     -4.556      0.000      -0.693      -0.276
+==============================================================================
+Omnibus:                       45.805   Durbin-Watson:                   1.685
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              103.299
+Skew:                          -0.962   Prob(JB):                     3.71e-23
+Kurtosis:                       5.742   Cond. No.                         200.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="binary-classification">
+<h3>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h3>
+<p>If the target variable is a categorical variable, the linear regression model does not provide reasonable predictions as all real-valued numbers are returned by the linear regression model, while the categorical variable only takes up to <span class="math notranslate nohighlight">\(K\)</span> values. Let us start with the scenario where the target variable has two possible outcomes, e.g., “positive” or “negative”. The first step is the numerical conversion of categories which is usually done by a dummy encoding. The choice which category is represented by <span class="math notranslate nohighlight">\(1\)</span> is arbitrary.</p>
+<p><strong>Prediction</strong></p>
+<p>The regression line serves as a building block for a model which predicts values for <span class="math notranslate nohighlight">\(y \in \lbrace 0, 1 \rbrace\)</span>. Let us denote the value of the regression line by <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+z = \boldsymbol{\theta}^T \boldsymbol{x}
+\]</div>
+<p>One way to create <span class="math notranslate nohighlight">\(0, 1\)</span> predictions could be by transforming <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{y} = 
+\begin{cases}
+1 &amp; \text{for } z &gt; 0 \\
+0 &amp; \text{else }
+\end{cases}
+\end{split}\]</div>
+<p>However, a more popular choice is to transform <span class="math notranslate nohighlight">\(y^*\)</span> to a number <span class="math notranslate nohighlight">\(\pi \in [0, 1]\)</span> which is interpreted as the probability for <span class="math notranslate nohighlight">\(y\)</span> being of category <span class="math notranslate nohighlight">\(1\)</span>, i.e., <span class="math notranslate nohighlight">\(\pi = P\left(y = 1\right)\)</span>. While different functions can be chosen to transform <span class="math notranslate nohighlight">\(y^*\)</span> to <span class="math notranslate nohighlight">\(\pi\)</span>, a common one is the logistic function:</p>
+<div class="math notranslate nohighlight">
+\[
+\pi = \frac{1}{1 + e^{-z}}
+\]</div>
+<p>To be more precise, we could also use the following notation:</p>
+<div class="math notranslate nohighlight">
+\[
+\pi_{\boldsymbol{\theta}}\left( \boldsymbol{x} \right) = \frac{1}{1 + e^{-\boldsymbol{\theta}^T \boldsymbol{x}}}
+\]</div>
+<p>which highlights, that given information from feature variables <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>, the probability prediction depends on the parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>. The final prediction needs to be build around a rule which probability threshold is used to assign predictions to the actual categories <span class="math notranslate nohighlight">\(0, 1\)</span>. A natural choice might be given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{y} = 
+\begin{cases}
+1 &amp; \text{for } \pi &gt; 0.5 \\
+0 &amp; \text{else }
+\end{cases}
+\end{split}\]</div>
+<p>However, the threshold can be set to other values in <span class="math notranslate nohighlight">\([0, 1]\)</span> which may improve the predictive performance.</p>
+<p><strong>Model estimation</strong></p>
+<p>Binary prediction models often use the loss function</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\boldsymbol{\theta}\right) = \sum_{i=1}^m - y_i \log\left( \pi_i \right) - (1 - y_i)\log\left( 1- \pi_i \right)
+\]</div>
+<p>for estimating the model parameters. A closer look shows us that the loss function uses the negative value for the logarithm of the probability prediction for the observed category per observation. The plot below shows as that this value is lower if the probability prediction is high. This means a model is calibrated such that high probability predictions are generated for the category which is observed. This loss function is derived by the concept of entropy or by maximum-likelihood estimation, respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log \pi$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d394d47de333b7d399cbfdb3363fd7de5bf24daaf4181d43fec108ac037c6fe2.png" src="_images/d394d47de333b7d399cbfdb3363fd7de5bf24daaf4181d43fec108ac037c6fe2.png" />
+</div>
+</div>
+<p><strong>Model evaluation</strong></p>
+<p>Once, the model is trained, a first impression regarding the performance for a binary prediction model is given by the accuracy. Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+acc = 
+\begin{cases}
+1 &amp; \text{ if } y = \hat{y} \\
+0 &amp; \text{ else }
+\end{cases}
+\end{split}\]</div>
+<p>be a binary variable which is equal to <span class="math notranslate nohighlight">\(1\)</span> if the predicted category is in line with the observed category. The average for this variable represents the accuracy:</p>
+<div class="math notranslate nohighlight">
+\[
+AC = \frac{1}{m} \sum_{i = 1}^n acc_i
+\]</div>
+<p>However, the accuracy does not distinguish between different mistakes the model can make. This is why we introduce the notion of positives and negatives. Independent of the context, positive refers to category <span class="math notranslate nohighlight">\(1\)</span> and negative to category <span class="math notranslate nohighlight">\(0\)</span>. The following scenarios can occur:</p>
+<ul class="simple">
+<li><p>The model predicts category <span class="math notranslate nohighlight">\(1\)</span> and the observation is of category <span class="math notranslate nohighlight">\(1\)</span>, this is called a true positive (TP)</p></li>
+<li><p>The model predicts category <span class="math notranslate nohighlight">\(1\)</span> and the observation is of category <span class="math notranslate nohighlight">\(0\)</span>, this is called a false positive (FP)</p></li>
+<li><p>The model predicts category <span class="math notranslate nohighlight">\(0\)</span> and the observation is of category <span class="math notranslate nohighlight">\(0\)</span>, this is called a true negative (TN)</p></li>
+<li><p>The model predicts category <span class="math notranslate nohighlight">\(0\)</span> and the observation is of category <span class="math notranslate nohighlight">\(1\)</span>, this is called a false negative (FN)</p></li>
+</ul>
+<p>A visual inspection for the occurrence of these instances can be done by a confusion matrix as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Example true labels and predicted labels</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Compute confusion matrix</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Display confusion matrix</span>
+<span class="n">disp</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">display_labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/582e2753260e4368b682e81d96e8093934347154ae05546b326a716be8ff2865.png" src="_images/582e2753260e4368b682e81d96e8093934347154ae05546b326a716be8ff2865.png" />
+</div>
+</div>
+<p>With these definitions, the accuracy can also be written by:</p>
+<div class="math notranslate nohighlight">
+\[
+AC = \frac{TP + TN}{TP + FN + TN + FN}
+\]</div>
+<p>To better differentiate between errors, the precision and recall of the model is often included. The precision is:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{precision} = \frac{TP}{TP + FP}
+\]</div>
+<p>where this metric indicates the ability of the model to generate as few false positive predictions as possible. The recall is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{recall} = \frac{TP}{TP + FN}
+\]</div>
+<p>it describes the ability of the model to identify the positive categories of the dependent variable. Since both measures are important sources of information on the quality of the model, they can be combined in the F1 score:</p>
+<div class="math notranslate nohighlight">
+\[
+F_1 = \frac{2 \cdot \text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
+\]</div>
+<p>Similar to the linear regression model, one should always have in mind to evaluate these metrics in comparison to a simple yet reasonable benchmark. A reasonable benchmark for classification tasks is to always predict the category with the highest occurrence in the training data set. For instance, if we have a loan portfolio for which only 3$ firms default, the simple prediction would be to predict non-default for every company. This predictor would create an accuracy of 97%, however, would create many FN and no TP instances.</p>
+</section>
+<section id="multi-classification">
+<h3>Multi-classification<a class="headerlink" href="#multi-classification" title="Link to this heading">#</a></h3>
+<p>Once the idea of logistic regression is understood, it is relatively easy to adapt this idea to the case of a dependent variable with more than two categories. Two modeling approaches are popular for this purpose, the multinomial regression model and the softmax regression.</p>
+<p><strong>Prediction</strong></p>
+<p>In the multinomial model, <span class="math notranslate nohighlight">\(K-1\)</span> parameter vectors <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_k\)</span> are used for <span class="math notranslate nohighlight">\(K\)</span> categories, and in the softmax regression <span class="math notranslate nohighlight">\(K\)</span> parameter vectors <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_k\)</span> are used. No matter which model is used, we understand by a parameter vector:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{\theta}_k = 
+\begin{pmatrix}
+\theta_{k0} \\
+\theta_{k1} \\
+\vdots \\
+\theta_{kn} \\
+\end{pmatrix}
+\end{split}\]</div>
+<p>if <span class="math notranslate nohighlight">\(n\)</span> independent variables are included in the model. In the multinomial model, we first have a linear regression alike function for the first <span class="math notranslate nohighlight">\(K-1\)</span> categories:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\theta_{10} + \theta_{11} x_1 + \theta_{12} x_2 + ... + \theta_{1n} x_n =  \boldsymbol{\theta}_1^T \boldsymbol{x} \\
+\theta_{20} + \theta_{21} x_1 + \theta_{22} x_2 + ... + \theta_{2n} x_n =  \boldsymbol{\theta}_2^T \boldsymbol{x} \\
+\vdots \\
+\theta_{(K-1)0} + \theta_{(K-1)1} x_1 + \theta_{(K-1)2} x_2 + ... + \theta_{(K-1)n} x_n =  \boldsymbol{\theta}_{(K-1)}^T \boldsymbol{x} \\
+\end{split}\]</div>
+<p>As with the logistic regression model, we would have the problem for these values that the respective output is any real number, but we want to predict individual categories. Also for this type of modeling, instead of actual categories, probabilities <span class="math notranslate nohighlight">\(P\left(y = k | \boldsymbol{x}\right)\)</span> are predicted. However, translating the real numbers into probabilities requires a similar “trick” as using logistic regression. For a model with multiple categories, all probability predictions must hold that they are in the range of values <span class="math notranslate nohighlight">\([0, 1]\)</span>. In addition, they must sum to <span class="math notranslate nohighlight">\(1\)</span> because the categories are disjoint events. To achieve this, the real number values for each category in the multinomial model are transformed by:</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(y = k | \boldsymbol{x}\right) = f_{\boldsymbol{\theta}_k} \left( \boldsymbol{x} \right) = \frac{e^{ \boldsymbol{\theta}_k^T \boldsymbol{x}}}{1 + \sum_{l=1}^{K-1} e^{ \boldsymbol{\theta}_l^T \boldsymbol{x}}}
+\]</div>
+<p>The probability forecast of category <span class="math notranslate nohighlight">\(K\)</span> (which, by the way, can be chosen arbitrarily), results from the <span class="math notranslate nohighlight">\(K-1\)</span> probability forecasts:</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(y = K | \boldsymbol{x}\right) = 1 - \sum_{l=1}^{K-1} P\left(y = l | \boldsymbol{x}\right) = f_{\boldsymbol{\theta}_K} \left( \boldsymbol{x} \right) = \frac{1}{1 + \sum_{l=1}^{K-1} e^{ \boldsymbol{\theta}_l^T \boldsymbol{x}}}
+\]</div>
+<p>In softmax regression, regression lines are formed for all <span class="math notranslate nohighlight">\(K\)</span> categories:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\theta_{10} + \theta_{11} x_1 + \theta_{12} x_2 + ... + \theta_{1n} x_n =  \boldsymbol{\theta}_1^T \boldsymbol{x} \\
+\theta_{20} + \theta_{21} x_1 + \theta_{22} x_2 + ... + \theta_{2n} x_n =  \boldsymbol{\theta}_2^T \boldsymbol{x} \\
+\vdots \\
+\theta_{K0} + \theta_{K1} x_1 + \theta_{K2} x_2 + ... + \theta_{Kp} x_p =  \boldsymbol{\theta}_{K}^T \boldsymbol{x} \\
+\end{split}\]</div>
+<p>Each real number of the respective straight lines is transformed into probabilities by means of the softmax function:</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(y = k | \boldsymbol{x}\right) = f_{\boldsymbol{\theta}_k} \left( \boldsymbol{x} \right) = \frac{e^{ \boldsymbol{\theta}_k^T \boldsymbol{x}}}{\sum_{l=1}^{K} e^{ \boldsymbol{\theta}_l^T \boldsymbol{x}}}
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(n+1\)</span> more parameters must be estimated for the softmax model, yet this approach is somewhat more popular in machine learning, whereas multinomial regression is increasingly used in statistical analysis. Even though these models use more parameters and more model equations than logistic regression, the way logistic regression is modeled remains similar. The starting point is always a real number which stems from linear regression function, which is transformed using an appropriate function depending on the modeling needs.</p>
+<p><strong>Model estimation</strong></p>
+<p>Also the models for <span class="math notranslate nohighlight">\(K&gt;2\)</span> categories, can be estimated under the same loss function. Let <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{y}}\)</span> be a <span class="math notranslate nohighlight">\(K\)</span> dimensional one-hot vector that has value <span class="math notranslate nohighlight">\(1\)</span> at position <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(0\)</span> at all other positions. Moreover, let <span class="math notranslate nohighlight">\( \boldsymbol{\pi}_{\Theta} \)</span> be the vector of probability forecasts, then all parameters <span class="math notranslate nohighlight">\(\Theta\)</span> of the model are obtained by minimizing the loss function:</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\Theta\right) = -\frac{1}{m} \sum_{i=1}^m \tilde{\boldsymbol{y}}_i \log \left( \boldsymbol{\pi}_{\Theta, i} \right)
+\]</div>
+<p>Both model can be used for nominal categories. If the target variable is on an ordinal scale, the ranking of the variable must also be taken into account. This is done, for example, in the ordinal regression model.</p>
+<p><strong>Model evaluation</strong></p>
+<p>Multi-classification can be assessed in analogous use of the metrics for binary classification. See an example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="c1"># Example true labels and predicted labels for multi-class classification</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Example probabilities for each class</span>
+
+<span class="c1"># Accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Confusion Matrix</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Classification Report</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="n">disp</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">display_labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
+Confusion Matrix:
+</pre></div>
+</div>
+<img alt="_images/5b3368fef3498a387cfb168325087919fb31919ed41dceba1e1df0dc84be36fd.png" src="_images/5b3368fef3498a387cfb168325087919fb31919ed41dceba1e1df0dc84be36fd.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.86      0.86      0.86         7
+           1       0.57      0.67      0.62         6
+           2       0.83      0.71      0.77         7
+
+    accuracy                           0.75        20
+   macro avg       0.75      0.75      0.75        20
+weighted avg       0.76      0.75      0.75        20
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="neural-networks">
+<h3>Neural networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h3>
+<p>The models presented above are limited in terms of capture complex and flexible relationships between feature and target variables. While a multitude of more flexible models such as decision and regression trees, random forests, gradient boosted models, support vector machines, etc. exists, we restrict ourselves to one powerful model class - <em>neural networks</em>.</p>
+<p>Neural networks can be used for all types of supervised tasks and are able to capture complex relationships. Furthermore, they also are used for unsupervised and reinforcement learning as well which demonstrates their importance and versatile for the machine learning domain. While different architectures of neural networks, e.g., recurrent networks, encoder-decoder network, generative networks, exist, we take a look one type of neural network architecture - forward neural networks (other names for this architecture are multilayer perceptron, fully connected neural network, densely connected neural networks).</p>
+<p>Before we take a look at the formal definition for neural networks, let us subsume the most important characteristics of neural networks:</p>
+<ul class="simple">
+<li><p>Neural networks consist of <em>layers</em>, an input layer, hidden layers and an output layer</p></li>
+<li><p>Each layer includes <em>neurons</em>; the number of neurons in the hidden layers can be set by the user as desired</p></li>
+<li><p>Neurons (with the exception of input neurons) are generated by the composition of an <em>affine transformation</em> <span class="math notranslate nohighlight">\(f(x) = a + b x\)</span> and an arbitrary <em>activation function</em> <span class="math notranslate nohighlight">\(g\)</span>, each neuron is made of the form: <span class="math notranslate nohighlight">\(g\left(f(x)\right)\)</span></p></li>
+<li><p>Parameters of the network can be learned by using the same loss functions as for the models above</p></li>
+<li><p>Parameter estimation is done by numerical optimization of the loss function using algorithms which are based upon <em>gradient descent</em></p></li>
+</ul>
+<p>With this in mind, let us take a look at the formal definition. As it is very common, we use <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as the symbols for the parameters of neural networks, these are called <em>weights</em> and <em>bias</em>.</p>
+<p>The first layer which receives input data is called the input layer, the last layer in a neural network returns processed input and is called the output layer. In between those two layers hidden layers can be used. Each layer consists of a number of neurons which is defined by the user. Furthermore, the output of each layer is activated by activation functions.</p>
+<p>First, let us take a look how a neuron is determined using neurons from the previous layer for a single observation in the data set. The input data is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{x} = 
+\begin{pmatrix}
+    x_1 \\
+    x_2 \\
+    \vdots \\
+    x_{n_1} \\
+\end{pmatrix}
+\end{split}\]</div>
+<p>where the index <span class="math notranslate nohighlight">\(j = 1, ..., n_1\)</span> represents the number of input variables (input neurons) in the first layer <span class="math notranslate nohighlight">\(n_{l=1}\)</span>. For the sake of consistency, let us denote the input variables by <span class="math notranslate nohighlight">\(\boldsymbol{x} = \boldsymbol{h}^{(1)}\)</span>, where the <span class="math notranslate nohighlight">\((1)\)</span> in the superscript signals that these are the neurons from the first layer. The first step to determine the neuron in the next layer ist to aggregate the neurons of the previous layer in a weighted fashion. This is called affine map:</p>
+<div class="math notranslate nohighlight">
+\[
+z^{(2)} = \boldsymbol{h}^{(1), T} \boldsymbol{w}^{(1)}  + b^{(1)} = w_{1}^{(1)} h_{1}^{(1)} + w_{2}^{(1)} h_2^{(1)} + ... + w_{n_{1}}^{(1)} h_{n_{1}}^{(1)} + b^{(1)}
+\]</div>
+<p>The output of this transformation is used as input for an activation function <span class="math notranslate nohighlight">\(g\)</span>. Various activation functions are used for neural networks. Popular examples are</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Identity</p></td>
+<td><p><span class="math notranslate nohighlight">\(g(z) = z\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relu</p></td>
+<td><p><span class="math notranslate nohighlight">\(g(z) = \max (z, 0)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Sigmoid</p></td>
+<td><p><span class="math notranslate nohighlight">\(g(z) = \frac{1}{1 + e^{-z}} \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>See the output below for their visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Identity&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Relu&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sigmoid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cba40e5b10272ac85c924d86df804c1032673b6503091c35a153c420ec43817d.png" src="_images/cba40e5b10272ac85c924d86df804c1032673b6503091c35a153c420ec43817d.png" />
+</div>
+</div>
+<p>The result of the activation function is the hidden neuron for the next layer. Thus, to create a single neuron for the next layer, we use:</p>
+<div class="math notranslate nohighlight">
+\[
+h^{(2)} = g(z^{(2)}) = g \left(w_{1}^{(1)} h_{1}^{(1)} + w_{2}^{(1)} h_2^{(1)} + ... + w_{n_{1}}^{(1)} h_{n_{1}}^{(1)} + b^{(1)}\right)
+\]</div>
+<p>If we want to generate more than one hidden neuron, we need different parameters. Let us introduce the index <span class="math notranslate nohighlight">\(k\)</span> for this purpose:</p>
+<div class="math notranslate nohighlight">
+\[
+h_k^{(2)} = g(z_k^{(2)}) = g \left(w_{1k}^{(1)} h_{1}^{(1)} + w_{2k}^{(1)} h_2^{(1)} + ... + w_{n_{1}k}^{(1)} h_{n_{1}}^{(1)} + b_k^{(1)}\right)
+\]</div>
+<p>As this operation is used in general from layer <span class="math notranslate nohighlight">\(l-1\)</span> to layer <span class="math notranslate nohighlight">\(l\)</span>, we can write:</p>
+<div class="math notranslate nohighlight">
+\[
+h_k^{(l)} = g(z_k^{(l)}) = g \left(w_{1k}^{(l-1)} h_{1}^{(l-1)} + w_{2k}^{(l-1)} h_2^{(l-1)} + ... + w_{n_{l-1}k}^{(l-1)} h_{n_{l-1}}^{(l-1)} + b_k^{(l-1)}\right) = g \left( \boldsymbol{h}^{(l-1), T} \boldsymbol{w}_k^{(l-1)} + b_k^{(l-1)} \right) 
+\]</div>
+<p>Given a data set with <span class="math notranslate nohighlight">\(m\)</span> observations, we can use the expression:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{H}^{(l)} = g \left( \boldsymbol{H}^{(l-1)} \boldsymbol{W}^{(l-1)}  + \boldsymbol{b}^{(l-1)} \right)
+\]</div>
+<p>Here, the dimensions are as follow:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{H}^{(l-1)} \in \mathbb{R}^{m \times n_{l-1}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{H}^{(l)} \in \mathbb{R}^{m \times n_{l}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{W}^{(l-1)} \in \mathbb{R}^{n_{l-1} \times n_{l}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{b}^{(l-1)} \in \mathbb{R}^{n_{l}}\)</span></p></li>
+</ul>
+<p>and the operation <span class="math notranslate nohighlight">\(\boldsymbol{H}^{(l-1)} \boldsymbol{W}^{(l-1)} + \boldsymbol{b}^{(l-1)}\)</span> is defined in a way such that the vector <span class="math notranslate nohighlight">\(\boldsymbol{b}^{(l-1)}\)</span> is added to each column of the matrix <span class="math notranslate nohighlight">\(\boldsymbol{H}^{(l-1)} \boldsymbol{W}^{(l-1)}\)</span> (this is called broadcasting).</p>
+<p>These operations are repeated for as many layers as desired by the user. For instance, let us take a look how data would be processed for a neural network with one hidden layer, two hidden neurons and one neuron in the output layer. Let us further focus on the processing of a single observation and assume that the network receives realizations of three input variables <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span> in the input layer and only the identity function is used for activation in each layer.</p>
+<p>The input neurons are <span class="math notranslate nohighlight">\(h_1^{(1)} = x_1, h_2^{(1)} = x_2, h_3^{(1)} = x_3\)</span>. The hidden neurons for the next layer are calculated by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\boldsymbol{h}^{(2), T} = g \left(
+\begin{pmatrix}
+h_1^{(1)} &amp; h_2^{(1)} &amp; h_3^{(1)} \\
+\end{pmatrix}
+\begin{pmatrix}
+w_{11}^{(1)} &amp; w_{12}^{(1)}  \\
+w_{21}^{(1)} &amp; w_{22}^{(1)}  \\
+w_{31}^{(1)} &amp; w_{32}^{(1)}  \\
+\end{pmatrix}  +
+\begin{pmatrix}
+b_{1}^{(1)}  \\
+b_{2}^{(1)}  \\
+\end{pmatrix} 
+\right) = \\ =
+\begin{pmatrix}
+h_1^{(1)} w_{11}^{(1)} + h_2^{(1)} w_{21}^{(1)} + h_3^{(1)} w_{31}^{(1)}  &amp; 
+h_1^{(1)} w_{12}^{(1)} + h_2^{(1)} w_{22}^{(1)} + h_3^{(1)} w_{32}^{(1)} \\
+\end{pmatrix} +
+\begin{pmatrix}
+b_{1}^{(1)}  \\
+b_{2}^{(1)}  \\
+\end{pmatrix} =  \\ =
+\begin{pmatrix}
+h_1^{(1)} w_{11}^{(1)} + h_2^{(1)} w_{21}^{(1)} + h_3^{(1)} w_{31}^{(1)} + b_{1}^{(1)}   &amp; 
+h_1^{(1)} w_{12}^{(1)} + h_2^{(1)} w_{22}^{(1)} + h_3^{(1)} w_{32}^{(1)} + b_{2}^{(1)} \\
+\end{pmatrix} +
+\end{align}
+\end{split}\]</div>
+<p>To produce the output of the neural network, we further process these neurons through the second (output) layer by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h^{(3)} = g \left(
+\begin{pmatrix}
+h_1^{(2)} &amp; h_2^{(2)} \\
+\end{pmatrix} 
+\begin{pmatrix}
+w_{1}^{(2)} \\ w_{2}^{(2)}  \\
+\end{pmatrix} +
+b^{(2)}
+\right) = 
+w_{1}^{(2)} h_1^{(2)} + w_{2}^{(2)} h_2^{(2)} + b^{(2)}
+\end{split}\]</div>
+<p>The only thing which is fixed here are the input values <span class="math notranslate nohighlight">\(h_1^{(1)} = x_1, h_2^{(1)} = x_2, h_3^{(1)} = x_3\)</span>. All other values <span class="math notranslate nohighlight">\(\boldsymbol{W}^{(1)}, \boldsymbol{b}^{(1)}, \boldsymbol{W}^{(2)}, \boldsymbol{b}^{(2)}\)</span> are parameters which need to be trained for the model. The number of parameters is determined by the number of hidden neurons which we set for every layer. The more hidden neurons we would like to use, the higher the number of parameters which needs to be trained. What we see in the example above is what is called a forward pass which describes how the input data is processed through the network. Note that there are no real limits regarding the architecture. For instance you can also define a neural network which produces more than one neuron in the output layer. This is why a neural network can be used for regression and classification tasks as well. The only consideration which need to be taken care of are:</p>
+<ul class="simple">
+<li><p>For a regression task, the output neuron must include a single neuron which is activated by the identity function</p></li>
+<li><p>For a binary classification task, the output neuron must include a single neuron which is activated by the logistic function (which is also called sigmoid function in this context)</p></li>
+<li><p>For a multi-classification task, the number of output neurons is equal to the number of categories; the neurons are activated by the softmax function</p></li>
+</ul>
+<p>In order to train the parameters we minimize a loss function which is appropriate for the task. For instance, the loss functions from above can be used to train a neural network for a regression or classification task, respectively. The optimization is done by iterative and numerical methods which rely upon gradient information. The general iterative procedure for <em>gradient descent</em> algorithms is:</p>
+<ol class="arabic simple">
+<li><p>Start with a random guess for the set of all parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>: <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span></p></li>
+<li><p>Until a condition for termination is fulfilled, repeat:</p>
+<ol class="arabic simple">
+<li><p>Determine <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{\theta}} L\)</span></p></li>
+<li><p>Update the parameter by: <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(k)} \leftarrow \boldsymbol{\theta}^{(k-1)} - \eta \nabla_{\boldsymbol{\theta}} L\)</span></p></li>
+</ol>
+</li>
+</ol>
+<p>The gradient <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{\theta}} L\)</span> includes all partial derivatives if we derive the loss function w.r.t. to a single parameter of the model. If this value is positive, it tells us that increasing the parameter by a small amount would increase the loss which is why we rather should decrease the parameter. If this value is negative, we should increase the parameter as this reduces the loss. This rule is subsumed by 2.2. The gradient is calculated by automatic differentiation which can be done by application of the chain rule. It dictates you how to derive derivatives for compositions of functions. Given the function <span class="math notranslate nohighlight">\(h: g \circ f\)</span> with <span class="math notranslate nohighlight">\(h(x) = g\left( f \left(x \right) \right)\)</span>, the derivative is determined by:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial h}{\partial x} = \frac{\partial g}{\partial f} \frac{\partial f}{\partial x}
+\]</div>
+<p>The forward neural network is a composition of mathematical operations:</p>
+<div class="math notranslate nohighlight">
+\[
+g^{(L)} \left(f^{(L)} \left( ... \left( g^{(1)} \left( f^{(1)} \left( \boldsymbol{x} \right) \right) \right) \right) \right)
+\]</div>
+<p>This is why each partial derivative can be determined applying the chain rule. As the outer functions in the formula above represent the last operations of the network, we need these derivatives first. This is why we <em>backpropagate</em> through the network from output to input when deriving all partial derivatives.</p>
+<p>Certain variations and improvements of pure gradient descent are used for training neural networks, however, a basic understanding how gradient information is provided by the description above. In more detail, a popular version is so called mini-batch gradient descent which splits a data set into subsamples (batches) and derives parameter updates for every batch. One run through all batches is called an epoch. Training is usually one over multiple epochs until the loss value converges to a minimum. Variables which impact the neural network’s performance, but are not trained by minimizing the loss function are called <em>hyperparameters</em>. For instance, the number of layers, number of hidden neurons, activation functions, learning rate, etc. can also further improve the performance.</p>
+</section>
+<section id="validation-and-generalization-of-supervised-learning-models">
+<h3>Validation and generalization of supervised learning models<a class="headerlink" href="#validation-and-generalization-of-supervised-learning-models" title="Link to this heading">#</a></h3>
+<p>Machine learning is based on learning from data samples. The overall goal is to develop models which learn general relationships that hold for new and unseen data. Thus, a simple best practice is to split data into <em>training</em> and <em>test</em> data, train the model for test data and evaluate its performance w.r.t. the test data. However, if we only follow this procedure, evaluation metrics for test data are exposed to a large level of variation. This means, depending how we split the data, the evaluation of test data may substantially differ. One way to deal with this is to conduct <em>cross-validation</em>. A popular choice for cross validation is K-fold cross validation. In K-fold cross validation, the data set is split into <span class="math notranslate nohighlight">\(k\)</span> equal parts. Then, one of the parts is used as a test data set at a time, while the remaining data is used to train the model. This process is performed <span class="math notranslate nohighlight">\(k\)</span> times by iterating over all the parts (folds). The graph below visualizes this form of data partitioning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">cmap_cv</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span>
+<span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span>
+
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">400</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+    <span class="c1"># Fill in indices with the training/test groups</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="n">indices</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">indices</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Visualize the results</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)),</span>
+            <span class="p">[</span><span class="n">ii</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">indices</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_cv</span><span class="p">,</span>
+            <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+            <span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Observation number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cross validation number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;K-Fold&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ba2c0cf229f7b1b4ed6e237c08df349f715f492b7f5501dfa62041b089d2d6d8.png" src="_images/ba2c0cf229f7b1b4ed6e237c08df349f715f492b7f5501dfa62041b089d2d6d8.png" />
+</div>
+</div>
+<p>However, this validation technique assumes that observations are conditionally independent. This means no dependencies such as spatial or temporal dependence is given which can not be explained by the feature variables. For financial time series data, this assumption is at least critical. Furthermore, as financial data often is sequential, splitting the data as for K-fold cross validation means we can use data from the future to predict the past.</p>
+<p>To make sure that such potential mis-specifications do not impact the assessment of a model’s performance, one either may want to use a form of time series validation. Two choices are natural candidates with this respect: (1) a rolling window approach and (2) a cumulative time approach. The rolling window approach always uses the same number of time steps from the past <span class="math notranslate nohighlight">\(t-T^{\text{train}}, t-T^{\text{train}}+1, ..., t-1, t\)</span> to train a model and a fixed number of time steps from the future <span class="math notranslate nohighlight">\(t+1, t+2, ...., t + T^{\text{test}} - 1, t + T^{\text{test}}\)</span> is used for evaluation. If you want to make sure that training data does not include information from the test data, you can omit a certain number of time steps between training and test data. Furthermore, if possible the test data sets should not overlap. The cumulative approach works almost in the same way, however, instead of keeping the training size constant, one always adds more data to the training data set as time passes. The graphics below visualize both approaches for which no time steps are omitted during training and testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">y_idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
+    <span class="n">tr</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">40</span>
+    <span class="n">tt</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">40</span>
+    <span class="n">full_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+    <span class="n">indices_roll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span><span class="p">)</span> 
+    <span class="n">indices_roll</span><span class="p">[</span><span class="n">tr</span><span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">indices_roll</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">tt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">indices_cumulative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span><span class="p">)</span> 
+    <span class="n">indices_cumulative</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">indices_cumulative</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">tt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Visualize the results</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices_roll</span><span class="p">)),</span>
+        <span class="p">[</span><span class="n">y_idx</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices_roll</span><span class="p">),</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">indices_roll</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_cv</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Visualize the results</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices_cumulative</span><span class="p">)),</span>
+        <span class="p">[</span><span class="n">y_idx</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices_cumulative</span><span class="p">),</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">indices_cumulative</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_cv</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">y_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Observation number&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Validation number&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rolling window&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Observation number&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Validation number&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative window&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/02b34f46d9801e4c1440d21beb827d19918bc177e48f9bf57bbaec6ff551368e.png" src="_images/02b34f46d9801e4c1440d21beb827d19918bc177e48f9bf57bbaec6ff551368e.png" />
+</div>
+</div>
+<p>If a model has hyperparameters, the validation process can be repeated for different sets of hyperparameters. Several algorithms exist for hyperparameter tuning. Examples are:</p>
+<ul class="simple">
+<li><p>Grid Search: Exhaustive search over a specified parameter grid.</p></li>
+<li><p>Random Search: Randomly sample the parameter space.</p></li>
+<li><p>Genetic Algorithms: Use evolutionary algorithms to optimize hyperparameters.</p></li>
+</ul>
+<p>Implementations can be found in packages such as Optuna, Hyperopt, or Scikit-learn’s GridSearchCV and RandomizedSearchCV.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_dependence_matters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Multivariate analysis - dependence matters!</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differences-between-machine-learning-and-traditional-statistical-analysis">Differences Between Machine Learning and Traditional Statistical Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-tasks">Machine learning tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-classification">Multi-classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">Neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-and-generalization-of-supervised-learning-models">Validation and generalization of supervised learning models</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
