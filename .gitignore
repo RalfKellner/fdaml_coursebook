@@ -1,4 +1,5 @@
-data/*
+gitdata/*
 tutorials/*
 .DS_Store
 .venv/*
+data/*
