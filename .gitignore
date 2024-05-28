@@ -1,3 +1,4 @@
 data/*
 tutorials/*
 .DS_Store
+.venv/*
