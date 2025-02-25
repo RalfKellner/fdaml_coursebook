@@ -1,0 +1,6 @@
+format: jb-book
+root: 00_welcome
+chapters:
+- file: 01_introduction
+- file: 02_random_variables
+
