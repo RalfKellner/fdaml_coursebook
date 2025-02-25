@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Random variables &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_random_variables';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Asset classes" href="01_introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Random variables</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/02_random_variables.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Random variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="random-variables">
+<h1>Random variables<a class="headerlink" href="#random-variables" title="Link to this heading">#</a></h1>
+<p>Financial market developments are often difficult to predict. From today’s perspective, future market movements appear random and resemble a random experiment. The reason for this is that we hardly find deterministic relationships on financial markets. This is based on the efficiency of financial markets. If markets are highly efficient, new information is immediately incorporated into prices. Thus, future price movements are primarily driven by new, unpredictable information.</p>
+<p>For us, this indicates, we should model and analyze outcomes on financial markets as random variables. As a consequence, this chapter introduces concepts of random variables.</p>
+<section id="fundamentals">
+<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">#</a></h2>
+<p>A random variable is based on a <em>sample space</em> which defines the set of all possibel outcomes. The sample space is denoted by <span class="math notranslate nohighlight">\(\Omega\)</span>, for instance, for a coin toss, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\Omega = \lbrace \text{heads}, \text{tails} \rbrace
+\]</div>
+<p>or the result of two consecutive dice throws:</p>
+<div class="math notranslate nohighlight">
+\[
+\Omega = \lbrace (1, 1), (1, 2), ..., (1, 6), (2, 1), ..., (6, 6) \rbrace
+\]</div>
+<p>or for equity returns, assuming continuous prices, we typically define the sample space</p>
+<div class="math notranslate nohighlight">
+\[
+\Omega = \mathbb{R}
+\]</div>
+<p>as encompassing all possible real-valued returns.</p>
+<p>Usually, we are not (only) interested in single outcomes of the sample space and we want to determine probabilities for subsets of the sample space. These subsets are called <em>events</em>. Examples are:</p>
+<p>The event that the sum of two dices is 10:</p>
+<div class="math notranslate nohighlight">
+\[
+A = \lbrace (4, 6), (5, 5), (6, 4) \rbrace
+\]</div>
+<p>The event that a stock return lies between 2% and 5%</p>
+<div class="math notranslate nohighlight">
+\[
+A = [0.02, 0.05]
+\]</div>
+<p>The set of all events <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> for which a probability can be assigned is called <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra. It fulfills three requirements:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega \in \mathcal{F}\)</span> - the certain event is included</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \in \mathcal{F} \Rightarrow \bar{A} \in \mathcal{F}\)</span> - if we can assign a probability for an event, we can assign a probability for the complement as well</p></li>
+<li><p><span class="math notranslate nohighlight">\(A_1, A_2, ... \in \mathcal{F} \Rightarrow \bigcup\limits_{i \in \mathbb{N}} A_i \in \mathcal{F}\)</span> - probabilities for a union of events can be assigned</p></li>
+</ol>
+<p>To quantify how likely the occurrence of an event is, we use probability which is a mapping <span class="math notranslate nohighlight">\(P: \mathcal{F} \rightarrow [0,1]\)</span>  which assigns numbers <span class="math notranslate nohighlight">\([0,1]\)</span> to every event <span class="math notranslate nohighlight">\(A\)</span>. The probability mapping must fulfill the axioms of probability:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(P(A \geq 0)~ \forall A_i~ \in \mathcal{F}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\Omega) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P\left(\bigcup\limits_{i = 1}^{\infty} A_i \right) = \sum_{i = 1}^{\infty} P(A_i) \forall A_i \in \mathcal{F}\)</span> with <span class="math notranslate nohighlight">\(A_j \cap A_k = \emptyset\)</span>, <span class="math notranslate nohighlight">\(j \neq k\)</span></p></li>
+</ol>
+</section>
+<section id="id1">
+<h2>Random variables<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Usually, we are not interested in the event itself but in a number associated with the event, e.g., units sold, revenue, price, … We call these numbers <strong>random numbers</strong> which are realizations of <strong>random variables</strong>. A (real-valued) random variable <span class="math notranslate nohighlight">\(X\)</span> is a function that maps outcomes from the sample space <span class="math notranslate nohighlight">\(\Omega\)</span> to the real number line</p>
+<div class="math notranslate nohighlight">
+\[X: \Omega \to \mathbb{R}\]</div>
+<div class="math notranslate nohighlight">
+\[\omega \to x(\omega)\]</div>
+<p>For instance a coin tossing game with outcomes <span class="math notranslate nohighlight">\(\omega_1\)</span>: <em>heads</em> and <span class="math notranslate nohighlight">\(\omega_2\)</span>: <em>tails</em>. If <em>heads</em> is the outcome, we win 5 monetary units and if <em>tail</em> is the outcome we loose 5 monetary units. The random number <span class="math notranslate nohighlight">\(X\)</span> describing our profit for a coin toss is defined by:</p>
+<p><span class="math notranslate nohighlight">\(X(\omega_1) = 5\)</span> and <span class="math notranslate nohighlight">\(x(\omega_2) = -5\)</span>. More technically speaking <span class="math notranslate nohighlight">\(X\)</span> must be <strong>measurable</strong>. Given a subset of <span class="math notranslate nohighlight">\(B \in \mathbb{R}\)</span>, the inverse image of <span class="math notranslate nohighlight">\(B\)</span> with respect to <span class="math notranslate nohighlight">\(X\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[X^{-1}(B) = \lbrace \omega \in \Omega | X(\omega) \in B \rbrace \]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> be a set of subsets from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(X\)</span> is measurable if <span class="math notranslate nohighlight">\(X^{-1}(B) \in \mathcal{F}\)</span> for all <span class="math notranslate nohighlight">\(B \in \mathcal{B}\)</span>. For the probability measure of <span class="math notranslate nohighlight">\(X\)</span>, it holds that:</p>
+<div class="math notranslate nohighlight">
+\[P_x(X \in B) = P(X^{-1}(B)), B \in \mathcal{B}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is not just a measure mapping outcomes to numbers, but rather maps from one probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, P)\)</span> to probability space <span class="math notranslate nohighlight">\((\mathbb{R}, \mathcal{B}, P_x)\)</span>.</p>
+<p>If a random variable can only take on countably values, it is called a <em>discrete</em> random variable. A <em>continuos</em> random variable can take on an infinite number of values which is usually describe by an interval.</p>
+<p>For a discrete random variable, the function assigning probabilities to its realizations is called <strong>probability mass function</strong> and is given by a list-alike definition:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) = \begin{cases}
+			P_x(\{ x \}) &amp; \text{for } x  \\
+			0 &amp; \, \text{else}
+         \end{cases}
+\end{split}\]</div>
+<p>The function</p>
+<div class="math notranslate nohighlight">
+\[
+F(x)  = P_x\left( (-\infty, x] \right) = \sum_{x_i \leq x} f(x_i)
+\]</div>
+<p>is called <strong>cumulative distribution function</strong>. Let us take a look at an example. Starting with the throw of two dices, we can create a random variable which is the sum of both dices,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X =
+\begin{cases}
+2 &amp; (1,1) \\
+3 &amp; (1,2), (2,1) \\
+4 &amp; (1,3), (2,2), (3,1) \\
+5 &amp; (1,4), (2,3), (3,2), (4,1) \\
+6 &amp; (1,5), (2,4), (3,3), (4,2), (5,1) \\
+7 &amp; (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \\
+8 &amp; (2,6), (3,5), (4,4), (5,3), (6,2) \\
+9 &amp; (3,6), (4,5), (5,4), (6,3) \\
+10 &amp; (4,6), (5,5), (6,4) \\
+11 &amp; (5,6), (6,5) \\
+12 &amp; (6,6)
+\end{cases}
+\end{split}\]</div>
+<p>The probability mass function assigns probabilities to each possible outcome of the sum of two dice:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(X = x) =
+\begin{cases}
+\frac{1}{36} &amp; x = 2 \\
+\frac{2}{36} &amp; x = 3 \\
+\frac{3}{36} &amp; x = 4 \\
+\frac{4}{36} &amp; x = 5 \\
+\frac{5}{36} &amp; x = 6 \\
+\frac{6}{36} &amp; x = 7 \\
+\frac{5}{36} &amp; x = 8 \\
+\frac{4}{36} &amp; x = 9 \\
+\frac{3}{36} &amp; x = 10 \\
+\frac{2}{36} &amp; x = 11 \\
+\frac{1}{36} &amp; x = 12
+\end{cases}
+\end{split}\]</div>
+<p>The cumulative distribution function gives the probability that <span class="math notranslate nohighlight">\(X\)</span> takes a value less than or equal to a given number:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F(X) = P(X \leq x) =
+\begin{cases}
+0 &amp; x &lt; 2 \\
+\frac{1}{36} &amp; 2 \leq x &lt; 3 \\
+\frac{3}{36} &amp; 3 \leq x &lt; 4 \\
+\frac{6}{36} &amp; 4 \leq x &lt; 5 \\
+\frac{10}{36} &amp; 5 \leq x &lt; 6 \\
+\frac{15}{36} &amp; 6 \leq x &lt; 7 \\
+\frac{21}{36} &amp; 7 \leq x &lt; 8 \\
+\frac{26}{36} &amp; 8 \leq x &lt; 9 \\
+\frac{30}{36} &amp; 9 \leq x &lt; 10 \\
+\frac{33}{36} &amp; 10 \leq x &lt; 11 \\
+\frac{35}{36} &amp; 11 \leq x &lt; 12 \\
+1 &amp; x \geq 12
+\end{cases}
+\end{split}\]</div>
+<p>The figure below shows visualizes the probability mass and the cumulative distribution function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define possible sums of two dice</span>
+<span class="n">sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+
+<span class="c1"># Compute probability mass function (PMF)</span>
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="mi">1</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">6</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">36</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">36</span>
+<span class="p">])</span>
+
+<span class="c1"># Compute cumulative distribution function (CDF)</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pmf</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sum of Two Dice&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Probability Mass Function (PMF)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">1</span><span class="p">],</span> <span class="n">sums</span><span class="p">))</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">cdf</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>  <span class="c1"># Adding points for clarity</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sum of Two Dice&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative Distribution Function (CDF) - Stepwise&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5a41344a03a6e473ffe9d40cf7c2a78244856a65a4fc268b4f5c454ac3ba673f.png" src="_images/5a41344a03a6e473ffe9d40cf7c2a78244856a65a4fc268b4f5c454ac3ba673f.png" />
+</div>
+</div>
+<p>For a continuous random variable, the probability of a concrete realization is equal to 0, <span class="math notranslate nohighlight">\(P(x = 0) = 0\)</span>. Instead of directly defining a function mapping probabilities to subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, we define a <strong>probability density function</strong> <span class="math notranslate nohighlight">\(f(x)\)</span> which enables us to determine probabilities by integration. The domain of this function must be the set of all possibles states of <span class="math notranslate nohighlight">\(x\)</span>. Furthermore, it must hold the <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> and that <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x)dx = 1\)</span>. With this definition the corresponding cumulative distribution function is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = \int_{-\infty}^{x} f(t)dt
+\]</div>
+<p>The output of <span class="math notranslate nohighlight">\(F(x)\)</span> is the probability for observation a value of <span class="math notranslate nohighlight">\(x\)</span> or smaller. To determine probabilities within an interval, we can make use of the relationship:</p>
+<div class="math notranslate nohighlight">
+\[
+P \left(a \leq X \leq b\right) = F(b) - F(a) = \int_{a}^{b} f(t)dt
+\]</div>
+<p>An example for a continuous random variable would be the waiting time between information updates (e.g., in form of news or corporate announcements) of on stock markets. A reasonable distribution for such a random variable is the exponential distribution with density function:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \lambda e^{-\lambda x}, x \geq 0
+\]</div>
+<p>and cumulative density function:</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = 1 - e^{-\lambda x}, x \geq 0
+\]</div>
+<p>To define this distribution, we need to set a value for <span class="math notranslate nohighlight">\(\lambda\)</span>. The figure below shows the shape of the probability and cumulative distribution function for <span class="math notranslate nohighlight">\(\lambda = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># Define the exponential distribution parameter (lambda)</span>
+<span class="n">lambda_param</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># Generate x values for plotting</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Compute the PDF and CDF</span>
+<span class="n">pdf_values</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambda_param</span><span class="p">)</span>
+<span class="n">cdf_values</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambda_param</span><span class="p">)</span>
+
+<span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot PDF (Density Function)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">pdf_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="c1">#axes[0].fill_between(x_values, pdf_values, alpha=0.3, color=&quot;blue&quot;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Exponential Distribution - PDF&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot CDF (Cumulative Distribution Function)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">cdf_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<span class="c1">#axes[1].fill_between(x_values, cdf_values, alpha=0.3, color=&quot;red&quot;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Exponential Distribution - CDF&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2af4a838ba301a10e8ac28eedc6b32359f70b515133502a987ad1c774f74756e.png" src="_images/2af4a838ba301a10e8ac28eedc6b32359f70b515133502a987ad1c774f74756e.png" />
+</div>
+</div>
+</section>
+<section id="central-moments-and-quantiles">
+<h2>Central moments and quantiles<a class="headerlink" href="#central-moments-and-quantiles" title="Link to this heading">#</a></h2>
+<p>Probability distributions can be compared by numbers which summarize their characteristics such as location, variation, shape and so on. For this purpose, ordinary and central moments of the distributions are used.</p>
+<p>The <strong>expectation</strong> or <strong>expected value</strong> of a random variable if defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+E(X) = \begin{cases}
+			\sum_i x_i \cdot f(x_i) &amp;  x   \text{ discrete} \\
+			\int_{-\infty}^{\infty} x \cdot f(x) dx &amp; x \text{ continuous}
+       \end{cases}
+\end{split}\]</div>
+<p>The expectation is linear which means: <span class="math notranslate nohighlight">\(E(a + b X) = a + b E(X)\)</span>.</p>
+<p>The <strong>variance</strong> measures how much realizations of a random variable vary and is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Var(X) = E(X-E(X))^2 =
+			\begin{cases}
+			\sum_i (x_i - E(X))^2 \cdot f(x_i)   &amp; x \text{ discrete} \\
+			\int_{-\infty}^{\infty} (x - E(X))^2 \cdot f(x) dx  &amp; x \text{ continuous}
+			\end{cases}
+\end{split}\]</div>
+<p>For the variance, it holds that <span class="math notranslate nohighlight">\(Var(a + bx) = b^2 Var(x)\)</span>. The square root of the variance defines the <strong>standard deviation</strong> which is often denoted by the symbol <span class="math notranslate nohighlight">\(\sigma_x\)</span>. In finance, standard deviation is also called <strong>volatility</strong>.</p>
+<p>If a probability distribution is not symmetric it is skewed. To quantify <strong>skewness</strong>, we use:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{E \left[\left(X - E(X)\right)^3 \right]}{\sigma_x^3}  
+\]</div>
+<p>For negative values, the distribution is left skewed and for positive values, the distribution is right skewed. In addition of skewness, <strong>kurtosis</strong> is also often used for the characterization of probability distributions.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{E \left[\left(X - E(X)\right)^4 \right]}{\sigma_x^4}  
+\]</div>
+<p>To characterize the level of kurtosis, the normal distribution is usually taken as a reference. It exhibits a kurtosis of <span class="math notranslate nohighlight">\(3\)</span>. If distributions exhibit higher kurtosis than <span class="math notranslate nohighlight">\(3\)</span>, we speak of excess kurtosis and leptokurtic distributions. These distributions are characterized by higher probability mass in the tails of the distribution. This means, extreme outcomes of the random variable are more likely. If a distribution exhibits a kurtosis lower then <span class="math notranslate nohighlight">\(3\)</span>, we say it is platokurtic.</p>
+<p>Besides, quantiles of probability distributions can be used to characterize different parts of a distribution. A quantile is a statistical measure that divides a probability distribution into intervals with equal probabilities, or specifies the value below which a given percentage of the data falls. Quantiles are used to understand the dispersion, skewness, and central tendency of a distribution.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><p>The median (or 50th percentile) is the value that separates the lower 50% of a dataset from the upper 50%.</p></li>
+<li><p>The quartiles divide the data into four equal parts (e.g., the 25th percentile is the first quartile  Q_1 ).</p></li>
+<li><p>The deciles divide the data into ten equal parts.</p></li>
+<li><p>The percentiles divide the data into 100 equal parts (e.g., the 90th percentile means 90% of the data is below that value).</p></li>
+</ul>
+<p>Quantiles are particularly useful in finance, and statistics, where measures such as Value-at-Risk (VaR) use quantiles to assess the probability of extreme losses. The  <span class="math notranslate nohighlight">\(\alpha\)</span>-quantile (also called the  <span class="math notranslate nohighlight">\(\alpha\)</span>-th percentile) of <span class="math notranslate nohighlight">\(X\)</span> is the smallest value <span class="math notranslate nohighlight">\(x_{\alpha}\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+P(X \leq x_{\alpha}) = F(x_{\alpha}) \geq \alpha.
+\]</div>
+<p>Alternatively, this can be written as:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{\alpha} = \inf \{ x \in \mathbb{R} \mid F(x) \geq \alpha \}.
+\]</div>
+<p>This means that at least <span class="math notranslate nohighlight">\(\alpha \times\)</span> 100%  of the probability mass is less than or equal to  <span class="math notranslate nohighlight">\(x_{\alpha}\)</span>. For continuous distributions, the quantile is unique and is obtained using the inverse of the CDF:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{\alpha} = F^{-1}(\alpha), \quad \text{where } F^{-1}(\alpha) = \inf \{ x \in \mathbb{R} \mid F(x) \geq \alpha \}.
+\]</div>
+<p>For discrete distributions, the quantile may not be unique, as the CDF is a step function, and multiple values can satisfy  <span class="math notranslate nohighlight">\(P(X \leq x_{\alpha}) \geq \alpha\)</span>.</p>
+<p>Let us take a look at a simple example for a continuous exponentially distributed random variable. We can inverse the cumulative distribution function.</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = 1 - e^{-\lambda x} 
+\]</div>
+<p>to:</p>
+<div class="math notranslate nohighlight">
+\[
+F^{-1} (\alpha) = \frac{\ln (1 - \alpha)}{-\lambda} 
+\]</div>
+<p>To determine, the, e.g., 90% quantile, with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>, we calculate:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{0.90} = -\ln(0.10) \approx 2.302.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is the arrival of new information in minutes, this means that for about 90% of all time when new information arrives, the wating time is below <span class="math notranslate nohighlight">\(2.302\)</span> minutes. This also means that for about 10% it takes longer than <span class="math notranslate nohighlight">\(2.302\)</span> minutes.</p>
+</section>
+<section id="generation-of-random-variables">
+<h2>Generation of random variables<a class="headerlink" href="#generation-of-random-variables" title="Link to this heading">#</a></h2>
+<p>With the quantile function, it gets fairly easy to generate random variables. This is useful, if we want to simulate realizations of random variables. To simulate data, we take a look at the <strong>inverse-transform</strong> method. The starting point are random variables of a uniform distribution on the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>. A random variable has a uniform distribution on the interval <span class="math notranslate nohighlight">\([a, b]\)</span>, if its density function is defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{b-a}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(a\leq x \leq b\)</span>. As the name suggests, the uniform distribution can model a random observation on <span class="math notranslate nohighlight">\([a, b]\)</span> where each realization is equally likely. Without going to much into the details, uniform random numbers can be created by an algorithm which is “just” a step by step guide of mathematical operations. Below, you can take a look at a histogram of <span class="math notranslate nohighlight">\(10000\)</span> random realizations from a uniform distribution on the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">random_numbers</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>  
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First random observations:</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">75</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">random_numbers</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">75</span><span class="si">}</span><span class="se">\n</span><span class="s2">Visualization of all random variables below:&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of uniform random numbers&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Esimated density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
+===========================================================================
+[0.01516373 0.94141311 0.75606186 0.83923225 0.16833487]
+===========================================================================
+Visualization of all random variables below:
+</pre></div>
+</div>
+<img alt="_images/2c01fc571279c4ca34124e36c75e089058f8e67222a5128caf965d1a338fcd82.png" src="_images/2c01fc571279c4ca34124e36c75e089058f8e67222a5128caf965d1a338fcd82.png" />
+</div>
+</div>
+<p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
+<p>Let us take a look how this works with an example. A normally distributed random variable has a density function:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 }
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span> with two parameters <span class="math notranslate nohighlight">\(\mu \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(\sigma \in \mathbb{R}^{+}\)</span>. It can be shown that <span class="math notranslate nohighlight">\(E(X) = \mu\)</span> and <span class="math notranslate nohighlight">\(Var(X) = \sigma^2\)</span>. The figure below exhibits the density and the cumulative distribution function of a standard normal distribution with <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma^2 = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># Generate values for the standard normal distribution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Standard Normal CDF&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Density function of a standard normal distribution&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Standard Normal CDF&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative distribution function of a standard normal distribution&quot;</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8bfb67ac320930e3b40ec714ccd1986513f9592d67cbeb994992b428894d6389.png" src="_images/8bfb67ac320930e3b40ec714ccd1986513f9592d67cbeb994992b428894d6389.png" />
+</div>
+</div>
+<p>The inverse of the cumulative distribution function is given below and shows you how to map probabilities to observations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">ppf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">ppf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Inverse cumulative distribution function of a standard normal distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b93f2e5e6373ddeafe23231900f339ef914d869b14177ee3462ca72e213812f1.png" src="_images/b93f2e5e6373ddeafe23231900f339ef914d869b14177ee3462ca72e213812f1.png" />
+</div>
+</div>
+<p>If we insert all random realizations from the uniform distribution of our previous example, process them into the inverse cumulative distribution, the histogram looks as shown below. We obsere that this is very similar to the theoretical density of the normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of standard normal random numbers&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cb7bfd65191656c8632a8a2e707052b0b8791160edf1c9c72176a71b57279ca2.png" src="_images/cb7bfd65191656c8632a8a2e707052b0b8791160edf1c9c72176a71b57279ca2.png" />
+</div>
+</div>
+<p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">random_numbers</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of exponentially distributed random numbers&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cdebe15cb135b8a7c711c6f58f684c32b91dbfa324c315a11b4a4524293f6d4f.png" src="_images/cdebe15cb135b8a7c711c6f58f684c32b91dbfa324c315a11b4a4524293f6d4f.png" />
+</div>
+</div>
+<p>This procedure can be formalized by two steps:</p>
+<ol class="arabic simple">
+<li><p>Draw a random number  U  from the uniform distribution <span class="math notranslate nohighlight">\( U \sim (0, 1) \)</span>.</p></li>
+<li><p>Return <span class="math notranslate nohighlight">\(X = F^{-1}(U)\)</span>.</p></li>
+</ol>
+<p>It even holds for discrete distributions if we modify step two to:</p>
+<ol class="arabic simple" start="2">
+<li><p>Find the smallest value <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(F(x) \geq U\)</span>.</p></li>
+</ol>
+<p>Assume we have a coin tossing experiment and define the random variable X by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = 
+\begin{cases}
+0 &amp; \text{if heads} \\
+1 &amp; \text{if tails} 
+\end{cases}
+\end{split}\]</div>
+<p>The cumulative distribution function is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F(x) = 
+\begin{cases}
+0 &amp; x &lt; 0 \\
+\frac{1}{2} &amp; 0 \leq x &lt; 1 \\
+1 &amp; x \geq 1
+\end{cases}
+\end{split}\]</div>
+<p>This means if <span class="math notranslate nohighlight">\(U \leq 0.5\)</span>, we assign <span class="math notranslate nohighlight">\(X = 0\)</span> (heads), if <span class="math notranslate nohighlight">\(U &gt; 0.5\)</span>, we assign <span class="math notranslate nohighlight">\(X=1\)</span> (tails). The figure below illustrates relative frequences of <span class="math notranslate nohighlight">\(X=0, X=1\)</span> (in the left) and the number of coin tosses and the average of the random variable on the right. Again the input has been the same as for the examples above, i.e., uniform distributed random variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">steps</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10001</span><span class="p">)</span>
+<span class="n">draws</span> <span class="o">=</span> <span class="p">(</span><span class="n">random_numbers</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">draws</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">counts</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">draws</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;relative frequency&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Frequencies of heads and tails&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">draws</span><span class="p">)</span> <span class="o">/</span> <span class="n">steps</span><span class="p">)</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Draw&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Average of random draws&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Random coin tossing experiment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/66858ef6bcf97dbf4898fba7b27d11b09df5d72e50bab9e1324b0f08d43b2e01.png" src="_images/66858ef6bcf97dbf4898fba7b27d11b09df5d72e50bab9e1324b0f08d43b2e01.png" />
+</div>
+</div>
+<p>For this course, two key aspects emphasize the use of simulation:</p>
+<ol class="arabic simple">
+<li><p>Understanding the Impact of Randomness:
+In reality, we typically draw a random sample of data and analyze it. By using simulation, we can generate thousands of such samples to understand the variability introduced by randomness when drawing a single random sample. For instance, if we collect financial data from the past year for a company, how reliable are the conclusions drawn from this dataset in predicting future outcomes? More broadly, this line of questioning forms the foundation of statistical inference—that is, determining which decisions can and should be inferred from a data sample and assessing the degree to which these decisions are influenced by chance.</p></li>
+<li><p>Exploring “What If” Scenarios:
+Simulation serves as a powerful tool for scenario analysis, allowing us to examine a range of possible outcomes under different conditions. For example, it can help us explore the potential impact of financial turmoil on markets. Of course, simulation is inherently dependent on the assumptions made when selecting a model for data generation. However, if the model successfully captures realistic data patterns, its simulation results can still provide valuable insights—even if real-world data does not exactly match the simulated outcomes.</p></li>
+</ol>
+</section>
+<section id="multivariate-random-variables">
+<h2>Multivariate random variables<a class="headerlink" href="#multivariate-random-variables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Independence</p></li>
+<li><p>Dependence</p></li>
+<li><p>Expectected value and variance for a sum of random variables</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Asset classes</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1152 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Asset classes &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01_introduction';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Random variables" href="02_random_variables.html" />
+    <link rel="prev" title="Introduction" href="00_welcome.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/01_introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Asset classes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonds">Bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-coupon-bonds">Zero-coupon bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupon-bonds">Coupon bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-to-maturity">Yield to maturity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#term-structure">Term structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-options">Derivatives - Options</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="asset-classes">
+<h1>Asset classes<a class="headerlink" href="#asset-classes" title="Link to this heading">#</a></h1>
+<p>Financial markets can be distinguished based upon several criteria. We try to get an overview when categorizing financial markets by asset class. An asset is anything of value or a resource of value that can be owned or controlled to produce positive economic value for its owner or holder. In a broader economic sense, assets are crucial because they can be used to generate income, reduce expenses, or store value for future use. The concept of an asset is foundational in finance, accounting, and economics, guiding how individuals, businesses, and governments evaluate and manage their resources.</p>
+<p>Financial markets by asset class may be split into:</p>
+<ul class="simple">
+<li><p>Equity markets (Stock markets): These markets deal with the trading of company shares or stock, including the primary market for new issues (IPOs) and the secondary market for trading existing securities. Major stock markets include the New York Stock Exchange (NYSE), Nasdaq, Tokyo Stock Exchange, and Shanghai Stock Exchange, with the NYSE being the largest in terms of total market capitalization.</p></li>
+<li><p>Debt markets (Bond markets): Markets for trading debt instruments, such as government bonds, corporate bonds, and other types of debt financing. This market is crucial for governments and corporations to raise funds for various purposes, from infrastructure projects to operational financing.</p></li>
+<li><p>Derivatives Markets: markets for trading contracts that derive their value from underlying assets, such as futures, options, and swaps. The derivatives market is vast and complex, with a notional value that far exceeds both the equity and bond markets (both are estimated around $100 trillion). Estimates of the global derivatives market range from hundreds of trillions to over a quadrillion dollars in notional value. Derivatives include futures, options, swaps, and other complex financial instruments used for hedging, speculation, and leveraging financial positions.</p></li>
+<li><p>Foreign Exchange (Forex) markets: Markets for trading currencies, facilitating currency conversion for international trade and investments. The forex market is the largest financial market in the world. This market operates 24 hours a day, facilitating currency trading and conversion around the globe.</p></li>
+<li><p>Commodity markets: Markets for trading physical goods or raw products, such as gold, oil, or agricultural products. The size of commodity markets can vary greatly depending on the specific commodity (e.g., oil, gold, agricultural products). The total trading volume in commodities markets is in the trillions of dollars annually. Commodities are fundamental to the global economy, impacting industries, energy, food, and manufacturing.</p></li>
+<li><p>Cryptocurrency markets: These are digital financial marketplaces where cryptocurrencies, such as Bitcoin, Ethereum, and many others, are traded. Further assets on these markets are various financial products and services within the blockchain and decentralized finance (DeFi) spaces, such as tokenized assets, stablecoins, and financial services that operate without traditional intermediaries. The cryptocurrency market is relatively small compared to traditional financial markets, but it has experienced rapid growth since its inception. The total market capitalization of all cryptocurrencies has fluctuated significantly, reaching over $2 trillion during its peak periods. Despite its smaller size, the cryptocurrency market is notable for its volatility, innovation, and the wide interest it has garnered among investors and technologists.</p></li>
+</ul>
+<p>Capturing all asset classes and their foundations is beyond the scope of a single course. In this course, we mainly focus on the equity market. Besides, we include bonds and options as they represent traditional asset classes as well. Nevertheless, later in this course we aim to analyze mechanisms between different asset classes and include asset classes such as, e.g., FX or cryptocurrencies.</p>
+<section id="stocks">
+<h2>Stocks<a class="headerlink" href="#stocks" title="Link to this heading">#</a></h2>
+<p>Stocks (or Equities) represent ownership in a company. When you buy a stock, you become a shareholder, meaning you own a portion of the company. Shares refer to the individual units of ownership within a stock. A stock is the broad term, while shares denote specific units of it.</p>
+<p>Companies issue stocks primarily to raise capital for growth, expansion, or paying off debts. This process is done through either initial public offerings (IPOs) or secondary offerings. Stocks can be categorized into common and preferred stocks:</p>
+<ul class="simple">
+<li><p>Common stocks provide ownership, voting rights, and potential dividends but carry higher risk.</p></li>
+<li><p>Preferred stocks offer a higher claim on company assets and fixed dividends but usually lack voting rights.</p></li>
+</ul>
+<p>Stocks are traded on exchanges such as the New York Stock Exchange (NYSE), Nasdaq, and London Stock Exchange (LSE). Some companies distribute a portion of their profits to shareholders in the form of dividends. Stock markets typically close overnight, on weekends, and on certain holidays. However, some markets offer pre-market and after-hours trading, though these sessions usually have lower liquidity.</p>
+<p>Stocks are offered at an <strong>ask price</strong> — the price set by a seller — and demanded at a <strong>bid price</strong> — the price a buyer is willing to pay. A transaction occurs when the bid and ask prices match, either because:</p>
+<ul class="simple">
+<li><p>The actual bid and ask prices overlap, or</p></li>
+<li><p>A buyer agrees to pay a higher price or a seller accepts a lower price.</p></li>
+</ul>
+<p>Wider bid-ask spreads (usually the difference between ask and bid prices) indicate less liquidity, because they make it more expensive to trade, as traders must buy higher and sell lower than during regular hours. The total amount of shares traded within a period is called <strong>volume</strong>.</p>
+<p>There are multiple ways to determine the value of a stock. Market participants typically use a combination of methods. Stock valuation can generally be categorized into absolute and relative approaches:</p>
+<ul class="simple">
+<li><p>Absolute valuation methods estimate a stock’s intrinsic value by projecting future cash flows and discounting them to the present using a discount rate. Common models include:</p>
+<ul>
+<li><p>Discounted Cash Flow (DCF) Model</p></li>
+<li><p>Dividend Discount Model (DDM) (for dividend-paying stocks)</p></li>
+</ul>
+</li>
+<li><p>Relative valuation compares a stock’s price to similar companies based on financial metrics such as:</p>
+<ul>
+<li><p>Price-to-Earnings (P/E) Ratio</p></li>
+<li><p>Price-to-Book (P/B) Ratio</p></li>
+<li><p>EV/EBITDA Ratio</p></li>
+</ul>
+</li>
+</ul>
+<p>In financial markets, price movements within a given period are often summarized using Open-High-Low-Close (OHLC) prices, typically accompanied by trading volume.</p>
+<ul class="simple">
+<li><p>Open price: The price at the start of the period.</p></li>
+<li><p>Close price: The price at the end of the period.</p></li>
+<li><p>High price: The highest price observed during the period.</p></li>
+<li><p>Low price: The lowest price observed during the period.</p></li>
+</ul>
+<p>Among these, the close price is commonly used to represent a stock’s market value at time  t .</p>
+<p>Investors can participate in the stock market in two main ways:</p>
+<ul class="simple">
+<li><p>Direct investment in individual company stocks.</p></li>
+<li><p>Exchange-traded funds (ETFs), which allow investment in a diversified portfolio of stocks.</p></li>
+</ul>
+<p>To track the overall stock market performance, investors frequently analyze broad stock market indices. Indices aggregate the price movements of selected stocks based on predefined rules, providing insight into market trends.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><p>S&amp;P 500: Tracks the performance of the 500 largest U.S. companies, weighted by market capitalization (i.e., total outstanding shares × stock price).</p></li>
+<li><p>S&amp;P 400 &amp; S&amp;P 600: Represent mid-cap and small-cap U.S. companies, respectively.</p></li>
+<li><p>STOXX 600: Covers small, mid, and large-cap stocks from 17 European countries.</p></li>
+</ul>
+<p>Since an index itself is not directly investable, investors can gain exposure through ETFs that replicate the index’s performance. Let us denote the share price or index value by <span class="math notranslate nohighlight">\(S_t\)</span>. It can be used to quantify and visualize the value development of stocks over time. However, raw stock prices are difficult to compare across assets due to different values and exhibit undesirable statistical properties. The plot below illustrates the price movements of the S&amp;P 500 (SPX) and the STOXX 600 over time. The left plot only displays absolute index values which demonstrate the issues which arise if the indices are at different levels. For better comparability, we can normalize the index value at each time step by the starting value.</p>
+<div class="math notranslate nohighlight">
+\[
+S_t^{*} = \frac{S_t}{S_1}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">close_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/00_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">close_prices</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Date&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;^SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;^STOXX&quot;</span><span class="p">]</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+    <span class="n">one_year_ago</span> <span class="o">=</span> <span class="n">today</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+
+    <span class="n">ohlc_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">one_year_ago</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">today</span><span class="p">)</span>
+    <span class="n">close_prices</span> <span class="o">=</span> <span class="n">ohlc_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/00_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">index_development</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Absolute value development&quot;</span><span class="p">)</span>
+<span class="n">relative_index_development</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">close_prices</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">close_prices</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Relative value development&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b8ae2355f46b7655a6a19fdea23ac4eab08b39f9c7e72f9e3f87b9c8199a7f5.png" src="_images/0b8ae2355f46b7655a6a19fdea23ac4eab08b39f9c7e72f9e3f87b9c8199a7f5.png" />
+</div>
+</div>
+<p>To facilitate comparisons, returns are often used instead of prices. The discrete return <span class="math notranslate nohighlight">\(R_t\)</span> over a fixed time period is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+R_t = \frac{S_t - S_{t-1}}{S_{t-1}} = \frac{S_t}{S_{t-1}} - 1
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually one distinguishes between a random variable <span class="math notranslate nohighlight">\(S_t\)</span> and a realization <span class="math notranslate nohighlight">\(s_t\)</span> by using large or small letters. A formal definition of a random variable is presented in the next chapter.</p>
+</div>
+<p>The discrete return represents the percentage change in price from one period to the next. The corresponding plot below shows these returns, which fluctuate around zero and remain within a bounded numerical range. These properties make returns more useful for statistical analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daily_returns</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+<span class="n">daily_returns_plt</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Daily discrete index returns&quot;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/de6a0886985cdf02854f712bcd110bd244288741d9bc0b12f594e457ca74d84e.png" src="_images/de6a0886985cdf02854f712bcd110bd244288741d9bc0b12f594e457ca74d84e.png" />
+</div>
+</div>
+<p>Since stock prices evolve continuously in financial markets, log-returns are often preferred. The log-return <span class="math notranslate nohighlight">\(Z_t\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+Z_t = \ln \left( \frac{S_t}{S_{t-1}} \right) = \ln S_t - \ln S_{t-1}
+\]</div>
+<p>For small price changes, discrete and log-returns are nearly identical. However, for large fluctuations, log-returns are smaller in magnitude due to the logarithmic transformation. The relationship between the two return measures is:</p>
+<div class="math notranslate nohighlight">
+\[
+S_t = \ln (1 + R_t), \quad R_t = e^{R_t} - 1
+\]</div>
+<p>Log-returns have useful mathematical properties, particularly additivity over time, making them advantageous for certain financial models and statistical analyses. At an initial investment <span class="math notranslate nohighlight">\(N_0\)</span> at time <span class="math notranslate nohighlight">\(t=0\)</span>, the value in time can be determined by discrete or log-returns. For discrete returns, the value is given by the cumulative product:</p>
+<div class="math notranslate nohighlight">
+\[
+V_t = N_0 \prod_{t' \leq t} \left(1 + R_{t'}\right)
+\]</div>
+<p>When using log-returns, the value can be determined by:</p>
+<div class="math notranslate nohighlight">
+\[
+V_t = N_0 e^{ \sum_{t' \leq t} Z_{t'}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values_plt</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Value development of one monetary unit investment (discrete returns)&quot;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5eeab69f0345db09fa39606e705bec09faf6d46bb719c7a8b0c3aa8ceebcb511.png" src="_images/5eeab69f0345db09fa39606e705bec09faf6d46bb719c7a8b0c3aa8ceebcb511.png" />
+</div>
+</div>
+</section>
+<section id="bonds">
+<h2>Bonds<a class="headerlink" href="#bonds" title="Link to this heading">#</a></h2>
+<p>The bond market is interesting by itself, but, also because of its interplay with the stock market. While there are many interesting details about bonds and the bond market, we focus on some fundamental aspects. We examine essential characteristics to understand what drives the value of bonds, their dependence to interest rates and what makes them interesting analytical complements to the stock market.</p>
+<p>A bond is another way to collect funding. It can be used by financial entities such as governments or corporations. The financial entity is the seller (also called issuer) of the bond and sells the bond to the investor with the promise to pay her the <em>face or par value</em> at the end of <em>maturity</em> plus potentially other regular (typically annually or semi-annually) payments until maturity called <em>coupon</em> payments.</p>
+<p>This means, selling a bond is equal to lending money from others and that is the fundamental difference to selling stocks. While selling stocks enables investors to buy shares of a company’s equity value, selling bonds increases the company’s liabilities, thus, its leverage captured by the ratio of liabilities to equities.</p>
+<p>To understand the value of bonds and how to determine bond returns, we first need to agree upon the concept of <em>discounting</em>, i.e., determining today’s value of future cash flows. Assume you have the chance to invest into something by spending <span class="math notranslate nohighlight">\(100\)</span> monetary units today at <span class="math notranslate nohighlight">\(t=0\)</span> and collecting a cash flow of <span class="math notranslate nohighlight">\(105\)</span> at the next time step <span class="math notranslate nohighlight">\(t=1\)</span>. The discrete return of this investment is <span class="math notranslate nohighlight">\(5\%\)</span>. This implies that something worth <span class="math notranslate nohighlight">\(105\)</span> in the future at <span class="math notranslate nohighlight">\(t=1\)</span> is worth <span class="math notranslate nohighlight">\(100\)</span> today at <span class="math notranslate nohighlight">\(t=0\)</span>, given a return of <span class="math notranslate nohighlight">\(5\%\)</span>. This can be brought to a general formula:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{C_{t}}{1 + r_{t}}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(V_0\)</span> being the value at <span class="math notranslate nohighlight">\(t=0\)</span> of cash flow <span class="math notranslate nohighlight">\(C_t\)</span> at <span class="math notranslate nohighlight">\(t\)</span>. If we extend this to multiple time steps <span class="math notranslate nohighlight">\(T\)</span>, the formula becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \sum_{t=1}^T \frac{C_{t}}{1 + r_{t}}
+\]</div>
+<p>where returns <span class="math notranslate nohighlight">\(r_t\)</span> can vary across periods. Assuming a constant return between each time period <span class="math notranslate nohighlight">\(r\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \sum_{t=1}^T \frac{C_{t}}{\left(1 + r\right)^t}
+\]</div>
+<section id="zero-coupon-bonds">
+<h3>Zero-coupon bonds<a class="headerlink" href="#zero-coupon-bonds" title="Link to this heading">#</a></h3>
+<p>With these concepts in mind, we can apply them to bond valuation. There are two fundamentally different types of bonds, <em>zero-coupon bonds</em> and <em>coupon bonds</em>. A zero-coupon bond makes a single payment to the holder at maturity. At maturity, the bondholder receives the par value, which is predetermined at issuance. The bond is initially issued at a discount, and its price increases over time based on the agreed-upon interest rate. The interest rate can be compounded at different time frequencies such as annually or semi-annually. For instance, today’s value (at <span class="math notranslate nohighlight">\(t=0\)</span>) for a zero-coupon bond with a par value of 1000 and an interest rate of 5% with annual compounding and a maturiy of one year has a value equal to:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{1000}{1 + 0.05} = 952.38
+\]</div>
+<p>If compounding is done semi-annually, the interest rate per half-year is 2.5% and today’s value of the zero-coupon bond is:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{1000}{\left(1 + 0.025\right)^2} = 951.81
+\]</div>
+<p>Since semi-annual compounding means earning 2.5% twice, the total return is slightly greater than 5% due to the compounding effect:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1000}{951.81} - 1 = 0.051
+\]</div>
+<p>It is also possible to agree upon continuos compounding which leads to a value of:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1000}{e^{0.05}} = 951.23
+\]</div>
+<p>As time to maturity decreases, the bond price converges to its par value due to the reduced discounting effect. Assume you bought the bond for <span class="math notranslate nohighlight">\(951.81\)</span> and the interest rate remains stable. The value of the bond half a year before it matures is:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{1000}{\left(1 + 0.025\right)} = 975.61
+\]</div>
+<p>Thus, the value of the bond increased by:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{975.61}{951.81} - 1 = 0.025
+\]</div>
+<p>As long as you hold your bond until the end of maturity and collect the par value of 1000, your relative income is predictable and fixed. Note that this is only true if the bond issuer is not defaulting, i.e., is able to meet its obligations at maturity. Another important characteristic is that interest rates and bond prices have an inverse relationship. The higher the rate, the more today’s value is diminished by discounting effects.</p>
+<p>If we sum, this up, for a zero-coupon bond, we note that</p>
+<ul class="simple">
+<li><p>The relationship between interest rates and bond prices is inverse, this means, higher interest rates reduce the price of the bond</p></li>
+<li><p>An investor who must sell early faces price risk, but a buy-and-hold investor does not.</p></li>
+</ul>
+<p>In general, the value of a zero-coupon bond is equal to:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{N}{(1 + r)^T}
+\]</div>
+<p>for discrete compounding, and,</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{N}{e^{rT}} = N e^{-rT}
+\]</div>
+<p>for continuous compounding. Here, <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(T\)</span> correspond to the same frequency, e.g., if <span class="math notranslate nohighlight">\(r\)</span> is the annual rate, <span class="math notranslate nohighlight">\(T\)</span> is the maturiy in years.</p>
+</section>
+<section id="coupon-bonds">
+<h3>Coupon bonds<a class="headerlink" href="#coupon-bonds" title="Link to this heading">#</a></h3>
+<p>Coupon bonds make periodic interest payments, known as <em>coupons</em>, throughout their lifetime. At maturity, the bondholder receives the final coupon payment along with the par value.</p>
+<p>For example, consider a coupon bond with a maturity of five years, a par value of <span class="math notranslate nohighlight">\(1000\)</span>, and an annual coupon rate of <span class="math notranslate nohighlight">\(5\%\)</span>. The bondholder receives the following cash flows:</p>
+<div class="math notranslate nohighlight">
+\[
+(50, 50, 50, 50, 50 + 1000)
+\]</div>
+<p>Since these cash flows occur at different points in time, we discount them to determine the present value of the bond. Assuming an annual rate of <span class="math notranslate nohighlight">\(5\%\)</span>, the bond’s value at issuance (if issued at par) is:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \sum_{t = 1}^{5} \frac{50}{(1 + 0.05)^t} + \frac{1000}{(1 + 0.05)^5} = 1000.
+\]</div>
+<p>In general, the present value of a coupon bond is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + r)^t} + \frac{N}{(1 + r)^T},
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is the periodic coupon payment,</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the par value paid at maturity,</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the yield to maturity (YTM), and</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is the total number of periods.</p></li>
+</ul>
+<p>As with zero-coupon bonds, an <strong>inverse relationship</strong> exists between bond price and interest rates: when rates rise, bond prices fall, and vice versa. At issuance, the bond is priced at par which is how the rate is determined (in the example above, <span class="math notranslate nohighlight">\(r = 0.05\)</span> such that discounted cash flows equal the par value).</p>
+</section>
+<section id="yield-to-maturity">
+<h3>Yield to maturity<a class="headerlink" href="#yield-to-maturity" title="Link to this heading">#</a></h3>
+<p>The numerical examples for the values of zero and coupon bonds demonstrate how their value is determined using a specific rate for discounting. At issuance this rate is specified and depends on factors such as base rates from central banks or solvency of the issuer. Usually higher base rates increase rates of bond contracts (thus decreasing their value). Furthermore, the greater the risk of a bond issuer not being able to pay its obligations, the higher the rate must be for finding investors to purchase the bond and bearing this credit risk (thus again decreasing today’s value of the bond).</p>
+<p>However, once bonds have been issued and are held by investors, externalities that impact bond prices may change which alters the current value of bond contracts. Usually, we only observe current prices of bonds and know about their contract specifics such as the maturity, coupon payments, coupon dates, etc. Take a look at the zero-coupon bond from the example above. Originally, its (semi-annual) rate has been <span class="math notranslate nohighlight">\(r = 0.025\)</span>. Thus, according to its initial contract design, its value should be:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \frac{1000}{\left(1 + 0.025\right)} = 975.61
+\]</div>
+<p>half a year before it matures. However, what if the interest rate environment changed since its issuance and currently zero-coupon bonds with the same maturity (and solvency) are offered at a price of <span class="math notranslate nohighlight">\(961.54\)</span>? At this moment, the current value of your bond is the same because if you would like to sell it, no rationale investor will pay you more. But what is the internal rate of return for this bond if an investor purchases it at a price of <span class="math notranslate nohighlight">\(961.54\)</span>. Let <span class="math notranslate nohighlight">\(y\)</span> denote the internal rate of return. Under discrete compounding, we know that:</p>
+<div class="math notranslate nohighlight">
+\[
+V_t = \frac{N}{(1 + y)^{T - t}} 
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(y\)</span> can be determined if we know about the current price <span class="math notranslate nohighlight">\(V_t\)</span>, the maturity <span class="math notranslate nohighlight">\(T\)</span> and the par value <span class="math notranslate nohighlight">\(N\)</span> by solving for <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \left( \frac{N}{V_t} \right)^{\frac{1}{T-t}} - 1
+\]</div>
+<p>For our example, we know <span class="math notranslate nohighlight">\(N = 1000, V_1 = 961.54\)</span>, <span class="math notranslate nohighlight">\(T = 2\)</span> (two half years) and <span class="math notranslate nohighlight">\(t=1\)</span> (in our example half a year has passed, half a year ahead until maturity). This implies an internal rate of return of <span class="math notranslate nohighlight">\(y = 0.04\)</span>. In general, this is called the <em>yield to maturity</em> or just <em>yield</em>, however, for zero-coupon bonds, this is also called the <em>spot rate</em>.</p>
+<p>For coupon bonds, the principle to determine the yield is the same, but, gets more complicated due to coupon payments during maturity. For instance, assume a coupon bond with a current price of <span class="math notranslate nohighlight">\(1036.30\)</span>, four outstanding (annual) coupon payments <span class="math notranslate nohighlight">\(C = 50\)</span> and a final payment <span class="math notranslate nohighlight">\(N = 1000\)</span>. To determine the yield, we solve for <span class="math notranslate nohighlight">\(y\)</span> in the equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{t = 1}^{4} \frac{50}{(1 + y)^t} + \frac{1000}{(1 + y)^4} = 1036.30.
+\]</div>
+<p>In this example, numerical methods (such as trial and error or financial calculators) yield an approximate solution of <span class="math notranslate nohighlight">\(r = 4\%\)</span>. The yield to maturity represents a single discount rate that equates the bond’s price to its future cash flows. However, we can also view a coupon bond as a collection of zero-coupon bonds, each with different maturities and corresponding <em>spot rates</em>. Under this approach, the value of the bond is:</p>
+<div class="math notranslate nohighlight">
+\[
+V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + y_t)^t} + \frac{N}{(1 + y_T)^T},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_t\)</span> represents the spot rate for time <span class="math notranslate nohighlight">\(t\)</span>. Unlike the yield to maturity, which applies a single rate to all cash flows, this approach discounts each cash flow using its respective spot rate. Thus, the yield to maturity of a coupon bond can be interpreted as a <em>weighted average of spot rates</em> for zero-coupon bonds with different maturities, where the weights depend on the present values of each cash flow.</p>
+<p>As we learned about different return based concepts, let us try to summarize:</p>
+<ul class="simple">
+<li><p>When a bond is issued, its key characteristics are maturity, par value, coupon payments (for a coupon bond), compounding frequency, and yield to maturity (YTM). The yield to maturity can be interpreted as the discount rate that equates the present value of the bond’s future cash flows to its current price.</p></li>
+<li><p>At the time of issuance, this discount rate equals the yield to maturity. However, as market conditions change — such as shifts in interest rates or credit risk — the bond’s price deviates from its expected path. This, in turn, alters its yield to maturity.</p></li>
+<li><p>To track these changes, we can calculate discrete or log-returns of bond prices, similar to stocks. For instance, monthly price changes of bonds. The key difference is that bond cash flows (coupons and principal repayment) are predictable, as their timing is fixed.</p></li>
+<li><p>If all conditions affecting the bond’s value remain unchanged, its expected return equals its yield to maturity. However, if market conditions fluctuate — leading to changes in interest rates, credit spreads, or reinvestment opportunities — the bond’s price will adjust, making it a risky investment with an uncertain future value before maturity.</p></li>
+</ul>
+</section>
+<section id="term-structure">
+<h3>Term structure<a class="headerlink" href="#term-structure" title="Link to this heading">#</a></h3>
+<p>An important aspect when analyzing the bond market is the <em>term structure</em> which analyzes the impact of maturity on bond prices. Keeping other externalities constant, investors usually demand higher returns for bonds with longer maturity. The reason for this is that cash flows in the distant future are more uncertain which increases risk. If is important to note that only bonds with identical or at least very similar solvency can be compared with respect to maturity. For instance, bonds of companies with very little default risk. In the center of term structure analysis are <em>risk free</em> bonds, usually government bonds. They are called risk free, because except for a few exceptions, governments do not default, thus, the risk of not receiving cash flows when holding the bond until maturity is practically as good as zero. Furthermore, as we are going to learn in later chapters, according to modern portfolio theory, investors invest into a mix of risk free and risky assets. This makes the yields of risk free assets such as government bonds a very integral part of investing.</p>
+<p>In reality, the yield curve sometimes deviates from an upward sloping behavior, and is a valuable tool for financial data analysis. For instance, the figure below demonstrates three empirical shapes at different points in time. On March 5 in 2012, the yield curve exhibits a typical upward sloping behavior capturing investors demand for higher yields if cash flows are more distant (and thus more uncertain). However, at the other dates we observe a u-shaped and even a downwar sloping behavior as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">fred_api_key</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fredapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fred</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/01_yield_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">fred</span> <span class="o">=</span> <span class="n">Fred</span><span class="p">(</span><span class="n">fred_api_key</span><span class="p">)</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DGS1MO&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS3MO&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS6MO&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS1&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS2&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS3&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS5&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS7&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS10&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS20&quot;</span><span class="p">,</span> <span class="s2">&quot;DGS30&quot;</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">observation_start</span><span class="o">=</span><span class="s2">&quot;1995-01-01&quot;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1Month&quot;</span><span class="p">,</span> <span class="s2">&quot;3Month&quot;</span><span class="p">,</span> <span class="s2">&quot;6Month&quot;</span><span class="p">,</span> <span class="s2">&quot;1Year&quot;</span><span class="p">,</span> <span class="s2">&quot;2Year&quot;</span><span class="p">,</span> <span class="s2">&quot;3Year&quot;</span><span class="p">,</span> <span class="s2">&quot;5Year&quot;</span><span class="p">,</span> <span class="s2">&quot;7Year&quot;</span><span class="p">,</span> <span class="s2">&quot;10Year&quot;</span><span class="p">,</span> <span class="s2">&quot;20Year&quot;</span><span class="p">,</span> <span class="s2">&quot;30Year&quot;</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/01_yield_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2007-09-05&quot;</span><span class="p">,</span> <span class="s2">&quot;2012-03-05&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-03-03&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">date</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;US Yield curves at different days&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Yield (%)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e0695905da06894720f8625deb7337c8f04072c46f3728fa5c8374ce33c3bfa8.png" src="_images/e0695905da06894720f8625deb7337c8f04072c46f3728fa5c8374ce33c3bfa8.png" />
+</div>
+</div>
+<p>The shape of the yield curve is often interpreted in different ways and used to derive market expectations. Even though, this does not be true, one usually derives:</p>
+<ul class="simple">
+<li><p>Upward sloping: economic expansion</p></li>
+<li><p>Downward sloping: signal for recession</p></li>
+<li><p>Flat: economic uncertainty</p></li>
+</ul>
+<p>For instance an inverted (downward sloping) yield curve may imply investors’ expectation that yields are going to be lower in the future. This may be due to reduced base rates of central banks which are often used as a tool to stimulate the economy during harsh economic conditions. However, even though inverted yield curves have been observed before before major economic recession in the past decades, it is not certain that a recession must follow. For instance, if you take a look at the figure below, you can see that the yield curve has been inverted for a longer period from 2021-2023 as result for base rate increases by the Federal Reserve in the US to combat inflation. Until today no recession followed. Nevertheless tracking the yield curve by yield differences of short and long term bonds can help us to identify changes in market expectations of investors, e.g., expectations about future monetary policy, inflation or recession.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yields_plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s2">&quot;3Month&quot;</span><span class="p">,</span> <span class="s2">&quot;2Year&quot;</span><span class="p">,</span> <span class="s2">&quot;10Year&quot;</span><span class="p">,</span> <span class="s2">&quot;30Year&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.25</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.80</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Market yields for U.S. treasury securities at different maturities&quot;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;Yield (%)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/200ef233f14b09513ec15910329af07309ac5d0fa8ab858347096f31a8aabfaa.png" src="_images/200ef233f14b09513ec15910329af07309ac5d0fa8ab858347096f31a8aabfaa.png" />
+</div>
+</div>
+<p>As the yield curve is characterized by yields for varying maturities every day it is challenging to subsume its characteristics quantitatively. A rather pragmatic approach is to build the yield spread by subtracting the current yield for short term oblications from yields with long term horizon, e.g., the difference between the ten and the two year yield which is shown in the cell below. For large positive values, we may infer that a large premium is paid for holding long term bonds. Premium is the extra return which investors receive for lending money over a longer time period. A high premium may be ascribed to investors uncertainty regarding the future or their epectation of higher inflation. If the spread falls below zero, the yield curve is usually inversed, signaling bad economic expectations by investors.</p>
+<p>To fully characterize the yield curve, we need a function of the form <span class="math notranslate nohighlight">\(f: t \to \mathbb{R}\)</span> which means the function returns a real valued yield for every possible maturity <span class="math notranslate nohighlight">\(t\)</span>. We are going to take a look at this in later chapters. For now, just remember the yield curve is important, because it can be used to quantify how attractive risk free investments are at a given time and which investment horizon for risk free investments may be most favorable. Also note that we focus on government bonds and thus risk free assets. Of course, bonds are also an important financial vehicle for companies. In this context, the credibility of companies and tools to secure against their inability to meet future obligations are crucial. These aspects are analyzed by <em>default modeling</em>, <em>ratings</em> and <em>credit default swaps</em> which are not in the scope of this course.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="kn">import</span> <span class="n">DateFormatter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fredapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fred</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">fred_api_key</span>  <span class="c1"># Ensure you have your FRED API key</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">recession_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/02_recession_index.csv&quot;</span><span class="p">)</span>
+    <span class="n">recession_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">recession_data</span><span class="p">[</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">])</span>
+    <span class="n">recession_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">recession_data</span> <span class="o">=</span> <span class="n">recession_data</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">fred</span> <span class="o">=</span> <span class="n">Fred</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">fred_api_key</span><span class="p">)</span>
+    <span class="n">recession_data</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="s2">&quot;USREC&quot;</span><span class="p">,</span> <span class="n">observation_start</span><span class="o">=</span><span class="s2">&quot;1995-01-01&quot;</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+
+<span class="n">treasury_spread</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;10Year&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;2Year&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">treasury_spread</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;10Y - 2Y Spread&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">recession_data</span><span class="p">[</span><span class="n">recession_data</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+                      <span class="n">recession_data</span><span class="p">[</span><span class="n">recession_data</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;U.S. Treasury Security Spread - 10 Years Minus 2 Years&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Spread (%)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Mark zero line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/34293878975c02a9c56d430e43aafeba96a362b21c5fa9a0280927225364a5f8.png" src="_images/34293878975c02a9c56d430e43aafeba96a362b21c5fa9a0280927225364a5f8.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="derivatives-options">
+<h2>Derivatives - Options<a class="headerlink" href="#derivatives-options" title="Link to this heading">#</a></h2>
+<p>A derivative is a financial instrument whose value depends on another underlying. Derivatives can be bought at exchange traded and over the counter markets. The former use standardized contracts, while the latter provides the opportunity of individual aggreements.</p>
+<p>In this course, we only look at options as a tool to analyze market expectations of stock market participants. Two basic types of options are important in this context, i.e., <em>put</em> and <em>call</em> options. The call gives the holder of the option the right to buy an asset by a certain date and price. The put gives the holder of the option the right to sell an asset by a certain date and price.</p>
+<ul class="simple">
+<li><p>the price is called <em>strike</em> and usually denoted by <span class="math notranslate nohighlight">\(K\)</span></p></li>
+<li><p>the date is called <em>expiration</em> or <em>maturity</em> date and usually denoted by <span class="math notranslate nohighlight">\(T\)</span></p></li>
+</ul>
+<p>Two different types of put and call options exist: <em>European</em> and <em>American</em> options. This has nothing to do with geographical location. European options can only be executed at the expiration date, while American options can always be executed until expiration. If they are executed before expiration, this is called <em>early excercise</em>. American options are mostly traded, however, also more complex to analyze.</p>
+<p>Let us denote the underlying, i.e., the asset by <span class="math notranslate nohighlight">\(S_t\)</span>. The payoff for call and put options are:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Call(Payoff)} = \max(S_T - K, 0)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Put(Payoff)} = \max(S_T - K, 0)
+\]</div>
+<p>Note that this formula uses <span class="math notranslate nohighlight">\(T\)</span> in the underlying subscript, <span class="math notranslate nohighlight">\(T\)</span> is the time at expiration, thus, to determine an American option call payoff, one needs to replace <span class="math notranslate nohighlight">\(S_T\)</span> with <span class="math notranslate nohighlight">\(S_t\)</span>. A long position in a call or put is the position for the option holder, at the same time, the counterpart in the option contract is the seller of the option and has a short position. The figure below visualizes the payoff for both options and both parties of the option contracts. An option is said to be <em>in the money</em> if its current payoff is positive, it is <em>at the money</em> if the strike price equals the underlying’s value and it is <em>out of the money</em> if the current payoff is negative.</p>
+<p>Note that the payoff is not the cash flow both parties receive. As the option holder has the right but must not execute an option, the seller demands a price for this flexibility - the option price, i.e., the amount of money the one in the long position must pay to the one in the short position. Including the price of an option price to the cash flow shifts the payoff profile for both positions as shown by the dashed profiles in the figure below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">european_call_payoff</span><span class="p">(</span><span class="n">S_T</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Payoff function for a European Call Option at expiration. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">S_T</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">european_put_payoff</span><span class="p">(</span><span class="n">S_T</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Payoff function for a European Put Option at expiration. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="n">S_T</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># Define parameters</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Strike price</span>
+<span class="n">S_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Stock price range</span>
+
+<span class="c1"># Compute payoffs</span>
+<span class="n">call_payoff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">european_call_payoff</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">S_range</span><span class="p">])</span>
+<span class="n">put_payoff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">european_put_payoff</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">S_range</span><span class="p">])</span>
+<span class="n">call_payoff_minus_price</span> <span class="o">=</span> <span class="n">call_payoff</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="n">put_payoff_minus_price</span> <span class="o">=</span> <span class="n">put_payoff</span> <span class="o">-</span> <span class="mi">5</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">call_payoff</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;long (holder)&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">call_payoff_minus_price</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;long (holder) minus price&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="o">-</span><span class="n">call_payoff</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;short (seller)&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="o">-</span><span class="n">call_payoff_minus_price</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;short (seller) plus price&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">put_payoff</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;long (holder)&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">put_payoff_minus_price</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;long (holder) minus price&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="o">-</span><span class="n">put_payoff</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;short (holder)&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="o">-</span><span class="n">put_payoff_minus_price</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;short (seller) plus price&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Strike Price&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Strike Price&quot;</span><span class="p">)</span>
+
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Stock Price at Expiration ($S_T$)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Option Payoff&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;European Call Option Payoff at Expiration&quot;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Stock Price at Expiration ($S_T$)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;European Put Option Payoff at Expiration&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1a179c36ef527c311d7f3618faa003211455194775738456a44bd96f81e3aa7c.png" src="_images/1a179c36ef527c311d7f3618faa003211455194775738456a44bd96f81e3aa7c.png" />
+</div>
+</div>
+<p>The motivation for purchasing options is manifold; however, speculation and hedging are two of the most important drivers of the options market. If market participants expect the underlying asset’s value to rise or fall, they can take a direct position by purchasing (going long) or short-selling the asset. However, by incorporating options into their strategy, they can achieve greater flexibility and leverage. For example, buying call options instead of the asset itself allows investors to gain exposure to upside potential while limiting their downside risk to the option premium. Similarly, put options enable traders to profit from declining prices without the need for short selling.</p>
+<p>At the same time, options serve as a risk management tool to hedge against adverse price movements. Consider an investor who holds an asset and also purchases a put option on that asset (a protective put strategy). If the asset’s value declines, the put option appreciates in value, offsetting losses on the asset. This provides downside protection while allowing the investor to participate in potential gains if the asset price rises. Note that options are available to various assets. Examples for the corresponding underlying are stocks, foreign exchange rates, or stock indices.</p>
+<p>Determining an option price is a fairly sophisticated task which we omit in this course. Nevertheless, let us take a quick look at two very popular formulas. The Black-Scholes-Merton (BSM) formulas for European call and put options to determine their prices:</p>
+<p>European Call Option Price:</p>
+<div class="math notranslate nohighlight">
+\[
+C = S_0 N(d_1) - K e^{-rT} N(d_2)
+\]</div>
+<p>European Put Option Price:</p>
+<div class="math notranslate nohighlight">
+\[
+P = K e^{-rT} N(-d_2) - S_0 N(-d_1)
+\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[
+d_1 = \frac{\ln \left(\frac{S_0}{K} \right) + \left(r + \frac{\sigma^2}{2} \right)T}{\sigma \sqrt{T}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+d_2 = d_1 - \sigma \sqrt{T}
+\]</div>
+<p>Explanation of Terms:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C\)</span>: European call option price</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span>: European put option price</p></li>
+<li><p><span class="math notranslate nohighlight">\(S_0\)</span>: Current stock price</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span>: Strike price of the option</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span>: Time to expiration (in years)</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span>: Risk-free interest rate (annualized)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>: Volatility of the stock (annualized)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N(d)\)</span>: Cumulative distribution function (CDF) of the standard normal distribution</p></li>
+</ul>
+<p>The derivation of these formulas is done under the following assumptions:</p>
+<ul class="simple">
+<li><p>The market is arbitrage-free, meaning there are no riskless profit opportunities.</p></li>
+<li><p>The underlying asset price follows a geometric Brownian motion (GBM) with constant drift and volatility. Prices move continuously without sudden jumps (i.e., no extreme gaps in price).</p></li>
+<li><p>The risk-free rate <span class="math notranslate nohighlight">\(r\)</span> is constant and known over the life of the option.</p></li>
+<li><p>The volatility <span class="math notranslate nohighlight">\(\sigma\)</span> of the underlying asset remains constant over time.</p></li>
+<li><p>The model only applies to European options, which can be exercised only at expiration, not before.</p></li>
+<li><p>No transaction costs</p></li>
+<li><p>Traders can continuously adjust their positions to hedge risk perfectly.</p></li>
+<li><p>The underlying asset does not pay dividends (though this assumption is modified in dividend-adjusted versions of the model).</p></li>
+<li><p>Investors can borrow and lend money at the risk-free rate. Short selling is allowed without restriction.</p></li>
+</ul>
+<p>To give you an idea, how option prices vary with their underlying parameters, let us take a look at put and call option prices whose default parameters are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K = 100\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> = 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span> = 0.05</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> = 0.20</p></li>
+</ul>
+<p>The figure below illustrates how the put and call prices change for this contract by <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>, <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(T\)</span>:</p>
+<ul class="simple">
+<li><p>Stock Price ( <span class="math notranslate nohighlight">\(S\)</span> ) Sensitivity</p>
+<ul>
+<li><p>Call options increase in value as the stock price rises.</p></li>
+<li><p>Put options decrease in value as the stock price rises.</p></li>
+</ul>
+</li>
+<li><p>Volatility ( <span class="math notranslate nohighlight">\(\sigma\)</span> ) Sensitivity</p>
+<ul>
+<li><p>Both call and put options increase in price as volatility increases.</p></li>
+<li><p>This is because higher volatility raises the probability of extreme moves, benefiting options.</p></li>
+</ul>
+</li>
+<li><p>Time to Expiration ( <span class="math notranslate nohighlight">\(T\)</span> ) Sensitivity</p>
+<ul>
+<li><p>Call and put options generally increase with more time remaining (due to time value).</p></li>
+<li><p>However, deep in-the-money or out-of-the-money options may behave differently.</p></li>
+</ul>
+</li>
+<li><p>Strike Price ( <span class="math notranslate nohighlight">\(K\)</span> ) Sensitivity</p>
+<ul>
+<li><p>Call options decrease as the strike price increases (it becomes more expensive to exercise).</p></li>
+<li><p>Put options increase as the strike price increases.</p></li>
+</ul>
+</li>
+</ul>
+<p>Note, a more formal approach (that we omit here) to quantify sensitivities is provided by the <em>Greeks</em> which are partial derivatives of option prices to their parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Black-Scholes formula for European call and put options</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">black_scholes</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">option_type</span><span class="o">=</span><span class="s2">&quot;call&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span><span class="p">)</span> <span class="k">if</span> <span class="n">option_type</span> <span class="o">==</span> <span class="s2">&quot;call&quot;</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="n">S</span><span class="p">)</span>
+
+    <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">option_type</span> <span class="o">==</span> <span class="s2">&quot;call&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">option_type</span> <span class="o">==</span> <span class="s2">&quot;put&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">d2</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">d1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;option_type must be &#39;call&#39; or &#39;put&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define base parameters</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>      <span class="c1"># Strike price</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1"># Time to expiration (1 year)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span>     <span class="c1"># Risk-free rate (5%)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># Volatility (20%)</span>
+<span class="n">S_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Range for stock price</span>
+<span class="n">sigma_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Range for volatility</span>
+<span class="n">T_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Range for time to expiration</span>
+<span class="n">K_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Range for strike prices</span>
+
+<span class="c1"># Compute sensitivities</span>
+<span class="n">call_prices_S</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;call&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">S_range</span><span class="p">]</span>
+<span class="n">put_prices_S</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;put&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">S_range</span><span class="p">]</span>
+
+<span class="n">call_prices_sigma</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma_</span><span class="p">,</span> <span class="s2">&quot;call&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">sigma_</span> <span class="ow">in</span> <span class="n">sigma_range</span><span class="p">]</span>
+<span class="n">put_prices_sigma</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma_</span><span class="p">,</span> <span class="s2">&quot;put&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">sigma_</span> <span class="ow">in</span> <span class="n">sigma_range</span><span class="p">]</span>
+
+<span class="n">call_prices_T</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T_</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;call&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">T_</span> <span class="ow">in</span> <span class="n">T_range</span><span class="p">]</span>
+<span class="n">put_prices_T</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T_</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;put&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">T_</span> <span class="ow">in</span> <span class="n">T_range</span><span class="p">]</span>
+
+<span class="n">call_prices_K</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K_</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;call&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">K_</span> <span class="ow">in</span> <span class="n">K_range</span><span class="p">]</span>
+<span class="n">put_prices_K</span> <span class="o">=</span> <span class="p">[</span><span class="n">black_scholes</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">K_</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;put&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">K_</span> <span class="ow">in</span> <span class="n">K_range</span><span class="p">]</span>
+
+<span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Stock Price Sensitivity</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">call_prices_S</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_range</span><span class="p">,</span> <span class="n">put_prices_S</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Option Price vs. Stock Price (S)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Stock Price (S)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Option Price&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Volatility Sensitivity</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sigma_range</span><span class="p">,</span> <span class="n">call_prices_sigma</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sigma_range</span><span class="p">,</span> <span class="n">put_prices_sigma</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Option Price vs. Volatility (σ)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Volatility (σ)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Option Price&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Time to Expiration Sensitivity</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_range</span><span class="p">,</span> <span class="n">call_prices_T</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_range</span><span class="p">,</span> <span class="n">put_prices_T</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Option Price vs. Time to Expiration (T)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time to Expiration (T)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Option Price&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Strike Price Sensitivity</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">K_range</span><span class="p">,</span> <span class="n">call_prices_K</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Call Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">K_range</span><span class="p">,</span> <span class="n">put_prices_K</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Put Option&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Option Price vs. Strike Price (K)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Strike Price (K)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Option Price&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5d144d28fd8a15d139eef2d4809ca1141c6d6eebff8cc5f8aba0913029b318cf.png" src="_images/5d144d28fd8a15d139eef2d4809ca1141c6d6eebff8cc5f8aba0913029b318cf.png" />
+</div>
+</div>
+<p>The only variable that needs to be estimated to determine an option’s price is its volatility <span class="math notranslate nohighlight">\(\sigma\)</span>, as the strike price and maturity are usually fixed by contract design. The risk-free rate is typically inferred from short-term risk-free financial instruments such as Treasury bills, government bonds, or other high-quality short-term debt instruments.</p>
+<p>In this course, we will explore different ways to estimate volatility using historical data, which provides a backward-looking perspective. However, options can be used to infer implied volatility, which reflects market participants’ forward-looking expectations of future asset price fluctuations. To determine implied volatility, one must collect price data from existing options along with their contract parameters.</p>
+<p>The simplest method for determining implied volatility is to solve the Black-Scholes formula for <span class="math notranslate nohighlight">\(\sigma\)</span> at a given market price. However, since an explicit analytical solution does not exist, <span class="math notranslate nohighlight">\(\sigma\)</span> must be determined numerically using an iterative search method, such as the Newton-Raphson algorithm.</p>
+<p>For example, consider a call option with <span class="math notranslate nohighlight">\(S_0 = 95 ,  K = 100 ,  T = 1 ,  r = 0.05\)</span>, and a market price of <span class="math notranslate nohighlight">\(7.7\)</span>. Plugging in <span class="math notranslate nohighlight">\(\sigma = 0.20\)</span> into the Black-Scholes formula gives <span class="math notranslate nohighlight">\(C = 7.51\)</span>, while <span class="math notranslate nohighlight">\(\sigma = 0.21\)</span> gives <span class="math notranslate nohighlight">\(C = 7.89\)</span>. This implies that the true implied volatility lies between <span class="math notranslate nohighlight">\(0.20 &lt; \sigma &lt; 0.21\)</span>. In this case, the exact implied volatility is approximately <span class="math notranslate nohighlight">\(\sigma = 0.205\)</span>. At this price, market participants are expecting an annualized volatility of 20.5% until maturity.</p>
+<p>Contrary to the original assumptions of Black and Scholes, implied volatilities vary with strike price and maturity. Options with extreme strike-to-stock price ratios typically exhibit higher implied volatilities, forming what is known as the volatility smile. Similarly, options with different maturities often display different implied volatilities, forming a volatility term structure. These deviations arise due to market imperfections, stochastic volatility, jump processes, and other factors that Black-Scholes does not account for.</p>
+<p>A key application of implied volatility is in volatility indices, which aggregate the market’s expectations of future volatility. The most well-known example is the VIX (CBOE Volatility Index), which derives implied volatilities from European-style options on the S&amp;P 500 index. The VIX is constructed using near-term options (with maturities close to 30 days), aggregated and annualized to form a measure of expected market volatility over the next year. Due to its tendency to spike during market stress, the VIX is often referred to as the “fear index.”</p>
+<p>Similar volatility indices exist for other asset classes, including bonds. A notable example is the MOVE index, which measures the implied volatility of U.S. Treasury bonds and reflects uncertainty in the interest rate markets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">close_observations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/03_vix.csv&quot;</span><span class="p">)</span>
+    <span class="n">close_observations</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">close_observations</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">close_observations</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Date&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;^SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;^VIX&quot;</span><span class="p">]</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+    <span class="n">one_year_ago</span> <span class="o">=</span> <span class="n">today</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>
+
+    <span class="n">ohlc_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">one_year_ago</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">today</span><span class="p">)</span>
+    <span class="n">close_observations</span> <span class="o">=</span> <span class="n">ohlc_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">close_observations</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/03_vix.csv&quot;</span><span class="p">)</span>
+
+<span class="n">close_observations</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;^SPX&quot;</span><span class="p">:</span> <span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;^VIX&quot;</span><span class="p">:</span> <span class="s2">&quot;VIX&quot;</span><span class="p">},</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">close_observations</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;VIX&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Stock market development and the VIX&quot;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f28b15820a6b3f754ef493ea72fd56fcf0c019245e25e666c1cb4dcf005509f1.png" src="_images/f28b15820a6b3f754ef493ea72fd56fcf0c019245e25e666c1cb4dcf005509f1.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00_welcome.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_random_variables.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random variables</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonds">Bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-coupon-bonds">Zero-coupon bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupon-bonds">Coupon bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-to-maturity">Yield to maturity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#term-structure">Term structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-options">Derivatives - Options</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
