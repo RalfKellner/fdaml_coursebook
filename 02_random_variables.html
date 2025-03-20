@@ -66,6 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Estimation and Evaluation" href="03_estimation.html" />
     <link rel="prev" title="Asset classes" href="01_introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,6 +168,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
 </ul>
 
     </div>
@@ -331,7 +333,18 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-multivariate-random-variables">Definition of multivariate random variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous-multivariate-distributions">Discrete and continuous multivariate distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-distributions">Marginal distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-random-variables">Independence of random variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance-of-linear-combinations">Expected value and variance of linear combinations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-formulation-for-portfolio-return-and-variance">Matrix Formulation for Portfolio Return and Variance</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -403,13 +416,13 @@ A = [0.02, 0.05]
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> be a set of subsets from <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(X\)</span> is measurable if <span class="math notranslate nohighlight">\(X^{-1}(B) \in \mathcal{F}\)</span> for all <span class="math notranslate nohighlight">\(B \in \mathcal{B}\)</span>. For the probability measure of <span class="math notranslate nohighlight">\(X\)</span>, it holds that:</p>
 <div class="math notranslate nohighlight">
 \[P_x(X \in B) = P(X^{-1}(B)), B \in \mathcal{B}\]</div>
-<p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is not just a measure mapping outcomes to numbers, but rather maps from one probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, P)\)</span> to probability space <span class="math notranslate nohighlight">\((\mathbb{R}, \mathcal{B}, P_x)\)</span>.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(X\)</span> is not just a measure mapping outcomes to numbers, but rather maps from probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, P)\)</span> to probability space <span class="math notranslate nohighlight">\((\mathbb{R}, \mathcal{B}, P_x)\)</span>.</p>
 <p>If a random variable can only take on countably values, it is called a <em>discrete</em> random variable. A <em>continuos</em> random variable can take on an infinite number of values which is usually describe by an interval.</p>
 <p>For a discrete random variable, the function assigning probabilities to its realizations is called <strong>probability mass function</strong> and is given by a list-alike definition:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 f(x) = \begin{cases}
-			P_x(\{ x \}) &amp; \text{for } x  \\
+			P_x(X = x) &amp; \text{for } x  \\
 			0 &amp; \, \text{else}
          \end{cases}
 \end{split}\]</div>
@@ -418,7 +431,7 @@ f(x) = \begin{cases}
 \[
 F(x)  = P_x\left( (-\infty, x] \right) = \sum_{x_i \leq x} f(x_i)
 \]</div>
-<p>is called <strong>cumulative distribution function</strong>. Let us take a look at an example. Starting with the throw of two dices, we can create a random variable which is the sum of both dices,</p>
+<p>is called <strong>cumulative distribution function</strong>. For the definition above we use <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(P_x\)</span> to differentiate between the probability for the event and for the random variable. Usually, we focus on random variables and use <span class="math notranslate nohighlight">\(P\)</span> for <span class="math notranslate nohighlight">\(P_x\)</span> in the remainder of this book. Let us take a look at an example. Starting with the throw of two dices, we can create a random variable which is the sum of both dices,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 X =
@@ -492,7 +505,7 @@ F(X) = P(X \leq x) =
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">pmf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PMF&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sum of Two Dice&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Probability Mass Function (PMF)&quot;</span><span class="p">)</span>
@@ -502,8 +515,8 @@ F(X) = P(X \leq x) =
 
 <span class="n">sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">1</span><span class="p">],</span> <span class="n">sums</span><span class="p">))</span>
 <span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">cdf</span><span class="p">))</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>  <span class="c1"># Adding points for clarity</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">cdf</span><span class="p">)</span>  
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sum of Two Dice&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative Distribution Function (CDF) - Stepwise&quot;</span><span class="p">)</span>
@@ -516,10 +529,10 @@ F(X) = P(X \leq x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5a41344a03a6e473ffe9d40cf7c2a78244856a65a4fc268b4f5c454ac3ba673f.png" src="_images/5a41344a03a6e473ffe9d40cf7c2a78244856a65a4fc268b4f5c454ac3ba673f.png" />
+<img alt="_images/a8d09b84669778817bac1f8a4791529fef233b035d1fefed32ebcbc1a1a7ef22.png" src="_images/a8d09b84669778817bac1f8a4791529fef233b035d1fefed32ebcbc1a1a7ef22.png" />
 </div>
 </div>
-<p>For a continuous random variable, the probability of a concrete realization is equal to 0, <span class="math notranslate nohighlight">\(P(x = 0) = 0\)</span>. Instead of directly defining a function mapping probabilities to subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, we define a <strong>probability density function</strong> <span class="math notranslate nohighlight">\(f(x)\)</span> which enables us to determine probabilities by integration. The domain of this function must be the set of all possibles states of <span class="math notranslate nohighlight">\(x\)</span>. Furthermore, it must hold the <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> and that <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x)dx = 1\)</span>. With this definition the corresponding cumulative distribution function is given by:</p>
+<p>For a continuous random variable, the probability of a concrete realization is equal to 0, <span class="math notranslate nohighlight">\(P(X = x) = 0\)</span>. Instead of directly defining a function mapping probabilities to subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, we define a <strong>probability density function</strong> <span class="math notranslate nohighlight">\(f(x)\)</span> which enables us to determine probabilities by integration. The domain of this function must be the set of all possibles states of <span class="math notranslate nohighlight">\(x\)</span>. Furthermore, it must hold the <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> and that <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x)dx = 1\)</span>. With this definition the corresponding cumulative distribution function is given by:</p>
 <div class="math notranslate nohighlight">
 \[
 F(x) = \int_{-\infty}^{x} f(t)dt
@@ -529,7 +542,7 @@ F(x) = \int_{-\infty}^{x} f(t)dt
 \[
 P \left(a \leq X \leq b\right) = F(b) - F(a) = \int_{a}^{b} f(t)dt
 \]</div>
-<p>An example for a continuous random variable would be the waiting time between information updates (e.g., in form of news or corporate announcements) of on stock markets. A reasonable distribution for such a random variable is the exponential distribution with density function:</p>
+<p>An example for a continuous random variable would be the waiting time between information updates (e.g., in form of news or corporate announcements) of a company. A reasonable distribution for such a random variable is the exponential distribution with density function:</p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = \lambda e^{-\lambda x}, x \geq 0
@@ -558,7 +571,7 @@ F(x) = 1 - e^{-\lambda x}, x \geq 0
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># Plot PDF (Density Function)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">pdf_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">pdf_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
 <span class="c1">#axes[0].fill_between(x_values, pdf_values, alpha=0.3, color=&quot;blue&quot;)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Exponential Distribution - PDF&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
@@ -567,7 +580,7 @@ F(x) = 1 - e^{-\lambda x}, x \geq 0
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Plot CDF (Cumulative Distribution Function)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">cdf_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">cdf_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
 <span class="c1">#axes[1].fill_between(x_values, cdf_values, alpha=0.3, color=&quot;red&quot;)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Exponential Distribution - CDF&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
@@ -582,7 +595,7 @@ F(x) = 1 - e^{-\lambda x}, x \geq 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2af4a838ba301a10e8ac28eedc6b32359f70b515133502a987ad1c774f74756e.png" src="_images/2af4a838ba301a10e8ac28eedc6b32359f70b515133502a987ad1c774f74756e.png" />
+<img alt="_images/da048b3a4ed6cf581cc1726643cd40eaa7b3da9e66f17d1b805bc67f76651969.png" src="_images/da048b3a4ed6cf581cc1726643cd40eaa7b3da9e66f17d1b805bc67f76651969.png" />
 </div>
 </div>
 </section>
@@ -623,7 +636,7 @@ Var(X) = E(X-E(X))^2 =
 <p>For example:</p>
 <ul class="simple">
 <li><p>The median (or 50th percentile) is the value that separates the lower 50% of a dataset from the upper 50%.</p></li>
-<li><p>The quartiles divide the data into four equal parts (e.g., the 25th percentile is the first quartile  Q_1 ).</p></li>
+<li><p>The quartiles divide the data into four equal parts (e.g., the 25th percentile is the first quartile  <span class="math notranslate nohighlight">\(Q_1\)</span> ).</p></li>
 <li><p>The deciles divide the data into ten equal parts.</p></li>
 <li><p>The percentiles divide the data into 100 equal parts (e.g., the 90th percentile means 90% of the data is below that value).</p></li>
 </ul>
@@ -688,12 +701,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.01516373 0.94141311 0.75606186 0.83923225 0.16833487]
+[0.89865316 0.72955151 0.01008022 0.18676181 0.73285182]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/2c01fc571279c4ca34124e36c75e089058f8e67222a5128caf965d1a338fcd82.png" src="_images/2c01fc571279c4ca34124e36c75e089058f8e67222a5128caf965d1a338fcd82.png" />
+<img alt="_images/c32f0c98265adb2ebabbf6f58d348fdb31b686bd0302867605a7c5f95d65319c.png" src="_images/c32f0c98265adb2ebabbf6f58d348fdb31b686bd0302867605a7c5f95d65319c.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -765,7 +778,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cb7bfd65191656c8632a8a2e707052b0b8791160edf1c9c72176a71b57279ca2.png" src="_images/cb7bfd65191656c8632a8a2e707052b0b8791160edf1c9c72176a71b57279ca2.png" />
+<img alt="_images/01f145fbb27b4668417fa535047bcd225712f2a3eab0da1e8b97dcc5201720e6.png" src="_images/01f145fbb27b4668417fa535047bcd225712f2a3eab0da1e8b97dcc5201720e6.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -781,7 +794,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cdebe15cb135b8a7c711c6f58f684c32b91dbfa324c315a11b4a4524293f6d4f.png" src="_images/cdebe15cb135b8a7c711c6f58f684c32b91dbfa324c315a11b4a4524293f6d4f.png" />
+<img alt="_images/ae402f0f839d2a5a14542daa50dcfcc6d7e4b1ed912f5a9be2c64a740a03e039.png" src="_images/ae402f0f839d2a5a14542daa50dcfcc6d7e4b1ed912f5a9be2c64a740a03e039.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -836,7 +849,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/66858ef6bcf97dbf4898fba7b27d11b09df5d72e50bab9e1324b0f08d43b2e01.png" src="_images/66858ef6bcf97dbf4898fba7b27d11b09df5d72e50bab9e1324b0f08d43b2e01.png" />
+<img alt="_images/0da5af9a8a94404ea1a094be2f1adf0ca024d9f990a495b92ab2f265bcb91166.png" src="_images/0da5af9a8a94404ea1a094be2f1adf0ca024d9f990a495b92ab2f265bcb91166.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -849,11 +862,391 @@ Simulation serves as a powerful tool for scenario analysis, allowing us to exami
 </section>
 <section id="multivariate-random-variables">
 <h2>Multivariate random variables<a class="headerlink" href="#multivariate-random-variables" title="Link to this heading">#</a></h2>
+<p>So far, we have focused on univariate random variables that represent single quantities of interest. However, financial analysis typically involves multiple random quantities that may be interrelated, such as returns on different assets, prices and volumes, or various economic indicators. To analyze such scenarios, we need to extend our framework to multivariate random variables.</p>
+<section id="definition-of-multivariate-random-variables">
+<h3>Definition of multivariate random variables<a class="headerlink" href="#definition-of-multivariate-random-variables" title="Link to this heading">#</a></h3>
+<p>A multivariate random variable (or random vector) <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)\)</span> is a vector of <span class="math notranslate nohighlight">\(n\)</span> random variables defined on the same probability space <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, P)\)</span>. Each component <span class="math notranslate nohighlight">\(X_i\)</span> is a univariate random variable that maps from the sample space <span class="math notranslate nohighlight">\(\Omega\)</span> to the real line <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X}: \Omega \to \mathbb{R}^n\]</div>
+<div class="math notranslate nohighlight">
+\[\omega \mapsto \mathbf{x}(\omega) = (x_1(\omega), x_2(\omega), \ldots, x_n(\omega))\]</div>
+<p>For example, if we consider daily returns on two stocks, we might define a bivariate random variable <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2)\)</span>, where <span class="math notranslate nohighlight">\(X_1\)</span> represents the return on the first stock and <span class="math notranslate nohighlight">\(X_2\)</span> represents the return on the second stock.</p>
+</section>
+<section id="discrete-and-continuous-multivariate-distributions">
+<h3>Discrete and continuous multivariate distributions<a class="headerlink" href="#discrete-and-continuous-multivariate-distributions" title="Link to this heading">#</a></h3>
+<p>Similar to univariate random variables, multivariate random variables can be classified as discrete or continuous.</p>
+<p>A multivariate random variable <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)\)</span> is <strong>discrete</strong> if it can take on only countably many values in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. The corresponding <strong>joint probability mass function</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f_{\mathbf{X}}(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = P(\mathbf{X} = \mathbf{x}) = P(X_1 = x_1, X_2 = x_2, \ldots, X_n = x_n)\]</div>
+<p>The joint probability mass function must satisfy:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f_{\mathbf{X}}(\mathbf{x}) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{\mathbf{x}} f_{\mathbf{X}}(\mathbf{x}) = 1\)</span></p></li>
+</ol>
+<p>A multivariate random variable <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)\)</span> is <strong>continuous</strong> if there exists a non-negative function <span class="math notranslate nohighlight">\(f_{\mathbf{X}}: \mathbb{R}^n \to [0, \infty)\)</span>, called the <strong>joint probability density function</strong>, such that for any region <span class="math notranslate nohighlight">\(A \subset \mathbb{R}^n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{X} \in A) = \int_A f_{\mathbf{X}}(\mathbf{x}) \, d\mathbf{x} = \int_A f(x_1, x_2, \ldots, x_n) \, dx_1 \, dx_2 \, \ldots \, dx_n\]</div>
+<p>The joint probability density function must satisfy:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f_{\mathbf{X}}(\mathbf{x}) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{\mathbb{R}^n} f_{\mathbf{X}}(\mathbf{x}) \, d\mathbf{x} = 1\)</span></p></li>
+</ol>
+<p>For both discrete and continuous multivariate distributions, the <strong>joint cumulative distribution function</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[F_{\mathbf{X}}(\mathbf{x}) = F(x_1, x_2, \ldots, x_n) = P(X_1 \leq x_1, X_2 \leq x_2, \ldots, X_n \leq x_n)\]</div>
+<p>As for univariate distributions, we can select among a large number of multivariate distribution families. Examples are the multivariate normal or t distribution. Furthermore, it is possible to decompose a multivariate distribution into its marginal distributions and their dependence structure which is can be modeled by copulas. For the moment, we omit the formal definiton of these distributions and concepts.</p>
+</section>
+<section id="marginal-distributions">
+<h3>Marginal distributions<a class="headerlink" href="#marginal-distributions" title="Link to this heading">#</a></h3>
+<p>Given a joint distribution of a multivariate random variable, we can derive the distribution of individual components or subsets of components. These are called <strong>marginal distributions</strong>.</p>
+<p>For a discrete (continuous) bivariate random variable <span class="math notranslate nohighlight">\((X_1, X_2)\)</span> with joint probability mass (density) function <span class="math notranslate nohighlight">\(f(x_1, x_2)\)</span>, the marginal probability mass (density) functions are:</p>
+<div class="math notranslate nohighlight">
+\[f_{X_1}(x_1) = \sum_{x_2} f(x_1, x_2)\]</div>
+<div class="math notranslate nohighlight">
+\[f_{X_2}(x_2) = \sum_{x_1} f(x_1, x_2)\]</div>
+<p>These concepts extend naturally to random vectors with more than two components.</p>
+</section>
+<section id="conditional-distributions">
+<h3>Conditional distributions<a class="headerlink" href="#conditional-distributions" title="Link to this heading">#</a></h3>
+<p>In financial analysis, we are often interested in the behavior of one random variable given information about another. This leads to the concept of <strong>conditional distributions</strong>.</p>
+<p>For discrete random variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span>, the conditional probability mass function of <span class="math notranslate nohighlight">\(X_1\)</span> given <span class="math notranslate nohighlight">\(X_2 = x_2\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f_{X_1|X_2}(x_1|x_2) = P(X_1 = x_1 | X_2 = x_2) = \frac{f(x_1, x_2)}{f_{X_2}(x_2)}\]</div>
+<p>provided that <span class="math notranslate nohighlight">\(f_{X_2}(x_2) &gt; 0\)</span>.</p>
+<p>For continuous random variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span>, the conditional probability density function of <span class="math notranslate nohighlight">\(X_1\)</span> given <span class="math notranslate nohighlight">\(X_2 = x_2\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f_{X_1|X_2}(x_1|x_2) = \frac{f(x_1, x_2)}{f_{X_2}(x_2)}\]</div>
+<p>provided that <span class="math notranslate nohighlight">\(f_{X_2}(x_2) &gt; 0\)</span>.</p>
+<p>The conditional distribution helps us understand how the probability distribution of one variable changes when we have information about another variable. For instance, we might want to know how the distribution of returns on one asset changes given that we observe a specific return on another asset.</p>
+</section>
+<section id="independence-of-random-variables">
+<h3>Independence of random variables<a class="headerlink" href="#independence-of-random-variables" title="Link to this heading">#</a></h3>
+<p>Two random variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> are <strong>independent</strong> if and only if their joint distribution equals the product of their marginal distributions:</p>
+<p>For discrete and continuous random variables:
+$<span class="math notranslate nohighlight">\(f(x_1, x_2) = f_{X_1}(x_1) \cdot f_{X_2}(x_2) \quad \text{for all } x_1, x_2\)</span>$</p>
+<p>Equivalently, for both discrete and continuous random variables:
+$<span class="math notranslate nohighlight">\(F(x_1, x_2) = F_{X_1}(x_1) \cdot F_{X_2}(x_2) \quad \text{for all } x_1, x_2\)</span>$</p>
+<p>If random variables are independent, then knowing the value of one does not provide any information about the other. Independence is a crucial concept in finance, as it simplifies many calculations and is a key assumption in various models.</p>
+</section>
+<section id="covariance-and-correlation">
+<h3>Covariance and correlation<a class="headerlink" href="#covariance-and-correlation" title="Link to this heading">#</a></h3>
+<p>To quantify the linear relationship between two random variables, we use <strong>covariance</strong> and <strong>correlation</strong>.</p>
+<p>The <strong>covariance</strong> between two random variables <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Cov}(X_1, X_2) = E[(X_1 - E[X_1])(X_2 - E[X_2])] = E[X_1 X_2] - E[X_1]E[X_2]\]</div>
+<p>where <span class="math notranslate nohighlight">\(E[\cdot]\)</span> denotes the expected value.</p>
+<p>Covariance measures how two random variables vary together. A positive covariance indicates that the variables tend to move in the same direction, while a negative covariance indicates that they tend to move in opposite directions. If the covariance is zero, the variables are said to be <strong>uncorrelated</strong>.</p>
+<p>The <strong>correlation coefficient</strong> between <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> is a standardized measure of their linear relationship, defined as:</p>
+<div class="math notranslate nohighlight">
+\[\rho(X_1, X_2) = \frac{\text{Cov}(X_1, X_2)}{\sqrt{\text{Var}(X_1)\text{Var}(X_2)}} = \frac{\text{Cov}(X_1, X_2)}{\sigma_{X_1}\sigma_{X_2}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma_{X_i}^2\)</span> is the variance of <span class="math notranslate nohighlight">\(X_i\)</span>.</p>
+<p>The correlation coefficient always lies between -1 and 1:</p>
 <ul class="simple">
-<li><p>Independence</p></li>
-<li><p>Dependence</p></li>
-<li><p>Expectected value and variance for a sum of random variables</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho = 1\)</span> indicates perfect positive linear relationship</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho = -1\)</span> indicates perfect negative linear relationship</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho = 0\)</span> indicates no linear relationship (uncorrelated)</p></li>
 </ul>
+<p>Correlation is a crucial measure in finance, particularly in portfolio management, risk assessment, and diversification strategies. Take a look at the figure below which shows occurrences of two random variables with different covariance levels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ellipse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.transforms</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">transforms</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+
+<span class="c1"># First, define a helper function for drawing confidence ellipses</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">confidence_ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">n_std</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a plot of the covariance confidence ellipse of *x* and *y*.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x and y must be the same size&quot;</span><span class="p">)</span>
+
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">pearson</span> <span class="o">=</span> <span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    
+    <span class="c1"># Using a special case to obtain the eigenvalues of this</span>
+    <span class="c1"># two-dimensional dataset.</span>
+    <span class="n">ell_radius_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">pearson</span><span class="p">)</span>
+    <span class="n">ell_radius_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pearson</span><span class="p">)</span>
+    <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">ell_radius_x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">ell_radius_y</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="n">facecolor</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Calculating the standard deviation of x from the square root of the variance</span>
+    <span class="n">scale_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">n_std</span>
+    <span class="n">mean_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="c1"># Calculating the standard deviation of y from the square root of the variance</span>
+    <span class="n">scale_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">n_std</span>
+    <span class="n">mean_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">transf</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Affine2D</span><span class="p">()</span> \
+        <span class="o">.</span><span class="n">rotate_deg</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale_x</span><span class="p">,</span> <span class="n">scale_y</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">mean_x</span><span class="p">,</span> <span class="n">mean_y</span><span class="p">)</span>
+
+    <span class="n">ellipse</span><span class="o">.</span><span class="n">set_transform</span><span class="p">(</span><span class="n">transf</span> <span class="o">+</span> <span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Generate three datasets with different correlations</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Negative Correlation (ρ = -0.8)&#39;</span><span class="p">,</span> <span class="s1">&#39;No Correlation (ρ = 0)&#39;</span><span class="p">,</span> <span class="s1">&#39;Positive Correlation (ρ = 0.8)&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">correlations</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">labels</span><span class="p">)):</span>
+    <span class="c1"># Create covariance matrix</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">corr</span><span class="p">],</span> <span class="p">[</span><span class="n">corr</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+    
+    <span class="c1"># Generate random samples</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    
+    <span class="c1"># Scatterplot</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">confidence_ellipse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n_std</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate and display empirical correlation</span>
+    <span class="n">emp_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="s1">Empirical ρ = </span><span class="si">{</span><span class="n">emp_corr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/67cb758738ad762cfea1508a6e17eb5c0eb47004cfb0b68b73d7278a3d5e6c4a.png" src="_images/67cb758738ad762cfea1508a6e17eb5c0eb47004cfb0b68b73d7278a3d5e6c4a.png" />
+</div>
+</div>
+<p>It’s important to note that while independence implies zero correlation, the converse is not necessarily true. Two random variables can be uncorrelated but still dependent in a non-linear way. To visualize this, take a look below. Even though very stron non-linear relationships exist, the linear correlation coefficient underestimates the true relationship.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="c1"># Set random seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Set plotting style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-whitegrid&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;notebook&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="c1"># Create figure with three subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 1. Linear relationship</span>
+<span class="n">x_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y_linear</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x_linear</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># y = 2x + 1 + noise</span>
+<span class="n">corr_linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x_linear</span><span class="p">,</span> <span class="n">y_linear</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_linear</span><span class="p">,</span> <span class="n">y_linear</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Linear Relationship</span><span class="se">\n</span><span class="s1">Correlation: </span><span class="si">{</span><span class="n">corr_linear</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add regression line</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x_linear</span><span class="p">,</span> <span class="n">y_linear</span><span class="p">)</span>
+<span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_line</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x_line</span> <span class="o">+</span> <span class="n">intercept</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_line</span><span class="p">,</span> <span class="n">y_line</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 2. Logarithmic relationship</span>
+<span class="n">x_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Positive values for log</span>
+<span class="n">y_log</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_log</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># y = 3*log(x) + noise</span>
+<span class="n">corr_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x_log</span><span class="p">,</span> <span class="n">y_log</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_log</span><span class="p">,</span> <span class="n">y_log</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Logarithmic Relationship</span><span class="se">\n</span><span class="s1">Correlation: </span><span class="si">{</span><span class="n">corr_log</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add curve for the logarithmic relationship</span>
+<span class="n">x_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_curve</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_curve</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve</span><span class="p">,</span> <span class="n">y_curve</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 3. Sine relationship</span>
+<span class="n">x_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_sine</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># y = sin(x) + noise</span>
+<span class="n">corr_sine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x_sine</span><span class="p">,</span> <span class="n">y_sine</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_sine</span><span class="p">,</span> <span class="n">y_sine</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sine Relationship</span><span class="se">\n</span><span class="s1">Correlation: </span><span class="si">{</span><span class="n">corr_sine</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add curve for the sine relationship</span>
+<span class="n">x_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_curve</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve</span><span class="p">,</span> <span class="n">y_curve</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print additional information</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Linear relationship correlation: </span><span class="si">{</span><span class="n">corr_linear</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logarithmic relationship correlation: </span><span class="si">{</span><span class="n">corr_log</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sine relationship correlation: </span><span class="si">{</span><span class="n">corr_sine</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f95e2b0f627c4790b9f705c280ff3f9bd6917d6c7e46be9b1cbb14efd33dc5c9.png" src="_images/f95e2b0f627c4790b9f705c280ff3f9bd6917d6c7e46be9b1cbb14efd33dc5c9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear relationship correlation: 0.9996
+Logarithmic relationship correlation: 0.9131
+Sine relationship correlation: -0.3822
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="expected-value-and-variance-of-linear-combinations">
+<h3>Expected value and variance of linear combinations<a class="headerlink" href="#expected-value-and-variance-of-linear-combinations" title="Link to this heading">#</a></h3>
+<p>In financial applications, we often work with portfolios or linear combinations of random variables. Understanding the properties of these combinations is essential for portfolio analysis and risk management.</p>
+<p>Given a linear combination of random variables:</p>
+<div class="math notranslate nohighlight">
+\[Y = a_1 X_1 + a_2 X_2 + \ldots + a_n X_n = \sum_{i=1}^n a_i X_i\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_1, a_2, \ldots, a_n\)</span> are constants, the expected value of <span class="math notranslate nohighlight">\(Y\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[E[Y] = E\left[\sum_{i=1}^n a_i X_i\right] = \sum_{i=1}^n a_i E[X_i]\]</div>
+<p>This linearity property of expectation holds regardless of whether the random variables are independent.</p>
+<p>The variance of the linear combination depends on the covariances between the random variables:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(Y) = \text{Var}\left(\sum_{i=1}^n a_i X_i\right) = \sum_{i=1}^n a_i^2 \text{Var}(X_i) + 2\sum_{i &lt; j} a_i a_j \text{Cov}(X_i, X_j)\]</div>
+<p>If the random variables are uncorrelated (i.e., <span class="math notranslate nohighlight">\(\text{Cov}(X_i, X_j) = 0\)</span> for all <span class="math notranslate nohighlight">\(i \neq j\)</span>), then the variance simplifies to:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(Y) = \sum_{i=1}^n a_i^2 \text{Var}(X_i)\]</div>
+<p>For the special case of a portfolio of assets, where <span class="math notranslate nohighlight">\(a_i\)</span> represents the weight of asset <span class="math notranslate nohighlight">\(i\)</span> in the portfolio and <span class="math notranslate nohighlight">\(X_i\)</span> represents the return on asset <span class="math notranslate nohighlight">\(i\)</span>, these formulas are the foundation of modern portfolio theory. They allow us to calculate the expected return and risk (variance) of a portfolio based on the properties of individual assets and their interrelationships.</p>
+</section>
+<section id="covariance-matrix">
+<h3>Covariance Matrix<a class="headerlink" href="#covariance-matrix" title="Link to this heading">#</a></h3>
+<p>For a set of random variables <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span>, the <strong>covariance matrix</strong> <span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(n \times n\)</span> symmetric matrix where:</p>
+<ul class="simple">
+<li><p>The diagonal element <span class="math notranslate nohighlight">\(\Sigma_{ii} = \text{Var}(X_i)\)</span> represents the variance of the <span class="math notranslate nohighlight">\(i\)</span>-th random variable</p></li>
+<li><p>The off-diagonal element <span class="math notranslate nohighlight">\(\Sigma_{ij} = \text{Cov}(X_i, X_j)\)</span> represents the covariance between the <span class="math notranslate nohighlight">\(i\)</span>-th and <span class="math notranslate nohighlight">\(j\)</span>-th random variables</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Sigma = 
+\begin{pmatrix} 
+\text{Var}(X_1) &amp; \text{Cov}(X_1, X_2) &amp; \cdots &amp; \text{Cov}(X_1, X_n) \\
+\text{Cov}(X_2, X_1) &amp; \text{Var}(X_2) &amp; \cdots &amp; \text{Cov}(X_2, X_n) \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\text{Cov}(X_n, X_1) &amp; \text{Cov}(X_n, X_2) &amp; \cdots &amp; \text{Var}(X_n)
+\end{pmatrix}\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\text{Cov}(X_i, X_j) = \text{Cov}(X_j, X_i)\)</span>, the covariance matrix is symmetric.</p>
+</section>
+<section id="matrix-formulation-for-portfolio-return-and-variance">
+<h3>Matrix Formulation for Portfolio Return and Variance<a class="headerlink" href="#matrix-formulation-for-portfolio-return-and-variance" title="Link to this heading">#</a></h3>
+<p>For a portfolio with weight vector <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1, w_2, \ldots, w_n)^T\)</span> and a vector of asset returns <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)^T\)</span> with expected returns <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (E[X_1], E[X_2], \ldots, E[X_n])^T\)</span>, we can express the portfolio expected return and variance using matrix notation:</p>
+<p><strong>Portfolio Expected Return:</strong>
+$<span class="math notranslate nohighlight">\(E[R_p] = \mathbf{w}^T \boldsymbol{\mu} = \sum_{i=1}^n w_i E[X_i]\)</span>$</p>
+<p><strong>Portfolio Variance:</strong>
+$<span class="math notranslate nohighlight">\(\text{Var}(R_p) = \mathbf{w}^T \Sigma \mathbf{w} = \sum_{i=1}^n \sum_{j=1}^n w_i w_j \text{Cov}(X_i, X_j)\)</span>$</p>
+<p>This matrix formulation is not only more compact but also computationally efficient for large portfolios. It provides an elegant framework for portfolio optimization problems, such as determining the weights that minimize portfolio variance for a given expected return.</p>
+<p>When <span class="math notranslate nohighlight">\(\sum_{i=1}^n w_i = 1\)</span> (weights sum to 1) and no short selling is allowed (<span class="math notranslate nohighlight">\(w_i \geq 0\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>), the set of all possible portfolios in the risk-return space forms the <strong>efficient frontier</strong>, which is the central concept in Markowitz portfolio theory.</p>
+<p>Depending on expectations, variances and covariances different portfolios can be formed by choosing different weights <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. We come back later to this, but for the puropose of demonstration, take a look in the figure below. This shows the cumulative portfolio returns for three portfolios which are formed with the same assets, however, using different portfolio weights.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Generate stock return data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_stocks</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_days</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Create correlation matrix </span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Expected returns</span>
+<span class="n">expected_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">])</span>  <span class="c1"># 8%, 12%, 6% annual returns</span>
+
+<span class="c1"># Standard deviations (volatility)</span>
+<span class="n">volatilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">])</span>  <span class="c1"># 20%, 30%, 15% volatility</span>
+
+<span class="c1"># Construct covariance matrix</span>
+<span class="n">diag_vol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">volatilities</span><span class="p">)</span>
+<span class="n">covariance_matrix</span> <span class="o">=</span> <span class="n">diag_vol</span> <span class="o">@</span> <span class="n">correlation_matrix</span> <span class="o">@</span> <span class="n">diag_vol</span>
+
+<span class="c1"># Generate daily returns - assuming 252 trading days per year</span>
+<span class="n">daily_expected_returns</span> <span class="o">=</span> <span class="n">expected_returns</span> <span class="o">/</span> <span class="mi">252</span>
+<span class="n">daily_covariance</span> <span class="o">=</span> <span class="n">covariance_matrix</span> <span class="o">/</span> <span class="mi">252</span>
+
+<span class="c1"># Generate return data</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">daily_expected_returns</span><span class="p">,</span> <span class="n">daily_covariance</span><span class="p">,</span> <span class="n">n_days</span><span class="p">)</span>
+
+<span class="c1"># Convert to a DataFrame</span>
+<span class="n">returns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Stock</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_stocks</span><span class="p">)])</span>
+
+<span class="c1"># Calculate empirical statistics</span>
+<span class="n">empirical_means</span> <span class="o">=</span> <span class="n">returns_df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">252</span>  <span class="c1"># Annualized</span>
+<span class="n">empirical_cov</span> <span class="o">=</span> <span class="n">returns_df</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span> <span class="o">*</span> <span class="mi">252</span>     <span class="c1"># Annualized</span>
+<span class="n">empirical_corr</span> <span class="o">=</span> <span class="n">returns_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Portfolio construction</span>
+<span class="c1"># Equal weight portfolio</span>
+<span class="n">equal_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_stocks</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_stocks</span>
+
+<span class="c1"># Minimum variance portfolio (simplified calculation)</span>
+<span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_stocks</span><span class="p">)</span>
+<span class="n">inv_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">empirical_cov</span><span class="p">)</span>
+<span class="n">min_var_weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ones</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span><span class="p">)</span>
+
+<span class="c1"># Maximum Sharpe ratio portfolio (simplified, assuming risk-free rate = 0)</span>
+<span class="n">max_sharpe_weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">empirical_means</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ones</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">empirical_means</span><span class="p">)</span>
+
+<span class="c1"># Normalize to ensure weights sum to 1</span>
+<span class="n">max_sharpe_weights</span> <span class="o">=</span> <span class="n">max_sharpe_weights</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">max_sharpe_weights</span><span class="p">)</span>
+
+<span class="c1"># Calculate portfolio returns</span>
+<span class="n">portfolio_returns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Equal Weight&#39;</span><span class="p">:</span> <span class="n">returns_df</span> <span class="o">@</span> <span class="n">equal_weights</span><span class="p">,</span>
+    <span class="s1">&#39;Min Variance&#39;</span><span class="p">:</span> <span class="n">returns_df</span> <span class="o">@</span> <span class="n">min_var_weights</span><span class="p">,</span>
+    <span class="s1">&#39;Max Sharpe&#39;</span><span class="p">:</span> <span class="n">returns_df</span> <span class="o">@</span> <span class="n">max_sharpe_weights</span>
+<span class="p">}</span>
+
+<span class="c1"># Convert to DataFrame</span>
+<span class="n">port_returns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">portfolio_returns</span><span class="p">)</span>
+
+<span class="c1"># Calculate cumulative portfolio returns</span>
+<span class="n">cumulative_port_returns</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">port_returns_df</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+
+<span class="c1"># Plot portfolio cumulative returns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cumulative_port_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative_port_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cumulative_port_returns</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Trading Day&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Returns of Different Portfolios&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7a31c296553115a059d9f1038d29cb9f9d249935877f5cce6a79319aa368f41e.png" src="_images/7a31c296553115a059d9f1038d29cb9f9d249935877f5cce6a79319aa368f41e.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -896,6 +1289,15 @@ Simulation serves as a powerful tool for scenario analysis, allowing us to exami
         <p class="prev-next-title">Asset classes</p>
       </div>
     </a>
+    <a class="right-next"
+       href="03_estimation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Estimation and Evaluation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -917,7 +1319,18 @@ Simulation serves as a powerful tool for scenario analysis, allowing us to exami
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-multivariate-random-variables">Definition of multivariate random variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous-multivariate-distributions">Discrete and continuous multivariate distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-distributions">Marginal distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-random-variables">Independence of random variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance-of-linear-combinations">Expected value and variance of linear combinations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-formulation-for-portfolio-return-and-variance">Matrix Formulation for Portfolio Return and Variance</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

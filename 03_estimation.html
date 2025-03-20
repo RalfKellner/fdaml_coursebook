@@ -1,0 +1,1132 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estimation and Evaluation &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_estimation';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Random variables" href="02_random_variables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimation and Evaluation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_estimation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estimation and Evaluation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares">Ordinary Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance">Bias and Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation">Maximum-Likelihood Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-function">The Likelihood Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-maximum-likelihood-estimator">Finding the Maximum Likelihood Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-bernoulli-distribution">Example 1 - The Bernoulli Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-the-normal-distribution">Example 2 - The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-test-data">Training and Test Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross Validation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estimation-and-evaluation">
+<h1>Estimation and Evaluation<a class="headerlink" href="#estimation-and-evaluation" title="Link to this heading">#</a></h1>
+<p>The previous chapter introduces the concept of random variables. We can either model full distributions, individual (central) moments or quantiles by using parameteric approaches. For instance, random normal variable is defined by two parameters <span class="math notranslate nohighlight">\(\mu, \sigma^2\)</span>. If we want to use a parametric model, we need to set these parameters. The common process for this purpose is to collect data samples and find parameters which are in line with the data observed.</p>
+<p>Three prominent estimation methods stand out for their theoretical foundations and practical applications to reach this goal.</p>
+<ul class="simple">
+<li><p>Ordinary Least Squares (OLS) minimizes the sum of squared differences between observed values and model predictions, providing a computationally straightforward approach particularly suited for linear relationships.</p></li>
+<li><p>Maximum-likelihood estimation (MLE) identifies parameter values that maximize the probability of observing the given data, offering flexibility across diverse probability distributions and asymptotic efficiency under regularity conditions.</p></li>
+<li><p>Bayesian estimation incorporates prior knowledge about parameters through probability distributions, updating these beliefs with observed data to produce posterior distributions that quantify parameter uncertainty.</p></li>
+</ul>
+<p>Each method presents distinct advantages depending on sample sizes, underlying assumptions, and research objectives, with their complementary strengths driving statistical modeling across disciplines from economics to biology. This chapter reviews concepts of OLS and MLE. Afterwards, we examine further important concepts related to estimation, i.e., estimation uncertainty as well as variance and bias of estimators.</p>
+<section id="ordinary-least-squares">
+<h2>Ordinary Least Squares<a class="headerlink" href="#ordinary-least-squares" title="Link to this heading">#</a></h2>
+<p>Even though OLS is a general concept, it usually is used to estimate the expected value. In the simplest case, we can consider a model with a single parameter μ (the population mean), where we aim to estimate this parameter from a sample of observations.</p>
+<p>Consider the model:
+$<span class="math notranslate nohighlight">\(Y = \mu + \varepsilon\)</span>$</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> is a random variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the unknown parameter (population mean) to be estimated</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span> is the error term for observation <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>The Ordinary Least Squares approach aims to find the value of <span class="math notranslate nohighlight">\(\mu\)</span> that minimizes the sum of squared deviations between a series <span class="math notranslate nohighlight">\(Y_1, Y_2, ..., Y_n\)</span> which are assumed to be independent and identically distributed:</p>
+<div class="math notranslate nohighlight">
+\[S(\mu) = \sum_{i=1}^n (Y_i - \mu)^2\]</div>
+<p>To find the minimum, we take the derivative with respect to <span class="math notranslate nohighlight">\(\mu\)</span> and set it equal to zero:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial S(\mu)}{\partial \mu} = -2\sum_{i=1}^n (Y_i - \mu) = 0\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n (Y_i - \mu) = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n Y_i - n\mu = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n Y_i = n\mu\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\mu}_{OLS} = \frac{1}{n}\sum_{i=1}^n Y_i = \bar{y}\]</div>
+<p>Omitting the evaluation of the second order condition, we observe that the OLS estimator for the single parameter <span class="math notranslate nohighlight">\(\mu\)</span> is simply the sample mean <span class="math notranslate nohighlight">\(\bar{Y}\)</span>. This simple case demonstrates that when estimating just a constant term (the population mean), the OLS estimator is equivalent to the sample mean. Note the difference between the general concept of an <strong>estimator</strong> <span class="math notranslate nohighlight">\(\bar{Y}\)</span> and its realization for a data sample <span class="math notranslate nohighlight">\(\bar{y}\)</span> which is called <strong>estimate</strong>. The estimator is the rule how to estimate for given data.</p>
+<p>OLS estimation is not restricted to a single parameter model. From your undergraduate studies, you should be familiar with the linear regression model.</p>
+<div class="math notranslate nohighlight">
+\[Y = \mathbf{x}'\boldsymbol{\beta} + \varepsilon\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> is the dependent random variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a <span class="math notranslate nohighlight">\(K \times 1\)</span> vector of explanatory variables which are assumed to be given (realized)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> is a <span class="math notranslate nohighlight">\(K \times 1\)</span> vector of unknown parameters to be estimated</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span> is the error term</p></li>
+</ul>
+<p>In matrix notation, for a series of independent and identically distributed <span class="math notranslate nohighlight">\(n\)</span> observations:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of dependent variables</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is an <span class="math notranslate nohighlight">\(n \times K\)</span> matrix of explanatory variables</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\varepsilon}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of error terms</p></li>
+</ul>
+<p>The OLS method seeks to minimize the sum of squared residuals:</p>
+<div class="math notranslate nohighlight">
+\[S(\boldsymbol{\beta}) = \sum_{i=1}^n (Y_i - \mathbf{x}_i'\boldsymbol{\beta})^2 = (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})'(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})\]</div>
+<p>Expanding the expression:</p>
+<div class="math notranslate nohighlight">
+\[S(\boldsymbol{\beta}) = \mathbf{Y}'\mathbf{Y} - \mathbf{Y}'\mathbf{X}\boldsymbol{\beta} - \boldsymbol{\beta}'\mathbf{X}'\mathbf{Y} + \boldsymbol{\beta}'\mathbf{X}'\mathbf{X}\boldsymbol{\beta}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\mathbf{Y}'\mathbf{X}\boldsymbol{\beta}\)</span> is a scalar, its transpose <span class="math notranslate nohighlight">\(\boldsymbol{\beta}'\mathbf{X}'\mathbf{Y}\)</span> is equal to it. Therefore:</p>
+<div class="math notranslate nohighlight">
+\[S(\boldsymbol{\beta}) = \mathbf{y}'\mathbf{y} - 2\boldsymbol{\beta}'\mathbf{X}'\mathbf{y} + \boldsymbol{\beta}'\mathbf{X}'\mathbf{X}\boldsymbol{\beta}\]</div>
+<p>To find the minimum, we take the derivative with respect to <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> and set it equal to zero:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial S(\boldsymbol{\beta})}{\partial \boldsymbol{\beta}} = -2\mathbf{X}'\mathbf{Y} + 2\mathbf{X}'\mathbf{X}\boldsymbol{\beta} = \mathbf{0}\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X}'\mathbf{X}\boldsymbol{\beta} = \mathbf{X}'\mathbf{Y}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol{\beta}}_{OLS} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{Y}\]</div>
+<p>This is the OLS estimator for the coefficient vector <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>.</p>
+</section>
+<section id="bias-and-variance">
+<h2>Bias and Variance<a class="headerlink" href="#bias-and-variance" title="Link to this heading">#</a></h2>
+<p>The estimator is itself a random variable for which we can determine its expectation and variance.</p>
+<section id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
+<p>An estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> of a parameter <span class="math notranslate nohighlight">\(\theta\)</span> is said to be unbiased if its expected value equals the true parameter value:</p>
+<div class="math notranslate nohighlight">
+\[E[\hat{\theta}] = \theta\]</div>
+<p>The bias of an estimator is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Bias}(\hat{\theta}) = E[\hat{\theta}] - \theta\]</div>
+<p>Bias measures the systematic deviation of an estimator from the true parameter value. An unbiased estimator, on average, yields the correct value of the parameter being estimated. However, any individual estimate from a sample may still differ from the true parameter value due to sampling variability.</p>
+<p>For example, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is an unbiased estimator of the population mean <span class="math notranslate nohighlight">\(\mu\)</span> because <span class="math notranslate nohighlight">\(E[\bar{X}] = \mu\)</span>. In contrast, the sample variance with denominator <span class="math notranslate nohighlight">\(n\)</span> (instead of <span class="math notranslate nohighlight">\(n-1\)</span>) is a biased estimator of the population variance.</p>
+</section>
+<section id="variance">
+<h3>Variance<a class="headerlink" href="#variance" title="Link to this heading">#</a></h3>
+<p>The variance of an estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(\hat{\theta}) = E[(\hat{\theta} - E[\hat{\theta}])^2]\]</div>
+<p>Variance measures the dispersion or spread of the estimator around its expected value. A lower variance indicates that the estimator produces values that are more closely clustered around its expected value, making individual estimates more reliable.</p>
+<p>The variance of an estimator typically decreases as the sample size increases. For instance, the variance of the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is <span class="math notranslate nohighlight">\(\frac{\sigma^2}{n}\)</span>, where <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the population variance and <span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p>
+<p>The Mean Squared Error (MSE) connects bias and variance:</p>
+<div class="math notranslate nohighlight">
+\[\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + [\text{Bias}(\hat{\theta})]^2\]</div>
+<p>This relationship illustrates the bias-variance tradeoff: sometimes accepting a small bias can substantially reduce variance, resulting in a lower overall MSE.</p>
+<p>The example below samples data with different sample sizes from a normal distribution with an expected value. For sample sizes of <span class="math notranslate nohighlight">\(\lbrace 5, 30, 100 \rbrace\)</span>, we draw random samples with <span class="math notranslate nohighlight">\(\mu = 50\)</span> for 10,000 times and use the OLS estimator to record estimates. The figure below shows histograms of these estimates. The wider empirical distributions of estimates with a smaller sample size demonstrate a higher variability among estimates. The mean of the estimates is very close to the true value of <span class="math notranslate nohighlight">\(\mu\)</span> which demonstrates the unbiasedness of the estimator.</p>
+<p>It is very important to understand that in realizy, we do not know the true value and usually build inferences on a single data sample!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set random seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Define the true population parameters</span>
+<span class="n">true_mean</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">true_std</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Create a population (normal distribution)</span>
+<span class="n">population_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">population</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">true_mean</span><span class="p">,</span> <span class="n">true_std</span><span class="p">,</span> <span class="n">population_size</span><span class="p">)</span>
+
+<span class="c1"># Define different sample sizes</span>
+<span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="n">num_experiments</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Number of samples for each sample size</span>
+
+<span class="c1"># Store results</span>
+<span class="n">all_sample_means</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># For each sample size, perform multiple sampling experiments</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">sample_sizes</span><span class="p">:</span>
+    <span class="n">sample_means</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">):</span>
+        <span class="c1"># Draw a random sample of size n from the population</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">sample_means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
+    
+    <span class="n">all_sample_means</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_means</span>
+
+<span class="c1"># Create visualization with subplots (one histogram per sample size)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_sizes</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Distribution of Sample Means for Different Sample Sizes&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="c1"># Plot histograms for each sample size</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_sizes</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">all_sample_means</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">true_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Mean&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Set common x-axis label</span>
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Sample Mean Value&#39;</span><span class="p">)</span>
+
+<span class="c1"># Calculate and display statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Size | Mean of Sample Means | Bias | Std of Sample Means | Theoretical SE&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------------------------------------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">sample_sizes</span><span class="p">:</span>
+    <span class="n">mean_of_sample_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_sample_means</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="n">std_of_sample_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">all_sample_means</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="n">theoretical_std</span> <span class="o">=</span> <span class="n">true_std</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="n">mean_of_sample_means</span> <span class="o">-</span> <span class="n">true_mean</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">11d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">mean_of_sample_means</span><span class="si">:</span><span class="s2">19.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">bias</span><span class="si">:</span><span class="s2">4.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">std_of_sample_means</span><span class="si">:</span><span class="s2">18.4f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">theoretical_std</span><span class="si">:</span><span class="s2">13.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Size | Mean of Sample Means | Bias | Std of Sample Means | Theoretical SE
+-----------------------------------------------------------------------
+          5 |             49.9851 | -0.0149 |             4.5733 |        4.4721
+         30 |             49.9405 | -0.0595 |             1.8638 |        1.8257
+        100 |             49.9564 | -0.0436 |             1.0014 |        1.0000
+</pre></div>
+</div>
+<img alt="_images/e91b35dd3484346a9bcc9e182ed0108766751f30beef7a7d26a88c2904aea32e.png" src="_images/e91b35dd3484346a9bcc9e182ed0108766751f30beef7a7d26a88c2904aea32e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="maximum-likelihood-estimation">
+<h2>Maximum-Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Link to this heading">#</a></h2>
+<p>Instead of OLS, we also can use MLE to estimate the parameters of a model provided a distributional assumption for the data is made. The fundamental idea behind maximum likelihood estimation is intuitive: choose the parameter values that make the observed data most likely to have occurred. More formally, MLE identifies the parameter values that maximize the likelihood function, which measures the probability (or probability density) of observing the given data as a function of the model parameters.</p>
+<section id="the-likelihood-function">
+<h3>The Likelihood Function<a class="headerlink" href="#the-likelihood-function" title="Link to this heading">#</a></h3>
+<p>For a random sample <span class="math notranslate nohighlight">\(Y_1, Y_2, \ldots, Y_n\)</span> from an independent and identical distribution with probability density (or mass) function <span class="math notranslate nohighlight">\(f(Y_i|\theta)\)</span> where <span class="math notranslate nohighlight">\(\theta\)</span> represents the unknown parameter(s), the likelihood function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[L(\theta|Y_1, Y_2, \ldots, Y_n) = \prod_{i=1}^{n} f(Y_i|\theta)\]</div>
+<p>Often, we work with the log-likelihood function instead:</p>
+<div class="math notranslate nohighlight">
+\[\ell(\theta|Y_1, Y_2, \ldots, Y_n) = \log L(\theta|Y_1, Y_2, \ldots, y_n) = \sum_{i=1}^{n} \log f(Y_i|\theta)\]</div>
+<p>The log-likelihood function is mathematically more convenient to work with because it transforms products into sums and often simplifies the optimization process.</p>
+</section>
+<section id="finding-the-maximum-likelihood-estimator">
+<h3>Finding the Maximum Likelihood Estimator<a class="headerlink" href="#finding-the-maximum-likelihood-estimator" title="Link to this heading">#</a></h3>
+<p>The maximum likelihood estimator <span class="math notranslate nohighlight">\(\hat{\theta}_{MLE}\)</span> is the value of <span class="math notranslate nohighlight">\(\theta\)</span> that maximizes the likelihood (or log-likelihood) function:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\theta}_{MLE} = \underset{\theta}{\operatorname{argmax}} \, L(\theta|Y_1, Y_2, \ldots, Y_n) = \underset{\theta}{\operatorname{argmax}} \, \ell(\theta|Y_1, Y_2, \ldots, Y_n)\]</div>
+<p>The process to find this estimator typically involves:</p>
+<ol class="arabic simple">
+<li><p>Specifying the likelihood function based on the assumed probability distribution</p></li>
+<li><p>Taking the logarithm to obtain the log-likelihood function</p></li>
+<li><p>Differentiating the log-likelihood function with respect to the unknown parameters</p></li>
+<li><p>Setting these derivatives equal to zero and solving for the parameters</p></li>
+<li><p>Verifying that the solution is indeed a maximum (using the second derivative test)</p></li>
+</ol>
+<p>While MLE is not always unbiased in finite samples, its bias often diminishes rapidly as the sample size increases, and the combination of consistency and efficiency makes it a powerful approach for parameter estimation.</p>
+</section>
+<section id="example-1-the-bernoulli-distribution">
+<h3>Example 1 - The Bernoulli Distribution<a class="headerlink" href="#example-1-the-bernoulli-distribution" title="Link to this heading">#</a></h3>
+<p>Formally, a random variable <span class="math notranslate nohighlight">\(Y\)</span> follows a Bernoulli distribution with parameter <span class="math notranslate nohighlight">\(\theta\)</span> (written as <span class="math notranslate nohighlight">\(Y \sim\)</span> Bernoulli (<span class="math notranslate nohighlight">\(\theta\)</span>)) if:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(Y = 1) = \theta \\
+P(Y = 0) = 1 - \theta \\
+\end{split}\]</div>
+<p>Where:</p>
+<p><span class="math notranslate nohighlight">\(\theta\)</span> is the probability of “success” (obtaining a 1) and  <span class="math notranslate nohighlight">\(1-\theta\)</span> is the probability of “failure” (obtaining a 0). For instance, we define a random variable which is <span class="math notranslate nohighlight">\(Y = 1\)</span> if the stock price of an asset increases on a day in comparison to the previous day and <span class="math notranslate nohighlight">\(Y = 0\)</span>, otherwise. Given the following sequence: <span class="math notranslate nohighlight">\(\lbrace 0, 1, 1, 1, 0, 1, 0, 0, 1, 0 \rbrace\)</span>, the likelihood for these ten observations is:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) = \left(1 - \theta\right) \cdot \theta \cdot \theta \cdot \theta \cdot \left(1 - \theta\right) \cdot \theta \cdot \left(1 - \theta\right) \cdot \left(1 - \theta\right)  \cdot \theta   \cdot \left(1 - \theta\right)
+\]</div>
+<p>Let us write this in a shorter form, hereby, <span class="math notranslate nohighlight">\(n = 10\)</span> is the number of all observations:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) = \theta^{\sum_{i=1}^n Y_i} \cdot \left(1 - \theta\right)^{n - \sum_t \sum_{i=1}^n Y_i}
+\]</div>
+<p>Now, applying the log-transformation, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L \left( \theta \right) = \sum_{i=1}^n Y_i \log \theta + \left( n - \sum_{i=1}^n Y_i \right) \log \left(1 - \theta\right)
+\]</div>
+<p>The task which needs to be solved is to find the parameter which maximizes the log-likelihood for a given data sample. In our example the log-likelihood function is:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L \left( \theta \right) = 5 \log \theta + \left( 10 - 5 \right) \log \left(1 - \theta\right)
+\]</div>
+<p>Possible values for <span class="math notranslate nohighlight">\(\theta\)</span> lie in the interval <span class="math notranslate nohighlight">\([0, 1]\)</span>. The graphic below illustrates the variation of <span class="math notranslate nohighlight">\(\log L \left( \theta \right)\)</span> depending on <span class="math notranslate nohighlight">\(\theta\)</span> and indicates reasonable parameter estimates should be in the range around <span class="math notranslate nohighlight">\(0.50\)</span>. To solve this properly, one needs to conduct optimization which can be done analytically for some distributions and needs to be done numerically for others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">theta_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ll</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta_values</span><span class="p">,</span> <span class="n">ll</span><span class="p">(</span><span class="n">theta_values</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log L(\theta)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0229e88f663c8fa0a56ef39144a5a5f78f35e76ca40576e28e18cc0274944fc8.png" src="_images/0229e88f663c8fa0a56ef39144a5a5f78f35e76ca40576e28e18cc0274944fc8.png" />
+</div>
+</div>
+<p>The first derivative is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial \theta} \log L(\theta) = \frac{\sum_{i=1}^n Y_i}{\theta} - \frac{n - \sum_{i=1}^n Y_i}{1-\theta}
+\]</div>
+<p>Setting the derivative to zero and solving brings us:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\sum_{i=1}^n Y_i(1-\theta) = \theta(n - \sum_{i=1}^n Y_i) \\
+\sum_{i=1}^n Y_t - \sum_{i=1}^n Y_i \theta = n \theta - \sum_{i=1}^n Y_i \theta \\
+\sum_{i=1}^n Y_i = n \theta \\
+\hat{\theta} = \frac{1}{n} \sum_{i=1}^n Y_i = \bar{Y}
+\end{split}\]</div>
+</section>
+<section id="example-2-the-normal-distribution">
+<h3>Example 2 - The Normal Distribution<a class="headerlink" href="#example-2-the-normal-distribution" title="Link to this heading">#</a></h3>
+<p>This works also for more than a single parameter. Let us take a look at its maximum likelihood estimation for the two parameters of the normal distribution. The likelihood function is:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\mu, \sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(Y_i - \mu)^2}{2\sigma^2}\right)
+\]</div>
+<p>and after log-transformation the Log-likelihood function:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L(\mu, \sigma^2) = \sum_{i=1}^n \log \left(\frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(Y_i - \mu)^2}{2\sigma^2}\right)\right)
+\]</div>
+<p>which can be simplified to:</p>
+<div class="math notranslate nohighlight">
+\[
+\log L(\mu, \sigma^2) = -\frac{n}{2} \log (2\pi \sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^n (Y_i - \mu)^2
+\]</div>
+<p>By deriving the derivative w.r.t. <span class="math notranslate nohighlight">\(\mu\)</span>, setting it to zero and solving it, we get the maximum likelihood estimator for it:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial}{\partial \mu} \log L(\mu, \sigma^2) = \frac{1}{\sigma^2} \sum_{i=1}^n (Y_i - \mu) = 0 \\
+\sum_{i=1}^n Y_i - n \mu = 0 \Rightarrow \mu = \frac{1}{n} \sum_{i=1}^n Y_i
+\end{split}\]</div>
+<p>By deriving the derivative w.r.t. <span class="math notranslate nohighlight">\(\sigma^2\)</span>, setting it to zero and solving it, we get the maximum likelihood estimator for it:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial}{\partial \sigma^2} \log L(\mu, \sigma^2) = -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2} \sum_{i=1}^n (Y_i - \mu)^2 = 0 \\
+\frac{n}{2\sigma^2} = \frac{1}{2(\sigma^2)^2} \sum_{i=1}^n (Y_i - \mu)^2 \Rightarrow \sigma^2 = \frac{1}{n} \sum_{i=1}^n (Y_i - \mu)^2
+\end{split}\]</div>
+<p>Finally, this means the maximum likelihood estimator for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> are the arithmetic mean and the empirical variance (without bias correction):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{\mu} = \frac{1}{n} \sum_{i=1}^n Y_i = \bar{Y} \\
+\hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n \left( Y_i - \hat{\mu} \right)^2
+\end{split}\]</div>
+</section>
+</section>
+<section id="model-evaluation">
+<h2>Model evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h2>
+<p>To assess how accurate an estimate is or how well a distributional assumption fits to the data, we select one or more suited metrics. An obvious metric for an OLS estimate is the mean squared error <span class="math notranslate nohighlight">\(MSE\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+MSE = \frac{1}{n} \sum_{i=1}^n \left(y_i - \hat{\mu}\right)^2
+\]</div>
+<p>The lower this value is, the smaller are on average the deviations between realizations <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_n\)</span> and <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>. An alternative is the mean absolute error MAE:</p>
+<div class="math notranslate nohighlight">
+\[
+MAE = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{\mu}|
+\]</div>
+<p>which may be impacted less by extreme realizations. In general, a variety of performance metrics exists to evaluate different estimation tasks. The metrics presented here only serve as examples.</p>
+<p>When comparing the fit of a MLE, the Akaike information criterion (AIC) and the Bayesian information criterion (BIC) can be used:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+AIC = -2 \log L(\boldsymbol{\theta}) + 2p \\
+BIC = -2 \log L(\boldsymbol{\theta}) + \log(n)p 
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(n\)</span> being the number of observations and <span class="math notranslate nohighlight">\(p\)</span> the number of parameters. The higher the likelihood the smaller <span class="math notranslate nohighlight">\(-2 \log L(\boldsymbol{\theta})\)</span>, thus, the lower the value of the AIC and the BIC, the better. By adding <span class="math notranslate nohighlight">\(2p\)</span> and <span class="math notranslate nohighlight">\(\log(n)p\)</span>, models with a higher number of parameters are penalized to a larger extent. Hereby, the BIC is more conservative towards more flexible models with a higher number of parameters.</p>
+<section id="training-and-test-data">
+<h3>Training and Test Data<a class="headerlink" href="#training-and-test-data" title="Link to this heading">#</a></h3>
+<p>The final goal for a statistical model or algorithm is <strong>generalization</strong>. While we use a data sample to determine estimates, we also want these estimates to perform comparably well for new and unseen data. This is why we usually collect at least two data samples, i.e., <strong>training</strong> data to derive estimates and <strong>test</strong> data to evaluate if the estimate also works good for new data.</p>
+<p>For instance in the example below, we collect daily returns for the S&amp;P 500 and the STOXX 600 and split the data in between the whole time period into a training set (first part of the time series) and a test set (second part of the time series). We determine the average return for each index for the training set. Next, we determine the MAE for the training and test data using the estimate from the training data for both time periods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">close_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_03/00_index_price_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">close_prices</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Date&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;^SPX&quot;</span><span class="p">,</span> <span class="s2">&quot;^STOXX&quot;</span><span class="p">]</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">today</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="mi">365</span><span class="p">)</span>
+
+    <span class="n">ohlc_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">today</span><span class="p">)</span>
+    <span class="n">close_prices</span> <span class="o">=</span> <span class="n">ohlc_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">close_prices</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_03/00_index_price_data.csv&quot;</span><span class="p">)</span>
+<span class="n">close_prices</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SP500&quot;</span><span class="p">,</span> <span class="s2">&quot;STOXX600&quot;</span><span class="p">]</span>
+
+<span class="n">daily_returns</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">split_date</span> <span class="o">=</span> <span class="s2">&quot;2022-02-28&quot;</span>
+<span class="n">trainining_data</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">split_date</span><span class="p">),</span> <span class="p">:]</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">split_date</span><span class="p">):,</span> <span class="p">:]</span>
+<span class="n">mean_est</span> <span class="o">=</span> <span class="n">trainining_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SP500&quot;</span><span class="p">,</span> <span class="s2">&quot;STOXX600&quot;</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">])</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">trainining_data</span> <span class="o">-</span> <span class="n">mean_est</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_data</span> <span class="o">-</span> <span class="n">mean_est</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The mean abolute error for the estimated expected value is:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean abolute error for the estimated expected value is:
+
+             SP500  STOXX600
+training  0.006477  0.006227
+test      0.007792  0.006238
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a second example we estimate the parameters of a normal and a student t distribution for the STOXX 600 using the training data. Afterwards, we determine the AIC and the BIC for training and test data.</p>
+<p>The density of the normal distribution is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f(Y) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(Y-\mu)^2}{2\sigma^2}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> are parameters representing the expected value and variance. The density of the student t distribution can be defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+f(Y) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sigma \sqrt{\nu \pi} \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{(Y - \mu)^2}{\nu \sigma^2} \right)^{-\frac{\nu+1}{2}}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the location parameter (shifts the distribution),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the scale parameter (controls the spread),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nu\)</span> is the degrees of freedom (df),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma(\cdot)\)</span> is the gamma function.</p></li>
+</ul>
+<p>The degrees of freedom impact the tails of the distribution. Lower values indicate higher probability masses in the tails, thus, a greater probability for experiencing more extreme events. This is why, the student t distribution is often more realistic for financial returns. It is also a good example for a distribution where the parameters do not exactly match specific moments. The expected value only exists for <span class="math notranslate nohighlight">\(\nu &gt; 1\)</span>, if <span class="math notranslate nohighlight">\(\nu \leq 1\)</span> the expected value does not exist and is infinte, respectively. The variance only exists for <span class="math notranslate nohighlight">\(\nu &gt; 2\)</span>. If this condition is met, the variance can be calculated by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}[Y] = \sigma^2 \cdot \frac{\nu}{\nu - 2}, \quad \text{for } \nu &gt; 2.
+\]</div>
+<p>The output below shows that according to all metrics, the student distribution would be a better fit for the returns of the STOXX 600. This is true for training and test data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">t</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">theta_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainining_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">)</span>
+<span class="n">theta_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainining_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">)</span>
+
+<span class="n">ll_norm_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">trainining_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">,</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ll_t_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">trainining_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">,</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+<span class="n">ll_norm_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">,</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">ll_t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">STOXX600</span><span class="p">,</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_t</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+<span class="n">aic_norm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">aic_t_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_train</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+
+<span class="n">aic_norm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">aic_t_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_test</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+
+<span class="n">n_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trainining_data</span><span class="p">)</span>
+<span class="n">bic_norm_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">bic_t_train</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_train</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_train</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+
+<span class="n">n_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="n">bic_norm_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_norm_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_norm</span><span class="p">)</span>
+<span class="n">bic_t_test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ll_t_test</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_t</span><span class="p">)</span>
+
+
+<span class="n">eval_distrs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">],</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LL (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;AIC (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;BIC (train)&quot;</span><span class="p">,</span> <span class="s2">&quot;LL (test)&quot;</span><span class="p">,</span> <span class="s2">&quot;AIC (test)&quot;</span><span class="p">,</span> <span class="s2">&quot;BIC (test)&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;LL (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_norm_train</span><span class="p">,</span> <span class="n">ll_t_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;AIC (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aic_norm_train</span><span class="p">,</span> <span class="n">aic_t_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;BIC (train)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bic_norm_train</span><span class="p">,</span> <span class="n">bic_t_train</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;LL (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_norm_test</span><span class="p">,</span> <span class="n">ll_t_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;AIC (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">aic_norm_test</span><span class="p">,</span> <span class="n">aic_t_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;BIC (test)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">bic_norm_test</span><span class="p">,</span> <span class="n">bic_t_test</span><span class="p">]</span>
+<span class="n">eval_distrs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LL (train)</th>
+      <th>AIC (train)</th>
+      <th>BIC (train)</th>
+      <th>LL (test)</th>
+      <th>AIC (test)</th>
+      <th>BIC (test)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>normal</th>
+      <td>802.221681</td>
+      <td>-1600.443361</td>
+      <td>-1593.457238</td>
+      <td>2629.930263</td>
+      <td>-5255.860526</td>
+      <td>-5246.524070</td>
+    </tr>
+    <tr>
+      <th>t</th>
+      <td>819.098972</td>
+      <td>-1632.197945</td>
+      <td>-1621.718760</td>
+      <td>2640.969460</td>
+      <td>-5275.938920</td>
+      <td>-5261.934236</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="cross-validation">
+<h3>Cross Validation<a class="headerlink" href="#cross-validation" title="Link to this heading">#</a></h3>
+<p>If we only split the data arbitrarily into two partiations, we may face several problems that can have a negative impact on model evaluation.</p>
+<ul class="simple">
+<li><p>The performance metric may vary to a large degree, depending on the specific split point, i.e., the performance metric has a high variance.</p></li>
+<li><p>Data is not used efficiently as a large portion of data is unused for training, reducing the amount of available information.</p></li>
+<li><p>If the training split is not representative, the model may be fitted too specific to training data and will not generalize, this is called <strong>overfitting</strong>.</p></li>
+</ul>
+<p>To overcome these pitfalls, <strong>cross validation</strong> techniques can be applied. In essence, cross validation can be done in different ways. The overall idea is to split the data multiple times, evaluate different test data sets and use the average out of sample performance metrics. This usually addresses all pitfalls from above.</p>
+<p>A very common approach of cross validation is <strong>k-fold cross validation</strong>. It is a resampling procedure used to evaluate machine learning models on a limited data sample. The procedure has a single parameter called <span class="math notranslate nohighlight">\(k\)</span> that refers to the number of groups the data sample is split into.</p>
+<p>Formally, for a dataset <span class="math notranslate nohighlight">\(D\)</span> of size <span class="math notranslate nohighlight">\(n\)</span>, k-fold cross validation works as follows:</p>
+<ol class="arabic simple">
+<li><p>Randomly partition the dataset <span class="math notranslate nohighlight">\(D\)</span> into <span class="math notranslate nohighlight">\(k\)</span> mutually exclusive subsets (folds) of approximately equal size:<span class="math notranslate nohighlight">\( D= D_1 \cup D_2 \cup ... \cup D_k \)</span></p></li>
+<li><p>For each fold <span class="math notranslate nohighlight">\(i \in \{1, 2, ..., k\}\)</span>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Use <span class="math notranslate nohighlight">\(D_i\)</span> as the validation set</p></li>
+<li><p>Use <span class="math notranslate nohighlight">\(D \setminus D_i\)</span> (the complement of <span class="math notranslate nohighlight">\(D_i\)</span>​) as the training set</p></li>
+<li><p>Train the model on the training set and evaluate it on the validation set</p></li>
+<li><p>Record the performance metric <span class="math notranslate nohighlight">\(P_i\)</span>​ (e.g. MSE, MAE)</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Calculate the overall performance estimate as the average across all <span class="math notranslate nohighlight">\(k\)</span> iterations:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[P = \frac{1}{k} \sum_{i=1}^{k} P_i\]</div>
+<p>The standard deviation of performance across folds can also be calculated to assess the stability of the model:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_P = \sqrt{\frac{1}{k} \sum_{i=1}^{k} (P_i - P)^2}\]</div>
+<p>Common choices for <span class="math notranslate nohighlight">\(k\)</span> include 5 and 10, though the specific value depends on dataset size and computational constraints. The figure below shows how data is split for a data set with <span class="math notranslate nohighlight">\(200\)</span> observations using <span class="math notranslate nohighlight">\(k=5\)</span> splits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">cmap_cv</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span>
+<span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">tt</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+    <span class="c1"># Fill in indices with the training/test groups</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="n">indices</span><span class="p">[</span><span class="n">tt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">indices</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Visualize the results</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)),</span>
+            <span class="p">[</span><span class="n">ii</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">indices</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_cv</span><span class="p">,</span>
+            <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+            <span class="n">vmax</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Observation number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cross validation number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;K-Fold&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/79b3c0d5a47248ed08882e700917883e51806315705219f795b09ba64febeb72.png" src="_images/79b3c0d5a47248ed08882e700917883e51806315705219f795b09ba64febeb72.png" />
+</div>
+</div>
+<p>Cross validation as described above assumes indpendence among data samples. For financial data this assumption is often not met. Potential pitfalls are:</p>
+<ul class="simple">
+<li><p>Past values influence future values.</p></li>
+<li><p>Shuffling breaks temporal dependencies, making training data contain information from the future that should not be available at that point in time.</p></li>
+</ul>
+<p>Alternatives are time series split that respect temporal structure. Hereby, two choices are the expanding and the rolling window approach. The <strong>expanding approach</strong>  gradually expands the training set, and the test set always consists of later observations.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fold</p></th>
+<th class="head"><p>Training Data</p></th>
+<th class="head"><p>Test Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>[1, 2, 3]</p></td>
+<td><p>[4]</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>[1, 2, 3, 4]</p></td>
+<td><p>[5]</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>[1, 2, 3, 4, 5]</p></td>
+<td><p>[6]</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>[1, 2, 3, 4, 5, 6]</p></td>
+<td><p>[7]</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>[1, 2, 3, 4, 5, 6, 7]</p></td>
+<td><p>[8]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For the <strong>rolling window</strong> approch, a fixed-size rolling window moves through time. The training set maintains a fixed size, dropping older observations as it moves forward. The test set always consists of the next time step(s).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fold</p></th>
+<th class="head"><p>Training Data</p></th>
+<th class="head"><p>Test Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>[1, 2, 3]</p></td>
+<td><p>[4]</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>[2, 3, 4]</p></td>
+<td><p>[5]</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>[3, 4, 5]</p></td>
+<td><p>[6]</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>[4, 5, 6]</p></td>
+<td><p>[7]</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>[5, 6, 7]</p></td>
+<td><p>[8]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We may examine these appraoches in the next chapters when studying applications.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_random_variables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Random variables</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares">Ordinary Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-and-variance">Bias and Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation">Maximum-Likelihood Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-function">The Likelihood Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-maximum-likelihood-estimator">Finding the Maximum Likelihood Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-the-bernoulli-distribution">Example 1 - The Bernoulli Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-the-normal-distribution">Example 2 - The Normal Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-test-data">Training and Test Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross Validation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
