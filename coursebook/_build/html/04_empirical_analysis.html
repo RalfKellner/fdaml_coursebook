@@ -1,0 +1,1603 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Empirical Estimation &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_empirical_analysis';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Estimation and Evaluation" href="03_estimation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Empirical Estimation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04_empirical_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Empirical Estimation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-stock-market-analysis">Empirical stock market analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-sovereign-bond-analysis">Empirical sovereign bond analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volatilty-analysis">Volatilty analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-positive-correlation-exists">Why a Positive Correlation Exists:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-correlation-isnt-perfect">Why the Correlation Isn’t Perfect:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptocurrencies">Cryptocurrencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commodity-analysis">Commodity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation analysis</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="empirical-estimation">
+<h1>Empirical Estimation<a class="headerlink" href="#empirical-estimation" title="Link to this heading">#</a></h1>
+<p>The last chapters introduce fundamental concepts for empirical analysis on financial markets. We learned about important asset types such as stocks, bonds and options. We introduced the concept of random variables and estimation. For instance, we derived the sample mean as an estimator for the expected value. To analyze developments and key characteristics of financial vehicles on financial markets, we we often need to estimate key statistical properties from observed data. Let’s define formal estimators for the central moments and quantiles that form the foundation of financial data analytics and apply them to real data.</p>
+<section id="descriptive-statistics">
+<h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\{X_1, X_2, \ldots, X_n\}\)</span> be a sample of <span class="math notranslate nohighlight">\(n\)</span> independent and identically distributed random variables representing financial returns or prices. The empirical estimators for the mean, variance, skewness, kurtosis, and quantiles are defined as follows:</p>
+<p>The <strong>sample mean</strong> is an unbiased estimator of the population mean: $<span class="math notranslate nohighlight">\(\hat{\mu} = \frac{1}{n}\sum_{i=1}^{n}X_i\)</span>$</p>
+<p>The <strong>sample variance</strong> is given by: $<span class="math notranslate nohighlight">\(\hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \hat{\mu})^2\)</span><span class="math notranslate nohighlight">\( where we divide by \)</span>n−1<span class="math notranslate nohighlight">\( rather than \)</span>n$ to ensure unbiasedness.</p>
+<p><strong>Skewness</strong> measures the asymmetry of the probability distribution and is estimated by: $<span class="math notranslate nohighlight">\(\hat{S} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^3}{(\hat{\sigma}^2)^{3/2}}\)</span>$</p>
+<p>Positive skewness indicates a distribution with an asymmetric tail extending toward more positive values, while negative skewness indicates a distribution with an asymmetric tail extending toward more negative values.</p>
+<p><strong>Kurtosis</strong> measures the “tailedness” of the probability distribution and is estimated by: $<span class="math notranslate nohighlight">\(\hat{K} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^4}{(\hat{\sigma}^2)^2}\)</span>$</p>
+<p>The excess kurtosis is often reported as <span class="math notranslate nohighlight">\(\hat{K} - 3\)</span>, where 3 is the kurtosis of a normal distribution. Positive excess kurtosis indicates a distribution with heavier tails than a normal distribution.</p>
+<p>For a given probability <span class="math notranslate nohighlight">\(p \in (0,1)\)</span>, the empirical estimator for the <span class="math notranslate nohighlight">\(p\)</span>-quantile, denoted by <span class="math notranslate nohighlight">\(\hat{q}_p\)</span>​, is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{q}_p = \begin{cases}
+\frac{1}{2} \left( X_{(np)} + X_{(np + 1)} \right) &amp; \text{ if } np \text{ is an integer } \\
+X_{(\lfloor np + 1 \rfloor)} &amp; \text{ if } np \text{ is not an integer }
+\end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(X_{(i)}\)</span>​ represents the <span class="math notranslate nohighlight">\(i\)</span>-th order statistic (i.e., the <span class="math notranslate nohighlight">\(i\)</span>-th smallest value in the sample), and <span class="math notranslate nohighlight">\(\lfloor np \rfloor\)</span> denotes the floor function applied to <span class="math notranslate nohighlight">\(np\)</span>. Basically, each quantile splits the data into two parts such that <span class="math notranslate nohighlight">\(p \cdot \)</span> 100% of the observations are equal to or below and <span class="math notranslate nohighlight">\((1 - p) \cdot \)</span> 100% of the observations are equal to or above the <span class="math notranslate nohighlight">\(p\)</span>-quantile. Note that statistical software programs often adjust this approach and try to improve it by, e.g., interpolation.</p>
+<p>Let’s walk through an example with ten numbers: <span class="math notranslate nohighlight">\([2.3, 1.5, 4.7, -0.8, 3.2, 0.9, 2.8, -1.2, 3.9, 1.7]\)</span>.</p>
+<p>The sample mean is calculated as the sum of all observations divided by the sample size:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mu} = \frac{1}{10}(2.3 + 1.5 + 4.7 + (-0.8) + 3.2 + 0.9 + 2.8 + (-1.2) + 3.9 + 1.7) = \frac{19.0}{10} = 1.9
+\]</div>
+<p>Next, we calculate the variance:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}^2 = \frac{1}{9}\sum_{i=1}^{10}(X_i - 1.9)^2 = \frac{1}{9}(0.16 + 0.16 + 7.84 + 7.29 + 1.69 + 1.00 + 0.81 + 9.61 + 4.00 + 0.04) = \frac{32.6}{9} = 3.62
+\]</div>
+<p>Then, the standard deviation is the square root of the variance:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma} = \sqrt{3.62} = 1.90
+\]</div>
+<p>The skewness is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{S} = \frac{\frac{1}{10}\sum_{i=1}^{10}(X_i - 1.9)^3}{(3.62)^{3/2}} = \frac{-0.74}{6.89} = -0.107
+\]</div>
+<p>This slightly negative skewness indicates a distribution with a slightly longer tail on the left side.</p>
+<p>The kurtosis is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{K} = \frac{\frac{1}{10}\sum_{i=1}^{10}(X_i - 1.9)^4}{(3.62)^2} = \frac{93.96}{13.10} = 7.17
+\]</div>
+<p>The excess kurtosis (kurtosis - 3) is 4.17, indicating a distribution with heavier tails than a normal distribution.</p>
+<p>For the 25% qunatile, we determine <span class="math notranslate nohighlight">\(np=10 \cdot 0.25 = 2.5\)</span> which is not an integer, thus, we use <span class="math notranslate nohighlight">\( X_{(\lfloor 2.5 \rfloor + 1)} = X_{(3)} = 0.9\)</span>.</p>
+<p>Another interesting estimator for financial data, originating from extreme value theory, is the Hill estimator. We will not delve into its theoretical underpinnings but instead focus on its definition and interpretation. Given independent and identically distributed random variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>, we define the order statistics sorted in descending order as <span class="math notranslate nohighlight">\(X_{(1,n)} \geq X_{(2,n)} \geq \dots \geq X_{(n,n)}\)</span>. The Hill estimator based on the top <span class="math notranslate nohighlight">\(k\)</span> largest observations is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\xi}{k, n} = \frac{1}{k} \sum_{j = 1}^k \left( \ln X_{(j,n)} - \ln X_{(k+1,n)} \right)
+\]</div>
+<p>This quantity estimates the tail index <span class="math notranslate nohighlight">\(\xi\)</span>, which governs the heaviness of the distribution’s upper tail. Larger values of <span class="math notranslate nohighlight">\(\hat{\xi}_{k,n}\)</span> indicate a heavier tail, meaning a higher likelihood of extreme positive values.</p>
+<p>Since this estimator targets the upper tail, it is more sensitive to large (positive) outliers. In financial applications, however, we are often more concerned with the lower tail—that is, with extreme negative outcomes such as large losses or negative returns. To apply the Hill estimator to the lower tail, a common technique is to multiply all observations by -1, effectively reflecting the distribution, and then apply the same formula to the resulting data.</p>
+<p>One important practical consideration is the choice of <span class="math notranslate nohighlight">\(k\)</span>, the number of top order statistics used in the Hill estimator. In empirical work, k is typically chosen to correspond to a high-order quantile, for example, the largest 5% to 10% of the sample. The goal is to find a range of <span class="math notranslate nohighlight">\(k\)</span> values over which the estimates <span class="math notranslate nohighlight">\(\hat{\xi}{k,n}\)</span> remain relatively stable. This stability is often assessed visually using a Hill plot, where <span class="math notranslate nohighlight">\(\hat{\xi}{k,n}\)</span> is plotted against <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>While this pragmatic approach does not guarantee that the assumptions of extreme value theory are fully satisfied, it still provides a useful approximation of the distribution’s tail behavior. In particular, it allows us to compare how “extreme” the realizations of one dataset are relative to another, even if the exact theoretical conditions are not met.</p>
+<p>When we talk about heavy tails in a distribution, we’re interested in how often extreme values—like very large asset returns or losses—occur. Some distributions, like the Normal, make extreme values very unlikely. Others, like the Pareto or Cauchy, allow for much more dramatic extremes.</p>
+<p>The Hill estimator is a simple way to quantify how heavy the upper tail of a distribution is, using only the largest values in a dataset. Here’s a way to think about it:</p>
+<ul class="simple">
+<li><p>imagine lining up your data from largest to smallest.</p></li>
+<li><p>focus just on the top few largest values (say, the top 10%).</p></li>
+<li><p>Ask: How quickly do these extreme values drop off as we go down the list?</p></li>
+</ul>
+<p>If the drop-off is steep, the tail is thin: extremely large values are rare.
+If the drop-off is gradual, the tail is heavy: extremely large values are more likely.</p>
+<p>The Hill estimator looks at how big jumps between the largest values are — but it does so on a log scale. Taking logarithms helps us do two things:</p>
+<ol class="arabic simple">
+<li><p>Measure relative differences rather than absolute ones — this makes sense when values are very large (e.g., <span class="math notranslate nohighlight">\(1000 vs. \)</span>2000 is a more meaningful difference than <span class="math notranslate nohighlight">\(1 vs. \)</span>2 in some contexts).</p></li>
+<li><p>Flatten the scale so that we can average the gaps between extreme values more effectively.</p></li>
+</ol>
+<p>By comparing each of the top k values to the (k+1)-th largest (i.e., the smallest of the “extreme” group), and doing so on a log scale, we get a summary number: the Hill estimate.</p>
+<ul class="simple">
+<li><p>If the Hill estimate is high, it means that the top values don’t decay very quickly — the distribution has a heavy tail, and we might expect more large outliers.</p></li>
+<li><p>If it’s low, it means the extreme values fall off quickly — the tail is light, and outliers are less likely.</p></li>
+</ul>
+<p>In finance, this helps us answer questions like:</p>
+<p>“How risky is this asset in terms of rare, extreme losses or gains?”</p>
+<p>Just to clarify, how the estimation is done. Suppose we have the following dataset (e.g., returns or positive losses): <span class="math notranslate nohighlight">\(X = \lbrace2.1, 3.5, 4.0, 5.8, 6.2, 7.1, 8.5, 10.0, 12.3, 15.0\rbrace\)</span></p>
+<p>First, sort in  descending order and sort the data from largest to smallest to get the order statistics:</p>
+<div class="math notranslate nohighlight">
+\[
+X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\quad \dots
+\]</div>
+<p>We’ll choose <span class="math notranslate nohighlight">\(k = 3\)</span>, so we focus on the top 3 values: <span class="math notranslate nohighlight">\(X_{(1)}, X_{(2)}, X_{(3)}\)</span>, and we also need <span class="math notranslate nohighlight">\(X_{(4)}\)</span> = 8.5 for the formula. Determine the natural log of these realizations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\ln X_{(1)} = \ln 15.0 \approx 2.7080 \\
+\ln X_{(2)} = \ln 12.3 \approx 2.5096 \\
+\ln X_{(3)} = \ln 10.0 \approx 2.3026 \\
+\ln X_{(4)} = \ln 8.5 \approx 2.1401 \\
+\end{split}\]</div>
+<p>Now compute:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\xi}_{3,10} = \frac{1}{3} \left[ (2.7080 - 2.1401) + (2.5096 - 2.1401) + (2.3026 - 2.1401) \right] = \frac{1}{3} (0.5679 + 0.3695 + 0.1625) = \frac{1.0999}{3} \approx 0.3666
+\]</div>
+</section>
+<section id="empirical-stock-market-analysis">
+<h2>Empirical stock market analysis<a class="headerlink" href="#empirical-stock-market-analysis" title="Link to this heading">#</a></h2>
+<p>Let us take a look at real empirical data. We collect index values for the S&amp;P 500 since 1997 and determine daily discrete returns. The figure below is a time series plot which plots returns over time. We also include crisis periods by shaded areas. By this means, we can identify a very common property of daily financial returns which is called <strong>volatility clustering</strong>. As you can see, returns seem to vary in crisis periods. Once the market enters a crisis period, the more volatile behavior persists for a while. Investors perceive higher fluctuations as riskier, even if higher fluctuations also mean greater deviations in positive returns. As investors are risk-averse, greater downward deviations (negative returns) are weighted more heavily.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/sp_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Download S&amp;P 500 data</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;^GSPC&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;1997-01-01&quot;</span><span class="p">,</span> <span class="n">auto_adjust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Compute daily returns</span>
+    <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Daily Return&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">spx</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
+    <span class="n">spx</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/sp_data.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">crisis_periods</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dotcom_bubble&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dot-Com Bubble&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2000-03-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2002-10-09&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;global_financial_crisis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Global Financial Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2007-10-09&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2009-03-09&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;eurozone_debt_crisis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eurozone Debt Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2010-04-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-07-26&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;china_market_turmoil&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Market Turmoil&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-06-12&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-02-11&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;covid_crash&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;COVID-19 Crash&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-02-20&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-23&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">spx</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">spx</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spx</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" src="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurtosis</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hill_estimator</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tail</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;upper&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be between 1 and len(data) - 1&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tail</span> <span class="o">==</span> <span class="s2">&quot;upper&quot;</span><span class="p">:</span>
+        <span class="n">sorted_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">data</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">tail</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span><span class="p">:</span>
+        <span class="n">sorted_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="o">-</span><span class="n">data</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tail must be &#39;upper&#39; or &#39;lower&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">top_k</span> <span class="o">=</span> <span class="n">sorted_data</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">x_k1</span> <span class="o">=</span> <span class="n">sorted_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="n">logs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">top_k</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_k1</span><span class="p">)</span>
+    <span class="n">hill_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hill_est</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">describe_with_moments</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">percentiles</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span> <span class="n">fisher</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_hill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">k_ratio</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extended descriptive stats with skewness, kurtosis, and Hill estimator.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - data: pd.Series or pd.DataFrame</span>
+<span class="sd">    - fisher: If True, returns Fisher kurtosis (normal=0); else Pearson (normal=3)</span>
+<span class="sd">    - include_hill: Whether to include Hill estimator for tails (only for Series)</span>
+<span class="sd">    - k_ratio: Fraction of sample to use for Hill estimator (e.g., 0.05 means top 5%)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.Series or pd.DataFrame with added statistics</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="n">percentiles</span><span class="p">)</span>
+        <span class="n">clean_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clean_data</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_ratio</span><span class="p">)</span>
+
+        <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;skew&quot;</span><span class="p">:</span> <span class="n">skew</span><span class="p">(</span><span class="n">clean_data</span><span class="p">),</span>
+            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">fisher</span><span class="o">=</span><span class="n">fisher</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">include_hill</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">extra</span><span class="p">[</span><span class="s2">&quot;hill_upper&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s2">&quot;upper&quot;</span><span class="p">)</span>
+            <span class="n">extra</span><span class="p">[</span><span class="s2">&quot;hill_lower&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">desc</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">extra</span><span class="p">)])</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="n">percentiles</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">col_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">col_data</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_ratio</span><span class="p">)</span>
+            <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">skew</span><span class="p">(</span><span class="n">col_data</span><span class="p">)</span>
+            <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">fisher</span><span class="o">=</span><span class="n">fisher</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">include_hill</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;hill_upper&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;upper&quot;</span><span class="p">)</span>
+                <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;hill_lower&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;lower&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">desc</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a pandas Series or DataFrame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cell below determines descriptive statistics for the daily returns from the figure above. We take a look at these statistics over the full period, only the crisis periods and the non-crisis periods. Examining these statistics holistically shows that financial crises are not just higher-volatility periods, but structurally different in terms of tail risk and asymmetry.</p>
+<p>During the crisis period:</p>
+<ul class="simple">
+<li><p>The hill estimator for the lower tail is higher</p></li>
+<li><p>The 5% quantile is lower</p></li>
+<li><p>Kurtosis is slightly higher</p></li>
+<li><p>Minimum and maximum is more extreme</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_overall</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
+<span class="n">returns_crisis</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">returns_non_crisis</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">desc_overall</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">returns_overall</span><span class="p">)</span>
+<span class="n">desc_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">returns_crisis</span><span class="p">)</span>
+<span class="n">desc_non_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">returns_non_crisis</span><span class="p">)</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Full&quot;</span><span class="p">:</span> <span class="n">desc_overall</span><span class="p">,</span> <span class="s2">&quot;Crisis&quot;</span><span class="p">:</span> <span class="n">desc_crisis</span><span class="p">,</span> <span class="s2">&quot;Non-Crisis&quot;</span><span class="p">:</span> <span class="n">desc_non_crisis</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comparison</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   Full       Crisis   Non-Crisis
+count       7104.000000  1985.000000  5119.000000
+mean           0.000359    -0.000909     0.000851
+std            0.012165     0.016865     0.009709
+min           -0.119841    -0.119841    -0.068657
+5%            -0.018504    -0.027018    -0.014689
+50%            0.000671    -0.000364     0.000872
+95%            0.017459     0.023888     0.015411
+max            0.115800     0.115800     0.093828
+skew          -0.180188    -0.178286     0.177337
+kurtosis       9.510842     6.397881     6.280152
+hill_upper     0.390793     0.388954     0.328835
+hill_lower     0.381063     0.363625     0.347228
+</pre></div>
+</div>
+</div>
+</div>
+<p>This can also be seen visually when dividing the empirical distribution in crisis and non-crisis period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">returns_non_crisis</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Non-Crisis&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">returns_crisis</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Crisis&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of S&amp;P 500 Returns with Emphasis on Tails&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daily Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/49f8b4a89820d3f653be80d30b4b07432d1e71bc0a660071a9eb6ebbd7c62855.png" src="_images/49f8b4a89820d3f653be80d30b4b07432d1e71bc0a660071a9eb6ebbd7c62855.png" />
+</div>
+</div>
+</section>
+<section id="empirical-sovereign-bond-analysis">
+<h2>Empirical sovereign bond analysis<a class="headerlink" href="#empirical-sovereign-bond-analysis" title="Link to this heading">#</a></h2>
+<p>To understand the behavior of sovereign bonds in financial markets, this section examines the descriptive properties of bond exchange-traded funds (ETFs), which offer a practical and intuitive way to analyze bond performance. Unlike yield-based measures, which represent annualized rates of return for holding a bond to maturity, bond ETF prices reflect the realized total return from day to day — including price changes, accrued interest, and reinvested coupons. This makes them directly comparable to equity returns and more suitable for empirical return-based analysis. In addition, bond ETFs eliminate the need for yield-to-price approximations, duration assumptions, or interpolations from constant maturity yield curves. As a result, they provide a clean, market-based proxy for sovereign bond returns that is especially useful for analyzing volatility, correlation with equities, and flight-to-safety behavior during periods of financial stress.</p>
+<p>The figure below exhibits discrete returns of two bond ETFs which invest mostly into sovereign bonds, SHY with an emphasis on shorter maturities (1-3 years) and IEF with maturities of medium range (7-10 years). In comparison to the stock index we observe a smaller range of return realizations and less difference regarding the volatility behavior in crisis and non-crisis periods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">bond_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/bond_etf_returns.csv&quot;</span><span class="p">)</span>
+    <span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">bond_returns</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">bond_etfs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SHY&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">]</span>
+    <span class="n">bond_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">bond_etfs</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;1997-01-01&quot;</span><span class="p">)[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">bond_returns</span> <span class="o">=</span> <span class="n">bond_data</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">bond_returns</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/bond_etf_returns.csv&quot;</span><span class="p">)</span>
+
+<span class="n">crisis_periods</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dotcom_bubble&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dot-Com Bubble&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2000-03-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2002-10-09&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;global_financial_crisis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Global Financial Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2007-10-09&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2009-03-09&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;eurozone_debt_crisis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eurozone Debt Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2010-04-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-07-26&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;china_market_turmoil&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Market Turmoil&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-06-12&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-02-11&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;covid_crash&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;COVID-19 Crash&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-02-20&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-23&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;SHY&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;SHY-ETF (1-3 year treasuries)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;IEF-ETF (7-10 year treasuries)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sovereign Bond ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7f786ab029c743387e03bbce88ff409b699a49a44dca349929f56f18a969706a.png" src="_images/7f786ab029c743387e03bbce88ff409b699a49a44dca349929f56f18a969706a.png" />
+</div>
+</div>
+<p>Taking a look at the descriptive statistics below, we observe a higher average return during crisis periods in comparison to non-crisis periods. This characterizes a higher demand and on average higher positve price changes during critical times. At the same time, volatility and adverse return realizations (quantified by the lower 5%-quantile) are higher during crisis periods, however, moderate in comparison to the stock index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bond_returns_crisis</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">bond_returns_non_crisis</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">desc_bonds_overall</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">desc_bonds_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">bond_returns_crisis</span><span class="p">)</span>
+<span class="n">desc_bonds_non_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">bond_returns_non_crisis</span><span class="p">)</span>
+<span class="n">comparison_bond</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">desc_bonds_overall</span><span class="p">,</span> <span class="n">desc_bonds_crisis</span><span class="p">,</span> <span class="n">desc_bonds_non_crisis</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">comparison_bond</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;IEF-Full&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY-Full&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF-Non-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY-Non-Crisis&quot;</span><span class="p">]</span>
+<span class="n">comparison_bond</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IEF-Full</th>
+      <th>SHY-Full</th>
+      <th>IEF-Crisis</th>
+      <th>SHY-Crisis</th>
+      <th>IEF-Non-Crisis</th>
+      <th>SHY-Non-Crisis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5704.000000</td>
+      <td>5704.000000</td>
+      <td>1380.000000</td>
+      <td>1380.000000</td>
+      <td>4324.000000</td>
+      <td>4324.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.000151</td>
+      <td>0.000076</td>
+      <td>0.000364</td>
+      <td>0.000084</td>
+      <td>0.000083</td>
+      <td>0.000074</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.004333</td>
+      <td>0.000961</td>
+      <td>0.005546</td>
+      <td>0.001212</td>
+      <td>0.003865</td>
+      <td>0.000866</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.025072</td>
+      <td>-0.006566</td>
+      <td>-0.025072</td>
+      <td>-0.005614</td>
+      <td>-0.018489</td>
+      <td>-0.006566</td>
+    </tr>
+    <tr>
+      <th>5%</th>
+      <td>-0.006827</td>
+      <td>-0.001325</td>
+      <td>-0.008538</td>
+      <td>-0.001795</td>
+      <td>-0.006145</td>
+      <td>-0.001217</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000238</td>
+      <td>0.000000</td>
+      <td>0.000495</td>
+      <td>0.000118</td>
+      <td>0.000187</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>95%</th>
+      <td>0.006850</td>
+      <td>0.001608</td>
+      <td>0.008892</td>
+      <td>0.002159</td>
+      <td>0.006101</td>
+      <td>0.001437</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.034262</td>
+      <td>0.009974</td>
+      <td>0.026416</td>
+      <td>0.007094</td>
+      <td>0.034262</td>
+      <td>0.009974</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>0.084762</td>
+      <td>0.281683</td>
+      <td>0.001218</td>
+      <td>-0.068221</td>
+      <td>0.100617</td>
+      <td>0.559662</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>2.529146</td>
+      <td>7.205682</td>
+      <td>1.211967</td>
+      <td>3.992562</td>
+      <td>2.823517</td>
+      <td>8.879630</td>
+    </tr>
+    <tr>
+      <th>hill_upper</th>
+      <td>0.310934</td>
+      <td>0.354383</td>
+      <td>0.282214</td>
+      <td>0.277649</td>
+      <td>0.292372</td>
+      <td>0.347825</td>
+    </tr>
+    <tr>
+      <th>hill_lower</th>
+      <td>0.296656</td>
+      <td>0.412977</td>
+      <td>0.281508</td>
+      <td>0.399966</td>
+      <td>0.295510</td>
+      <td>0.365864</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="volatilty-analysis">
+<h2>Volatilty analysis<a class="headerlink" href="#volatilty-analysis" title="Link to this heading">#</a></h2>
+<p>Chapter 1 introduced options and the possibility to derive implied volatility. Implied volatility can be interpreted as a forward looking volatility estimate. We can compare this to the empirical estimator which has been introduced in the beginning of this chapter. For this taks, we compare the VIX to empirical estimates which use a rolling window of historical data.</p>
+<p>The VIX measures the market’s expectation of volatility over the next 30 calendar days, derived from S&amp;P 500 option prices with maturities between 23 and 37 days. It is annualized and in per cent, thus, a value of the VIX of 20 means that the annual volatility estimate is equal to <span class="math notranslate nohighlight">\(0.20\)</span>. In comparison to that we can determine a volatility estimate from the past days, e.g., around 20 days, and transfrom this daily volatility estimate to an annual estimate by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}_{\text{annual}} = \sqrt{252} \cdot \hat{\sigma}_{\text{daily}}
+\]</div>
+<p>This transformation is based on the simplified assumption that daily observations are independent and identically distributed random variables. We learned in Chapter 1 that log-returns are additive over time. This means that if we want to determine, e.g., the annual return, we can simply sum over daily return within that year. Together with the independent and identically distributed assumption, the volatility of every day’s log return is the same. Thus, as shown in Chapter 2, the variance for a sum of random variables:</p>
+<div class="math notranslate nohighlight">
+\[Y = a_1 X_1 + a_2 X_2 + \ldots + a_n X_n = \sum_{i=1}^n a_i X_i\]</div>
+<p>simplifies from:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(Y) = \text{Var}\left(\sum_{i=1}^n a_i X_i\right) = \sum_{i=1}^n \underbrace{a_i^2}_{=1} \text{Var}(X_i) + \underbrace{ 2\sum_{i &lt; j} a_i a_j \text{Cov}(X_i, X_j)}_{=0 \text{ due to independence}}\]</div>
+<p>to:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(Y) = \sum_{i=1}^n \text{Var}(X_i) = n \cdot \text{Var}(X)\]</div>
+<p>This means for a sum of <span class="math notranslate nohighlight">\(n=252\)</span> log-returns (one year has approximately <span class="math notranslate nohighlight">\(252\)</span> trading days). The variance is <span class="math notranslate nohighlight">\(252\)</span> times the daily variance estimate.</p>
+<p>In the figure below, at every point in time, we use the past <span class="math notranslate nohighlight">\(21\)</span> days to determine a daily volatility estimate, this is annualized and multiplied by <span class="math notranslate nohighlight">\(100\)</span> (as the VIX is in per cent). Thus, at every day, we can compare the volatility estimate of historical data (blue line) to the one which is build on investors’ perception what is going to happen within the next 30 calender days.</p>
+<div class="highlight-{Why notranslate"><div class="highlight"><pre><span></span>
+The **VIX** measures the **market&#39;s expectation of volatility over the next 30 calendar days**, derived from S&amp;P 500 option prices with maturities between 23 and 37 days. It is a **forward-looking** measure.
+
+To compare this to **historical volatility**, we use a **21-day rolling window** because:
+
+- There are roughly **21 trading days in a typical month**.
+- This aligns with the VIX&#39;s 30-day horizon, which is based on calendar days.
+- It allows for a meaningful comparison between **past realized volatility** and **expected future volatility**.
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">vix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/vola_est_vix.csv&quot;</span><span class="p">)</span>
+    <span class="n">vix</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">vix</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">vix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">sp500</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/vola_est_sp.csv&quot;</span><span class="p">)</span>
+    <span class="n">sp500</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">sp500</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">sp500</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Download historical data</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="s2">&quot;2025-01-01&quot;</span>
+    <span class="n">sp500</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;^GSPC&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+    <span class="n">vix</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;^VIX&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+    <span class="n">sp500</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">sp500</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">vix</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">vix</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">sp500</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/vola_est_sp.csv&quot;</span><span class="p">)</span>
+    <span class="n">vix</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/vola_est_vox.csv&quot;</span><span class="p">)</span>
+
+<span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;log_return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Compute historical volatility (e.g. 21-day rolling std dev of daily returns, annualized)</span>
+<span class="n">rolling_window</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">trading_days</span> <span class="o">=</span> <span class="mi">252</span>
+<span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;hist_vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;log_return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">rolling_window</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">trading_days</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Combine with VIX (already annualized in % terms)</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Hist Vol&#39;</span><span class="p">:</span> <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;hist_vol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;VIX&#39;</span><span class="p">:</span> <span class="n">vix</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">combined</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">combined</span><span class="p">[</span><span class="s1">&#39;Hist Vol&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Historical Volatility (</span><span class="si">{</span><span class="n">rolling_window</span><span class="si">}</span><span class="s1"> days rolling)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">combined</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">combined</span><span class="p">[</span><span class="s1">&#39;VIX&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;VIX (Implied Volatility)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;S&amp;P 500: Historical Volatility vs. Implied Volatility (VIX)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Volatility (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/15c46afc5e0bf39acf011987957833f3f9c92f2cacaade1829d5cbd624b4260f.png" src="_images/15c46afc5e0bf39acf011987957833f3f9c92f2cacaade1829d5cbd624b4260f.png" />
+</div>
+</div>
+<p>We typically observe a positive correlation between historical (realized) volatility and the VIX (implied volatility), but the relationship is far from perfect. The actual correlation between both for the example above is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">combined</span><span class="p">[</span><span class="s1">&#39;Hist Vol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">combined</span><span class="p">[</span><span class="s1">&#39;VIX&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation between Historical Vol and VIX: </span><span class="si">{</span><span class="n">correlation</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between Historical Vol and VIX: 0.83
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possible reasons and explanations are:</p>
+<section id="why-a-positive-correlation-exists">
+<h3>Why a Positive Correlation Exists:<a class="headerlink" href="#why-a-positive-correlation-exists" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Volatility clustering: High past volatility tends to be followed by high future volatility. Since the VIX is forward-looking and historical volatility is backward-looking, they often move in the same direction.</p></li>
+<li><p>Shared information: Both measures are influenced by major market events — a sudden crash, for instance, raises both historical and implied volatility.</p></li>
+<li><p>Market memory: The options market (which determines the VIX) incorporates recent volatility into its pricing of expected future risk.</p></li>
+</ul>
+</section>
+<section id="why-the-correlation-isnt-perfect">
+<h3>Why the Correlation Isn’t Perfect:<a class="headerlink" href="#why-the-correlation-isnt-perfect" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Different time perspectives:</p>
+<ul>
+<li><p>VIX is based on market expectations of future volatility (next 30 calendar days).</p></li>
+<li><p>Historical volatility looks backward, typically over the last 21 trading days.</p></li>
+</ul>
+</li>
+<li><p>VIX includes a risk premium:</p>
+<ul>
+<li><p>The VIX reflects not just expected volatility but also investor demand for protection.</p></li>
+<li><p>This “variance risk premium” can cause the VIX to overestimate actual future volatility.</p></li>
+</ul>
+</li>
+<li><p>Behavioral factors**:</p>
+<ul>
+<li><p>During crises or uncertainty, investors tend to overreact, pushing VIX up even if actual volatility hasn’t materialized yet.</p></li>
+<li><p>In calm periods, the VIX might remain elevated if uncertainty about future events lingers.</p></li>
+</ul>
+</li>
+<li><p>Mean reversion effects:</p>
+<ul>
+<li><p>Realized volatility can be high in a recent period, but market participants may expect it to cool down, leading to a lower VIX (or vice versa).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="cryptocurrencies">
+<h2>Cryptocurrencies<a class="headerlink" href="#cryptocurrencies" title="Link to this heading">#</a></h2>
+<p>The analysis of bonds and stocks shows that stocks usually are more risky but also more profitable than bonds. Bonds tend to offer more stable income streams and lower volatility, which makes them a popular choice for conservative investors. Stocks, on the other hand, typically provide higher returns in exchange for increased risk and exposure to market fluctuations.</p>
+<p>Let us compare this traditional risk–return tradeoff to Bitcoin, the most popular representative of the cryptocurrency asset class. Bitcoin emerged in the wake of the 2008 financial crisis as a radical alternative to fiat currencies and has evolved significantly over time. Although its early years were marked by limited adoption and high technical risk, Bitcoin became a major focus of global financial markets around 2017, when its price surged dramatically and it began to attract attention from institutional investors.</p>
+<p>Unlike bonds and stocks, Bitcoin exhibits characteristics of both an investment asset and a speculative instrument. Its high volatility has made it appealing for traders seeking large returns, but it has also introduced considerable risk for long-term investors. As we examine Bitcoin alongside bonds and stocks, we can explore how its risk–return profile differs from traditional asset classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">btc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/btc_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Download S&amp;P 500 data</span>
+    <span class="n">btc</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2015-01-01&quot;</span><span class="p">,</span> <span class="n">auto_adjust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Compute daily returns</span>
+    <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+    <span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">btc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/btc_data.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">crisis_periods</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;china_market_turmoil&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Market Turmoil&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-06-12&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-02-11&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;covid_crash&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;COVID-19 Crash&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-02-20&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-23&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">btc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bitcoin Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7a3d1cb713e0b802661bba79c023dba066cfa1fa42665dcb04bbe40acca406a8.png" src="_images/7a3d1cb713e0b802661bba79c023dba066cfa1fa42665dcb04bbe40acca406a8.png" />
+</div>
+</div>
+<p>The descriptive statistics show that Bitcoin is by far more risky and profitable than the S&amp;P 500 index. This underlines its reputation as a speculative asset. Furthermore, it also exhibits less profit and more risk during financial crisis periods within the last ten years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">btc_returns_overall</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
+<span class="n">btc_returns_crisis</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">btc_returns_non_crisis</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">btc_desc_overall</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">btc_returns_overall</span><span class="p">)</span>
+<span class="n">btc_desc_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">btc_returns_crisis</span><span class="p">)</span>
+<span class="n">btc_desc_non_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">btc_returns_non_crisis</span><span class="p">)</span>
+<span class="n">btc_comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Full&quot;</span><span class="p">:</span> <span class="n">btc_desc_overall</span><span class="p">,</span> <span class="s2">&quot;Crisis&quot;</span><span class="p">:</span> <span class="n">btc_desc_crisis</span><span class="p">,</span> <span class="s2">&quot;Non-Crisis&quot;</span><span class="p">:</span> <span class="n">btc_desc_non_crisis</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">btc_comparison</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   Full      Crisis   Non-Crisis
+count       3745.000000  563.000000  3182.000000
+mean           0.002148   -0.000606     0.002636
+std            0.036077    0.038599     0.035597
+min           -0.371695   -0.371695    -0.211449
+5%            -0.055066   -0.060252    -0.053428
+50%            0.001297   -0.001287     0.001656
+95%            0.057392    0.052732     0.059416
+max            0.252472    0.181878     0.252472
+skew          -0.129039   -1.597136     0.208620
+kurtosis       7.652910   17.814366     5.021953
+hill_upper     0.405980    0.443347     0.377081
+hill_lower     0.367757    0.385532     0.378051
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="commodity-analysis">
+<h2>Commodity analysis<a class="headerlink" href="#commodity-analysis" title="Link to this heading">#</a></h2>
+<p>When analyzing financial markets, commodities deserve attention alongside stocks, bonds, and cryptocurrencies because they reflect fundamental economic forces such as inflation, supply chain disruptions, and geopolitical tensions. Among all commodities, gold and silver stand out due to their dual roles: they are both precious metals with industrial uses and historically important stores of value. Gold, in particular, is often viewed as a safe-haven asset during times of market stress, while silver combines monetary appeal with strong industrial demand, making it more sensitive to economic cycles.</p>
+<p>Beyond precious metals, other important commodities in macro-financial analysis include:</p>
+<ul class="simple">
+<li><p>Oil (e.g., Brent or WTI) — critical for global growth, energy pricing, and inflation dynamics.</p></li>
+<li><p>Copper — often considered a “barometer of global manufacturing” and economic health.</p></li>
+<li><p>Agricultural commodities (e.g., wheat, corn, soybeans) — relevant for food inflation and emerging markets.</p></li>
+</ul>
+<p>Analyzing commodities like gold and silver allows us to explore how real assets interact with financial instruments, and how they respond to inflation expectations, interest rate changes, and risk sentiment — making them a valuable part of any multi-asset comparison.</p>
+<p>In analogy to the previous analyses in this chapter, we take a look at a gold and silver ETF and its price development which is quantified by discrete returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/commodity_etf_returns.csv&quot;</span><span class="p">)</span>
+    <span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">commodity_etfs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]</span>
+    <span class="n">commodity_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">commodity_etfs</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2015-01-01&quot;</span><span class="p">)[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">commodity_data</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">commodity_returns</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/commodity_etf_returns.csv&quot;</span><span class="p">)</span>
+
+<span class="n">crisis_periods</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;china_market_turmoil&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;China Market Turmoil&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-06-12&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-02-11&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;covid_crash&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;COVID-19 Crash&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-02-20&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-23&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">commodity_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">commodity_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">commodity_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">commodity_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Gold-ETF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">commodity_returns</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;SLV&quot;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Silver-ETF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Commodity ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/77f01c86dde4af536634d1d54b623e2ffd12b375ba798f22550bf9caac98fcef.png" src="_images/77f01c86dde4af536634d1d54b623e2ffd12b375ba798f22550bf9caac98fcef.png" />
+</div>
+</div>
+<p>In comparison between both precious metals, silver seems to be a more risky and more profitable asset than gold. In comparison to the other assets they seem to lay between bonds and stocks regarding their risk-profitability profile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">commodity_returns_crisis</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">commodity_returns_non_crisis</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">desc_commodities_overall</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">commodity_returns</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">desc_commodities_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">commodity_returns_crisis</span><span class="p">)</span>
+<span class="n">desc_commodities_non_crisis</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">commodity_returns_non_crisis</span><span class="p">)</span>
+<span class="n">comparison_commodities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">desc_commodities_overall</span><span class="p">,</span> <span class="n">desc_commodities_crisis</span><span class="p">,</span> <span class="n">desc_commodities_non_crisis</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">comparison_commodities</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GLD-Full&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV-Full&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD-Non-Crisis&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV-Non-Crisis&quot;</span><span class="p">]</span>
+<span class="n">comparison_commodities</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GLD-Full</th>
+      <th>SLV-Full</th>
+      <th>GLD-Crisis</th>
+      <th>SLV-Crisis</th>
+      <th>GLD-Non-Crisis</th>
+      <th>SLV-Non-Crisis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>2577.000000</td>
+      <td>2577.000000</td>
+      <td>388.000000</td>
+      <td>388.000000</td>
+      <td>2189.000000</td>
+      <td>2189.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.000399</td>
+      <td>0.000416</td>
+      <td>-0.000150</td>
+      <td>-0.001277</td>
+      <td>0.000496</td>
+      <td>0.000716</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.008884</td>
+      <td>0.016714</td>
+      <td>0.010298</td>
+      <td>0.018469</td>
+      <td>0.008608</td>
+      <td>0.016370</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.053694</td>
+      <td>-0.135926</td>
+      <td>-0.039888</td>
+      <td>-0.123448</td>
+      <td>-0.053694</td>
+      <td>-0.135926</td>
+    </tr>
+    <tr>
+      <th>5%</th>
+      <td>-0.014043</td>
+      <td>-0.024992</td>
+      <td>-0.016053</td>
+      <td>-0.028918</td>
+      <td>-0.013428</td>
+      <td>-0.024121</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000522</td>
+      <td>0.000597</td>
+      <td>-0.000150</td>
+      <td>-0.000798</td>
+      <td>0.000576</td>
+      <td>0.000634</td>
+    </tr>
+    <tr>
+      <th>95%</th>
+      <td>0.014873</td>
+      <td>0.026809</td>
+      <td>0.015219</td>
+      <td>0.026773</td>
+      <td>0.014710</td>
+      <td>0.026773</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.049038</td>
+      <td>0.091429</td>
+      <td>0.044180</td>
+      <td>0.091429</td>
+      <td>0.049038</td>
+      <td>0.089985</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>-0.110010</td>
+      <td>-0.125671</td>
+      <td>0.065642</td>
+      <td>-0.537284</td>
+      <td>-0.147678</td>
+      <td>-0.006133</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>2.681618</td>
+      <td>5.780630</td>
+      <td>1.939894</td>
+      <td>6.646181</td>
+      <td>2.807990</td>
+      <td>5.405114</td>
+    </tr>
+    <tr>
+      <th>hill_upper</th>
+      <td>0.255512</td>
+      <td>0.334480</td>
+      <td>0.331650</td>
+      <td>0.310236</td>
+      <td>0.246600</td>
+      <td>0.339617</td>
+    </tr>
+    <tr>
+      <th>hill_lower</th>
+      <td>0.319398</td>
+      <td>0.360265</td>
+      <td>0.315803</td>
+      <td>0.339556</td>
+      <td>0.330482</td>
+      <td>0.363364</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Gold and silver typically exhibit a strong positive correlation, often ranging between 0.6 and 0.9 over long time periods (for our period its correlation is about 0.8). This is because both metals respond to similar macroeconomic drivers, such as inflation expectations, interest rate changes, and safe-haven demand during market stress. However, the correlation is not perfect — silver has a more cyclical component due to its industrial uses, making it more sensitive to global economic activity. As a result, silver often behaves like a high-beta version of gold, outperforming in bull markets but also experiencing sharper declines during downturns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation between discrete returns of Gold and Silver ETFs: </span><span class="si">{</span><span class="n">correlation</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation between discrete returns of Gold and Silver ETFs: 0.78
+</pre></div>
+</div>
+</div>
+</div>
+<p>Due to their correlation, it is interesting how their prices evolve over time. For this purpose, the gold-to-silver ratio measures how many ounces of silver are equivalent in price to one ounce of gold. Historically, this ratio has averaged between 55 and 65, though it has experienced wide swings depending on market conditions. A high ratio (e.g., above 80) suggests that silver is relatively undervalued compared to gold, while a low ratio (e.g., below 40) may indicate the opposite. Investors and traders often watch this ratio for mean-reversion opportunities, or as a signal of shifts in monetary policy expectations, inflation risk, or economic momentum.</p>
+<p>When comparing ETF prices such as GLD (gold) and SLV (silver), we can apply the same concepts used in spot price analysis, including the gold-to-silver ratio and their historical correlation. These ETFs are designed to closely track the spot prices of physical metals, so analyzing their price movements provides a practical and accessible way to study the relationship between gold and silver in financial markets.</p>
+<p>In the figure below, we compare the GLD to SLV ETF prices. We observe a variation of the gold-to-silver ration around its average over time. This indicates a characteristic which is called mean-reversion and very popular in finance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">metals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/metals.csv&quot;</span><span class="p">)</span>
+    <span class="n">metals</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">metals</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">metals</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span>
+    <span class="n">metals</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">([</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">)[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+    <span class="n">metals</span> <span class="o">=</span> <span class="n">metals</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">metals</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/metals.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compute ratios</span>
+<span class="n">gold_silver_ratio</span> <span class="o">=</span> <span class="n">metals</span><span class="p">[</span><span class="s1">&#39;GLD&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">metals</span><span class="p">[</span><span class="s1">&#39;SLV&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate the empirical mean</span>
+<span class="n">mean_ratio</span> <span class="o">=</span> <span class="n">gold_silver_ratio</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gold_silver_ratio</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GLD / SLV&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mean_ratio</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean Ratio = </span><span class="si">{</span><span class="n">mean_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gold to silver price ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Index (Start = 100)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1d5ecd63e7dcb9fe2260144a201f3b6acf2d54aede07e0f1541ccb49391ba3c2.png" src="_images/1d5ecd63e7dcb9fe2260144a201f3b6acf2d54aede07e0f1541ccb49391ba3c2.png" />
+</div>
+</div>
+</section>
+<section id="correlation-analysis">
+<h2>Correlation analysis<a class="headerlink" href="#correlation-analysis" title="Link to this heading">#</a></h2>
+<p>Let us conclude this chapter with a small correlation analysis of the assets discussed so far. We collect daily prices of the S&amp;P 500, the IEF bond ETF, Bitcoin, the GLD ETF. For each times series of these prices, discrete returns are calculated and merged to the VIX. The figure below visualizes each asset’s cumulative sum of discrete returns and plots the VIX in the lower figure. The Covid crisis marks a clear increase of fear with a spike of the VIX and a series of losses for all asset classes. We also observe how much more the value of Bitcoin increased in comparison to traditional asset classes such as stocks, bonds and commodities. However, also remember this comes along with the price of bearing significantly more risk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/assets.csv&quot;</span><span class="p">)</span>
+    <span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;^GSPC&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;^VIX&quot;</span><span class="p">,</span> <span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD&quot;</span><span class="p">]</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span><span class="p">)</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;^VIX&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;^VIX&quot;</span><span class="p">]],</span> <span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;VIX&quot;</span><span class="p">]</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;VIX&quot;</span><span class="p">]]</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/assets.csv&quot;</span><span class="p">)</span>
+
+<span class="n">non_vix_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">assets</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s1">&#39;VIX&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;height_ratios&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]},</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Upper plot: all assets except VIX</span>
+<span class="n">assets</span><span class="p">[</span><span class="n">non_vix_columns</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cumulative discrete returns (excluding VIX)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Price&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Lower plot: VIX only</span>
+<span class="n">assets</span><span class="p">[</span><span class="s1">&#39;VIX&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;VIX Index&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;VIX&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Final layout adjustments</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/33350c5e257dffee2e3431a0797c2d7b7bd19a097eb4de10751fd07c79c4c8da.png" src="_images/33350c5e257dffee2e3431a0797c2d7b7bd19a097eb4de10751fd07c79c4c8da.png" />
+</div>
+</div>
+<p>A heatmap of the correlation matrix is shown below. All values meet the economic intution, i.e.:</p>
+<ul class="simple">
+<li><p>S&amp;P 500</p>
+<ul>
+<li><p>Moderately negatively correlated with <strong>VIX</strong> (-0.16), as expected during market stress.</p></li>
+<li><p>Weakly positively correlated with <strong>BTC</strong> (0.22), suggesting that Bitcoin sometimes behaves like a high-beta equity.</p></li>
+<li><p>Nearly uncorrelated with <strong>Gold</strong> (0.05), and mildly negatively with <strong>Treasuries</strong> (-0.17).</p></li>
+</ul>
+</li>
+<li><p>Treasury Bonds</p>
+<ul>
+<li><p>Positively correlated with <strong>Gold</strong> (0.38), reflecting their common role as safe-haven assets.</p></li>
+<li><p>Negatively correlated with <strong>equities</strong> (-0.17), typical in flight-to-safety regimes.</p></li>
+</ul>
+</li>
+<li><p>Bitcoin (BTC)</p>
+<ul>
+<li><p>Slightly positively correlated with the <strong>S&amp;P 500</strong> (0.22).</p></li>
+<li><p>Weak correlations with all other assets, indicating it behaves largely independently.</p></li>
+</ul>
+</li>
+<li><p>Gold</p>
+<ul>
+<li><p>Strongest link with <strong>Treasuries</strong> (0.38).</p></li>
+<li><p>Essentially uncorrelated with <strong>VIX</strong> (0.00), suggesting it doesn’t always move with short-term volatility spikes.</p></li>
+</ul>
+</li>
+<li><p>VIX</p>
+<ul>
+<li><p>Negatively correlated with <strong>stocks</strong> (-0.16), as expected.</p></li>
+<li><p>Low correlations with all other assets, reinforcing its function as a market fear gauge rather than an investment asset.</p></li>
+</ul>
+</li>
+</ul>
+<p>These findings support classical asset behavior patterns and highlight the value of diversification across different asset classes. They also show that <strong>Bitcoin</strong>, while slightly connected to equity markets, still behaves differently from traditional safe-havens like <strong>gold</strong> and <strong>Treasuries</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Compute correlation matrix</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Plot heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix of Asset Time Series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/767c94e96cd8924e8be822b63d1740319893b17cff0790250681af81200e2e94.png" src="_images/767c94e96cd8924e8be822b63d1740319893b17cff0790250681af81200e2e94.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_estimation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Estimation and Evaluation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-stock-market-analysis">Empirical stock market analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-sovereign-bond-analysis">Empirical sovereign bond analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volatilty-analysis">Volatilty analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-positive-correlation-exists">Why a Positive Correlation Exists:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-correlation-isnt-perfect">Why the Correlation Isn’t Perfect:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptocurrencies">Cryptocurrencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commodity-analysis">Commodity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation analysis</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
