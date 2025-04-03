@@ -702,12 +702,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.63284196 0.63989289 0.5790402  0.59434821 0.04652342]
+[0.95008654 0.4247818  0.4190833  0.24964466 0.19181565]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/b0fcc659e9fb1544d6f13dbaf64a97741be81a14b23fe0e897814eb5573d0344.png" src="_images/b0fcc659e9fb1544d6f13dbaf64a97741be81a14b23fe0e897814eb5573d0344.png" />
+<img alt="_images/12ea5faed5657eae01fa7368b2c009eefb0bfcb184e2193503c466f3e2fc066e.png" src="_images/12ea5faed5657eae01fa7368b2c009eefb0bfcb184e2193503c466f3e2fc066e.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -779,7 +779,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d50c9c656f1cb391cc5afc720f237401ebbc51c6eab0490aad2511b703b2da02.png" src="_images/d50c9c656f1cb391cc5afc720f237401ebbc51c6eab0490aad2511b703b2da02.png" />
+<img alt="_images/ee63c713e979515179e5b3476964a87e1f069ed0ace7a6de41f2583087c067c8.png" src="_images/ee63c713e979515179e5b3476964a87e1f069ed0ace7a6de41f2583087c067c8.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -795,7 +795,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/854fb3c845cc28553d279d7e610971350a4159817b4a99de8142e6deaa2f816f.png" src="_images/854fb3c845cc28553d279d7e610971350a4159817b4a99de8142e6deaa2f816f.png" />
+<img alt="_images/47bbb4e9c697f9fac5f307c388d27debbc6f59b763996fb7a01f62bd9e9ad275.png" src="_images/47bbb4e9c697f9fac5f307c388d27debbc6f59b763996fb7a01f62bd9e9ad275.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -850,7 +850,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/936e2a2504f35896afa13a12a9dc95d87a55cc5aacf177225e31f2c1f9926ea4.png" src="_images/936e2a2504f35896afa13a12a9dc95d87a55cc5aacf177225e31f2c1f9926ea4.png" />
+<img alt="_images/977de0e4b91c28e6148973d050d0086ea38af82c9858be2db5f93969e376976f.png" src="_images/977de0e4b91c28e6148973d050d0086ea38af82c9858be2db5f93969e376976f.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -1028,7 +1028,7 @@ $<span class="math notranslate nohighlight">\(F(x_1, x_2) = F_{X_1}(x_1) \cdot F
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c8d6f672de7f25854424887f37c36f142900dde85c7d0a30071e7aaff5c9d2e1.png" src="_images/c8d6f672de7f25854424887f37c36f142900dde85c7d0a30071e7aaff5c9d2e1.png" />
+<img alt="_images/5a68ce94fe97331331f7e862b8ee4f843f627d1ec07226fc1eb830b585841186.png" src="_images/5a68ce94fe97331331f7e862b8ee4f843f627d1ec07226fc1eb830b585841186.png" />
 </div>
 </div>
 <p>It’s important to note that while independence implies zero correlation, the converse is not necessarily true. Two random variables can be uncorrelated but still dependent in a non-linear way. To visualize this, take a look below. Even though very stron non-linear relationships exist, the linear correlation coefficient underestimates the true relationship.</p>
