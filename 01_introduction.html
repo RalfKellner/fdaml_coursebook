@@ -169,6 +169,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Asset classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
 </ul>
 
     </div>
@@ -599,12 +600,12 @@ V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + r)^t} + \frac{N}{(1 + r)^T},
 <section id="yield-to-maturity">
 <h3>Yield to maturity<a class="headerlink" href="#yield-to-maturity" title="Link to this heading">#</a></h3>
 <p>The numerical examples for the values of zero and coupon bonds demonstrate how their value is determined using a specific rate for discounting. At issuance this rate is specified and depends on factors such as base rates from central banks or solvency of the issuer. Usually higher base rates increase rates of bond contracts (thus decreasing their value). Furthermore, the greater the risk of a bond issuer not being able to pay its obligations, the higher the rate must be for finding investors to purchase the bond and bearing this credit risk (thus again decreasing today’s value of the bond).</p>
-<p>However, once bonds have been issued and are held by investors, externalities that impact bond prices may change which alters the current value of bond contracts. Usually, we only observe current prices of bonds and know about their contract specifics such as the maturity, coupon payments, coupon dates, etc. Take a look at the zero-coupon bond from the example above. Originally, its (semi-annual) rate has been <span class="math notranslate nohighlight">\(r = 0.025\)</span>. Thus, according to its initial contract design, its value should be:</p>
+<p>However, once bonds have been issued and are held by investors, externalities that impact bond prices may change which alters the current value of bond contracts. Usually, we only observe current prices of bonds and know about their contract specifics such as the maturity, coupon payments, coupon dates, etc. Take a look at the zero-coupon bond from the example above. Originally, its (semi-annual) rate has been <span class="math notranslate nohighlight">\(r = 0.025\)</span>. Thus, according to its initial contract design, its value half a year before maturity should be:</p>
 <div class="math notranslate nohighlight">
 \[
 V_0 = \frac{1000}{\left(1 + 0.025\right)} = 975.61
 \]</div>
-<p>half a year before it matures. However, what if the interest rate environment changed since its issuance and currently zero-coupon bonds with the same maturity (and solvency) are offered at a price of <span class="math notranslate nohighlight">\(961.54\)</span>? At this moment, the current value of your bond is the same because if you would like to sell it, no rationale investor will pay you more. But what is the internal rate of return for this bond if an investor purchases it at a price of <span class="math notranslate nohighlight">\(961.54\)</span>. Let <span class="math notranslate nohighlight">\(y\)</span> denote the internal rate of return. Under discrete compounding, we know that:</p>
+<p>However, what if the interest rate environment changed since its issuance and currently zero-coupon bonds with the same maturity (and solvency) are offered at a price of <span class="math notranslate nohighlight">\(961.54\)</span>? At this moment, the current value of your bond is the same because if you would like to sell it, no rationale investor will pay you more. But what is the internal rate of return for this bond if an investor purchases it at a price of <span class="math notranslate nohighlight">\(961.54\)</span>. Let <span class="math notranslate nohighlight">\(y\)</span> denote the internal rate of return. Under discrete compounding, we know that:</p>
 <div class="math notranslate nohighlight">
 \[
 V_t = \frac{N}{(1 + y)^{T - t}} 
@@ -620,7 +621,7 @@ y = \left( \frac{N}{V_t} \right)^{\frac{1}{T-t}} - 1
 \[
 \sum_{t = 1}^{4} \frac{50}{(1 + y)^t} + \frac{1000}{(1 + y)^4} = 1036.30.
 \]</div>
-<p>In this example, numerical methods (such as trial and error or financial calculators) yield an approximate solution of <span class="math notranslate nohighlight">\(r = 4\%\)</span>. The yield to maturity represents a single discount rate that equates the bond’s price to its future cash flows. However, we can also view a coupon bond as a collection of zero-coupon bonds, each with different maturities and corresponding <em>spot rates</em>. Under this approach, the value of the bond is:</p>
+<p>In this example, numerical methods (such as trial and error or mathematical algorithms) yield an approximate solution of <span class="math notranslate nohighlight">\(r = 4\%\)</span>. The yield to maturity represents a single discount rate that equates the bond’s price to its future cash flows. However, we can also view a coupon bond as a collection of zero-coupon bonds, each with different maturities and corresponding <em>spot rates</em>. Under this approach, the value of the bond is:</p>
 <div class="math notranslate nohighlight">
 \[
 V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + y_t)^t} + \frac{N}{(1 + y_T)^T},
@@ -701,7 +702,6 @@ V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + y_t)^t} + \frac{N}{(1 + y_T)^T},
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="kn">import</span> <span class="n">DateFormatter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">fredapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fred</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">fred_api_key</span>  <span class="c1"># Ensure you have your FRED API key</span>
-
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">recession_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_01/02_recession_index.csv&quot;</span><span class="p">)</span>
