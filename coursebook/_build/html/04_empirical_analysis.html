@@ -357,11 +357,20 @@
 <section id="descriptive-statistics">
 <h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\{X_1, X_2, \ldots, X_n\}\)</span> be a sample of <span class="math notranslate nohighlight">\(n\)</span> independent and identically distributed random variables representing financial returns or prices. The empirical estimators for the mean, variance, skewness, kurtosis, and quantiles are defined as follows:</p>
-<p>The <strong>sample mean</strong> is an unbiased estimator of the population mean: $<span class="math notranslate nohighlight">\(\hat{\mu} = \frac{1}{n}\sum_{i=1}^{n}X_i\)</span>$</p>
-<p>The <strong>sample variance</strong> is given by: $<span class="math notranslate nohighlight">\(\hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \hat{\mu})^2\)</span><span class="math notranslate nohighlight">\( where we divide by \)</span>n−1<span class="math notranslate nohighlight">\( rather than \)</span>n$ to ensure unbiasedness.</p>
-<p><strong>Skewness</strong> measures the asymmetry of the probability distribution and is estimated by: $<span class="math notranslate nohighlight">\(\hat{S} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^3}{(\hat{\sigma}^2)^{3/2}}\)</span>$</p>
+<p>The <strong>sample mean</strong> is an unbiased estimator of the population mean:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mu} = \frac{1}{n}\sum_{i=1}^{n}X_i\]</div>
+<p>The <strong>sample variance</strong> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \hat{\mu})^2\]</div>
+<p>where we divide by <span class="math notranslate nohighlight">\(n−1\)</span> rather than <span class="math notranslate nohighlight">\(n\)</span> to ensure unbiasedness.</p>
+<p><strong>Skewness</strong> measures the asymmetry of the probability distribution and is estimated by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{S} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^3}{(\hat{\sigma}^2)^{3/2}}\]</div>
 <p>Positive skewness indicates a distribution with an asymmetric tail extending toward more positive values, while negative skewness indicates a distribution with an asymmetric tail extending toward more negative values.</p>
-<p><strong>Kurtosis</strong> measures the “tailedness” of the probability distribution and is estimated by: $<span class="math notranslate nohighlight">\(\hat{K} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^4}{(\hat{\sigma}^2)^2}\)</span>$</p>
+<p><strong>Kurtosis</strong> measures the “tailedness” of the probability distribution and is estimated by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{K} = \frac{\frac{1}{n}\sum_{i=1}^{n}(X_i - \hat{\mu})^4}{(\hat{\sigma}^2)^2}\]</div>
 <p>The excess kurtosis is often reported as <span class="math notranslate nohighlight">\(\hat{K} - 3\)</span>, where 3 is the kurtosis of a normal distribution. Positive excess kurtosis indicates a distribution with heavier tails than a normal distribution.</p>
 <p>For a given probability <span class="math notranslate nohighlight">\(p \in (0,1)\)</span>, the empirical estimator for the <span class="math notranslate nohighlight">\(p\)</span>-quantile, denoted by <span class="math notranslate nohighlight">\(\hat{q}_p\)</span>​, is defined as:</p>
 <div class="math notranslate nohighlight">
