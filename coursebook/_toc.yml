@@ -5,3 +5,4 @@ chapters:
 - file: 02_random_variables
 - file: 03_estimation
 - file: 04_empirical_analysis
+- file: 05_regression

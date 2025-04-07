@@ -1,0 +1,1748 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linear Regression &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_regression';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Empirical Estimation" href="04_empirical_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/05_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specification">Model specification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-impact-of-intercept-and-slope">Understanding the Impact of Intercept and Slope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-categorical-variables-in-regression-models">Using Categorical Variables in Regression Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variable-encoding">Dummy Variable Encoding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-with-categorical-variables">Regression Model with Categorical Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions-of-the-linear-regression-model">Assumptions of the Linear Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearity">1. <strong>Linearity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-errors">2. <strong>Independence of Errors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homoscedasticity-constant-variance-of-errors">3. <strong>Homoscedasticity (Constant Variance of Errors)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-perfect-multicollinearity">4. <strong>No Perfect Multicollinearity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-conditional-mean-of-errors">5. <strong>Zero Conditional Mean of Errors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-of-errors-for-inference-only">6. <strong>Normality of Errors</strong> <em>(for inference only)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-in-linear-regression-is-different-from-zero">Hypothesis Testing in Linear Regression: Is β Different from Zero?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypotheses">The Hypotheses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-statistic-t-test">The Test Statistic (t-Test)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-understanding-standard-errors-through-repeated-sampling">Simulation: Understanding Standard Errors Through Repeated Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-rule">Decision Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-errors-matter">Why Standard Errors Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit-in-linear-regression">Goodness of Fit in Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-r-squared">Definition of R-squared</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-sectional-vs-time-series-regression">Cross-Sectional vs. Time-Series Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-sectional-regression">Cross-Sectional Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-regression">Time-Series Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences">Key Differences</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-regression-company-return-on-market-return-capm">Time-Series Regression: Company Return on Market Return (CAPM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-the-risk-free-rate">What about the risk-free rate?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-capm-multi-factor-models">Extending the CAPM: Multi-Factor Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-risk-factors-are-constructed">How Risk Factors Are Constructed</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-constructing-the-smb-size-factor">Example: Constructing the SMB (Size) Factor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-constructing-the-hml-value-factor">Example: Constructing the HML (Value) Factor</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-negative-fama-french-factor-betas">Interpreting Negative Fama-French Factor Betas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-beta-on-smb-size-factor">Negative Beta on SMB (Size Factor)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-beta-on-hml-value-factor">Negative Beta on HML (Value Factor)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-vs-monthly-data-in-time-series-regressions">Daily vs. Monthly Data in Time-Series Regressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-data">Daily Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-data">Monthly Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-expected-returns-with-capm-and-fama-french-models">Estimating Expected Returns with CAPM and Fama-French Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#capm-expected-return">CAPM Expected Return</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-3-factor-model">Fama-French 3-Factor Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-alpha-in-expected-return-estimation">The Role of Alpha in Expected Return Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-perspective">Theoretical Perspective</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-perspective">Empirical Perspective</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-trade-off">Practical Trade-Off</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-vs-idiosyncratic-risk">Systematic vs. Idiosyncratic Risk</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-risk-market-or-factor-risk">Systematic Risk (Market or Factor Risk)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#idiosyncratic-risk-asset-specific-risk">Idiosyncratic Risk (Asset-Specific Risk)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-why-firms-with-similar-risk-exposures-have-correlated-returns">Intuition: Why Firms with Similar Risk Exposures Have Correlated Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resulting-correlation">Resulting Correlation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up-from-factor-models-to-time-series-analysis">Wrapping Up: From Factor Models to Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h1>
+<p>Linear regression is one of the most fundamental and widely used tools in statistical modeling and data analysis — especially in finance. It allows us to quantify and explain the relationship between one variable (typically a financial return or price) and one or more explanatory variables (such as market returns, interest rates, or volatility). In its simplest form, linear regression helps answer questions like: “How sensitive is a stock to the overall market?” or “To what extent do interest rates explain bond yield changes?”</p>
+<p>By fitting a straight line to observed data, the linear regression model estimates how changes in the independent variable(s) influence the dependent variable. This makes it a powerful method for risk modeling, factor analysis, forecasting, and performance attribution — all of which are essential in asset management, portfolio construction, and financial research. In this chapter, we will build intuition for the model, understand how to estimate and interpret it, and explore its limitations and assumptions in the context of financial time series.</p>
+<section id="model-specification">
+<h2>Model specification<a class="headerlink" href="#model-specification" title="Link to this heading">#</a></h2>
+<p>In the multiple linear regression model, we describe a dependent random variable <span class="math notranslate nohighlight">\(Y\)</span> as a linear function of multiple independent variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \alpha + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k + \varepsilon
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>: Dependent variable (e.g., asset return)</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_1, \dots, X_k\)</span>: Independent variables (e.g., market return, interest rate, volatility)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>: Intercept term</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1, \dots, \beta_k\)</span>: Slope coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span>: Error term</p></li>
+</ul>
+<p>For a sample of <span class="math notranslate nohighlight">\(n\)</span> observations, the model becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_k x_{ik} + \varepsilon_i \quad \text{for } i = 1, 2, \dots, n
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span>: Observed value of the dependent variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{ij}\)</span>: Observed value of the <span class="math notranslate nohighlight">\(j\)</span>-th independent variable in observation <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_i\)</span>: Residual term for observation <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>In matrix notation, the model can be written compactly as:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of dependent variable values</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is an <span class="math notranslate nohighlight">\(n \times (k+1)\)</span> matrix including a column of ones for the intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> is a <span class="math notranslate nohighlight">\((k+1) \times 1\)</span> vector of coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\varepsilon}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of residuals</p></li>
+</ul>
+<p>The OLS estimator minimizes the <strong>sum of squared residuals</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\boldsymbol{\beta}} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+\]</div>
+<p>And the solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{Y}
+\]</div>
+<p>Predictions of the model for each observation are given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik} \quad \text{for } i = 1, 2, \dots, n
+\]</div>
+<p>This framework allows us to study how multiple variables jointly explain variations in an outcome — a common setup in empirical asset pricing and financial econometrics.</p>
+<section id="understanding-the-impact-of-intercept-and-slope">
+<h3>Understanding the Impact of Intercept and Slope<a class="headerlink" href="#understanding-the-impact-of-intercept-and-slope" title="Link to this heading">#</a></h3>
+<p>In a simple linear regression model, the <strong>intercept</strong> (<span class="math notranslate nohighlight">\(\beta_0\)</span>) and <strong>slope</strong> (<span class="math notranslate nohighlight">\(\beta_1\)</span>) determine the position and orientation of the regression line.</p>
+<ul class="simple">
+<li><p>The <strong>intercept <span class="math notranslate nohighlight">\(\beta_0\)</span></strong> represents the expected value of the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> when the independent variable <span class="math notranslate nohighlight">\(X\)</span> is zero. Changing the intercept shifts the entire regression line <strong>up or down</strong> without altering its slope. It captures any baseline effect or systematic component not explained by <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>The <strong>slope <span class="math notranslate nohighlight">\(\beta_1\)</span></strong> measures the sensitivity of <span class="math notranslate nohighlight">\(Y\)</span> to changes in <span class="math notranslate nohighlight">\(X\)</span>. A higher slope implies that small changes in <span class="math notranslate nohighlight">\(X\)</span> result in larger changes in <span class="math notranslate nohighlight">\(Y\)</span>, while a lower slope implies a weaker relationship. If <span class="math notranslate nohighlight">\(\beta_1 &gt; 0\)</span>, the regression line slopes upward (positive relationship); if <span class="math notranslate nohighlight">\(\beta_1 &lt; 0\)</span>, it slopes downward (negative relationship). Changing the slope <strong>rotates</strong> the regression line around the intercept.</p></li>
+</ul>
+<p>These two parameters together define the best linear approximation of how <span class="math notranslate nohighlight">\(Y\)</span> responds to <span class="math notranslate nohighlight">\(X\)</span>. Visually, they control the height and angle of the line that minimizes the sum of squared deviations from the observed data points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Simulate data for univariate regression</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">true_alpha</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">true_beta</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="c1"># Create a DataFrame</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
+
+<span class="c1"># Create plots to illustrate the impact of alpha and beta</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot 1: true alpha and beta</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True regression line&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;True Model: $\beta_0 = 2$, $\beta_1 = 1.5$&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot 2: Change in alpha (intercept)</span>
+<span class="n">alpha_changed</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha_changed</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Higher Intercept (α = 4)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Impact of Intercept $\beta_0$&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot 3: Change in beta (slope)</span>
+<span class="n">beta_changed</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">beta_changed</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Flatter Slope (β = 0.5)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Impact of Slope $\beta_1$&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/30866d0321805818561243be39278eaa13ef8e323f977bd3e89a5bae39fe5d6e.png" src="_images/30866d0321805818561243be39278eaa13ef8e323f977bd3e89a5bae39fe5d6e.png" />
+</div>
+</div>
+</section>
+<section id="using-categorical-variables-in-regression-models">
+<h3>Using Categorical Variables in Regression Models<a class="headerlink" href="#using-categorical-variables-in-regression-models" title="Link to this heading">#</a></h3>
+<p>In many financial and economic applications, some explanatory variables are <strong>categorical</strong> rather than numeric. Examples include:</p>
+<ul class="simple">
+<li><p>Asset type (e.g., stock, bond, crypto)</p></li>
+<li><p>Sector (e.g., tech, energy, financials)</p></li>
+<li><p>Rating category (e.g., AAA, BB, CCC)</p></li>
+<li><p>Country or region</p></li>
+</ul>
+<p>Since regression models require <strong>numerical inputs</strong>, we incorporate categorical variables by converting them into <strong>dummy variables</strong> (also called indicator variables).</p>
+<section id="dummy-variable-encoding">
+<h4>Dummy Variable Encoding<a class="headerlink" href="#dummy-variable-encoding" title="Link to this heading">#</a></h4>
+<p>Suppose we have a categorical variable with three categories: <code class="docutils literal notranslate"><span class="pre">&quot;Stock&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Bond&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;Crypto&quot;</span></code>. We introduce two dummy variables:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D_1 = 1\)</span> if the asset is a Bond, 0 otherwise</p></li>
+<li><p><span class="math notranslate nohighlight">\(D_2 = 1\)</span> if the asset is a Crypto, 0 otherwise</p></li>
+</ul>
+<p>We <strong>omit one category</strong> (e.g., Stock) to avoid perfect multicollinearity. This omitted category becomes the <strong>reference group</strong>.</p>
+</section>
+<section id="regression-model-with-categorical-variables">
+<h4>Regression Model with Categorical Variables<a class="headerlink" href="#regression-model-with-categorical-variables" title="Link to this heading">#</a></h4>
+<p>The model becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \beta_0 + \beta_1 D_1 + \beta_2 D_2 + \varepsilon
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>: Dependent variable (e.g., return)</p></li>
+<li><p><span class="math notranslate nohighlight">\(D_1\)</span>: Dummy for Bond</p></li>
+<li><p><span class="math notranslate nohighlight">\(D_2\)</span>: Dummy for Crypto</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>: Mean return for the reference group (Stock)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span>: Difference in mean return between Bonds and Stocks</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_2\)</span>: Difference in mean return between Crypto and Stocks</p></li>
+</ul>
+<p>Each coefficient measures the effect of being in that category <strong>relative to the reference group</strong>.</p>
+</section>
+<section id="interpretation">
+<h4>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\beta_1 = -0.01\)</span>, then bonds return on average 1% less than stocks.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\beta_2 = 0.03\)</span>, then crypto returns are 3% higher than stocks on average.</p></li>
+</ul>
+<p>This approach lets us include <strong>qualitative information</strong> in regression models, enabling comparisons across categories and testing for systematic differences between groups.</p>
+</section>
+</section>
+</section>
+<section id="assumptions-of-the-linear-regression-model">
+<h2>Assumptions of the Linear Regression Model<a class="headerlink" href="#assumptions-of-the-linear-regression-model" title="Link to this heading">#</a></h2>
+<p>To interpret the results of an ordinary least squares (OLS) regression correctly and ensure the validity of statistical inference (e.g., confidence intervals, p-values), certain assumptions must hold. These assumptions are typically stated in the context of the <strong>population model</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \beta_0 + \beta_1 X_1 + \dots + \beta_k X_k + \varepsilon
+\]</div>
+<section id="linearity">
+<h3>1. <strong>Linearity</strong><a class="headerlink" href="#linearity" title="Link to this heading">#</a></h3>
+<p>The relationship between the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> and the independent variables <span class="math notranslate nohighlight">\(X_1, \dots, X_k\)</span> is <strong>linear in parameters</strong>. That is, the expected value of <span class="math notranslate nohighlight">\(Y\)</span> is a linear function of the <span class="math notranslate nohighlight">\(X\)</span>’s:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[Y | X_1, \dots, X_k] = \beta_0 + \beta_1 X_1 + \dots + \beta_k X_k
+\]</div>
+<p>Violation: Nonlinear patterns in data → model misspecification.</p>
+</section>
+<section id="independence-of-errors">
+<h3>2. <strong>Independence of Errors</strong><a class="headerlink" href="#independence-of-errors" title="Link to this heading">#</a></h3>
+<p>The error terms <span class="math notranslate nohighlight">\(\varepsilon_i\)</span> are <strong>independent</strong> across observations.</p>
+<p>Violation: Occurs with <strong>autocorrelated data</strong> (e.g., time series) → standard errors and test statistics become unreliable.</p>
+</section>
+<section id="homoscedasticity-constant-variance-of-errors">
+<h3>3. <strong>Homoscedasticity (Constant Variance of Errors)</strong><a class="headerlink" href="#homoscedasticity-constant-variance-of-errors" title="Link to this heading">#</a></h3>
+<p>The error term has <strong>constant variance</strong> for all levels of the independent variables:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(\varepsilon_i | X_i) = \sigma^2
+\]</div>
+<p>Violation: <strong>Heteroscedasticity</strong> (e.g., volatility clustering in financial data) → OLS estimates are still unbiased, but no longer efficient; standard errors and p-values become unreliable.</p>
+</section>
+<section id="no-perfect-multicollinearity">
+<h3>4. <strong>No Perfect Multicollinearity</strong><a class="headerlink" href="#no-perfect-multicollinearity" title="Link to this heading">#</a></h3>
+<p>No independent variable is a <strong>perfect linear combination</strong> of the others.</p>
+<p>Violation: The model cannot uniquely estimate coefficients → common when including all dummies from a categorical variable (dummy variable trap).</p>
+</section>
+<section id="zero-conditional-mean-of-errors">
+<h3>5. <strong>Zero Conditional Mean of Errors</strong><a class="headerlink" href="#zero-conditional-mean-of-errors" title="Link to this heading">#</a></h3>
+<p>The errors have <strong>zero mean</strong>, conditional on the independent variables:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[\varepsilon_i | X_i] = 0
+\]</div>
+<p>Violation: If relevant variables are omitted or there’s measurement error, this assumption fails → OLS becomes <strong>biased and inconsistent</strong>.</p>
+</section>
+<section id="normality-of-errors-for-inference-only">
+<h3>6. <strong>Normality of Errors</strong> <em>(for inference only)</em><a class="headerlink" href="#normality-of-errors-for-inference-only" title="Link to this heading">#</a></h3>
+<p>The error terms <span class="math notranslate nohighlight">\(\varepsilon_i\)</span> are <strong>normally distributed</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_i \sim \mathcal{N}(0, \sigma^2)
+\]</div>
+<p>This is <strong>not required</strong> for OLS estimation, but it is important for:</p>
+<ul class="simple">
+<li><p>Hypothesis testing</p></li>
+<li><p>Constructing confidence intervals</p></li>
+<li><p>Small-sample inference</p></li>
+</ul>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Assumption</p></th>
+<th class="head"><p>Affects Coefficient Estimates?</p></th>
+<th class="head"><p>Affects Inference?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linearity</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Independence of Errors</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Homoscedasticity</p></td>
+<td><p>❌ No (bias)</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>No Perfect Multicollinearity</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Zero Conditional Mean</p></td>
+<td><p>✅ Yes (bias)</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Normality of Errors</p></td>
+<td><p>❌ No</p></td>
+<td><p>✅ Yes (small n)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Understanding these assumptions is key to knowing <strong>when OLS is trustworthy</strong>, and when to consider alternatives like <strong>robust standard errors</strong>, <strong>GARCH models</strong>, or <strong>nonlinear regressions</strong>.</p>
+</section>
+</section>
+<section id="hypothesis-testing-in-linear-regression-is-different-from-zero">
+<h2>Hypothesis Testing in Linear Regression: Is β Different from Zero?<a class="headerlink" href="#hypothesis-testing-in-linear-regression-is-different-from-zero" title="Link to this heading">#</a></h2>
+<p>In linear regression, we often want to test whether an individual explanatory variable <span class="math notranslate nohighlight">\(X_j\)</span> has a statistically significant effect on the dependent variable <span class="math notranslate nohighlight">\(Y\)</span>. In other words, we want to test whether the coefficient <span class="math notranslate nohighlight">\(\beta_j\)</span> is <strong>different from zero</strong>.</p>
+<section id="the-hypotheses">
+<h3>The Hypotheses<a class="headerlink" href="#the-hypotheses" title="Link to this heading">#</a></h3>
+<p>We set up the following null and alternative hypotheses:</p>
+<ul class="simple">
+<li><p><strong>Null hypothesis</strong> (<span class="math notranslate nohighlight">\(H_0\)</span>): <span class="math notranslate nohighlight">\(\beta_j = 0\)</span> (no effect)</p></li>
+<li><p><strong>Alternative hypothesis</strong> (<span class="math notranslate nohighlight">\(H_1\)</span>): <span class="math notranslate nohighlight">\(\beta_j \ne 0\)</span> (some effect)</p></li>
+</ul>
+</section>
+<section id="the-test-statistic-t-test">
+<h3>The Test Statistic (t-Test)<a class="headerlink" href="#the-test-statistic-t-test" title="Link to this heading">#</a></h3>
+<p>We estimate the coefficient <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> and its <strong>standard error</strong> <span class="math notranslate nohighlight">\(\text{SE}(\hat{\beta}_j)\)</span> from the data. Then we compute the <strong>t-statistic</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\hat{\beta}_j - 0}{\text{SE}(\hat{\beta}_j)}
+\]</div>
+<p>This statistic tells us how many standard errors <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> is away from zero.</p>
+</section>
+<section id="simulation-understanding-standard-errors-through-repeated-sampling">
+<h3>Simulation: Understanding Standard Errors Through Repeated Sampling<a class="headerlink" href="#simulation-understanding-standard-errors-through-repeated-sampling" title="Link to this heading">#</a></h3>
+<p>To refresh your memory regarding standard errors, we use simulation. The simulation below demonstrates the concept of a <strong>standard error</strong> by repeatedly estimating the slope coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> in a simple linear regression model across 1,000 independent samples. Each sample is generated from the same underlying data-generating process, where the true relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is linear with <span class="math notranslate nohighlight">\(\beta_1 = 1.5\)</span> and some added random noise.</p>
+<p>By estimating the regression model for each sample, we obtain a distribution of <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> values. This distribution reflects the <strong>sampling variability</strong> of the estimator — it shows how much <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> would fluctuate from sample to sample due to randomness in the data.</p>
+<p>The <strong>standard deviation of these 1,000 estimates</strong> gives us the <strong>empirical standard error</strong> of <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>. This matches the theoretical idea of a standard error: a measure of <strong>uncertainty around our estimate</strong>.</p>
+<p>Your take away should be:</p>
+<ul class="simple">
+<li><p>Even if the true <span class="math notranslate nohighlight">\(\beta\)</span> is fixed, different samples will yield different estimates.</p></li>
+<li><p>The standard error plays a central role in hypothesis testing, confidence intervals, and assessing the reliability of regression coefficients.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+
+<span class="c1"># Set parameters for the simulation</span>
+<span class="n">n_simulations</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">n_obs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">true_alpha</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">true_beta</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># Store estimated betas</span>
+<span class="n">beta_estimates</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Run the simulation</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_simulations</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">noise</span>
+
+    <span class="c1"># Estimate regression model</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Adds intercept term</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">beta_estimates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Extract the slope estimate (beta)</span>
+
+<span class="c1"># Convert to NumPy array for analysis</span>
+<span class="n">beta_estimates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">beta_estimates</span><span class="p">)</span>
+
+<span class="c1"># Calculate empirical standard error of beta estimates</span>
+<span class="n">empirical_se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">beta_estimates</span><span class="p">)</span>
+<span class="n">mean_beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">beta_estimates</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram of beta estimates</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">beta_estimates</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">true_beta</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;True β = </span><span class="si">{</span><span class="n">true_beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_beta</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean Estimate = </span><span class="si">{</span><span class="n">mean_beta</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribution of β Estimates over </span><span class="si">{</span><span class="n">n_simulations</span><span class="si">}</span><span class="s2"> Simulations</span><span class="se">\n</span><span class="s2">Empirical SE ≈ </span><span class="si">{</span><span class="n">empirical_se</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Estimated β&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0a6f7f10d5d5ab15d6d29a18e643c7c5da0ada5cae6d6a29007d84ed172144dd.png" src="_images/0a6f7f10d5d5ab15d6d29a18e643c7c5da0ada5cae6d6a29007d84ed172144dd.png" />
+</div>
+</div>
+</section>
+<section id="decision-rule">
+<h3>Decision Rule<a class="headerlink" href="#decision-rule" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compare the <span class="math notranslate nohighlight">\(t\)</span>-statistic to a <strong>critical value</strong> from the <span class="math notranslate nohighlight">\(t\)</span>-distribution (based on degrees of freedom).</p></li>
+<li><p>Or compute the <strong>p-value</strong>, which is the probability of observing a <span class="math notranslate nohighlight">\(t\)</span>-statistic this extreme under the null hypothesis.</p></li>
+<li><p><strong>Reject <span class="math notranslate nohighlight">\(H_0\)</span></strong> if the p-value is below a chosen significance level (e.g., 0.05).</p></li>
+</ul>
+</section>
+<section id="why-standard-errors-matter">
+<h3>Why Standard Errors Matter<a class="headerlink" href="#why-standard-errors-matter" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The standard error reflects the <strong>uncertainty</strong> in the estimate <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span>.</p></li>
+<li><p>If your standard errors are <strong>too small</strong> (e.g., due to violated assumptions like homoscedasticity), your t-statistics will be <strong>inflated</strong> → leading to <strong>false positives</strong> (Type I errors).</p></li>
+<li><p>If standard errors are <strong>too large</strong>, you may fail to detect real effects (Type II errors).</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>Interpretation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A statistically significant <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> (p &lt; 0.05) means we have <strong>evidence that <span class="math notranslate nohighlight">\(X_j\)</span> matters</strong> for predicting <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>A non-significant result suggests the effect is <strong>not distinguishable from zero</strong>, given the noise in the data.</p></li>
+</ul>
+</section>
+</section>
+<section id="goodness-of-fit-in-linear-regression">
+<h2>Goodness of Fit in Linear Regression<a class="headerlink" href="#goodness-of-fit-in-linear-regression" title="Link to this heading">#</a></h2>
+<p>The <strong>goodness of fit</strong> of a linear regression model refers to how well the model explains the variation in the dependent variable <span class="math notranslate nohighlight">\(Y\)</span>. In other words, it measures how closely the predicted values <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> match the actual observations <span class="math notranslate nohighlight">\(y_i\)</span>.</p>
+<p>The most common measure of goodness of fit is the <strong>coefficient of determination</strong>, also known as <strong>R-squared</strong> (<span class="math notranslate nohighlight">\(R^2\)</span>).</p>
+<section id="definition-of-r-squared">
+<h3>Definition of R-squared<a class="headerlink" href="#definition-of-r-squared" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\text{SSR}}{\text{SST}}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><strong>SSR</strong> (Sum of Squared Residuals): <span class="math notranslate nohighlight">\(\sum_{i=1}^n (y_i - \hat{y}_i)^2\)</span></p></li>
+<li><p><strong>SST</strong> (Total Sum of Squares): <span class="math notranslate nohighlight">\(\sum_{i=1}^n (y_i - \bar{y})^2\)</span></p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Interpretation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span>: The model explains none of the variation in <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2 = 1\)</span>: The model explains all of the variation in <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Values between 0 and 1 show the <strong>proportion of variance</strong> in <span class="math notranslate nohighlight">\(Y\)</span> explained by the independent variables.</p></li>
+</ul>
+<p>For example, <span class="math notranslate nohighlight">\(R^2 = 0.85\)</span> means that 85% of the variation in the dependent variable can be explained by the model.</p>
+<p>The figure below shows you two examples. If you take a look at the deviations from data points to the black dashed line (the arithmetic mean of <span class="math notranslate nohighlight">\(y\)</span>), this is to what the SST refers to. In comparison, the lower the deviations from the points to the red line (which is SSR), the more variation of <span class="math notranslate nohighlight">\(y\)</span> is explained by the model and the higher is <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">true_alpha</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">true_beta</span> <span class="o">=</span> <span class="mf">1.5</span>
+
+<span class="c1"># Low noise (high R²)</span>
+<span class="n">noise_low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y_low</span> <span class="o">=</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">noise_low</span>
+<span class="n">X_low</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">model_low</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y_low</span><span class="p">,</span> <span class="n">X_low</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">r2_low</span> <span class="o">=</span> <span class="n">model_low</span><span class="o">.</span><span class="n">rsquared</span>
+<span class="n">mean_y_low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_low</span><span class="p">)</span>
+
+<span class="c1"># High noise (low R²)</span>
+<span class="n">noise_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y_high</span> <span class="o">=</span> <span class="n">true_alpha</span> <span class="o">+</span> <span class="n">true_beta</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">noise_high</span>
+<span class="n">X_high</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">model_high</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y_high</span><span class="p">,</span> <span class="n">X_high</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">r2_high</span> <span class="o">=</span> <span class="n">model_high</span><span class="o">.</span><span class="n">rsquared</span>
+<span class="n">mean_y_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_high</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Left: High R²</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_low</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data (low noise)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model_low</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_low</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Regression Line&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mean_y_low</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean of y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;High R² Example</span><span class="se">\n</span><span class="s1">$R^2$ = </span><span class="si">{</span><span class="n">r2_low</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Right: Low R²</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_high</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data (high noise)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model_high</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_high</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Regression Line&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mean_y_high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean of y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Low R² Example</span><span class="se">\n</span><span class="s1">$R^2$ = </span><span class="si">{</span><span class="n">r2_high</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2781c8218871b272c641a89bfc3af9d35c8b0ef5ffb295c68434bd1839a54f93.png" src="_images/2781c8218871b272c641a89bfc3af9d35c8b0ef5ffb295c68434bd1839a54f93.png" />
+</div>
+</div>
+</section>
+<section id="important-notes">
+<h3>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>high <span class="math notranslate nohighlight">\(R^2\)</span> does not guarantee a good model</strong> — it could still be misspecified or suffer from overfitting.</p></li>
+<li><p>Adding more variables to the model <strong>never decreases <span class="math notranslate nohighlight">\(R^2\)</span></strong>, even if the new variables are irrelevant.</p></li>
+<li><p>To adjust for this, we use <strong>adjusted R-squared</strong>, which penalizes model complexity:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\bar{R}^2 = 1 - \left( \frac{\text{SSR} / (n - k - 1)}{\text{SST} / (n - 1)} \right)
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(k\)</span> is the number of explanatory variables (excluding the intercept), and <span class="math notranslate nohighlight">\(n\)</span> is the number of observations.</p>
+</section>
+<section id="id3">
+<h3>Summary<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(R^2\)</span> provides an intuitive measure of model performance, but it should be interpreted <strong>alongside other diagnostics</strong> like residual plots, statistical significance of coefficients, and tests for model assumptions.</p>
+</section>
+</section>
+<section id="cross-sectional-vs-time-series-regression">
+<h2>Cross-Sectional vs. Time-Series Regression<a class="headerlink" href="#cross-sectional-vs-time-series-regression" title="Link to this heading">#</a></h2>
+<p>In empirical finance and economics, regression models can be applied to different types of data structures — most commonly <strong>cross-sectional</strong> and <strong>time-series</strong> data. While the mathematical form of a regression model is similar in both settings, the interpretation and assumptions differ significantly.</p>
+<section id="cross-sectional-regression">
+<h3>Cross-Sectional Regression<a class="headerlink" href="#cross-sectional-regression" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data structure</strong>: Multiple entities (e.g., firms, assets, countries) observed at a single point in time.</p></li>
+<li><p><strong>Goal</strong>: Explain differences <strong>across units</strong>.</p></li>
+<li><p><strong>Example</strong>: Regress stock returns on firm characteristics (size, value, momentum) in a given month.</p></li>
+<li><p><strong>Assumptions</strong>: Observations are <strong>independent</strong> across units.</p></li>
+<li><p><strong>Common use</strong>: Asset pricing tests (e.g., Fama-MacBeth), cross-sectional risk premia analysis.</p></li>
+</ul>
+</section>
+<section id="time-series-regression">
+<h3>Time-Series Regression<a class="headerlink" href="#time-series-regression" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data structure</strong>: A single entity observed over <strong>multiple time periods</strong>.</p></li>
+<li><p><strong>Goal</strong>: Model dynamics or predict the future based on past information.</p></li>
+<li><p><strong>Example</strong>: Regress a stock’s return on past market returns or macro variables.</p></li>
+<li><p><strong>Assumptions</strong>: Observations are ordered and possibly <strong>serially correlated</strong> over time.</p></li>
+<li><p><strong>Common use</strong>: Return prediction, volatility modeling, macro-finance analysis.</p></li>
+</ul>
+</section>
+<section id="key-differences">
+<h3>Key Differences<a class="headerlink" href="#key-differences" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Cross-Sectional</p></th>
+<th class="head"><p>Time-Series</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>What varies</p></td>
+<td><p>Entities (at one time)</p></td>
+<td><p>Time (for one entity)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Independence assumption</p></td>
+<td><p>Across entities</p></td>
+<td><p>Across time (harder to satisfy)</p></td>
+</tr>
+<tr class="row-even"><td><p>Goal</p></td>
+<td><p>Explain variation across units</p></td>
+<td><p>Model evolution over time</p></td>
+</tr>
+<tr class="row-odd"><td><p>Examples</p></td>
+<td><p>Stock returns vs. firm size</p></td>
+<td><p>Stock returns vs. lagged market</p></td>
+</tr>
+<tr class="row-even"><td><p>Key concern</p></td>
+<td><p>Omitted variable bias</p></td>
+<td><p>Autocorrelation, stationarity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Understanding the type of regression you’re working with helps determine the right modeling approach, which assumptions need to be checked, and how to interpret the results in context.</p>
+</section>
+</section>
+<section id="time-series-regression-company-return-on-market-return-capm">
+<h2>Time-Series Regression: Company Return on Market Return (CAPM)<a class="headerlink" href="#time-series-regression-company-return-on-market-return-capm" title="Link to this heading">#</a></h2>
+<p>One of the most widely used time-series regressions in finance is the <strong>Capital Asset Pricing Model (CAPM)</strong> regression. In this model, the return of a single company (or asset) is regressed on the return of the overall market index:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{i,t} - R_{f,t}  = \alpha_i + \beta_i R_{m,t} + \varepsilon_t
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R_{i,t}\)</span>: Return of asset or company <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{f,t}\)</span>: Risk-free rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{m,t}\)</span>: Return of the market (e.g., S&amp;P 500) at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_i\)</span>: <strong>Market beta</strong> — a measure of how sensitive the asset is to market movements</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i\)</span>: <strong>Jensen’s alpha</strong> — the average return unexplained by market exposure (i.e., potential outperformance)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t\)</span>: Error term (idiosyncratic return)</p></li>
+</ul>
+<p>Note that <span class="math notranslate nohighlight">\(\beta_0\)</span> is replaced by <span class="math notranslate nohighlight">\(\alpha\)</span> only due to naming conventions in this scientific area. This regression is estimated using <strong>time-series data</strong> (e.g., daily, weekly, or monthly returns). The coefficient <span class="math notranslate nohighlight">\(\beta_i\)</span> plays a central role in risk management and portfolio construction, as it captures the asset’s <strong>systematic risk</strong>. A <span class="math notranslate nohighlight">\(\beta &gt; 1\)</span> indicates that the stock tends to amplify market movements, while <span class="math notranslate nohighlight">\(\beta &lt; 1\)</span> suggests a more defensive behavior.</p>
+<p>This model is foundational in empirical asset pricing and is frequently used to evaluate fund performance, estimate cost of capital, or measure exposure to systematic risk.</p>
+<section id="what-about-the-risk-free-rate">
+<h3>What about the risk-free rate?<a class="headerlink" href="#what-about-the-risk-free-rate" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The risk-free rate represents the return with zero market exposure.</p></li>
+<li><p>Subtracting it aligns the model with investors’ decisions: they choose how much return they want to earn above the risk-free rate by taking on different types of risk.</p></li>
+<li><p>This makes <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> easier to interpret in terms of compensation for risk.</p></li>
+</ul>
+<p>When you’re using daily or monthly data, it’s common to approximate <span class="math notranslate nohighlight">\(R_f\)</span> as zero if:</p>
+<ul class="simple">
+<li><p>The risk-free rate is very low (e.g., T-bill yield near 0%)</p></li>
+<li><p>Or you’re focusing on short-term, simplified regressions</p></li>
+</ul>
+<p>But in formal analysis (especially with Fama-French data), you should always subtract <span class="math notranslate nohighlight">\(R_f\)</span> from both the asset and market returns.</p>
+<p>The code below regresses Apple’s return on the Fama-French market portfolio using daily return data since 2015. The <span class="math notranslate nohighlight">\(\beta \approx 1.15\)</span> signals that Apple react’s sensitive to the market. Furthermore, the intercept <span class="math notranslate nohighlight">\(\alpha\)</span> has a very small value and according to the statistical test, we would not reject the hypothesis of <span class="math notranslate nohighlight">\(H_0: \alpha = 0\)</span> at a significance level of <span class="math notranslate nohighlight">\(5\%\)</span>. The <span class="math notranslate nohighlight">\(R^2 \approx 0.55\)</span> tells us that the market portfolio is able to explain more than half of the variation of Apple’s daily returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_ff_factors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/ff_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">factors</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+    <span class="n">factors</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">factors_monthly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/ff_data_monthly.csv&quot;</span><span class="p">)</span>
+    <span class="n">factors_monthly</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">factors_monthly</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y-%m&quot;</span><span class="p">)</span>
+    <span class="n">factors_monthly</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">factors_monthly</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">factors_monthly</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">get_ff_factors</span><span class="p">()</span>
+    <span class="n">factors</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/ff_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">factors_monthly</span> <span class="o">=</span> <span class="n">get_ff_factors</span><span class="p">(</span><span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;monthly&quot;</span><span class="p">)</span>
+    <span class="n">factors_monthly</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/ff_data_monthly.csv&quot;</span><span class="p">)</span>
+    
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/apple_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_05/apple_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">daily_returns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">monthly_returns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">monthly_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">monthly_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">daily_returns</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;excess_return&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span>
+
+<span class="n">df_monthly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">monthly_returns</span><span class="p">,</span> <span class="n">factors_monthly</span><span class="p">,</span> <span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;excess_return&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span>
+
+<span class="n">X_capm</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]])</span>
+<span class="n">X_three</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;excess_return&quot;</span><span class="p">]</span>
+
+<span class="n">X_capm_monthly</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df_monthly</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]])</span>
+<span class="n">X_three_monthly</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df_monthly</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]])</span>
+<span class="n">y_monthly</span> <span class="o">=</span> <span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;excess_return&quot;</span><span class="p">]</span>
+
+<span class="n">capm</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_capm</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">capm</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          excess_return   R-squared:                       0.548
+Model:                            OLS   Adj. R-squared:                  0.548
+Method:                 Least Squares   F-statistic:                     3049.
+Date:                Mon, 07 Apr 2025   Prob (F-statistic):               0.00
+Time:                        15:01:55   Log-Likelihood:                 7544.4
+No. Observations:                2515   AIC:                        -1.508e+04
+Df Residuals:                    2513   BIC:                        -1.507e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0005      0.000      1.949      0.051    -2.8e-06       0.001
+Mkt-RF         1.1533      0.021     55.215      0.000       1.112       1.194
+==============================================================================
+Omnibus:                      395.948   Durbin-Watson:                   1.889
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3725.071
+Skew:                           0.443   Prob(JB):                         0.00
+Kurtosis:                       8.896   Cond. No.                         86.9
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using different frequencies such as daily, weekly or monthly can impact the analysis. In the cell below, we conduct the same regression analysis, however, using monthly return data. This reduces the number of observations from <span class="math notranslate nohighlight">\(2,515\)</span> to <span class="math notranslate nohighlight">\(119\)</span>. While the estimates for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> only differ slightly to the daily estimates, the standard errors are larger, reflecting greater statistical uncertainty for these estimates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capm_monthly</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y_monthly</span><span class="p">,</span> <span class="n">X_capm_monthly</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">capm_monthly</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          excess_return   R-squared:                       0.461
+Model:                            OLS   Adj. R-squared:                  0.456
+Method:                 Least Squares   F-statistic:                     100.1
+Date:                Mon, 07 Apr 2025   Prob (F-statistic):           2.14e-17
+Time:                        15:01:55   Log-Likelihood:                 169.02
+No. Observations:                 119   AIC:                            -334.0
+Df Residuals:                     117   BIC:                            -328.5
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0090      0.006      1.628      0.106      -0.002       0.020
+Mkt-RF         1.1802      0.118     10.003      0.000       0.947       1.414
+==============================================================================
+Omnibus:                        5.601   Durbin-Watson:                   1.996
+Prob(Omnibus):                  0.061   Jarque-Bera (JB):                5.702
+Skew:                          -0.339   Prob(JB):                       0.0578
+Kurtosis:                       3.831   Cond. No.                         21.8
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extending-the-capm-multi-factor-models">
+<h3>Extending the CAPM: Multi-Factor Models<a class="headerlink" href="#extending-the-capm-multi-factor-models" title="Link to this heading">#</a></h3>
+<p>While the CAPM provides a simple and elegant framework for modeling asset returns based on market risk, empirical evidence has shown that <strong>market return alone does not fully explain the cross-section of stock returns</strong>. Certain types of stocks — such as small-cap or value stocks — have been observed to earn systematically higher returns than predicted by CAPM.</p>
+<p>To address these patterns, researchers have extended the CAPM into <strong>multi-factor models</strong>, where additional risk factors are included as explanatory variables in the regression. A popular example is the Fama-French extension which includes two additional risk factors <span class="math notranslate nohighlight">\(SMB\)</span> and <span class="math notranslate nohighlight">\(HLM\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{i,t} - R_{f,t}  = \alpha_i + \beta_m R_{m,t} + \beta_s \cdot \text{SMB}_t + \beta_h \cdot \text{HML}_t  + \varepsilon_t
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{SMB}_t\)</span> (Small Minus Big): The return difference between small-cap and large-cap portfolios</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{HML}_t\)</span> (Small Minus Big): The return difference between small-cap and large-cap portfolios</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_s\)</span>: Measures the asset’s <strong>exposure to the size factor</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_h\)</span>: Measures the asset’s <strong>exposure to the high minus low factor</strong></p></li>
+<li><p>Other factors can be added as well (e.g., momentum, profitability)</p></li>
+</ul>
+<p>This extended framework is part of the <strong>Fama-French factor models</strong>, which are widely used in empirical asset pricing and portfolio evaluation. Each additional factor aims to capture a <strong>systematic source of risk or behavioral bias</strong> not explained by the market alone.</p>
+<p>By including these factors in a time-series regression, we can better understand the <strong>drivers of asset returns</strong>, assess <strong>risk exposures</strong>, and improve <strong>performance attribution</strong> in asset management.</p>
+</section>
+<section id="how-risk-factors-are-constructed">
+<h3>How Risk Factors Are Constructed<a class="headerlink" href="#how-risk-factors-are-constructed" title="Link to this heading">#</a></h3>
+<p>The additional risk factors used in multi-factor models — such as <strong>Size (SMB)</strong>, <strong>Value (HML)</strong>, and others — are typically constructed from <strong>portfolio-sorting strategies</strong> based on firm characteristics.</p>
+<section id="example-constructing-the-smb-size-factor">
+<h4>Example: Constructing the SMB (Size) Factor<a class="headerlink" href="#example-constructing-the-smb-size-factor" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Firms are sorted into <strong>small-cap</strong> and <strong>large-cap</strong> groups based on their market capitalization.</p></li>
+<li><p>Portfolios are formed by going <strong>long small-cap stocks</strong> and <strong>short large-cap stocks</strong>.</p></li>
+<li><p>The daily or monthly return difference between these two portfolios defines the <strong>SMB (Small Minus Big)</strong> factor:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{SMB}_t = R_{\text{Small}, t} - R_{\text{Big}, t}
+\]</div>
+</section>
+<section id="example-constructing-the-hml-value-factor">
+<h4>Example: Constructing the HML (Value) Factor<a class="headerlink" href="#example-constructing-the-hml-value-factor" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Firms are sorted based on their <strong>book-to-market ratios</strong> (a measure of “value”).</p></li>
+<li><p>Portfolios are created by going <strong>long high book-to-market (value) stocks</strong> and <strong>short low book-to-market (growth) stocks</strong>.</p></li>
+<li><p>The return difference becomes the <strong>HML (High Minus Low)</strong> factor:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{HML}_t = R_{\text{High B/M}, t} - R_{\text{Low B/M}, t}
+\]</div>
+<p>These factors are meant to capture <strong>compensated sources of systematic risk</strong> — that is, risks that investors require a premium to bear. They are available from academic databases (e.g., Kenneth French’s data library) and are widely used in both academic research and professional asset management.</p>
+</section>
+</section>
+<section id="interpreting-negative-fama-french-factor-betas">
+<h3>Interpreting Negative Fama-French Factor Betas<a class="headerlink" href="#interpreting-negative-fama-french-factor-betas" title="Link to this heading">#</a></h3>
+<p>The cell below shows results for the regression of Apple’s daily returns on the three risk factors using data since 2015. The estimate for <span class="math notranslate nohighlight">\(\beta_m\)</span> is similar as for the single risk factor model from before. <span class="math notranslate nohighlight">\(\hat{\beta}_s\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_h\)</span> are both negative.</p>
+<section id="negative-beta-on-smb-size-factor">
+<h4>Negative Beta on SMB (Size Factor)<a class="headerlink" href="#negative-beta-on-smb-size-factor" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>SMB (Small Minus Big)</strong> captures the return spread between small-cap and large-cap stocks.</p></li>
+<li><p>A <strong>negative beta</strong> on SMB implies the asset behaves more like a <strong>large-cap stock</strong>.</p></li>
+<li><p>When small caps outperform, this asset tends to underperform, and vice versa.</p></li>
+</ul>
+<p>Interpretation:</p>
+<blockquote>
+<div><p>The asset has a <strong>tilt toward large-cap characteristics</strong>, and it is <strong>negatively exposed to the size premium</strong>.</p>
+</div></blockquote>
+</section>
+<section id="negative-beta-on-hml-value-factor">
+<h4>Negative Beta on HML (Value Factor)<a class="headerlink" href="#negative-beta-on-hml-value-factor" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>HML (High Minus Low)</strong> captures the return spread between value (high book-to-market) and growth (low book-to-market) stocks.</p></li>
+<li><p>A <strong>negative beta</strong> on HML implies the asset behaves more like a <strong>growth stock</strong>.</p></li>
+<li><p>When value stocks do well, this asset tends to do worse.</p></li>
+</ul>
+<p>Interpretation:</p>
+<blockquote>
+<div><p>The asset has a <strong>growth tilt</strong> and is <strong>negatively exposed to the value premium</strong>.</p>
+</div></blockquote>
+<p>Negative betas on these factors are common in <strong>large-cap growth stocks</strong>, such as major tech companies. These exposures help investors understand how an asset might perform relative to broader market and style trends.</p>
+<p>As for the single risk factor model, the beta coefficients seem to be statistically significantly different from zero. This is not the case for <span class="math notranslate nohighlight">\(\alpha\)</span> which implies that the expected return of Apple’s return is only driven by its exposure to systematic risk factors (we deep dive into this later). The coefficient of determination increases in comparison to the single risk factor model which demonstrates the benefit of including risk factors other than the market portfolio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fama_french</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_three</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fama_french</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          excess_return   R-squared:                       0.601
+Model:                            OLS   Adj. R-squared:                  0.601
+Method:                 Least Squares   F-statistic:                     1262.
+Date:                Mon, 07 Apr 2025   Prob (F-statistic):               0.00
+Time:                        15:01:55   Log-Likelihood:                 7701.5
+No. Observations:                2515   AIC:                        -1.540e+04
+Df Residuals:                    2511   BIC:                        -1.537e+04
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0004      0.000      1.792      0.073   -3.82e-05       0.001
+Mkt-RF         1.1713      0.020     58.180      0.000       1.132       1.211
+SMB           -0.3063      0.035     -8.705      0.000      -0.375      -0.237
+HML           -0.4000      0.025    -15.915      0.000      -0.449      -0.351
+==============================================================================
+Omnibus:                      421.379   Durbin-Watson:                   1.932
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3894.005
+Skew:                           0.506   Prob(JB):                         0.00
+Kurtosis:                       9.011   Cond. No.                         157.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>In analogy to before, we conduct the same analysis with monthly data. Hereby, we would not reject <span class="math notranslate nohighlight">\(H_0: \beta_s = 0\)</span>. This is due to the smaller estimate for the coefficient and the increases standard error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fama_french_monthly</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y_monthly</span><span class="p">,</span> <span class="n">X_three_monthly</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fama_french_monthly</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:          excess_return   R-squared:                       0.529
+Model:                            OLS   Adj. R-squared:                  0.516
+Method:                 Least Squares   F-statistic:                     42.98
+Date:                Mon, 07 Apr 2025   Prob (F-statistic):           1.05e-18
+Time:                        15:01:55   Log-Likelihood:                 177.00
+No. Observations:                 119   AIC:                            -346.0
+Df Residuals:                     115   BIC:                            -334.9
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0076      0.005      1.439      0.153      -0.003       0.018
+Mkt-RF         1.2224      0.117     10.475      0.000       0.991       1.454
+SMB           -0.1700      0.192     -0.887      0.377      -0.550       0.210
+HML           -0.5229      0.136     -3.841      0.000      -0.793      -0.253
+==============================================================================
+Omnibus:                        8.665   Durbin-Watson:                   2.078
+Prob(Omnibus):                  0.013   Jarque-Bera (JB):               10.740
+Skew:                          -0.418   Prob(JB):                      0.00465
+Kurtosis:                       4.211   Cond. No.                         38.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="daily-vs-monthly-data-in-time-series-regressions">
+<h3>Daily vs. Monthly Data in Time-Series Regressions<a class="headerlink" href="#daily-vs-monthly-data-in-time-series-regressions" title="Link to this heading">#</a></h3>
+<p>When estimating factor models such as the Fama-French regression, the choice between <strong>daily</strong> and <strong>monthly</strong> data involves a trade-off between <strong>sample size</strong>, <strong>noise</strong>, and <strong>economic interpretation</strong>.</p>
+<section id="daily-data">
+<h4>Daily Data<a class="headerlink" href="#daily-data" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Pros</strong>:</p>
+<ul>
+<li><p>Provides a <strong>larger number of observations</strong>, improving statistical power.</p></li>
+<li><p>Captures <strong>short-term dynamics</strong> and <strong>high-frequency behavior</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Cons</strong>:</p>
+<ul>
+<li><p>More <strong>market microstructure noise</strong> (e.g., bid-ask bounce, asynchronous trading).</p></li>
+<li><p>Factor exposures may be <strong>less stable day-to-day</strong>.</p></li>
+<li><p>More susceptible to <strong>outliers</strong> and <strong>event-driven volatility</strong>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="monthly-data">
+<h4>Monthly Data<a class="headerlink" href="#monthly-data" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Pros</strong>:</p>
+<ul>
+<li><p>Reduces noise and smooths out short-term fluctuations.</p></li>
+<li><p>More consistent with the <strong>economic meaning of risk premia</strong>, which are often long-term.</p></li>
+<li><p>Suitable for studies of <strong>style performance</strong> (e.g., size, value).</p></li>
+</ul>
+</li>
+<li><p><strong>Cons</strong>:</p>
+<ul>
+<li><p><strong>Fewer observations</strong>, which can lead to less precise estimates.</p></li>
+<li><p>Misses high-frequency behavior and <strong>intra-month variation</strong>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h4>Summary<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Daily Data</p></th>
+<th class="head"><p>Monthly Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Observations</p></td>
+<td><p>Many (high frequency)</p></td>
+<td><p>Fewer (low frequency)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Noise</p></td>
+<td><p>Higher</p></td>
+<td><p>Lower</p></td>
+</tr>
+<tr class="row-even"><td><p>Interpretability</p></td>
+<td><p>Short-term focus</p></td>
+<td><p>Long-term style exposure</p></td>
+</tr>
+<tr class="row-odd"><td><p>Common use cases</p></td>
+<td><p>Trading models, volatility</p></td>
+<td><p>Asset pricing, performance attribution</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The best choice depends on your <strong>research goal</strong>: use <strong>daily data</strong> for fine-grained analysis or short-term risk, and <strong>monthly data</strong> for understanding long-term factor exposures.</p>
+</section>
+</section>
+<section id="estimating-expected-returns-with-capm-and-fama-french-models">
+<h3>Estimating Expected Returns with CAPM and Fama-French Models<a class="headerlink" href="#estimating-expected-returns-with-capm-and-fama-french-models" title="Link to this heading">#</a></h3>
+<p>The CAPM and Fama-French models can be used not just to explain historical returns, but also to <strong>estimate expected returns</strong> based on an asset’s <strong>exposure to systematic risk factors</strong>.</p>
+<section id="capm-expected-return">
+<h4>CAPM Expected Return<a class="headerlink" href="#capm-expected-return" title="Link to this heading">#</a></h4>
+<p>Under the Capital Asset Pricing Model (CAPM), the expected return of an asset is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[R_i] = R_f + \beta_i \cdot \left( \mathbb{E}[R_m] - R_f \right)
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R_f\)</span>: Risk-free rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}[R_m]\)</span>: Expected market return</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_i\)</span>: Market beta of the asset</p></li>
+</ul>
+<p>This formula shows that expected return increases with <strong>market risk exposure</strong>. An asset with <span class="math notranslate nohighlight">\(\beta = 1\)</span> is expected to earn the market risk premium; a higher-beta asset earns more (and vice versa).</p>
+</section>
+<section id="fama-french-3-factor-model">
+<h4>Fama-French 3-Factor Model<a class="headerlink" href="#fama-french-3-factor-model" title="Link to this heading">#</a></h4>
+<p>The Fama-French model extends this to include exposures to <strong>size (SMB)</strong> and <strong>value (HML)</strong> factors:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[R_i] = R_f + \beta_m \cdot \left( \mathbb{E}[R_m] - R_f \right) + \beta_s \cdot \mathbb{E}[SMB] + \beta_h \cdot \mathbb{E}[HML]
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_s\)</span>: Exposure to the size factor (SMB)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_h\)</span>: Exposure to the value factor (HML)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}[SMB]\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}[HML]\)</span>: Expected returns of size and value factors</p></li>
+</ul>
+<p>Each term contributes to the expected return based on <strong>how sensitive the asset is to each risk factor</strong>, and <strong>how well-compensated that risk is</strong> in the market.</p>
+<p>These models help estimate <strong>fair returns</strong> for an asset given its risk exposures. Deviations from these expected returns may indicate <strong>mispricing</strong>, <strong>alpha</strong>, or <strong>model limitations</strong>.</p>
+<p>If we compare the estimates for the expected return for our example, we know have three options. The annualized expected return based on historical daily returns is equal to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annual expected return based on historical daily returns: </span><span class="si">{</span><span class="n">daily_returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">252</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annual expected return based on historical daily returns: 0.2413
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we determine, the expected returns with the formulas provided above, we observe a large discrepancy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e_capm</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">capm</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e_ff</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;SMB&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;SMB&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;HML&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;HML&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annual expected return based on historical data and the CAPM: </span><span class="si">{</span><span class="n">e_capm</span><span class="o">*</span><span class="mi">252</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annual expected return based on historical data and the three factor Fama-French model: </span><span class="si">{</span><span class="n">e_ff</span><span class="o">*</span><span class="mi">252</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annual expected return based on historical data and the CAPM: 0.1199
+Annual expected return based on historical data and the three factor Fama-French model: 0.1036
+</pre></div>
+</div>
+</div>
+</div>
+<p>The discrepancy stems from ommitting <span class="math notranslate nohighlight">\(\alpha\)</span>. If we include its empirical estimate, the following expected return estimates result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e_capm</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">capm</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;const&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">capm</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e_ff</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;const&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;SMB&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;SMB&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;HML&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;HML&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annual expected return based on historical data and the CAPM: </span><span class="si">{</span><span class="n">e_capm</span><span class="o">*</span><span class="mi">252</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annual expected return based on historical data and the three factor Fama-French model: </span><span class="si">{</span><span class="n">e_ff</span><span class="o">*</span><span class="mi">252</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Annual expected return based on historical data and the CAPM: 0.2380
+Annual expected return based on historical data and the three factor Fama-French model: 0.2057
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-role-of-alpha-in-expected-return-estimation">
+<h3>The Role of Alpha in Expected Return Estimation<a class="headerlink" href="#the-role-of-alpha-in-expected-return-estimation" title="Link to this heading">#</a></h3>
+<p>Wether to include or not to include the empirical estimate of <span class="math notranslate nohighlight">\(\alpha\)</span>, comes with a discussion. When using the CAPM or Fama-French model to estimate expected returns, a key question is whether or not to include the <strong>intercept term <span class="math notranslate nohighlight">\(\alpha\)</span></strong>.</p>
+<section id="theoretical-perspective">
+<h4>Theoretical Perspective<a class="headerlink" href="#theoretical-perspective" title="Link to this heading">#</a></h4>
+<p>From a theoretical standpoint, <strong>asset pricing models assume markets are efficient</strong>, and all expected returns are determined by <strong>exposure to systematic risk factors</strong>. This implies:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha = 0
+\]</div>
+<ul class="simple">
+<li><p>The <strong>intercept</strong> captures the portion of the return <strong>not explained by the factors</strong>.</p></li>
+<li><p>In the <strong>theory</strong>, all pricing errors (alphas) should average out to zero over time.</p></li>
+<li><p>Setting <span class="math notranslate nohighlight">\(\alpha = 0\)</span> aligns the model with its <strong>purpose as a benchmark for fair compensation</strong>.</p></li>
+</ul>
+</section>
+<section id="empirical-perspective">
+<h4>Empirical Perspective<a class="headerlink" href="#empirical-perspective" title="Link to this heading">#</a></h4>
+<p>In practice, when we estimate these models using time-series regressions, we do often observe non-zero <span class="math notranslate nohighlight">\(\alpha\)</span> values:</p>
+<ul class="simple">
+<li><p>If <strong><span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span></strong>, the asset earned more than predicted → “abnormal return”</p></li>
+<li><p>But this <span class="math notranslate nohighlight">\(\alpha\)</span> is <strong>sample-dependent</strong> and often <strong>not statistically significant</strong></p></li>
+</ul>
+<p>So while <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span> may improve the fit to <strong>historical returns</strong>, it doesn’t necessarily improve the <strong>predictive power</strong> of the model.</p>
+</section>
+<section id="practical-trade-off">
+<h4>Practical Trade-Off<a class="headerlink" href="#practical-trade-off" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Including <span class="math notranslate nohighlight">\(\alpha\)</span></strong> improves fit and aligns better with observed returns, but it treats past outperformance as <strong>persistent</strong>, which may be optimistic or spurious.</p></li>
+<li><p><strong>Setting <span class="math notranslate nohighlight">\(\alpha = 0\)</span></strong> reflects theoretical discipline and avoids <strong>overfitting</strong>, but may <strong>underestimate historical returns</strong> — especially for assets that have had unusually high past performance.</p></li>
+</ul>
+<blockquote>
+<div><p>Whether to include <span class="math notranslate nohighlight">\(\alpha\)</span> depends on the goal:</p>
+<ul class="simple">
+<li><p>For <strong>forecasting expected returns based on risk exposures</strong>, setting <span class="math notranslate nohighlight">\(\alpha = 0\)</span> is justified and theoretically consistent.</p></li>
+<li><p>For <strong>performance attribution or benchmarking</strong>, reporting <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span> provides insight into past unexplained return.</p></li>
+</ul>
+</div></blockquote>
+<p>Understanding this distinction helps students see <strong>why models are useful</strong> even if they don’t perfectly fit history — and why careful interpretation of regression outputs matters.</p>
+</section>
+</section>
+<section id="systematic-vs-idiosyncratic-risk">
+<h3>Systematic vs. Idiosyncratic Risk<a class="headerlink" href="#systematic-vs-idiosyncratic-risk" title="Link to this heading">#</a></h3>
+<p>Factor models also allow to derive a disticntion of total risk into two main components: <strong>systematic risk</strong> and <strong>idiosyncratic risk</strong>.</p>
+<section id="systematic-risk-market-or-factor-risk">
+<h4>Systematic Risk (Market or Factor Risk)<a class="headerlink" href="#systematic-risk-market-or-factor-risk" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>This is the portion of an asset’s return variability that is explained by <strong>common risk factors</strong>.</p></li>
+<li><p>Examples include overall market movements, interest rate shifts, inflation surprises, or exposure to factors like size or value.</p></li>
+<li><p>It is <strong>non-diversifiable</strong> — even well-diversified portfolios are exposed to systematic risk.</p></li>
+<li><p>In models like CAPM or Fama-French, systematic risk is captured by the <strong>factor betas</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Systematic Risk} = \beta_1 F_1 + \beta_2 F_2 + \dots
+\]</div>
+</section>
+<section id="idiosyncratic-risk-asset-specific-risk">
+<h4>Idiosyncratic Risk (Asset-Specific Risk)<a class="headerlink" href="#idiosyncratic-risk-asset-specific-risk" title="Link to this heading">#</a></h4>
+<ul>
+<li><p>This is the part of an asset’s return that is <strong>unique to the firm</strong> and not explained by common factors.</p></li>
+<li><p>Examples include firm-specific news, management changes, earnings surprises, or lawsuits.</p></li>
+<li><p>It is <strong>diversifiable</strong> — in a well-constructed portfolio, these risks tend to cancel out.</p></li>
+<li><p>In regression models, idiosyncratic risk is represented by the <strong>residuals</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+  \text{Idiosyncratic Risk} = \varepsilon_t
+  \]</div>
+</li>
+</ul>
+</section>
+<section id="why-this-matters">
+<h4>Why This Matters<a class="headerlink" href="#why-this-matters" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Investors are only compensated for <strong>systematic risk</strong>, because idiosyncratic risk can be eliminated through diversification.</p></li>
+<li><p>Understanding this distinction helps explain <strong>why correlations arise</strong> between similar assets: they share exposure to the same systematic factors.</p></li>
+<li><p>It also highlights the role of <strong>factor models</strong> in separating meaningful (priced) risk from noise.&lt;&gt;</p></li>
+</ul>
+</section>
+</section>
+<section id="intuition-why-firms-with-similar-risk-exposures-have-correlated-returns">
+<h3>Intuition: Why Firms with Similar Risk Exposures Have Correlated Returns<a class="headerlink" href="#intuition-why-firms-with-similar-risk-exposures-have-correlated-returns" title="Link to this heading">#</a></h3>
+<p>In multi-factor models like the CAPM or Fama-French models, an asset’s return is largely driven by its <strong>exposure to common risk factors</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{i,t} = \alpha_i + \beta_{i1} F_{1,t} + \beta_{i2} F_{2,t} + \dots + \varepsilon_{i,t}
+\]</div>
+<p>If two companies have <strong>similar betas</strong> — that is, they respond similarly to the same risk factors — their returns will tend to move together because:</p>
+<ul class="simple">
+<li><p>They are both influenced by the <strong>same systematic shocks</strong> (e.g., a market downturn, small-cap rally, value rebound).</p></li>
+<li><p>Their <strong>idiosyncratic (residual) components</strong> may differ, but the <strong>factor-driven component</strong> dominates in most periods.</p></li>
+</ul>
+<section id="intuition">
+<h4>Intuition:<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h4>
+<blockquote>
+<div><p>Think of factor exposures as <strong>risk “DNA”</strong> — when two companies share the same DNA, they react similarly to changes in the environment.</p>
+</div></blockquote>
+<p>For example:</p>
+<ul class="simple">
+<li><p>Two small-cap value stocks will likely both benefit when value stocks perform well.</p></li>
+<li><p>A large-cap growth tech stock and a small-cap cyclical industrial will react <strong>differently</strong> to the same macro environment.</p></li>
+</ul>
+</section>
+<section id="resulting-correlation">
+<h4>Resulting Correlation<a class="headerlink" href="#resulting-correlation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Returns of firms with <strong>similar factor loadings</strong> will have <strong>high correlation</strong>, even if their industries differ.</p></li>
+<li><p>Conversely, firms with <strong>dissimilar factor exposures</strong> may have <strong>low or even negative correlation</strong>.</p></li>
+</ul>
+<p>This is why <strong>factor models are also useful for explaining correlation patterns</strong> across assets, not just expected returns.</p>
+</section>
+</section>
+<section id="wrapping-up-from-factor-models-to-time-series-analysis">
+<h3>Wrapping Up: From Factor Models to Time Series Analysis<a class="headerlink" href="#wrapping-up-from-factor-models-to-time-series-analysis" title="Link to this heading">#</a></h3>
+<p>In this chapter, we explored the use of linear regression models in financial applications, with a focus on explaining asset returns using systematic risk factors such as market, size, and value. We discussed how to interpret regression coefficients, assess model fit, and distinguish between systematic and idiosyncratic sources of return variation. We also examined the trade-offs involved in data frequency, the role of alpha, and the theoretical underpinnings of expected return estimation.</p>
+<p>While these models provide powerful tools for understanding the drivers of returns, they typically treat time as just another variable. However, financial data are inherently <strong>ordered over time</strong>, and often exhibit patterns like autocorrelation, trends, and volatility clustering that standard regression models don’t capture.</p>
+<p>In the next chapter, we shift our focus from static relationships to <strong>dynamic behavior over time</strong>. We’ll introduce key concepts from <strong>time series analysis</strong>, such as stationarity, autocorrelation, lag structures, and volatility modeling. These tools allow us to better understand, model, and forecast the evolution of financial variables — from prices and returns to interest rates and volatility indices.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_empirical_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Empirical Estimation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specification">Model specification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-impact-of-intercept-and-slope">Understanding the Impact of Intercept and Slope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-categorical-variables-in-regression-models">Using Categorical Variables in Regression Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variable-encoding">Dummy Variable Encoding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-with-categorical-variables">Regression Model with Categorical Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions-of-the-linear-regression-model">Assumptions of the Linear Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearity">1. <strong>Linearity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-errors">2. <strong>Independence of Errors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homoscedasticity-constant-variance-of-errors">3. <strong>Homoscedasticity (Constant Variance of Errors)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-perfect-multicollinearity">4. <strong>No Perfect Multicollinearity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-conditional-mean-of-errors">5. <strong>Zero Conditional Mean of Errors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normality-of-errors-for-inference-only">6. <strong>Normality of Errors</strong> <em>(for inference only)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-in-linear-regression-is-different-from-zero">Hypothesis Testing in Linear Regression: Is β Different from Zero?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypotheses">The Hypotheses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-statistic-t-test">The Test Statistic (t-Test)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-understanding-standard-errors-through-repeated-sampling">Simulation: Understanding Standard Errors Through Repeated Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-rule">Decision Rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-errors-matter">Why Standard Errors Matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goodness-of-fit-in-linear-regression">Goodness of Fit in Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-r-squared">Definition of R-squared</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-sectional-vs-time-series-regression">Cross-Sectional vs. Time-Series Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-sectional-regression">Cross-Sectional Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-regression">Time-Series Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences">Key Differences</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-regression-company-return-on-market-return-capm">Time-Series Regression: Company Return on Market Return (CAPM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-the-risk-free-rate">What about the risk-free rate?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-capm-multi-factor-models">Extending the CAPM: Multi-Factor Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-risk-factors-are-constructed">How Risk Factors Are Constructed</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-constructing-the-smb-size-factor">Example: Constructing the SMB (Size) Factor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-constructing-the-hml-value-factor">Example: Constructing the HML (Value) Factor</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-negative-fama-french-factor-betas">Interpreting Negative Fama-French Factor Betas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-beta-on-smb-size-factor">Negative Beta on SMB (Size Factor)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-beta-on-hml-value-factor">Negative Beta on HML (Value Factor)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-vs-monthly-data-in-time-series-regressions">Daily vs. Monthly Data in Time-Series Regressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-data">Daily Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#monthly-data">Monthly Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-expected-returns-with-capm-and-fama-french-models">Estimating Expected Returns with CAPM and Fama-French Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#capm-expected-return">CAPM Expected Return</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-3-factor-model">Fama-French 3-Factor Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-alpha-in-expected-return-estimation">The Role of Alpha in Expected Return Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-perspective">Theoretical Perspective</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-perspective">Empirical Perspective</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-trade-off">Practical Trade-Off</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-vs-idiosyncratic-risk">Systematic vs. Idiosyncratic Risk</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#systematic-risk-market-or-factor-risk">Systematic Risk (Market or Factor Risk)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#idiosyncratic-risk-asset-specific-risk">Idiosyncratic Risk (Asset-Specific Risk)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why This Matters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-why-firms-with-similar-risk-exposures-have-correlated-returns">Intuition: Why Firms with Similar Risk Exposures Have Correlated Returns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resulting-correlation">Resulting Correlation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up-from-factor-models-to-time-series-analysis">Wrapping Up: From Factor Models to Time Series Analysis</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
