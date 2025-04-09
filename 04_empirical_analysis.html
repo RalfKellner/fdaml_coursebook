@@ -171,6 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Empirical Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
 </ul>
 
     </div>
@@ -1032,10 +1033,8 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
     <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
     <span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="c1"># Download S&amp;P 500 data</span>
     <span class="n">btc</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2015-01-01&quot;</span><span class="p">,</span> <span class="n">auto_adjust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># Compute daily returns</span>
     <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
     <span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
     <span class="n">btc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/btc_data.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
