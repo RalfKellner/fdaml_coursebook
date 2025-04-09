@@ -6,3 +6,4 @@ chapters:
 - file: 03_estimation
 - file: 04_empirical_analysis
 - file: 05_regression
+- file: 06_time_series

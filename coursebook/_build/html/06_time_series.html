@@ -1,0 +1,1747 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time Series Analysis &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_time_series';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Linear Regression" href="05_regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06_time_series.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time Series Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series">Time Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-finance">Example (Finance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocovariance-function">Autocovariance Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mean">Sample Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-autocovariance-function">Sample Autocovariance Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-weak-stationarity">Definition: (Weak) Stationarity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-stationarity-matters">Why Stationarity Matters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#in-practice">In Practice</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-noise-a-canonical-stationary-process">White Noise: A Canonical Stationary Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-and-use">Intuition and Use</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-white-noise-cannot-be-predicted">Why White Noise Cannot Be Predicted</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consequence">Consequence</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ljung-box-test">Ljung-Box Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses">Hypotheses</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">Test Statistic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-model-for-the-mean-the-ar-1-model">Conditional Model for the Mean: The AR(1) Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-ar-1-model-for-prediction">Using the AR(1) Model for Prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-ar-1-ar-p-and-arma-models">Beyond AR(1): AR(p) and ARMA Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-model-for-the-variance-the-garch-1-1-model">Conditional Model for the Variance: The GARCH(1, 1) model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#garch-1-1-model-definition">GARCH(1,1) Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-definition-garch-1-1">Formal Definition: GARCH(1,1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-ahead-volatility-prediction-with-garch-1-1">One-Step-Ahead Volatility Prediction with GARCH(1,1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-model-parameters">Interpretation of model parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-garch-forecasts-to-unconditional-volatility">Comparing GARCH Forecasts to Unconditional Volatility</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-vs-unconditional-mean-and-variance-estimators">Conditional vs Unconditional Mean and Variance Estimators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives">Summary: Modeling Conditional Mean and Variance — Univariate and Multivariate Perspectives</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-mean">Modeling the Conditional Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-variance">Modeling the Conditional Variance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-extensions">Multivariate Extensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#final-note">Final Note</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="time-series-analysis">
+<h1>Time Series Analysis<a class="headerlink" href="#time-series-analysis" title="Link to this heading">#</a></h1>
+<p>In financial markets, data are inherently ordered in time — prices, returns, interest rates, and volatility all evolve sequentially. While linear regression models help explain relationships between variables, they often ignore the <strong>temporal structure</strong> of financial data. This is where <strong>time series analysis</strong> comes in.</p>
+<p>Time series analysis focuses on understanding how a variable changes <strong>over time</strong>, identifying patterns such as <strong>trends</strong>, <strong>cycles</strong>, <strong>autocorrelation</strong>, and <strong>volatility clustering</strong>. It provides a framework for building models that not only describe historical behavior but also support <strong>forecasting</strong>, <strong>risk assessment</strong>, and <strong>strategy development</strong>.</p>
+<p>In this chapter, we will explore:</p>
+<ul class="simple">
+<li><p>How to visualize and interpret time series data</p></li>
+<li><p>The concept of <strong>stationarity</strong> and why it matters</p></li>
+<li><p>How to detect and measure <strong>autocorrelation</strong></p></li>
+<li><p>Simple models like the <strong>AR(1)</strong> and <strong>random walk</strong></p></li>
+<li><p>The building blocks for more advanced models such as <strong>GARCH</strong> and <strong>VAR</strong></p></li>
+</ul>
+<p>Time series tools are essential in empirical finance, especially for modeling return dynamics, volatility, interest rates, and macroeconomic indicators. They allow us to ask: <em>How predictable are financial markets?</em> and <em>What can we learn from the past to better understand the future?</em></p>
+<section id="time-series">
+<h2>Time Series<a class="headerlink" href="#time-series" title="Link to this heading">#</a></h2>
+<p>A <strong>time series</strong> is a sequence of data points indexed in <strong>chronological order</strong>, typically observed at regular time intervals (e.g., daily, monthly, quarterly).</p>
+<p>Formally, a <strong>univariate time series</strong> is defined as a collection of random variables:</p>
+<div class="math notranslate nohighlight">
+\[
+\{X_t\}_{t \in \mathbb{Z}} = \{X_1, X_2, X_3, \dots, X_T\}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span> denotes the value of the process at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span> belongs to an ordered set of time points (e.g., <span class="math notranslate nohighlight">\(t = 1, 2, \dots, T\)</span>).</p></li>
+<li><p>The entire sequence <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is treated as a <strong>stochastic process</strong>, meaning each <span class="math notranslate nohighlight">\(X_t\)</span> is a random variable drawn from a joint distribution with the other time points.</p></li>
+</ul>
+<section id="example-finance">
+<h3>Example (Finance)<a class="headerlink" href="#example-finance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span> could represent the closing price of Apple stock on trading day <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>In a return series, <span class="math notranslate nohighlight">\(X_t\)</span> would represent the log return between day <span class="math notranslate nohighlight">\(t - 1\)</span> and day <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+<p>Time series analysis focuses on modeling the <strong>temporal dependence</strong> between observations, which distinguishes it from cross-sectional analysis. This allows us to describe past dynamics, detect patterns, and make forecasts.</p>
+<p>See below the visualization of the daily time series for the S&amp;P 500 index and its discrete returns. While the index shows a steady upward trend over time, the returns do not. This upward movement is referred to as <strong>drift</strong>, and it captures the <strong>average direction and speed</strong> at which the price tends to evolve. A <strong>positive drift</strong> implies that the price increases on average over time. This causes the process to <strong>“wander” away from its initial value</strong>, making it <strong>non-stationary</strong>, as both its mean and variance change over time.</p>
+<p>In contrast, the return series does not show such a trend — instead, it fluctuates around a constant average. This behavior reflects the key property of a <strong>stationary</strong> time series, where the statistical properties remain stable over time. Despite these differences, both time series share a common feature: their short-term movements are driven by <strong>random fluctuations</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/sp_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Download S&amp;P 500 data</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;^GSPC&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;1997-01-01&quot;</span><span class="p">,</span> <span class="n">auto_adjust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Compute daily returns</span>
+    <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Daily Return&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+    <span class="n">spx</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">spx</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
+    <span class="n">spx</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/sp_data.csv&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spx</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;S&amp;P 500 Index&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;S&amp;P 500 Index&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Daily Close Index Value&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spx</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;S&amp;P 500 Returns&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;S&amp;P 500 Daily Returns&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Discrete Return&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/99f9f3d9e1d0160c899beea70f9edd81d66b0f67cbccb3c7b9e185ce9fa6b71b.png" src="_images/99f9f3d9e1d0160c899beea70f9edd81d66b0f67cbccb3c7b9e185ce9fa6b71b.png" />
+</div>
+</div>
+</section>
+<section id="autocovariance-function">
+<h3>Autocovariance Function<a class="headerlink" href="#autocovariance-function" title="Link to this heading">#</a></h3>
+<p>In time series analysis, the <strong>autocovariance function</strong> describes how a variable is linearly related to its own past values. For a time series <span class="math notranslate nohighlight">\(\{X_t\}\)</span>, the autocovariance at <strong>lag <span class="math notranslate nohighlight">\(h\)</span></strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\gamma(h) = \text{Cov}(X_t, X_{t+h}) = \mathbb{E}[(X_t - \mu)(X_{t+h} - \mu)]
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma(0)\)</span> is the <strong>variance</strong> of <span class="math notranslate nohighlight">\(X_t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma(h)\)</span> measures the strength and direction of the <strong>linear dependence</strong> between <span class="math notranslate nohighlight">\(X_t\)</span> and its lagged value <span class="math notranslate nohighlight">\(X_{t+h}\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\gamma(h) &gt; 0\)</span>, high values of <span class="math notranslate nohighlight">\(X_t\)</span> tend to be followed by high values at lag <span class="math notranslate nohighlight">\(h\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\gamma(h) &lt; 0\)</span>, high values tend to be followed by low values, and vice versa</p></li>
+</ul>
+<p>The autocovariance function is central to understanding the <strong>temporal dependence structure</strong> of a time series. In practice, we estimate autocovariance and autocorrelation from observed data. Given a time series sample <span class="math notranslate nohighlight">\(\{x_1, x_2, \dots, x_T\}\)</span>, we can compute the empirical estimators as follows:</p>
+<section id="sample-mean">
+<h4>Sample Mean<a class="headerlink" href="#sample-mean" title="Link to this heading">#</a></h4>
+<p>First, compute the sample mean:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x} = \frac{1}{T} \sum_{t=1}^{T} x_t
+\]</div>
+</section>
+<section id="sample-autocovariance-function">
+<h4>Sample Autocovariance Function<a class="headerlink" href="#sample-autocovariance-function" title="Link to this heading">#</a></h4>
+<p>The <strong>sample autocovariance</strong> at lag <span class="math notranslate nohighlight">\(h\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\gamma}(h) = \frac{1}{T} \sum_{t=1}^{T-h} (x_t - \bar{x})(x_{t+h} - \bar{x})
+\]</div>
+<p>This measures the <strong>linear dependence</strong> between the time series and its lagged version, using centered observations.</p>
+</section>
+</section>
+<section id="autocorrelation-function-acf">
+<h3>Autocorrelation Function (ACF)<a class="headerlink" href="#autocorrelation-function-acf" title="Link to this heading">#</a></h3>
+<p>The <strong>autocorrelation function (ACF)</strong> measures the correlation between a time series and its lagged values. For a stationary time series <span class="math notranslate nohighlight">\(\{X_t\}\)</span>, the autocorrelation at lag <span class="math notranslate nohighlight">\(h\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho(h) = \frac{\gamma(h)}{\gamma(0)}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma(h)\)</span> is the autocovariance at lag <span class="math notranslate nohighlight">\(h\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma(0)\)</span> is the variance of the series</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho(h)\)</span> lies between –1 and 1, and indicates the <strong>linear dependence</strong> between <span class="math notranslate nohighlight">\(X_t\)</span> and <span class="math notranslate nohighlight">\(X_{t+h}\)</span></p></li>
+</ul>
+<p>The ACF provides insight into the <strong>temporal structure</strong> of the series. It is essential for identifying patterns such as persistence, seasonality, or mean reversion, and helps guide the selection of appropriate time series models.</p>
+<p>The <strong>sample autocorrelation</strong> at lag <span class="math notranslate nohighlight">\(h\)</span> is the normalized autocovariance:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\rho}(h) = \frac{\hat{\gamma}(h)}{\hat{\gamma}(0)}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{\gamma}(0)\)</span> is the <strong>sample variance</strong> of the time series.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\rho}(h)\)</span> lies in <span class="math notranslate nohighlight">\([-1, 1]\)</span> and quantifies the <strong>relative strength</strong> of autocorrelation at lag <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+</ul>
+<p>These estimators form the basis of the empirical autocorrelation function (ACF), a key diagnostic tool in time series analysis. A plot of <span class="math notranslate nohighlight">\(\hat{\rho}(h)\)</span> against different lags <span class="math notranslate nohighlight">\(h\)</span> is known as the <strong>ACF plot</strong> or <strong>correlogram</strong>, and is a standard diagnostic tool in time series analysis.</p>
+<ul class="simple">
+<li><p>The blue bars show the sample autocorrelation at each lag.</p></li>
+<li><p>The shaded area or dashed horizontal lines indicate the 95% confidence interval.</p></li>
+<li><p>Bars outside this range are statistically significantly different from zero at the 5% level — suggesting real time dependence at that lag.</p></li>
+</ul>
+<p>The figure below exhibits ACF plots for daily returns of the S&amp;P 500, a bond ETF (IEF), Bitcoin and a Gold ETF (GLD). We observe only minor autocorrelation and the majority of autocorrelation values seem not to be statistically significantly different from zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.graphics.tsaplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_acf</span>
+
+<span class="n">bond_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/bond_etf_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">bond_returns</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">btc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/btc_data.csv&quot;</span><span class="p">)</span>
+<span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/commodity_etf_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span>
+<span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;ACF plots with 95% CI and data since 2015&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Lag&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Autocorrelation&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bond ETF (IEF) Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bitcoin Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gold ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/00c21824cdc8978409000d087ced5ada193cbd0a440b578d774ac19ffe06da28.png" src="_images/00c21824cdc8978409000d087ced5ada193cbd0a440b578d774ac19ffe06da28.png" />
+</div>
+</div>
+</section>
+<section id="definition-weak-stationarity">
+<h3>Definition: (Weak) Stationarity<a class="headerlink" href="#definition-weak-stationarity" title="Link to this heading">#</a></h3>
+<p>With our knowledge of autocovariance, we can define an important concept for time series data. A time series <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is said to be <strong>weakly stationary</strong> (or <strong>second-order stationary</strong>) if the following three conditions hold:</p>
+<ol class="arabic simple">
+<li><p><strong>Constant mean</strong>:
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}[X_t] = \mu \quad \text{for all } t
+\)</span>$</p></li>
+<li><p><strong>Constant variance</strong>:
+$<span class="math notranslate nohighlight">\(
+\text{Var}(X_t) = \sigma^2 \quad \text{for all } t
+\)</span>$</p></li>
+<li><p><strong>Autocovariance depends only on the lag</strong>:
+$<span class="math notranslate nohighlight">\(
+\text{Cov}(X_t, X_{t+h}) = \gamma(h) \quad \text{for all } t \text{ and } h
+\)</span>$</p></li>
+</ol>
+<p>This means the statistical properties of the series — its mean, variance, and correlation structure — are <strong>time-invariant</strong>.</p>
+<section id="why-stationarity-matters">
+<h4>Why Stationarity Matters<a class="headerlink" href="#why-stationarity-matters" title="Link to this heading">#</a></h4>
+<p>Most time series models, such as <strong>ARMA</strong>, <strong>ARIMA</strong>, <strong>GARCH</strong>, and <strong>VAR</strong>, are built under the assumption that the input series is <strong>stationary</strong>. Stationarity is important because:</p>
+<ul class="simple">
+<li><p>It allows us to model and forecast based on <strong>stable patterns</strong> over time.</p></li>
+<li><p>It enables meaningful estimation of <strong>autocorrelation</strong>, which would otherwise vary across time.</p></li>
+<li><p>It ensures that standard inference techniques (e.g., confidence intervals, hypothesis testing) are valid.</p></li>
+<li><p>Non-stationary series often contain <strong>trends</strong>, <strong>unit roots</strong>, or <strong>changing volatility</strong>, which can lead to <strong>spurious regression results</strong> if not properly addressed.</p></li>
+</ul>
+</section>
+<section id="in-practice">
+<h4>In Practice<a class="headerlink" href="#in-practice" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Price series</strong> (like stock prices) are typically <strong>non-stationary</strong> due to drift and increasing variance.</p></li>
+<li><p><strong>Return series</strong> (like daily or monthly returns) are often <strong>stationary</strong>, making them suitable for modeling.</p></li>
+</ul>
+<p>Identifying whether a series is stationary is one of the <strong>first steps</strong> in any time series analysis.</p>
+</section>
+</section>
+<section id="white-noise-a-canonical-stationary-process">
+<h3>White Noise: A Canonical Stationary Process<a class="headerlink" href="#white-noise-a-canonical-stationary-process" title="Link to this heading">#</a></h3>
+<p>A <strong>white noise process</strong> is one of the most basic examples of a <strong>stationary time series</strong>. It consists of a sequence of uncorrelated random variables with constant mean and variance.</p>
+<section id="definition">
+<h4>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(\{\varepsilon_t\}\)</span> be a time series. It is a <strong>white noise process</strong> if:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}[\varepsilon_t] = \mu\)</span> (constant mean) for all <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Var}(\varepsilon_t) = \sigma^2\)</span> (constant variance) for all <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Cov}(\varepsilon_t, \varepsilon_{t+h}) = 0\)</span> for all <span class="math notranslate nohighlight">\(h \ne 0\)</span> (no autocorrelation)</p></li>
+</ul>
+<p>This implies that each value is <strong>statistically independent</strong> (or at least uncorrelated) from all others — the best guess for the next value is simply the mean.</p>
+</section>
+<section id="intuition-and-use">
+<h4>Intuition and Use<a class="headerlink" href="#intuition-and-use" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>White noise represents <strong>pure randomness</strong> — no memory, no trend, no structure.</p></li>
+<li><p>It is <strong>stationary by construction</strong>: all its moments are constant over time.</p></li>
+<li><p>In time series modeling, white noise is often used as:</p>
+<ul>
+<li><p>A <strong>building block</strong> for more complex models (e.g., AR, MA, ARMA)</p></li>
+<li><p>The <strong>error term</strong> or <strong>innovation</strong> driving a process</p></li>
+<li><p>A <strong>benchmark</strong> for testing the presence of autocorrelation or structure in real data</p></li>
+</ul>
+</li>
+</ul>
+<p>The figure below shows simulated data from a white noise process (on the left) and its ACF plot (on the right). Comparing it to return plots from the previous chapters, we can see clear differences to real data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.graphics.tsaplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_acf</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">white_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">white_noise</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simulated White Noise Process&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">white_noise</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ACF of White Noise Process&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c5935d55e6ead84d29002114e136e8640355e1361d48368b685545271c079029.png" src="_images/c5935d55e6ead84d29002114e136e8640355e1361d48368b685545271c079029.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="why-white-noise-cannot-be-predicted">
+<h3>Why White Noise Cannot Be Predicted<a class="headerlink" href="#why-white-noise-cannot-be-predicted" title="Link to this heading">#</a></h3>
+<p>A white noise process represents <strong>pure randomness</strong> — each observation is an independent draw from the same distribution without any relation (correlation) over time and, thus, with no memory of the past. Formally, for a white noise process <span class="math notranslate nohighlight">\(\{\varepsilon_t\}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[\varepsilon_t \mid \varepsilon_{t-1}, \varepsilon_{t-2}, \dots] = \mathbb{E}[\varepsilon_t] = \mu
+\]</div>
+<p>This means that knowing all previous values provides <strong>no information</strong> about future values. Unlike trend-following or mean-reverting processes, white noise contains <strong>no structure or pattern</strong> to exploit.</p>
+<section id="intuition">
+<h4>Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>There are <strong>no systematic components</strong> — no drift, no trend, no autocorrelation.</p></li>
+<li><p>Each value is just <strong>noise</strong>, like flipping a fair coin or rolling a die.</p></li>
+<li><p>The <strong>best prediction</strong> for the next value is simply the mean — often zero.</p></li>
+</ul>
+</section>
+<section id="consequence">
+<h4>Consequence<a class="headerlink" href="#consequence" title="Link to this heading">#</a></h4>
+<p>White noise is fundamentally <strong>unpredictable</strong>. Attempting to forecast it using past observations will produce no better results than guessing the mean. In time series modeling, white noise is often the <strong>benchmark for unpredictability</strong> and the <strong>target residual pattern</strong> after fitting a good model.</p>
+<p>Thus, if we collect empirical data which seems to match a white noise process, we know that predicting its future (by its own past only) is not realistic, no matter how fancy the prediction model is going to be.</p>
+</section>
+</section>
+<section id="ljung-box-test">
+<h3>Ljung-Box Test<a class="headerlink" href="#ljung-box-test" title="Link to this heading">#</a></h3>
+<p>The <strong>Ljung-Box test</strong> is a statistical test used to detect whether a time series exhibits significant <strong>autocorrelation</strong> at one or more lags. It tests the <strong>null hypothesis</strong> that a series is <strong>white noise</strong>, meaning all autocorrelations up to a given lag are jointly equal to zero.</p>
+<section id="hypotheses">
+<h4>Hypotheses<a class="headerlink" href="#hypotheses" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Null hypothesis (<span class="math notranslate nohighlight">\(H_0\)</span>):</strong> The data are independently distributed (no autocorrelation), i.e., <span class="math notranslate nohighlight">\(\rho(1) = \rho(2) = ... = \rho(K) = 0\)</span>, for some specified value <span class="math notranslate nohighlight">\(K\)</span></p></li>
+<li><p><strong>Alternative hypothesis (<span class="math notranslate nohighlight">\(H_1\)</span>):</strong> The data exhibit autocorrelation up to lag <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+</ul>
+<p>That means a rejection of <span class="math notranslate nohighlight">\(H_0\)</span> implies that one or more autocorrelation values up to lag (<span class="math notranslate nohighlight">\(K\)</span>) are different from zero.</p>
+</section>
+<section id="test-statistic">
+<h4>Test Statistic<a class="headerlink" href="#test-statistic" title="Link to this heading">#</a></h4>
+<p>Given a sample of size <span class="math notranslate nohighlight">\(T\)</span>, and autocorrelations <span class="math notranslate nohighlight">\(\hat{\rho}_1, \hat{\rho}_2, \dots, \hat{\rho}_h\)</span> up to lag <span class="math notranslate nohighlight">\(h\)</span>, the Ljung-Box statistic is:</p>
+<div class="math notranslate nohighlight">
+\[
+Q = T(T + 2) \sum_{k=1}^{h} \frac{\hat{\rho}_k^2}{T - k}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> approximately follows a <strong>chi-squared distribution</strong> with <span class="math notranslate nohighlight">\(h\)</span> degrees of freedom.</p></li>
+<li><p>Large values of <span class="math notranslate nohighlight">\(Q\)</span> provide evidence <strong>against</strong> the null hypothesis (i.e., significant autocorrelation exists).</p></li>
+</ul>
+</section>
+<section id="interpretation">
+<h4>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>If the <strong>p-value is small</strong> (e.g., &lt; 0.05), we reject <span class="math notranslate nohighlight">\(H_0\)</span>: the series is <strong>not white noise</strong>.</p></li>
+<li><p>If the <strong>p-value is large</strong>, we do not reject <span class="math notranslate nohighlight">\(H_0\)</span>: the series behaves like white noise.</p></li>
+</ul>
+<p>The cell below conducts the Ljung-Box test for the daily returns of the S&amp;P 500, a bond ETF (IEF), Bitcoin, and a gold ETF (GLD), using data since 2015. Each row shows the test statistic and p-value when including autocorrelations up to the specified lag (given by the row index). The results confirm the patterns observed in the autocorrelation function (ACF) plots: daily returns for the S&amp;P 500 and the bond ETF (IEF) exhibit moderate autocorrelation, whereas BTC and gold returns appear largely uncorrelated over time.</p>
+<p>Importantly, the absence of autocorrelation does not imply that BTC and gold returns are inherently unpredictable — it simply means that past values of the same series do not contain useful information for predicting future values. In principle, one could still construct predictive models using other explanatory variables that show lagged relationships with these returns.</p>
+<p>However, it’s crucial to emphasize that forecasting financial asset returns is a highly challenging and noisy task. Even if some predictability is found in-sample, achieving consistent and robust performance out-of-sample is rare in practice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+
+<span class="n">ljung_box_sp</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_bond</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Bond ETF(IEF)&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Bond ETF(IEF)&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_btc</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_gold</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Gold ETF(GLD)&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Gold ETF(GLD)&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">ljung_box_sp</span><span class="p">,</span> <span class="n">ljung_box_bond</span><span class="p">,</span> <span class="n">ljung_box_btc</span><span class="p">,</span> <span class="n">ljung_box_gold</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">S&amp;P 500</th>
+      <th colspan="2" halign="left">Bond ETF(IEF)</th>
+      <th colspan="2" halign="left">BTC</th>
+      <th colspan="2" halign="left">Gold ETF(GLD)</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>61.463967</td>
+      <td>4.509202e-15</td>
+      <td>4.695152</td>
+      <td>0.030248</td>
+      <td>2.438601</td>
+      <td>0.118382</td>
+      <td>0.332197</td>
+      <td>0.564369</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>62.210466</td>
+      <td>3.098625e-14</td>
+      <td>14.214595</td>
+      <td>0.000819</td>
+      <td>2.805470</td>
+      <td>0.245923</td>
+      <td>3.686921</td>
+      <td>0.158269</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>62.247269</td>
+      <td>1.945331e-13</td>
+      <td>14.288471</td>
+      <td>0.002538</td>
+      <td>3.463010</td>
+      <td>0.325591</td>
+      <td>6.807163</td>
+      <td>0.078305</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>67.304851</td>
+      <td>8.407579e-14</td>
+      <td>15.702897</td>
+      <td>0.003445</td>
+      <td>3.819134</td>
+      <td>0.431036</td>
+      <td>7.713121</td>
+      <td>0.102671</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>70.117304</td>
+      <td>9.687751e-14</td>
+      <td>16.309565</td>
+      <td>0.006014</td>
+      <td>4.257958</td>
+      <td>0.512905</td>
+      <td>12.153010</td>
+      <td>0.032750</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>77.581438</td>
+      <td>1.127749e-14</td>
+      <td>16.309568</td>
+      <td>0.012185</td>
+      <td>8.426231</td>
+      <td>0.208509</td>
+      <td>12.315690</td>
+      <td>0.055286</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>80.657284</td>
+      <td>1.011638e-14</td>
+      <td>16.777778</td>
+      <td>0.018887</td>
+      <td>10.822142</td>
+      <td>0.146567</td>
+      <td>12.669034</td>
+      <td>0.080595</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>85.195136</td>
+      <td>4.375645e-15</td>
+      <td>18.431887</td>
+      <td>0.018212</td>
+      <td>12.905474</td>
+      <td>0.115144</td>
+      <td>12.833451</td>
+      <td>0.117710</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>95.860269</td>
+      <td>1.078672e-16</td>
+      <td>18.970966</td>
+      <td>0.025441</td>
+      <td>13.161090</td>
+      <td>0.155452</td>
+      <td>12.923192</td>
+      <td>0.166113</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>95.935567</td>
+      <td>3.535106e-16</td>
+      <td>24.365616</td>
+      <td>0.006687</td>
+      <td>18.962855</td>
+      <td>0.040737</td>
+      <td>14.491954</td>
+      <td>0.151711</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Also note that the frequency of returns has a noticeable impact on the degree of autocorrelation. In the cell below, we repeat the Ljung-Box test using monthly returns instead of daily returns. The results demonstrate that autocorrelation tends to weaken or vanish at lower frequencies.</p>
+<p>This observation is consistent with the idea that financial markets rapidly incorporate new information. Events that occurred weeks or months ago are typically already reflected in current prices, making past values less informative for predicting current returns over longer horizons. As a result, any time-dependence present in high-frequency data tends to fade as we aggregate over longer time intervals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">data_for_monthly_analysis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_06/data_for_monthly_analysis.csv&quot;</span><span class="p">)</span>
+    <span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">data_for_monthly_analysis</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;^GSPC&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD&quot;</span><span class="p">]</span>
+    <span class="n">data_for_monthly_analysis</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span><span class="p">)</span>
+    <span class="n">data_for_monthly_analysis</span> <span class="o">=</span> <span class="n">data_for_monthly_analysis</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">data_for_monthly_analysis</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">]</span>
+    <span class="n">data_for_monthly_analysis</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_06/data_for_monthly_analysis.csv&quot;</span><span class="p">)</span>
+
+<span class="n">monthly_sp_returns</span> <span class="o">=</span> <span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">monthly_bond_returns</span> <span class="o">=</span> <span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">monthly_btc_returns</span> <span class="o">=</span> <span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;BTC&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">monthly_gold_returns</span> <span class="o">=</span> <span class="n">data_for_monthly_analysis</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">ljung_box_sp</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">monthly_sp_returns</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_sp</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_bond</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">monthly_bond_returns</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Bond ETF(IEF)&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Bond ETF(IEF)&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_bond</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_btc</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">monthly_btc_returns</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_btc</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">ljung_box_gold</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">monthly_gold_returns</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Gold ETF(GLD)&quot;</span><span class="p">,</span> <span class="s2">&quot;test-stat&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Gold ETF(GLD)&quot;</span><span class="p">,</span> <span class="s2">&quot;p-value&quot;</span><span class="p">)]</span>
+<span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">ljung_box_gold</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">ljung_box_sp</span><span class="p">,</span> <span class="n">ljung_box_bond</span><span class="p">,</span> <span class="n">ljung_box_btc</span><span class="p">,</span> <span class="n">ljung_box_gold</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">S&amp;P 500</th>
+      <th colspan="2" halign="left">Bond ETF(IEF)</th>
+      <th colspan="2" halign="left">BTC</th>
+      <th colspan="2" halign="left">Gold ETF(GLD)</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+      <th>test-stat</th>
+      <th>p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1.710420</td>
+      <td>0.190931</td>
+      <td>0.551165</td>
+      <td>0.457842</td>
+      <td>2.758099</td>
+      <td>0.096763</td>
+      <td>0.391872</td>
+      <td>0.531317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.265526</td>
+      <td>0.195389</td>
+      <td>0.838684</td>
+      <td>0.657479</td>
+      <td>3.040434</td>
+      <td>0.218664</td>
+      <td>0.466716</td>
+      <td>0.791870</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.365875</td>
+      <td>0.338579</td>
+      <td>2.995377</td>
+      <td>0.392338</td>
+      <td>4.807208</td>
+      <td>0.186471</td>
+      <td>2.015498</td>
+      <td>0.569196</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.386461</td>
+      <td>0.495351</td>
+      <td>3.064200</td>
+      <td>0.547140</td>
+      <td>4.956758</td>
+      <td>0.291763</td>
+      <td>2.816452</td>
+      <td>0.588996</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>3.453703</td>
+      <td>0.630404</td>
+      <td>3.138048</td>
+      <td>0.678713</td>
+      <td>5.399146</td>
+      <td>0.369132</td>
+      <td>3.287300</td>
+      <td>0.655787</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>4.202386</td>
+      <td>0.649309</td>
+      <td>4.139121</td>
+      <td>0.657856</td>
+      <td>5.444956</td>
+      <td>0.488134</td>
+      <td>3.669859</td>
+      <td>0.721251</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6.547101</td>
+      <td>0.477505</td>
+      <td>4.151215</td>
+      <td>0.762205</td>
+      <td>5.782046</td>
+      <td>0.565417</td>
+      <td>3.949043</td>
+      <td>0.785628</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>7.936803</td>
+      <td>0.439668</td>
+      <td>7.922698</td>
+      <td>0.441057</td>
+      <td>7.741067</td>
+      <td>0.459164</td>
+      <td>4.727647</td>
+      <td>0.786249</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10.081206</td>
+      <td>0.343951</td>
+      <td>8.381188</td>
+      <td>0.496234</td>
+      <td>9.242407</td>
+      <td>0.415206</td>
+      <td>4.945886</td>
+      <td>0.839000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10.090268</td>
+      <td>0.432610</td>
+      <td>8.778285</td>
+      <td>0.553267</td>
+      <td>10.043168</td>
+      <td>0.436714</td>
+      <td>5.400956</td>
+      <td>0.862837</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="conditional-model-for-the-mean-the-ar-1-model">
+<h2>Conditional Model for the Mean: The AR(1) Model<a class="headerlink" href="#conditional-model-for-the-mean-the-ar-1-model" title="Link to this heading">#</a></h2>
+<p>Our analysis so far has revealed that certain financial return series — such as daily stock or bond returns — may exhibit <strong>autocorrelation</strong>, especially at short lags. This means that past returns contain information that could help explain or predict current returns. To model this behavior formally, we introduce the <strong>autoregressive model of order 1</strong>, or <strong>AR(1)</strong>.</p>
+<p>The AR(1) model captures the idea that the current value of a time series depends <strong>linearly on its most recent past value</strong>, plus a random shock:</p>
+<div class="math notranslate nohighlight">
+\[
+X_t = \xi + \phi \left( X_{t-1} - \xi \right) + \varepsilon_t
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\xi\)</span> a constant parameter</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span> is the <strong>autoregressive coefficient</strong> (lag-1 memory),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t\)</span> is a <strong>white noise error term</strong>.</p></li>
+</ul>
+<p>This model is still simple, yet it introduces <strong>persistence</strong>, <strong>mean-reversion</strong>, and <strong>predictive structure</strong> — all features observed in many economic and financial time series. It is one of the foundational building blocks for more complex models and is essential for understanding time series dynamics beyond white noise.</p>
+<p>Packages like <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> typically use <strong>conditional maximum likelihood estimation</strong>. This method assumes that the first observation is given (conditional on initial value), and then maximizes the <strong>likelihood function</strong> of the model under the assumption that the errors <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> are normally distributed:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_t \sim \mathcal{N}(0, \sigma^2)
+\]</div>
+<p>The conditional likelihood is then:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\xi, \phi, \sigma^2) = \prod_{t=2}^T \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(X_t - \xi - \phi \left( X_{t-1} - \xi \right))^2}{2\sigma^2} \right)
+\]</div>
+<p>This approach is slightly more efficient than OLS and forms the foundation for likelihood-based inference and model comparison (e.g., using AIC or BIC).</p>
+<p>In the cell below, we estimate the AR(1) model for daily returns for the S&amp;P 500 since 2015. The negative value for <span class="math notranslate nohighlight">\(\hat{\phi}\)</span> implies that we expect lower returns after higher realiizations and vice versa.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.arima.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">ARIMA</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2015-01-01&quot;</span><span class="p">):,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">ar1_model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ar1_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                    R_t   No. Observations:                 2671
+Model:                 ARIMA(1, 0, 0)   Log Likelihood                7933.859
+Date:                Wed, 09 Apr 2025   AIC                         -15861.718
+Time:                        12:45:05   BIC                         -15844.048
+Sample:                    01-02-2015   HQIC                        -15855.325
+                         - 03-28-2025                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0005      0.000      2.257      0.024    5.94e-05       0.001
+ar.L1         -0.1373      0.008    -17.873      0.000      -0.152      -0.122
+sigma2         0.0001    1.4e-06     87.959      0.000       0.000       0.000
+===================================================================================
+Ljung-Box (L1) (Q):                   0.29   Jarque-Bera (JB):             18283.31
+Prob(Q):                              0.59   Prob(JB):                         0.00
+Heteroskedasticity (H):               1.75   Skew:                            -0.67
+Prob(H) (two-sided):                  0.00   Kurtosis:                        15.75
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+</pre></div>
+</div>
+</div>
+</div>
+<section id="using-the-ar-1-model-for-prediction">
+<h3>Using the AR(1) Model for Prediction<a class="headerlink" href="#using-the-ar-1-model-for-prediction" title="Link to this heading">#</a></h3>
+<p>Once we have estimated the AR(1) model, we can use it to generate <strong>predictions</strong> for future values of the time series. Because the model expresses the current value as a function of the previous value, we can make <strong>one-step-ahead forecasts</strong> using:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{X}_{t+1} = \hat{\xi} + \hat{\phi} \left( X_{t-1} - \hat{\xi} \right)
+\]</div>
+<p>This forecast is the <strong>expected value</strong> of the next observation, conditional on the most recent observation and the estimated model parameters.</p>
+<p>We can also generate <strong>multi-step forecasts</strong> recursively by feeding predictions back into the model:</p>
+<ul class="simple">
+<li><p>Two-step ahead: <span class="math notranslate nohighlight">\(\hat{X}_{t+2} = \hat{\xi} + \hat{\phi} \hat{X}_{t+1}\)</span></p></li>
+<li><p>Three-step ahead: <span class="math notranslate nohighlight">\(\hat{X}_{t+3} = \hat{\xi} + \hat{\phi} \hat{X}_{t+2}\)</span>, and so on.</p></li>
+</ul>
+<p>The AR(1) model is particularly useful for predicting time series that exhibit <strong>persistence</strong> or <strong>mean-reversion</strong>, and it provides a foundation for more complex forecasting models in time series analysis.</p>
+<p>Let us take a look how well such a model is good for out-of-sample forecasting. The data starts at 2015, we use data until the end of 2022 to estimate the parameters of the AR(1) model and use it to forecast data starting in 2023. A benchmark is to use the arithmetic mean of returns between 2015 and 2022. To compare the models we calculate the residuals for each day:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_t = y_t - \hat{y}_t
+\]</div>
+<p>and sum their squared values:</p>
+<div class="math notranslate nohighlight">
+\[
+SSE = \sum_{t = 1}^T \varepsilon_t^2
+\]</div>
+<p>Hereby, we insert either the arithmetic mean or the AR(1) prediction for <span class="math notranslate nohighlight">\(\hat{y}_t\)</span>.</p>
+<p>When we do this for our example, the AR(1) model performs worse than the arithmetic mean. It even performs worse in comparison to a model which predicts zero <span class="math notranslate nohighlight">\(\hat{y}_t = 0\)</span> for every day. The reason for this may be a small overfit of the AR(1) model and the low level of autocorrelation and high level of randomness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arithmetic_mean</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-01-01&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ar1_predictions</span> <span class="o">=</span> <span class="n">ar1_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-01-03&quot;</span><span class="p">))</span>
+<span class="n">e_arithmetic</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-01-03&quot;</span><span class="p">):]</span> <span class="o">-</span> <span class="n">arithmetic_mean</span>
+<span class="n">e_ar1</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-01-03&quot;</span><span class="p">):]</span> <span class="o">-</span> <span class="n">ar1_predictions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SSE for the arithmetic mean: </span><span class="si">{</span><span class="n">e_arithmetic</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SSE for the AR(1) model: </span><span class="si">{</span><span class="n">e_ar1</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SSE for zero return predictions of every day: </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-01-03&quot;</span><span class="p">):]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SSE for the arithmetic mean: 0.0393
+SSE for the AR(1) model: 0.0401
+SSE for zero return predictions of every day: 0.0396
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-ar-1-ar-p-and-arma-models">
+<h3>Beyond AR(1): AR(p) and ARMA Models<a class="headerlink" href="#beyond-ar-1-ar-p-and-arma-models" title="Link to this heading">#</a></h3>
+<p>While the AR(1) model captures dependence on a single lag, many time series exhibit <strong>longer memory</strong>, where the current value is influenced by several past observations. In such cases, we can generalize to an <strong>autoregressive model of order <span class="math notranslate nohighlight">\(p\)</span></strong>, or <strong>AR(p)</strong> by inserting past realizations with higher lags. Further extensions also include past resiudals. These models are Moving Average (MA) models. Combining them gives aus ARMA models.</p>
+<p>Despite its worse performance in our example, studying the AR(1) model is a reasonable part of this chapter. While we see that future prediction of returns is very challenging, we are going to see that predicting the variance is more promising.</p>
+</section>
+</section>
+<section id="conditional-model-for-the-variance-the-garch-1-1-model">
+<h2>Conditional Model for the Variance: The GARCH(1, 1) model<a class="headerlink" href="#conditional-model-for-the-variance-the-garch-1-1-model" title="Link to this heading">#</a></h2>
+<p>So far, we have focused on analyzing the <strong>autocorrelation of returns</strong>. Overall, we observed at most moderate autocorrelation, and saw how difficult it is to predict returns in the presence of high randomness. Recall that the variance of a random variable measures the expected squared deviation from its mean. For simplicity, let us now assume that the mean of daily returns is approximately zero — a reasonable approximation given our earlier findings, where even the AR(1) model failed to significantly outperform the historical mean.</p>
+<p>Under this assumption, variance can be approximated by the squared values of return realizations. The ACF plots shown in the cell below visualize the <strong>autocorrelation of squared returns</strong> for the four asset classes we previously studied. Compared to the raw return series, the squared returns exhibit stronger and consistently positive autocorrelation. This implies that large deviations from zero — whether positive or negative — tend to be followed by further large deviations. This is consistent with the earlier observation of volatility clustering.</p>
+<p>These elevated autocorrelation levels suggest that models based on past squared returns may have greater predictive power than those focused on the mean alone. This motivates a shift in focus: from modeling expected returns, to modeling conditional variance — a key idea we explore with GARCH models in the next section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.graphics.tsaplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_acf</span>
+
+<span class="n">bond_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/bond_etf_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">bond_returns</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">btc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/btc_data.csv&quot;</span><span class="p">)</span>
+<span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">btc</span> <span class="o">=</span> <span class="n">btc</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_04/commodity_etf_returns.csv&quot;</span><span class="p">)</span>
+<span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">commodity_returns</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span>
+<span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">btc</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,</span> <span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;ACF plots with 95% CI and data since 2015&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;IEF&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Lag&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Autocorrelation&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bond ETF (IEF) Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bitcoin Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gold ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d5973e6453378bf53ac249e1e42d33c67627f1324d127dd4fde9c5929ebb0757.png" src="_images/d5973e6453378bf53ac249e1e42d33c67627f1324d127dd4fde9c5929ebb0757.png" />
+</div>
+</div>
+<section id="garch-1-1-model-definition">
+<h3>GARCH(1,1) Model Definition<a class="headerlink" href="#garch-1-1-model-definition" title="Link to this heading">#</a></h3>
+<p>Just as the <strong>AR model</strong> captures temporal dependence in the <strong>conditional mean</strong> of a time series, the <strong>GARCH model</strong> focuses on modeling the <strong>conditional variance</strong>. We begin with a general stochastic process of the form:</p>
+<div class="math notranslate nohighlight">
+\[
+X_t = \mu_t + \varepsilon_t
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\mu_t\)</span> represents the <strong>conditional mean</strong>, which can be specified using any appropriate time series model (e.g., AR(1), ARMA, or simply a constant). For example, under an AR(1) structure:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t = \xi + \phi (X_{t-1} - \xi)
+\]</div>
+<p>To focus purely on the variance, we often simplify by assuming the mean is constant and equal to zero:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t = \mu = 0 \quad \Rightarrow \quad X_t = \varepsilon_t
+\]</div>
+<p>The key idea of the GARCH model is that the <strong>shock term <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> has time-varying volatility</strong>. We represent this by:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_t = \sigma_t Z_t
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma_t^2\)</span> is the <strong>conditional variance</strong> at time <span class="math notranslate nohighlight">\(t\)</span> (i.e., variance given past information),</p></li>
+<li><p><span class="math notranslate nohighlight">\(Z_t\)</span> is a white noise process with <span class="math notranslate nohighlight">\(\mathbb{E}[Z_t] = 0\)</span> and <span class="math notranslate nohighlight">\(\operatorname{Var}(Z_t) = 1\)</span>.</p></li>
+</ul>
+<section id="formal-definition-garch-1-1">
+<h4>Formal Definition: GARCH(1,1)<a class="headerlink" href="#formal-definition-garch-1-1" title="Link to this heading">#</a></h4>
+<p>The <strong>GARCH(1,1)</strong> model (Generalized Autoregressive Conditional Heteroskedasticity) specifies the conditional variance <span class="math notranslate nohighlight">\(\sigma_t^2\)</span> as a linear function of:</p>
+<ul class="simple">
+<li><p>a constant,</p></li>
+<li><p>the <strong>lagged squared shock</strong> (<span class="math notranslate nohighlight">\(\varepsilon_{t-1}^2\)</span>), and</p></li>
+<li><p>the <strong>previous conditional variance</strong> (<span class="math notranslate nohighlight">\(\sigma_{t-1}^2\)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\sigma_t^2 = \omega + \alpha \varepsilon_{t-1}^2 + \beta \sigma_{t-1}^2
+\]</div>
+<p>with the constraints:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>, <span class="math notranslate nohighlight">\(\beta \geq 0\)</span>,</p></li>
+<li><p>and usually <span class="math notranslate nohighlight">\(\alpha + \beta &lt; 1\)</span> to ensure <strong>stationarity</strong> (i.e., finite long-run variance).</p></li>
+</ul>
+<p>This model captures the observed behavior in financial time series where <strong>large shocks tend to cluster</strong>, and periods of high volatility are followed by more volatile periods — a phenomenon known as <strong>volatility clustering</strong>. The model parameters are usually estimated by conditional maximum-likelihood estimation.</p>
+</section>
+<section id="one-step-ahead-volatility-prediction-with-garch-1-1">
+<h4>One-Step-Ahead Volatility Prediction with GARCH(1,1)<a class="headerlink" href="#one-step-ahead-volatility-prediction-with-garch-1-1" title="Link to this heading">#</a></h4>
+<p>The estimated GARCH(1,1) model is used to generate one-step-ahead forecasts of conditional variance (i.e., volatility squared). Once the parameters <span class="math notranslate nohighlight">\(\hat{\omega}\)</span>, <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span>, and <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> are estimated, the forecast for the next period’s variance is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}_{t+1}^2 = \hat{\omega} + \hat{\alpha} \cdot \varepsilon_t^2 + \hat{\beta} \cdot \hat{\sigma}_t^2
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_t^2\)</span> is the most recent squared return innovation (shock),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\sigma}_t^2\)</span> is the most recent estimated conditional variance.</p></li>
+</ul>
+<p>This equation updates the forecasted volatility using the most recent information. The one-step-ahead forecast is widely used in applications such as risk management, volatility trading, and Value-at-Risk (VaR) estimation.</p>
+<p>To initialize the recursion, the GARCH model uses historical return data to compute the residuals <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> and conditional variances <span class="math notranslate nohighlight">\(\sigma_t^2\)</span>. The starting values for these variables are typically set using the unconditional variance or backfilled from the estimation period using the fitted model.</p>
+</section>
+<section id="interpretation-of-model-parameters">
+<h4>Interpretation of model parameters<a class="headerlink" href="#interpretation-of-model-parameters" title="Link to this heading">#</a></h4>
+<p>The parametrization of the GARCH(1, 1) enables us to get insights into the dynamic behavior of volatility:</p>
+<ul class="simple">
+<li><p>The persistence of volatility is measured by <span class="math notranslate nohighlight">\(\alpha + \beta\)</span>. If it’s close to 1, shocks to volatility die out slowly — a key feature of financial time series.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> captures the “news” effect (how much recent shocks influence volatility).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> captures volatility persistence (how much past volatility propagates).</p></li>
+</ul>
+<p>In the cell below, we estimate a GARCH(1,1) model for the S&amp;P 500 (daily returns) using data between 1997 and 2017. The estimated parameters <span class="math notranslate nohighlight">\(\hat{\alpha} = 0.095\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta} = 0.895\)</span> suggest that:</p>
+<ul class="simple">
+<li><p>Volatility is highly persistent, as the sum <span class="math notranslate nohighlight">\(\hat{\alpha} + \hat{\beta} = 0.99\)</span> is close to 1.</p></li>
+<li><p>Recent shocks to returns (squared innovations) have a moderate short-term effect on future volatility through <span class="math notranslate nohighlight">\(\hat{\alpha}\)</span>.</p></li>
+<li><p>The high value of <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> indicates that past volatility contributes significantly to current conditional volatility, reflecting slow decay of volatility over time.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">arch</span><span class="w"> </span><span class="kn">import</span> <span class="n">arch_model</span>
+
+<span class="n">returns</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define cutoff date for in-sample vs out-of-sample</span>
+<span class="n">cutoff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2017-12-31&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">arch_model</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="s2">&quot;Zero&quot;</span><span class="p">,</span> <span class="n">vol</span><span class="o">=</span><span class="s1">&#39;GARCH&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">garch_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="n">last_obs</span><span class="o">=</span><span class="n">cutoff</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">garch_fit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                       Zero Mean - GARCH Model Results                        
+==============================================================================
+Dep. Variable:                    R_t   R-squared:                       0.000
+Mean Model:                 Zero Mean   Adj. R-squared:                  0.000
+Vol Model:                      GARCH   Log-Likelihood:               -7394.37
+Distribution:                  Normal   AIC:                           14794.7
+Method:            Maximum Likelihood   BIC:                           14814.5
+                                        No. Observations:                 5284
+Date:                Wed, Apr 09 2025   Df Residuals:                     5284
+Time:                        12:45:05   Df Model:                            0
+                              Volatility Model                              
+============================================================================
+                 coef    std err          t      P&gt;|t|      95.0% Conf. Int.
+----------------------------------------------------------------------------
+omega          0.0151  4.458e-03      3.388  7.046e-04 [6.366e-03,2.384e-02]
+alpha[1]       0.0947  1.337e-02      7.079  1.452e-12   [6.845e-02,  0.121]
+beta[1]        0.8952  1.402e-02     63.864      0.000     [  0.868,  0.923]
+============================================================================
+
+Covariance estimator: robust
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cell below illustrates the development of conditional volatlity for the time-series in sample (data from 1997 until 2017) and out of sample (data starting from 2018). We observe how well the GARCH(1, 1) model captures times of low and high volatilty regimes as well as volatility clustering.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">forecasts</span> <span class="o">=</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">cutoff</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Align conditional volatility (in-sample) and forecasts (out-of-sample)</span>
+<span class="n">cond_vol</span> <span class="o">=</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">conditional_volatility</span>  <span class="c1"># in-sample vol</span>
+<span class="n">forecast_vol</span> <span class="o">=</span> <span class="n">forecasts</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="s2">&quot;h.1&quot;</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span>  <span class="c1"># out-of-sample forecasted vol (sqrt to get std)</span>
+
+<span class="c1"># Combine everything into one DataFrame</span>
+<span class="n">vol_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Returns&quot;</span><span class="p">:</span> <span class="n">returns</span><span class="p">,</span>
+    <span class="s2">&quot;Conditional Volatility&quot;</span><span class="p">:</span> <span class="n">cond_vol</span><span class="p">,</span>
+    <span class="s2">&quot;Forecasted Volatility&quot;</span><span class="p">:</span> <span class="n">forecast_vol</span>
+<span class="p">})</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vol_df</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Returns&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vol_df</span><span class="p">[</span><span class="s2">&quot;Conditional Volatility&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;In-sample Volatility&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vol_df</span><span class="p">[</span><span class="s2">&quot;Forecasted Volatility&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Out-of-sample Volatility&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Forecast Start&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Returns (in %) and GARCH(1,1) Volatility: In-sample vs Forecast&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/052acae61ebfe32798d6ef44f118c6b562402a36b775088d513b262887d457eb.png" src="_images/052acae61ebfe32798d6ef44f118c6b562402a36b775088d513b262887d457eb.png" />
+</div>
+</div>
+</section>
+<section id="comparing-garch-forecasts-to-unconditional-volatility">
+<h4>Comparing GARCH Forecasts to Unconditional Volatility<a class="headerlink" href="#comparing-garch-forecasts-to-unconditional-volatility" title="Link to this heading">#</a></h4>
+<p>To evaluate the accuracy of volatility forecasts, we compare the <strong>conditional volatility predictions</strong> from the GARCH(1,1) model to a simple benchmark: the <strong>unconditional historical standard deviation</strong> of returns estimated from the in-sample period.</p>
+<p>We assess each forecast’s performance by computing the <strong>mean squared error (MSE)</strong> between the predicted variance and the realized squared returns in the out-of-sample period:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{T} \sum_{t=1}^{T} \left( r_t^2 - \hat{\sigma}_t^2 \right)^2
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( r_t^2 \)</span> is the realized squared return at time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \hat{\sigma}_t^2 \)</span> is the predicted conditional variance from the GARCH model or the square of the unconditional standard deviation.</p></li>
+</ul>
+<p>A lower MSE indicates a better approximation of actual return variability. If the GARCH model’s MSE is smaller than that of the unconditional variance forecast, it suggests that the model adds value by capturing time-varying volatility more effectively.</p>
+<p>Calculating the MSE for the out of sample period below demonstrates that the GARCH(1,1) model is better in capturing volatilty dynamics with daily frequency.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">in_sample_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">cutoff</span><span class="p">]</span>
+<span class="n">out_sample_returns</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="n">returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">]</span>
+
+<span class="n">realized_var</span> <span class="o">=</span> <span class="n">out_sample_returns</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">uncond_var</span> <span class="o">=</span> <span class="n">in_sample_returns</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">forecast_var</span> <span class="o">=</span> <span class="n">forecasts</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="s2">&quot;h.1&quot;</span><span class="p">]</span>
+
+<span class="n">comparison_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Realized Variance&quot;</span><span class="p">:</span> <span class="n">realized_var</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s2">&quot;GARCH Variance&quot;</span><span class="p">:</span> <span class="n">forecast_var</span><span class="p">,</span>
+    <span class="s2">&quot;Uncond Variance&quot;</span><span class="p">:</span> <span class="n">uncond_var</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">out_sample_returns</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">garch_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">comparison_df</span><span class="p">[</span><span class="s2">&quot;Realized Variance&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">comparison_df</span><span class="p">[</span><span class="s2">&quot;GARCH Variance&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">uncond_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">comparison_df</span><span class="p">[</span><span class="s2">&quot;Realized Variance&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">comparison_df</span><span class="p">[</span><span class="s2">&quot;Uncond Variance&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GARCH MSE: </span><span class="si">{</span><span class="n">garch_mse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unconditional MSE: </span><span class="si">{</span><span class="n">uncond_mse</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GARCH MSE: 21.3804
+Unconditional MSE: 35.2074
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">
+<h4>Economic Importance of Weak Return Autocorrelation and Persistent Volatility<a class="headerlink" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility" title="Link to this heading">#</a></h4>
+<p>Empirical analysis of daily stock returns often reveals that <strong>returns themselves exhibit little to no autocorrelation</strong>, while <strong>volatility is highly persistent</strong>. This observation has several important economic implications:</p>
+<ul class="simple">
+<li><p><strong>Market Efficiency</strong>: The absence of strong autocorrelation in returns supports the Efficient Market Hypothesis (EMH), which posits that asset prices reflect all available information. If returns were predictable based on past returns, it would suggest arbitrage opportunities, violating the EMH.</p></li>
+<li><p><strong>Volatility Clustering</strong>: The persistence of volatility means that periods of high or low volatility tend to cluster. This is consistent with the idea that new information arrives in bursts or that investors react gradually to information. Persistent volatility affects how traders and risk managers assess and respond to market risk.</p></li>
+<li><p><strong>Risk Management</strong>: Since return shocks have long-lasting effects on volatility, models like GARCH are valuable tools for <strong>forecasting risk</strong>. These forecasts feed into portfolio optimization, margin setting, and Value-at-Risk (VaR) models.</p></li>
+</ul>
+<p>In summary, while daily returns themselves may not be predictable, the <strong>predictability of volatility</strong> has deep implications for financial practice, from asset pricing to trading and risk control. For instance, a GARCH(1,1) model may be used to track recent volatility behavior and signal when investors may shift their fundings to safer investments such as bonds.</p>
+</section>
+</section>
+<section id="conditional-vs-unconditional-mean-and-variance-estimators">
+<h3>Conditional vs Unconditional Mean and Variance Estimators<a class="headerlink" href="#conditional-vs-unconditional-mean-and-variance-estimators" title="Link to this heading">#</a></h3>
+<p>Time series models usually provide conditional estimators for, e.g., the mean and the volatilty. Conditional in this context means, <strong>given recent information</strong>, which values and levels of variation do we expect next. In comparison, unconditional estimators do not include this information, however, include level values and variation over different market conditions. This may be summarized as follows:</p>
+<ul class="simple">
+<li><p><strong>Unconditional estimators</strong> assume that returns are independently and identically distributed (i.i.d.) over time. They compute a single, constant mean or variance across the entire sample:</p>
+<ul>
+<li><p><strong>Unconditional mean</strong>: the average return over the sample period.</p></li>
+<li><p><strong>Unconditional variance</strong>: the variance of returns over the full sample.</p></li>
+<li><p>These are static estimates that do not respond to new information or recent market conditions.</p></li>
+</ul>
+</li>
+<li><p><strong>Conditional estimators</strong>, by contrast, allow the mean and/or variance to change over time, depending on available information (usually past returns or volatility).</p>
+<ul>
+<li><p><strong>Conditional mean</strong>: estimated as a time-varying function, often via models like AR or ARMA.</p></li>
+<li><p><strong>Conditional variance</strong>: estimated using models like GARCH, which allow volatility to evolve based on past shocks and volatility.</p></li>
+<li><p>These estimates adapt to market dynamics and are more suitable for forecasting and risk management.</p></li>
+</ul>
+</li>
+</ul>
+<p>In essence, <strong>unconditional estimators provide long-run average behavior</strong>, while <strong>conditional estimators capture time-varying dynamics and short-run dependencies</strong> in financial data.</p>
+</section>
+<section id="summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives">
+<h3>Summary: Modeling Conditional Mean and Variance — Univariate and Multivariate Perspectives<a class="headerlink" href="#summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives" title="Link to this heading">#</a></h3>
+<p>In financial econometrics, modeling the <strong>conditional mean and variance</strong> of asset returns is essential for understanding return dynamics, forecasting, and managing risk. While this chapter has focused primarily on univariate models, it’s important to note that <strong>many different modeling approaches</strong> can be used depending on the data characteristics and the purpose of analysis.</p>
+<section id="modeling-the-conditional-mean">
+<h4>Modeling the Conditional Mean<a class="headerlink" href="#modeling-the-conditional-mean" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The conditional mean captures the predictable component of returns, typically modeled using:</p>
+<ul>
+<li><p><strong>AR (AutoRegressive) models</strong></p></li>
+<li><p><strong>MA (Moving Average) and ARMA models</strong></p></li>
+<li><p><strong>ARIMA/ARIMAX models</strong> when trends or exogenous variables are involved</p></li>
+<li><p><strong>Regime-switching or state-space models</strong> to capture structural shifts</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="modeling-the-conditional-variance">
+<h4>Modeling the Conditional Variance<a class="headerlink" href="#modeling-the-conditional-variance" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The conditional variance reflects time-varying risk, often modeled using:</p>
+<ul>
+<li><p><strong>ARCH/GARCH models</strong> for volatility clustering</p></li>
+<li><p><strong>EGARCH, GJR-GARCH</strong> to capture asymmetries (e.g., leverage effects)</p></li>
+<li><p><strong>Stochastic volatility models</strong> for more flexible dynamics</p></li>
+<li><p><strong>Rolling or expanding window estimators</strong> as non-parametric alternatives</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="multivariate-extensions">
+<h4>Multivariate Extensions<a class="headerlink" href="#multivariate-extensions" title="Link to this heading">#</a></h4>
+<p>In real-world applications, financial assets are rarely analyzed in isolation. Modeling interactions across multiple return series requires <strong>multivariate frameworks</strong>:</p>
+<ul class="simple">
+<li><p><strong>Vector Autoregressive (VAR) models</strong>: Extend univariate AR models to capture dynamic interdependencies across multiple time series. Useful for analyzing spillovers, impulse responses, and forecast systems of returns.</p></li>
+<li><p><strong>Multivariate GARCH (MGARCH) models</strong>: Extend GARCH to multiple assets to model time-varying covariances and correlations.</p>
+<ul>
+<li><p>Common specifications include:</p>
+<ul>
+<li><p><strong>VECH and Diagonal VECH models</strong>: Directly model each element of the conditional covariance matrix.</p></li>
+<li><p><strong>BEKK models</strong>: Ensure positive definiteness of the covariance matrix.</p></li>
+<li><p><strong>Dynamic Conditional Correlation (DCC) GARCH</strong>: Allows for time-varying correlations in a computationally efficient way.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>These multivariate models are particularly important in:</p>
+<ul class="simple">
+<li><p><strong>Portfolio optimization</strong> and <strong>risk budgeting</strong></p></li>
+<li><p><strong>Systemic risk monitoring</strong> and <strong>contagion analysis</strong></p></li>
+<li><p><strong>Macro-finance modeling</strong> and <strong>monetary policy transmission</strong></p></li>
+</ul>
+</section>
+<section id="final-note">
+<h4>Final Note<a class="headerlink" href="#final-note" title="Link to this heading">#</a></h4>
+<p>The choice of model depends on the research question, data properties, and computational constraints. Understanding the interplay between mean and variance dynamics — both univariate and multivariate — is a foundational skill in modern financial econometrics.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear Regression</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series">Time Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-finance">Example (Finance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocovariance-function">Autocovariance Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mean">Sample Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-autocovariance-function">Sample Autocovariance Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-function-acf">Autocorrelation Function (ACF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-weak-stationarity">Definition: (Weak) Stationarity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-stationarity-matters">Why Stationarity Matters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#in-practice">In Practice</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-noise-a-canonical-stationary-process">White Noise: A Canonical Stationary Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-and-use">Intuition and Use</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-white-noise-cannot-be-predicted">Why White Noise Cannot Be Predicted</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consequence">Consequence</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ljung-box-test">Ljung-Box Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hypotheses">Hypotheses</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">Test Statistic</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-model-for-the-mean-the-ar-1-model">Conditional Model for the Mean: The AR(1) Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-ar-1-model-for-prediction">Using the AR(1) Model for Prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beyond-ar-1-ar-p-and-arma-models">Beyond AR(1): AR(p) and ARMA Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-model-for-the-variance-the-garch-1-1-model">Conditional Model for the Variance: The GARCH(1, 1) model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#garch-1-1-model-definition">GARCH(1,1) Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formal-definition-garch-1-1">Formal Definition: GARCH(1,1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-ahead-volatility-prediction-with-garch-1-1">One-Step-Ahead Volatility Prediction with GARCH(1,1)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-model-parameters">Interpretation of model parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-garch-forecasts-to-unconditional-volatility">Comparing GARCH Forecasts to Unconditional Volatility</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-vs-unconditional-mean-and-variance-estimators">Conditional vs Unconditional Mean and Variance Estimators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives">Summary: Modeling Conditional Mean and Variance — Univariate and Multivariate Perspectives</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-mean">Modeling the Conditional Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-variance">Modeling the Conditional Variance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-extensions">Multivariate Extensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#final-note">Final Note</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

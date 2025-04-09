@@ -32,6 +32,32 @@ wheels = [
 ]
 
 [[package]]
+name = "arch"
+version = "7.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "scipy" },
+    { name = "statsmodels" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a5/25/6d334de3338153d65a0f4939349a89c597f5e9c31dbbc4e3206e18f5295d/arch-7.2.0.tar.gz", hash = "sha256:2c6128174e0e3ab4c2cad527e78eb3fbce4a4f8ba53580bdf0d02566eb2e953d", size = 1240750 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/64/bf/f47b7698717b4e8445a7fd163ca796bc636bb900d42d113756f4e4d9949d/arch-7.2.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:cb08153a2e38300f5244b9c31a179c8dff6c0c79539f2995c428c09a8b24121a", size = 948921 },
+    { url = "https://files.pythonhosted.org/packages/6e/d5/dccef476d4f357ab26fd7b464ef8aa9333ca28ed763afc52bbc8868de543/arch-7.2.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:2013c7be5a24aefd08b1eb88fb9dec0e05a8cea515669e384249b76bf1357768", size = 927453 },
+    { url = "https://files.pythonhosted.org/packages/9d/f5/7017b443d22c63390a0c8f739314ca3e3b04672518470c6020953ec481e2/arch-7.2.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:15d2069ff223bfcd9851e664da47103c7144a00f21a9de91414f233f981c048a", size = 948374 },
+    { url = "https://files.pythonhosted.org/packages/09/05/14d9b2773fea75d87e9e55a85f531ed615538eddf18a4b3cad4e34e2f12d/arch-7.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5c8939ebc83dea0cf22423669b4f523cc47a7f3f5d7af9d7af179aaf21c566f3", size = 978275 },
+    { url = "https://files.pythonhosted.org/packages/e9/b4/41071f125746396cf66da4f051ce86033fba53ef8df2496e6b453063a751/arch-7.2.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:a70170660dc0e97c980f4f5e75e5e5169f5d3c9a432b686e92994f0e5c376d38", size = 986304 },
+    { url = "https://files.pythonhosted.org/packages/fc/67/83b4ff85c61ec545366d654823acdfcfffa180f0f0c645cbf7ea97e2ada9/arch-7.2.0-cp312-cp312-win_amd64.whl", hash = "sha256:f374d113f44e5f0a7cf7a4a5b08c2ebc603990750fa24f472a00ede96d8cf02e", size = 926168 },
+    { url = "https://files.pythonhosted.org/packages/42/9c/76bf4826de4de523027dff4c3c0978efc5ae891e26644c4d1292af7e2f3e/arch-7.2.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:2a0c9a02afd470b3c7c0a507a6466ace7bf314bf0977818c58dff1d7a0b165cc", size = 945820 },
+    { url = "https://files.pythonhosted.org/packages/b6/df/ef96af416f665623cf6af3a8906612b4733040132b51061533e33ea666c2/arch-7.2.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:e5251808057282b614bb588c704106e9ea3fcef11dda142d05dbf5f6a95745f6", size = 925199 },
+    { url = "https://files.pythonhosted.org/packages/ab/b5/7630472342c0744b7416754f8ec6e45ece76fa822aa16dd8ae7691a40447/arch-7.2.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:16e54bb679fbab801f788ba8a9ed93929e453b0f471501bbad8a674290ddeab0", size = 947513 },
+    { url = "https://files.pythonhosted.org/packages/42/e3/3f6184896072d070e8dcd9af04a2d8db8604432a89f080fa1f3f6341e7c1/arch-7.2.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e4523f9357de7c8f064610cda669d3da411d879ca3db7fff5851ee3f9a55d9d6", size = 977859 },
+    { url = "https://files.pythonhosted.org/packages/21/24/3c12453b7568c9b3e7b8de0e3b4e650d13c99e34ae6ed49e5a804963476e/arch-7.2.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:5d45fb7ddc8376e7e2b4037297f526da1d1dd75190cab9add01e1db7194b51ca", size = 985537 },
+    { url = "https://files.pythonhosted.org/packages/cf/05/7e118efd6a1e17274bd4b694d7a9ca2fa9e7ded7a0fc695924541a4882ba/arch-7.2.0-cp313-cp313-win_amd64.whl", hash = "sha256:7ea8a89e1f63222f28f49925e8d30886478161124d862dcc840e66e6bb986301", size = 925204 },
+]
+
+[[package]]
 name = "asttokens"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -309,6 +335,7 @@ name = "fdaml"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "arch" },
     { name = "bs4" },
     { name = "fake-useragent" },
     { name = "fredapi" },
@@ -333,6 +360,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "arch", specifier = ">=7.2.0" },
     { name = "bs4", specifier = ">=0.0.2" },
     { name = "fake-useragent", specifier = ">=2.0.3" },
     { name = "fredapi", specifier = ">=0.5.2" },
