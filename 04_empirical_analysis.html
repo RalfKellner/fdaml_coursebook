@@ -172,6 +172,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Empirical Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
 </ul>
 
     </div>
@@ -525,78 +527,6 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
 <img alt="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" src="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurtosis</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">hill_estimator</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tail</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;upper&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be between 1 and len(data) - 1&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">tail</span> <span class="o">==</span> <span class="s2">&quot;upper&quot;</span><span class="p">:</span>
-        <span class="n">sorted_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">data</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">tail</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span><span class="p">:</span>
-        <span class="n">sorted_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="o">-</span><span class="n">data</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tail must be &#39;upper&#39; or &#39;lower&#39;&quot;</span><span class="p">)</span>
-
-    <span class="n">top_k</span> <span class="o">=</span> <span class="n">sorted_data</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
-    <span class="n">x_k1</span> <span class="o">=</span> <span class="n">sorted_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-
-    <span class="n">logs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">top_k</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x_k1</span><span class="p">)</span>
-    <span class="n">hill_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">hill_est</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">describe_with_moments</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">percentiles</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span> <span class="n">fisher</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_hill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">k_ratio</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Extended descriptive stats with skewness, kurtosis, and Hill estimator.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    - data: pd.Series or pd.DataFrame</span>
-<span class="sd">    - fisher: If True, returns Fisher kurtosis (normal=0); else Pearson (normal=3)</span>
-<span class="sd">    - include_hill: Whether to include Hill estimator for tails (only for Series)</span>
-<span class="sd">    - k_ratio: Fraction of sample to use for Hill estimator (e.g., 0.05 means top 5%)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    - pd.Series or pd.DataFrame with added statistics</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
-        <span class="n">desc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="n">percentiles</span><span class="p">)</span>
-        <span class="n">clean_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clean_data</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_ratio</span><span class="p">)</span>
-
-        <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;skew&quot;</span><span class="p">:</span> <span class="n">skew</span><span class="p">(</span><span class="n">clean_data</span><span class="p">),</span>
-            <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">fisher</span><span class="o">=</span><span class="n">fisher</span><span class="p">)</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="n">include_hill</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">extra</span><span class="p">[</span><span class="s2">&quot;hill_upper&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s2">&quot;upper&quot;</span><span class="p">)</span>
-            <span class="n">extra</span><span class="p">[</span><span class="s2">&quot;hill_lower&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">clean_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">desc</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">extra</span><span class="p">)])</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-        <span class="n">desc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">percentiles</span><span class="o">=</span><span class="n">percentiles</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="n">col_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">col_data</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_ratio</span><span class="p">)</span>
-            <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">skew</span><span class="p">(</span><span class="n">col_data</span><span class="p">)</span>
-            <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">fisher</span><span class="o">=</span><span class="n">fisher</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">include_hill</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;hill_upper&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;upper&quot;</span><span class="p">)</span>
-                <span class="n">desc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;hill_lower&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">hill_estimator</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;lower&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">desc</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a pandas Series or DataFrame&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>The cell below determines descriptive statistics for the daily returns from the figure above. We take a look at these statistics over the full period, only the crisis periods and the non-crisis periods. Examining these statistics holistically shows that financial crises are not just higher-volatility periods, but structurally different in terms of tail risk and asymmetry.</p>
 <p>During the crisis period:</p>
 <ul class="simple">
@@ -607,7 +537,9 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_overall</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">describe_with_moments</span>
+
+<span class="n">returns_overall</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span>
 <span class="n">returns_crisis</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">returns_non_crisis</span> <span class="o">=</span> <span class="n">spx</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 

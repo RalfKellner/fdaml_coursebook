@@ -1,0 +1,1395 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Risk Management &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_risk_management';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Portfolio Optimization" href="07_pf_optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Risk Management</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/08_risk_management.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Risk Management</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-measures">Risk Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-at-risk-var">Value at Risk (VaR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-returns">Working with Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-shortfall-es">Expected Shortfall (ES)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-value-at-risk-and-expected-shortfall">Determining the Value at Risk and Expected Shortfall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function-cdf">Cumulative Distribution Function (CDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-cdf-quantile-function">2. Inverse CDF (Quantile Function)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-and-challenges">Applications and Challenges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-and-conditional-risk-measurement">Unconditional and Conditional Risk Measurement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-risk-estimation">Unconditional Risk Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-risk-estimation-with-time-series-models">Conditional Risk Estimation with Time Series Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🧠 Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="risk-management">
+<h1>Risk Management<a class="headerlink" href="#risk-management" title="Link to this heading">#</a></h1>
+<p>In the previous chapters, we focused on portfolio construction and optimization — building portfolios that aim to maximize return for a given level of risk. In this chapter, we shift our perspective to the other side of the coin: <strong>financial risk management</strong>.</p>
+<p>Risk management is a core function in finance and asset management. It involves identifying, quantifying, and mitigating potential losses arising from adverse market developments. While returns are uncertain and often asymmetric, effective risk management helps ensure that losses remain within acceptable boundaries, particularly during volatile or crisis periods.</p>
+<p>We begin by introducing methods to <strong>quantify downside risk</strong> using two widely used metrics: <strong>Value at Risk (VaR)</strong> and <strong>Expected Shortfall (ES)</strong>. These measures estimate potential losses over a given time horizon with a specified confidence level — providing insight into the tail behavior of return distributions.</p>
+<p>To estimate these risk measures more accurately, we will apply <strong>time series models</strong> that capture both trends and volatility clustering observed in financial markets. This includes <strong>autoregressive (AR) models</strong> to model mean dynamics and <strong>GARCH models</strong> to capture time-varying volatility.</p>
+<p>The chapter concludes with a <strong>case study</strong>, where we apply these techniques in practice to monitor risk and evaluate potential risk-avoiding strategies. This will include scenarios like reducing exposure during high-risk periods or dynamically adjusting allocations based on volatility forecasts.</p>
+<section id="risk-measures">
+<h2>Risk Measures<a class="headerlink" href="#risk-measures" title="Link to this heading">#</a></h2>
+<p>To manage and control financial risk, we need tools that quantify potential losses under adverse conditions. Two of the most widely used risk measures in finance are <strong>Value at Risk (VaR)</strong> and <strong>Expected Shortfall (ES)</strong>, also known as Conditional Value at Risk (CVaR).</p>
+<section id="value-at-risk-var">
+<h3>Value at Risk (VaR)<a class="headerlink" href="#value-at-risk-var" title="Link to this heading">#</a></h3>
+<p>Formally, if <span class="math notranslate nohighlight">\(L\)</span> denotes portfolio <strong>loss</strong>, the Value at Risk at level <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_\alpha = \inf \left\{ x \in \mathbb{R} \mid \mathbb{P}(L \leq x) \geq \alpha \right\}
+\]</div>
+<p>In this formulation, <span class="math notranslate nohighlight">\(\text{VaR}_{0.99} = 0.05\)</span> of daily losses means that, a scenario where losses exceed a threshold of <span class="math notranslate nohighlight">\(0.05\)</span> over the specified period (a day) only has a 1% probability. Or if you like it the other way around, with a confidence of 99%, losses will not exceed <span class="math notranslate nohighlight">\(0.05\)</span> over the specified period.</p>
+</section>
+<section id="working-with-returns">
+<h3>Working with Returns<a class="headerlink" href="#working-with-returns" title="Link to this heading">#</a></h3>
+<p>In practice, we usually model <strong>portfolio returns <span class="math notranslate nohighlight">\(R\)</span></strong> rather than losses. If we define loss as <span class="math notranslate nohighlight">\(L = -R\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_\alpha^{(R)} = \inf \left\{ r \in \mathbb{R} \mid \mathbb{P}(R \leq r) \geq 1 - \alpha \right\}
+\]</div>
+<p>Thus, the VaR on returns corresponds to the <strong>lower quantile</strong> of the return distribution. For example, a 1% left-tail VaR of -<span class="math notranslate nohighlight">\(0.02\)</span> means that only with a probability of 1% returns will be equal to or lower than <span class="math notranslate nohighlight">\(-0.02\)</span> $within the specified period.</p>
+<p>To keep interpretation consistent, we often report:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_\alpha = -q_{1 - \alpha}(R)
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(q_{1 - \alpha}(R)\)</span> is the <span class="math notranslate nohighlight">\((1 - \alpha)\)</span>-quantile of returns.</p>
+</section>
+<section id="expected-shortfall-es">
+<h3>Expected Shortfall (ES)<a class="headerlink" href="#expected-shortfall-es" title="Link to this heading">#</a></h3>
+<p>VaR tells us the threshold for extreme losses, but not <strong>how bad things get beyond that point</strong>. <strong>Expected Shortfall (ES)</strong> addresses this by capturing the <strong>expectation of the worst-case losses</strong>.</p>
+<p>For return-based Expected Shortfall (ES), assuming a continuous return distribution, the ES at confidence level <span class="math notranslate nohighlight">\(\alpha\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{ES}_\alpha = -\mathbb{E}[R \mid R \leq q_{1 - \alpha}(R)] 
+\]</div>
+<p>This gives us the <strong>expected return</strong> in the worst <span class="math notranslate nohighlight">\((1 - \alpha)\%\)</span> of scenarios. In other words, we compute the average return <strong>below the Value at Risk threshold</strong> — i.e., in the left tail of the return distribution.</p>
+<p>An alternative and more formal representation uses the <strong>average of lower quantiles</strong>. The Expected Shortfall can be rewritten as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{ES}_\alpha = -\frac{1}{1 - \alpha} \int_0^{1 - \alpha} q_u(R) \, du
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(q_u(R)\)</span> denotes the <span class="math notranslate nohighlight">\(u\)</span>-quantile of the return distribution.</p>
+<p>This form expresses the Expected Shortfall as the <strong>average of all lower quantiles</strong> up to the <span class="math notranslate nohighlight">\((1 - \alpha)\)</span> level — each weighted equally over the interval <span class="math notranslate nohighlight">\([0, 1 - \alpha]\)</span>. It reflects the fact that ES incorporates the <strong>entire tail behavior</strong>, not just a single cutoff point like VaR.</p>
+</section>
+<section id="determining-the-value-at-risk-and-expected-shortfall">
+<h3>Determining the Value at Risk and Expected Shortfall<a class="headerlink" href="#determining-the-value-at-risk-and-expected-shortfall" title="Link to this heading">#</a></h3>
+<p>Determining the VaR and ES is comparably easy for random variables with the location-scale property. A <strong>location</strong> parameter shifts a distribution to the right or to the left without changing the distribution’s shape. A <strong>scale</strong> parameter linearly grows with a random variable if it is multiplied by a constant <span class="math notranslate nohighlight">\(c\)</span>, i.e., if the random variable <span class="math notranslate nohighlight">\(X\)</span> has a scale parameter of <span class="math notranslate nohighlight">\(\sigma\)</span>, then the random variable <span class="math notranslate nohighlight">\(c X\)</span> has a scale parameter of <span class="math notranslate nohighlight">\(|c| \sigma\)</span>.</p>
+<p>For a random variable <span class="math notranslate nohighlight">\(X\)</span> with mean <span class="math notranslate nohighlight">\(\mu\)</span> and scaling parameter <span class="math notranslate nohighlight">\(\sigma\)</span>, the random variable:</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \frac{X - \mu}{\sigma}
+\]</div>
+<p>has a location of <span class="math notranslate nohighlight">\(\mu = 0\)</span> and a scale parameter of <span class="math notranslate nohighlight">\(\sigma = 1\)</span>.</p>
+<p>This transformation implies:</p>
+<div class="math notranslate nohighlight">
+\[
+X = \mu + \sigma Z
+\]</div>
+<p>We now derive how the <strong>cumulative distribution function (CDF)</strong> and the <strong>quantile function (inverse CDF)</strong> of <span class="math notranslate nohighlight">\(X\)</span> relate to those of <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<section id="cumulative-distribution-function-cdf">
+<h4>Cumulative Distribution Function (CDF)<a class="headerlink" href="#cumulative-distribution-function-cdf" title="Link to this heading">#</a></h4>
+<p>We start by expressing the CDF of <span class="math notranslate nohighlight">\(Z\)</span> in terms of the CDF of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+F_Z(z) = \mathbb{P}(Z \leq z) = \mathbb{P}\left( \frac{X - \mu}{\sigma} \leq z \right)
+= \mathbb{P}(X \leq \mu + \sigma z) = F_X(\mu + \sigma z)
+\]</div>
+<p>This yields the key relation:</p>
+<div class="math notranslate nohighlight">
+\[
+F_Z(z) = F_X(\mu + \sigma z)
+\quad \Leftrightarrow \quad
+F_X(x) = F_Z\left( \frac{x - \mu}{\sigma} \right)
+\]</div>
+</section>
+<section id="inverse-cdf-quantile-function">
+<h4>2. Inverse CDF (Quantile Function)<a class="headerlink" href="#inverse-cdf-quantile-function" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(q_\alpha^{(X)}\)</span> denote the <span class="math notranslate nohighlight">\(\alpha\)</span>-quantile of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(q_\alpha^{(Z)}\)</span> the corresponding quantile of <span class="math notranslate nohighlight">\(Z\)</span>. We use the previous result:</p>
+<div class="math notranslate nohighlight">
+\[
+F_X(q_\alpha^{(X)}) = \alpha
+\quad \Rightarrow \quad
+F_Z\left( \frac{q_\alpha^{(X)} - \mu}{\sigma} \right) = \alpha
+\quad \Rightarrow \quad
+\frac{q_\alpha^{(X)} - \mu}{\sigma} = q_\alpha^{(Z)}
+\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(q_\alpha^{(X)}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+q_\alpha^{(X)} = \mu + \sigma \cdot q_\alpha^{(Z)}
+\]</div>
+</section>
+<section id="summary">
+<h4>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The <strong>CDF of <span class="math notranslate nohighlight">\(X\)</span></strong> is a scaled and shifted version of the <strong>CDF of <span class="math notranslate nohighlight">\(Z\)</span></strong>.</p></li>
+<li><p>The <strong>quantile function</strong> of <span class="math notranslate nohighlight">\(X\)</span> scales accordingly:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_\alpha^{(X)} = \mu + \sigma \cdot \text{VaR}_\alpha^{(Z)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{ES}_\alpha^{(X)} = \mu + \sigma \cdot \text{ES}_\alpha^{(Z)}
+\]</div>
+<ul class="simple">
+<li><p>This relationship holds whenever <span class="math notranslate nohighlight">\(X\)</span> belongs to a <strong>location-scale family</strong>, i.e., <span class="math notranslate nohighlight">\(X = \mu + \sigma Z\)</span> for some standardized <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="applications-and-challenges">
+<h3>Applications and Challenges<a class="headerlink" href="#applications-and-challenges" title="Link to this heading">#</a></h3>
+<p>Both <strong>Value at Risk (VaR)</strong> and <strong>Expected Shortfall (ES)</strong> are widely used tools for quantifying financial risk. They provide risk managers, regulators, and investors with a statistical estimate of how much a portfolio could lose over a given time period at a specified confidence level.</p>
+<p>In practice, these measures are used to:</p>
+<ul class="simple">
+<li><p>Assess portfolio risk under normal market conditions</p></li>
+<li><p>Set capital reserves or risk limits (e.g., in banks and funds)</p></li>
+<li><p>Monitor changes in portfolio risk over time</p></li>
+<li><p>Inform rebalancing or hedging decisions</p></li>
+</ul>
+<p>VaR is simple and intuitive — it tells us the worst expected loss over a time horizon with a given probability. ES, on the other hand, provides <strong>deeper insight into tail risk</strong> by accounting for the <strong>magnitude of losses beyond VaR</strong>.</p>
+<p>Despite their usefulness, both VaR and ES are subject to important limitations:</p>
+<ul class="simple">
+<li><p><strong>Model Risk</strong>: Both measures depend on the assumed distribution of returns. If the model is misspecified (e.g., assuming normality in heavy-tailed markets), the risk may be severely underestimated.</p></li>
+<li><p><strong>Estimation Uncertainty</strong>: Especially in short or unstable time windows, estimates of VaR and ES can be noisy and sensitive to sampling variation — particularly for ES, which depends on few extreme observations.</p></li>
+<li><p><strong>Liquidity and Market Impact</strong>: In real markets, large positions may not be easily liquidated at quoted prices. VaR and ES assume immediate execution at prevailing prices, ignoring <strong>liquidity risk</strong> and <strong>market impact</strong>.</p></li>
+<li><p><strong>Non-stationarity</strong>: Financial markets evolve. Historical estimates may not reflect future dynamics, and structural breaks (e.g., crises) can invalidate models calibrated on past data.</p></li>
+</ul>
+<p>VaR and ES are valuable tools for <strong>measuring and communicating downside risk</strong>, but they should not be viewed as definitive or fail-safe. In practice, risk management requires more than point estimates — it demands <strong>scenario thinking</strong>, <strong>robust modeling</strong>, and <strong>awareness of practical frictions</strong> such as liquidity constraints, leverage effects, and systemic spillovers.</p>
+</section>
+</section>
+<section id="unconditional-and-conditional-risk-measurement">
+<h2>Unconditional and Conditional Risk Measurement<a class="headerlink" href="#unconditional-and-conditional-risk-measurement" title="Link to this heading">#</a></h2>
+<p>In risk management, a key decision is whether to rely on <strong>unconditional</strong> or <strong>conditional</strong> estimates of risk. Both approaches aim to quantify downside risk using measures like <strong>Value at Risk (VaR)</strong> or <strong>Expected Shortfall (ES)</strong>, but they differ fundamentally in how they treat the dynamics of financial returns.</p>
+<section id="unconditional-risk-estimation">
+<h3>Unconditional Risk Estimation<a class="headerlink" href="#unconditional-risk-estimation" title="Link to this heading">#</a></h3>
+<p>Unconditional risk estimates are based on a <strong>long historical window</strong> and assume that the return distribution is <strong>stationary over time</strong>. A typical example is the <strong>empirical quantile method</strong>, where the <span class="math notranslate nohighlight">\(\alpha\)</span>-level of, e.g., VaR is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_\alpha = -q_{1 - \alpha}(R_{\text{hist}})
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(R_{\text{hist}}\)</span> is a long series of past returns. This approach is straightforward to compute, easy to interpret, and relatively robust to short-term noise.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p>Simple to implement and communicate</p></li>
+<li><p>Requires no model assumptions</p></li>
+<li><p>Smooths over temporary fluctuations and estimation noise</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p>Ignores time-varying behavior in risk (e.g., volatility clustering)</p></li>
+<li><p>May underestimate or overestimate current risk if market conditions shift</p></li>
+<li><p>Not responsive to crises or regime changes</p></li>
+</ul>
+</section>
+<section id="conditional-risk-estimation-with-time-series-models">
+<h3>Conditional Risk Estimation with Time Series Models<a class="headerlink" href="#conditional-risk-estimation-with-time-series-models" title="Link to this heading">#</a></h3>
+<p>Conditional risk measures, by contrast, explicitly model the <strong>evolving nature of risk</strong> over time. By using models like <strong>AR-GARCH</strong>, we can generate forecasts of the conditional mean and volatility of returns and estimate conditional risk measures, e.g., a conditional VaR by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_{t,\alpha} = \mu_t + \sigma_t \cdot \text{VaR}^{(Z)}_\alpha
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\sigma_t\)</span> are time-varying forecasts from the model</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{VaR}^{(Z)}_\alpha\)</span> is based on the quantile of standardized residuals</p></li>
+</ul>
+<p>This approach adapts quickly to new information and captures <strong>volatility clustering</strong>, a common feature in financial returns.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p>Reflects current market conditions</p></li>
+<li><p>Captures volatility dynamics and extreme movements</p></li>
+<li><p>Enables forward-looking risk estimation</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p>Requires model specification and estimation</p></li>
+<li><p>Sensitive to sample size, misspecification, and outliers</p></li>
+<li><p>Forecasts can be noisy and unstable if the model is not well calibrated</p></li>
+</ul>
+<section id="id1">
+<h4>🧠 Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Unconditional Risk</p></th>
+<th class="head"><p>Conditional Risk (AR-GARCH)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Adaptivity</p></td>
+<td><p>Static</p></td>
+<td><p>Time-varying</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model Assumptions</p></td>
+<td><p>None</p></td>
+<td><p>Requires correct model structure</p></td>
+</tr>
+<tr class="row-even"><td><p>Reaction to new data</p></td>
+<td><p>Slow</p></td>
+<td><p>Fast</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robustness</p></td>
+<td><p>High</p></td>
+<td><p>Depends on model and data</p></td>
+</tr>
+<tr class="row-even"><td><p>Use Case</p></td>
+<td><p>Long-term risk baseline</p></td>
+<td><p>Tactical risk forecasting</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this subchapter, we explore both approaches in detail. We begin by estimating unconditional risk measures using historical quantiles, and then contrast them with conditional risk forecasts generated by AR-GARCH models. We examine when each method is more appropriate, and how they differ in responsiveness and practical implications.</p>
+<p>In comparison to the previous data set, we collect a longer time period of a little extended asset universe including ETFs for stocks treasuries, real estates, gold an oil. For simplicity, we assume a naive investment strategy which invest into each asset with equal weights.</p>
+<p>The output of this cell exhibits the descriptive statistics. As expected certain asset classes such as stocks have higher risk but also higher expected profit, while safe haven assets such as gold or treasures have lower risk but also a lower expected return. The last column shows descriptive statistics of the naive portfolio (PF).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">describe_with_moments</span>
+
+
+<span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SPY&quot;</span><span class="p">,</span> <span class="c1"># S&amp;P 500 ETF</span>
+    <span class="s2">&quot;EEM&quot;</span><span class="p">,</span> <span class="c1"># Emerging Markets ETF</span>
+    <span class="s2">&quot;QQQ&quot;</span><span class="p">,</span> <span class="c1"># Nasdaq 100 (growth tilt) ETF</span>
+    <span class="s2">&quot;TLT&quot;</span><span class="p">,</span> <span class="c1"># Long Term US Treasuries</span>
+    <span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="c1"># Intermediate Term US Treasuries</span>
+    <span class="s2">&quot;LQD&quot;</span><span class="p">,</span> <span class="c1"># Investment Grade Corporate Bonds</span>
+    <span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="c1"># Gold ETF</span>
+    <span class="s2">&quot;USO&quot;</span><span class="p">,</span> <span class="c1"># Oil ETF</span>
+    <span class="s2">&quot;VNQ&quot;</span><span class="p">,</span> <span class="c1"># REIT ETF</span>
+    <span class="s2">&quot;SHY&quot;</span>  <span class="c1"># Short Term US Treasuries ETF</span>
+<span class="p">]</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_08/pf_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2000-01-01&quot;</span><span class="p">)</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_08/pf_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">asset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Emerging Markets&quot;</span><span class="p">,</span> <span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasuries (intermediate)&quot;</span><span class="p">,</span> <span class="s2">&quot;Corporate Bonds&quot;</span><span class="p">,</span> <span class="s2">&quot;Nasdaq 100 (Growth)&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasuries (short)&quot;</span><span class="p">,</span> <span class="s2">&quot;S&amp;P 500&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasuries (long)&quot;</span><span class="p">,</span> <span class="s2">&quot;Oil&quot;</span><span class="p">,</span> <span class="s2">&quot;REIT&quot;</span><span class="p">]</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">assets</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">asset_names</span>
+<span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;PF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">describe_with_moments</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Emerging Markets</th>
+      <th>Gold</th>
+      <th>Treasuries (intermediate)</th>
+      <th>Corporate Bonds</th>
+      <th>Nasdaq 100 (Growth)</th>
+      <th>Treasuries (short)</th>
+      <th>S&amp;P 500</th>
+      <th>Treasuries (long)</th>
+      <th>Oil</th>
+      <th>REIT</th>
+      <th>PF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+      <td>4785.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.000284</td>
+      <td>0.000405</td>
+      <td>0.000144</td>
+      <td>0.000178</td>
+      <td>0.000622</td>
+      <td>0.000076</td>
+      <td>0.000444</td>
+      <td>0.000176</td>
+      <td>-0.000166</td>
+      <td>0.000403</td>
+      <td>0.000257</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.017880</td>
+      <td>0.011155</td>
+      <td>0.004383</td>
+      <td>0.005561</td>
+      <td>0.014016</td>
+      <td>0.000955</td>
+      <td>0.012410</td>
+      <td>0.009518</td>
+      <td>0.023049</td>
+      <td>0.018801</td>
+      <td>0.007043</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.161662</td>
+      <td>-0.087808</td>
+      <td>-0.025073</td>
+      <td>-0.091111</td>
+      <td>-0.119788</td>
+      <td>-0.006566</td>
+      <td>-0.109424</td>
+      <td>-0.066683</td>
+      <td>-0.253150</td>
+      <td>-0.195137</td>
+      <td>-0.059489</td>
+    </tr>
+    <tr>
+      <th>5%</th>
+      <td>-0.024706</td>
+      <td>-0.017426</td>
+      <td>-0.006875</td>
+      <td>-0.007230</td>
+      <td>-0.022656</td>
+      <td>-0.001297</td>
+      <td>-0.018477</td>
+      <td>-0.015079</td>
+      <td>-0.035890</td>
+      <td>-0.024397</td>
+      <td>-0.009895</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000793</td>
+      <td>0.000540</td>
+      <td>0.000242</td>
+      <td>0.000406</td>
+      <td>0.001144</td>
+      <td>0.000000</td>
+      <td>0.000669</td>
+      <td>0.000474</td>
+      <td>0.000649</td>
+      <td>0.000738</td>
+      <td>0.000441</td>
+    </tr>
+    <tr>
+      <th>95%</th>
+      <td>0.023518</td>
+      <td>0.017560</td>
+      <td>0.007037</td>
+      <td>0.006868</td>
+      <td>0.020728</td>
+      <td>0.001615</td>
+      <td>0.016922</td>
+      <td>0.014887</td>
+      <td>0.033158</td>
+      <td>0.023101</td>
+      <td>0.009917</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.227699</td>
+      <td>0.112905</td>
+      <td>0.034262</td>
+      <td>0.097677</td>
+      <td>0.121647</td>
+      <td>0.009974</td>
+      <td>0.145197</td>
+      <td>0.075195</td>
+      <td>0.166667</td>
+      <td>0.170065</td>
+      <td>0.063392</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>0.556429</td>
+      <td>-0.176407</td>
+      <td>0.143103</td>
+      <td>0.043463</td>
+      <td>-0.051519</td>
+      <td>0.376412</td>
+      <td>0.004285</td>
+      <td>0.079152</td>
+      <td>-0.652465</td>
+      <td>0.015569</td>
+      <td>-0.259209</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>18.049768</td>
+      <td>6.214183</td>
+      <td>2.682244</td>
+      <td>57.845981</td>
+      <td>7.605240</td>
+      <td>8.459329</td>
+      <td>14.692654</td>
+      <td>3.313777</td>
+      <td>9.960275</td>
+      <td>16.332171</td>
+      <td>11.336375</td>
+    </tr>
+    <tr>
+      <th>hill_upper</th>
+      <td>0.441986</td>
+      <td>0.308456</td>
+      <td>0.302773</td>
+      <td>0.390305</td>
+      <td>0.360943</td>
+      <td>0.363482</td>
+      <td>0.405971</td>
+      <td>0.309244</td>
+      <td>0.358327</td>
+      <td>0.553764</td>
+      <td>0.395985</td>
+    </tr>
+    <tr>
+      <th>hill_lower</th>
+      <td>0.435973</td>
+      <td>0.360671</td>
+      <td>0.300272</td>
+      <td>0.390804</td>
+      <td>0.341536</td>
+      <td>0.418108</td>
+      <td>0.421908</td>
+      <td>0.276384</td>
+      <td>0.348855</td>
+      <td>0.499753</td>
+      <td>0.434198</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A visualization of the individual assets and the naive portfolio can be examined in the figure below. In this time period, the great financial crisis (GFC) in the years 2007-2009 and the Covid crisis are the most adverse events. If we choose to use unconditional risk measure estimates for risk management, the selection of the time period will have a drastic impact on the risk measure estimte. Risk management is usually from a conservative point of view. Thus, we may want to include the GFC into our estimation, the more data from more calm periods we add to the estimation, the less adverse the risk measures estimate will be. To explore these ideas we compare two time periods, the first uses all data until the end of 2018, the second excludes the GFC and uses data from 2010 until 2019. The estimates are evaluated for the data starting from 2019.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">assets</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Daily returns of a individual assets and a naive portfolio&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Discrete returns (daily)&quot;</span><span class="p">)</span>
+<span class="n">assets</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Daily returns of a individual assets and a naive portfolio&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;small&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Value development of a one monetary unit investment&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88707e0c0f9a90bf08dbfd485558b903e3825f1ebb8f514a5e6f3dff7482d5ac.png" src="_images/88707e0c0f9a90bf08dbfd485558b903e3825f1ebb8f514a5e6f3dff7482d5ac.png" />
+</div>
+</div>
+<p>Below you can find the descriptive statistics for the two different estimation and the evaluation data. Especially when comparing the minimum and the 5% quantile of the two estimation data sets to the corresponding estimates of the evaluation data, we observe that the estimates excluding the GFC might be not conservative enough while the one including the GFC may be too conservative.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">describe_with_moments</span><span class="p">,</span> <span class="n">empirical_value_at_risk</span><span class="p">,</span> <span class="n">empirical_expected_shortfall</span>
+
+
+<span class="n">cutoff_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2019-01-01&quot;</span><span class="p">)</span>
+
+<span class="n">estimation_data_with_crisis</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span>
+<span class="n">estimation_data_without_crisis</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2010-01-01&quot;</span><span class="p">):</span><span class="n">cutoff_date</span><span class="p">]</span>
+<span class="n">evaluation_data</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:]</span>
+
+<span class="n">descriptive_statistics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">estimation_data_with_crisis</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">]),</span>
+        <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">estimation_data_without_crisis</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">]),</span>
+        <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">evaluation_data</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">])</span>
+    <span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">descriptive_statistics</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Estimation with GFC&quot;</span><span class="p">,</span> <span class="s2">&quot;Estimation wo GFC&quot;</span><span class="p">,</span> <span class="s2">&quot;Evaluation&quot;</span><span class="p">]</span>
+<span class="n">descriptive_statistics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimation with GFC</th>
+      <th>Estimation wo GFC</th>
+      <th>Evaluation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3203.000000</td>
+      <td>2264.000000</td>
+      <td>1582.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.000231</td>
+      <td>0.000207</td>
+      <td>0.000309</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.007027</td>
+      <td>0.005162</td>
+      <td>0.007075</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.050952</td>
+      <td>-0.029589</td>
+      <td>-0.059489</td>
+    </tr>
+    <tr>
+      <th>5%</th>
+      <td>-0.009934</td>
+      <td>-0.008080</td>
+      <td>-0.009709</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000420</td>
+      <td>0.000390</td>
+      <td>0.000495</td>
+    </tr>
+    <tr>
+      <th>95%</th>
+      <td>0.009879</td>
+      <td>0.008036</td>
+      <td>0.010012</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.063392</td>
+      <td>0.027572</td>
+      <td>0.047679</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>0.140746</td>
+      <td>-0.165823</td>
+      <td>-1.053488</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>10.290155</td>
+      <td>2.837517</td>
+      <td>13.435337</td>
+    </tr>
+    <tr>
+      <th>hill_upper</th>
+      <td>0.419721</td>
+      <td>0.324637</td>
+      <td>0.345877</td>
+    </tr>
+    <tr>
+      <th>hill_lower</th>
+      <td>0.436602</td>
+      <td>0.344298</td>
+      <td>0.443874</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>One of the most fundamental ways to evaluate the performance of a Value at Risk (VaR) model is to compare the <strong>observed exceedance frequency</strong> — how often actual losses exceed the VaR threshold — with the <strong>theoretical exceedance frequency</strong> implied by the chosen confidence level.</p>
+<p>For example, a 99% daily VaR implies that we expect losses to exceed the VaR threshold on <strong>1% of days</strong>, or roughly <strong>1 out of every 100 trading days</strong>. If the model is well-calibrated, the proportion of actual exceedances over a long evaluation period should be close to this theoretical rate.</p>
+<p>This approach is often called <strong>backtesting VaR</strong>. It is simple yet powerful: if the model underestimates risk, we will observe <strong>too many exceedances</strong>; if it overestimates risk, <strong>exceedances will be too rare</strong>. A well-calibrated model should strike a balance, delivering realistic risk estimates that match the chosen level of protection.</p>
+<p>Also note that usually one combines this approach with another test if exceedances occur independent over time. We keep it simple at this point and take a look at the frequency of days where the return is lower than the 1% quantile. This is the same as examining the exceedances of losses (negative returns) over a VaR with 99% confidence level.</p>
+<p>If you take a look at the output of the cell below, we observe that none of the unconditional estimates suceeds. The one using the GFC is too conservative, the one excluding the GFC is not conservative enough and underestimates risk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">VaR_exceedance_GFC</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">evaluation_data</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">empirical_value_at_risk</span><span class="p">(</span><span class="n">estimation_data_with_crisis</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">],</span> <span class="mf">0.99</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">VaR_exceedance_wo_GFC</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">evaluation_data</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">empirical_value_at_risk</span><span class="p">(</span><span class="n">estimation_data_without_crisis</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">],</span> <span class="mf">0.99</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at risk exceedances between 2019 and 2025 when using estimate including the great financial crisis in the past: </span><span class="si">{</span><span class="n">VaR_exceedance_GFC</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at risk exceedances between 2019 and 2025 when using estimate excluding the great financial crisis in the past: </span><span class="si">{</span><span class="n">VaR_exceedance_wo_GFC</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value at risk exceedances between 2019 and 2025 when using estimate including the great financial crisis in the past: 0.0063
+Value at risk exceedances between 2019 and 2025 when using estimate excluding the great financial crisis in the past: 0.0202
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, we now take a look at what happens if we estimate the VaR by using a dynamic condtional approach. We choose a model which uses a time-varying mean, an AR(1), and a time-varying volatiltiy, by a GARCH(1, 1), model. We use data until 2019 to estimate the parameters. The estimated model output can be seen below and shows familiar characteristics, especially a high persistence of volatility. With the estimation data, residuals are determined by:</p>
+<div class="math notranslate nohighlight">
+\[
+Z_t = \frac{X_t - \mu_t}{\sigma_t} 
+\]</div>
+<p>Next, the unconditional quantile <span class="math notranslate nohighlight">\(q_{1 - \alpha}(Z)\)</span> is estimated. In sample (so with data until 2019) and out of sample (using the same parameters for the data starting in 2019), the VaR can be estimated by:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VaR}_{t,\alpha} = \hat{\mu}_t + \hat{\sigma}_t \cdot  -\hat{q}_{1 - \alpha}(Z) = \hat{\mu}_t + \hat{\sigma}_t \cdot \hat{\text{VaR}}^{(Z)}_\alpha
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">arch</span><span class="w"> </span><span class="kn">import</span> <span class="n">arch_model</span>
+
+<span class="n">returns</span> <span class="o">=</span> <span class="n">assets</span><span class="p">[</span><span class="s2">&quot;PF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">cutoff_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2019-01-01&quot;</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">arch_model</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="s2">&quot;AR&quot;</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vol</span><span class="o">=</span><span class="s1">&#39;GARCH&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">garch_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="n">last_obs</span><span class="o">=</span><span class="n">cutoff_date</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">garch_fit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                           AR - GARCH Model Results                           
+==============================================================================
+Dep. Variable:                     PF   R-squared:                       0.006
+Mean Model:                        AR   Adj. R-squared:                  0.006
+Vol Model:                      GARCH   Log-Likelihood:               -2594.15
+Distribution:                  Normal   AIC:                           5198.29
+Method:            Maximum Likelihood   BIC:                           5228.65
+                                        No. Observations:                 3202
+Date:                Thu, Apr 17 2025   Df Residuals:                     3200
+Time:                        20:22:53   Df Model:                            2
+                                  Mean Model                                  
+==============================================================================
+                 coef    std err          t      P&gt;|t|        95.0% Conf. Int.
+------------------------------------------------------------------------------
+Const          0.0314  8.496e-03      3.697  2.183e-04   [1.476e-02,4.806e-02]
+PF[1]         -0.0416  1.901e-02     -2.190  2.849e-02 [-7.889e-02,-4.382e-03]
+                              Volatility Model                              
+============================================================================
+                 coef    std err          t      P&gt;|t|      95.0% Conf. Int.
+----------------------------------------------------------------------------
+omega      5.1497e-03  1.630e-03      3.159  1.581e-03 [1.955e-03,8.344e-03]
+alpha[1]       0.0930  1.494e-02      6.227  4.749e-10   [6.373e-02,  0.122]
+beta[1]        0.8951  1.613e-02     55.501      0.000     [  0.863,  0.927]
+============================================================================
+
+Covariance estimator: robust
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we follow this procedure and quantify the exceedance ratios, we observe an almost perfect exceedance ratio for the (in sample) estimation data and an improvement to the unconditional approach from before for the (out of sample) evaluation period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">unconditional_quantile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">garch_fit</span><span class="o">.</span><span class="n">std_resid</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">mu_t_in_sample</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span> <span class="o">-</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span>
+<span class="n">sigma_t_in_sample</span> <span class="o">=</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">conditional_volatility</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span>
+<span class="n">VaR_t_in_sample</span> <span class="o">=</span> <span class="n">mu_t_in_sample</span> <span class="o">+</span> <span class="n">sigma_t_in_sample</span> <span class="o">*</span> <span class="n">unconditional_quantile</span>
+
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">align</span> <span class="o">=</span> <span class="s2">&quot;target&quot;</span><span class="p">)</span>
+<span class="n">mu_t_out_of_sample</span> <span class="o">=</span> <span class="n">forecast</span><span class="o">.</span><span class="n">mean</span><span class="p">[</span><span class="s2">&quot;h.1&quot;</span><span class="p">]</span>
+<span class="n">sigma_t_out_of_sample</span> <span class="o">=</span> <span class="n">forecast</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="s2">&quot;h.1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span> 
+<span class="n">VaR_t_out_of_sample</span> <span class="o">=</span> <span class="n">mu_t_out_of_sample</span> <span class="o">+</span> <span class="n">sigma_t_out_of_sample</span> <span class="o">*</span> <span class="n">unconditional_quantile</span>
+
+<span class="n">cond_vol</span> <span class="o">=</span> <span class="n">garch_fit</span><span class="o">.</span><span class="n">conditional_volatility</span>  <span class="c1"># in-sample vol</span>
+<span class="n">forecast_vol</span> <span class="o">=</span> <span class="n">forecast</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="s2">&quot;h.1&quot;</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span>  <span class="c1"># out-of-sample forecasted vol (sqrt to get std)</span>
+
+<span class="n">VaR_analysis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Returns&quot;</span><span class="p">:</span> <span class="n">returns</span><span class="p">,</span>
+    <span class="s2">&quot;Conditional Volatility&quot;</span><span class="p">:</span> <span class="n">cond_vol</span><span class="p">,</span> 
+    <span class="s2">&quot;Forecasted Volatility&quot;</span><span class="p">:</span> <span class="n">forecast_vol</span><span class="p">,</span>
+    <span class="s2">&quot;VaR_in_sample&quot;</span><span class="p">:</span> <span class="n">VaR_t_in_sample</span><span class="p">,</span>
+    <span class="s2">&quot;VaR_out_of_sample&quot;</span><span class="p">:</span> <span class="n">VaR_t_out_of_sample</span>
+<span class="p">})</span>
+<span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Hitting Event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_in_sample&quot;</span><span class="p">]</span> <span class="p">,</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_out_of_sample&quot;</span><span class="p">]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Leave Signal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Conditional Volatility&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.1</span> <span class="p">,</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Forecasted Volatility&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">conditional_VaR_in_sample_exceedances</span> <span class="o">=</span> <span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_in_sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">conditional_VaR_out_of_sample_exceedances</span> <span class="o">=</span> <span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_out_of_sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at risk exceedances between 2010 and 2018 when using time-varying value at risk estimates: </span><span class="si">{</span><span class="n">conditional_VaR_in_sample_exceedances</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at risk exceedances between 2019 and 2025 when using time-varying value at risk estimates: </span><span class="si">{</span><span class="n">conditional_VaR_out_of_sample_exceedances</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value at risk exceedances between 2010 and 2018 when using time-varying value at risk estimates: 0.0103
+Value at risk exceedances between 2019 and 2025 when using time-varying value at risk estimates: 0.0139
+</pre></div>
+</div>
+</div>
+</div>
+<p>The exceedance ratios are promising that the conditional VaR estimates are well suited for capturing time-varying quantile levels of the returns. The figure below plots returns togehter with time-varying 1% quantiles (so the negative of the VaR). The light grey dotted vertical lines represent days at which the return falls below the conditional quantile value (this is the same as the loss exceeding the VaR). We see that risk levels (measures by quantiles) dramatically increase during crisis periods and adverse economic conditions. While an unconditional 1% quantile would be equal to approximately -2% (when using data until 2019), we observe conditional 1% quantile levels up to -8% during crisis periods.</p>
+<p>While this helps us to better understand the actual loss levels during adverse economic conditions, we may also think about avoiding riskier assets during times when conditional risk measures increase. The increase in losses is mainly linked to increasing volatilities during crisis periods. So let us try a relatively simple approach to shift investments to safer assets when volatilities rise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Returns&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_in_sample&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;In-sample VaR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_out_of_sample&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Out-of-sample VaR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cutoff_date</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Forecast Start&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event_date</span> <span class="ow">in</span> <span class="n">VaR_analysis</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Hitting Event&quot;</span><span class="p">]]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">event_date</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Naive Portfolio Returns (in %) and filtered AR(1)-GARCH(1,1) Value at Risk predictions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bfd776fda59285f516a64ee032eda987d3ddd254a5e88f5d651f0703127bbc96.png" src="_images/bfd776fda59285f516a64ee032eda987d3ddd254a5e88f5d651f0703127bbc96.png" />
+</div>
+</div>
+<p>The figure below shows returns together with conditional volatility forecasts. The dotted black line represents the unconditional return volatility of the estimation period. We create a signal which is True if the conditional volatility forecast is higher then the unconditional volatility. If this happens we assume that more adverse economic conditions arise. If this happens, we shift all funds with equal parts to gold and a short term treasury ETF. During other times, we stick to the naive portfolio. The grey shaded areas mark times during which money is allocated to safer investments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signal</span> <span class="o">=</span> <span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Leave Signal&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="c1"># Create a shifted version to detect transitions</span>
+<span class="n">signal_shift</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># Start of True periods: when signal goes from False to True</span>
+<span class="n">starts</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[(</span><span class="n">signal</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">signal_shift</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span>
+<span class="c1"># End of True periods: when signal goes from True to False</span>
+<span class="n">ends</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[(</span><span class="n">signal</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">signal_shift</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span>
+<span class="c1"># Handle edge case: signal ends in True</span>
+<span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">ends</span> <span class="o">=</span> <span class="n">ends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="n">signal</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Returns&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Returns&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Conditional Volatility&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;In-sample Volatility&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;Forecasted Volatility&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Out-of-sample Volatility&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_in_sample&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;In-sample VaR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">VaR_analysis</span><span class="p">[</span><span class="s2">&quot;VaR_out_of_sample&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Out-of-sample VaR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">cutoff_date</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Forecast Start&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">cutoff_date</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Unconditional Volatility&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Naive Portfolio Returns (in %) and filtered AR(1)-GARCH(1,1) Value at Risk predictions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/54888f20086ac31026f67ed1e893e17ccc3ad87c9b1ba4d0f73119e1dd4c1082.png" src="_images/54888f20086ac31026f67ed1e893e17ccc3ad87c9b1ba4d0f73119e1dd4c1082.png" />
+</div>
+</div>
+<p>Following this strategy leaves us with a well managed portfolio between a naive portfolio and safe investments, only. The figure below exhibits returns and value development of these strategies. The “Vola-Switched” strategy would have avoided the drastic loss during March 2020 which is the period with the most adverse value development during the Covid crisis. Furthermore, its value steadily increases without drastic changes during the whole time period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_naive</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;PF&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:]</span>
+<span class="n">returns_safe</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasuries (short)&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:]</span>
+<span class="n">strategy_return</span> <span class="o">=</span> <span class="n">returns_naive</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">signal</span><span class="p">,</span> <span class="n">returns_safe</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cutoff_date</span><span class="p">:]</span>
+
+<span class="n">pf_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">returns_naive</span><span class="p">,</span>
+        <span class="n">returns_safe</span><span class="p">,</span>
+        <span class="n">strategy_return</span>  
+    <span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Naive&quot;</span><span class="p">,</span> <span class="s2">&quot;Safe&quot;</span><span class="p">,</span> <span class="s2">&quot;Vola-Switched&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">pf_returns</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Daily discrete returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Comparison of portfolio returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Cumulative portfolio value&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Comparison of portfolio value development&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2c684b2cad755bc49383ddf0a87a034ade6abb444005841a64173d8efd0e5054.png" src="_images/2c684b2cad755bc49383ddf0a87a034ade6abb444005841a64173d8efd0e5054.png" />
+</div>
+</div>
+<p>The risk adjusted performance is better than the naive portfolio, the slightly worse performance in comparison to the safe investments is mostly driven by recent events during which the Trump administration started a trade war which caused high demands and increasing prices of safe haven investments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">describe_with_moments</span>
+
+<span class="n">pf_returns_descriptives</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">pf_returns</span><span class="p">)</span>
+<span class="n">pf_returns_descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">pf_returns_descriptives</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive            0.043699
+Safe             0.070912
+Vola-Switched    0.065476
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Taking a look at the VaR and ES values also shows that the flight to safe investment strategy reduces tail risks in comparison to holding a naive portfolio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">empirical_value_at_risk</span><span class="p">,</span> <span class="n">empirical_expected_shortfall</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VaR levels at a 0.99 confidence level:&quot;</span><span class="p">)</span>
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">empirical_value_at_risk</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VaR levels at a 0.99 confidence level:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive            0.018685
+Safe             0.012814
+Vola-Switched    0.015947
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ES levels at a 0.975 confidence level:&quot;</span><span class="p">)</span>
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">empirical_value_at_risk</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ES levels at a 0.975 confidence level:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive            0.013162
+Safe             0.009998
+Vola-Switched    0.011660
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this chapter, we explored foundational approaches to financial risk measurement, with a focus on Value at Risk (VaR) and Expected Shortfall (ES) as tools for quantifying downside risk. We contrasted unconditional risk estimates — based on long historical windows — with conditional approaches that adapt to changing market environments using time series models such as AR-GARCH.</p>
+<p>Through empirical analysis, we demonstrated that conditional risk measures offer a more responsive and informative framework for risk monitoring. In particular, time-varying volatility estimates allowed for the early detection of elevated risk levels, which can be used to guide dynamic portfolio decisions.</p>
+<p>We illustrated this in a practical case study, where a strategy that reallocated capital to safe-haven assets (e.g., gold or short-term government bonds) during periods of forecasted high volatility outperformed a naive benchmark. This underlined the value of integrating <strong>forward-looking risk estimates</strong> into investment decision-making and showcased how <strong>conditional risk models</strong> can serve not only as diagnostic tools but also as the foundation for <strong>risk-mitigating strategies</strong> in real-world portfolios.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_pf_optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Portfolio Optimization</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-measures">Risk Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-at-risk-var">Value at Risk (VaR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-returns">Working with Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-shortfall-es">Expected Shortfall (ES)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-value-at-risk-and-expected-shortfall">Determining the Value at Risk and Expected Shortfall</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-distribution-function-cdf">Cumulative Distribution Function (CDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-cdf-quantile-function">2. Inverse CDF (Quantile Function)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-and-challenges">Applications and Challenges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-and-conditional-risk-measurement">Unconditional and Conditional Risk Measurement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-risk-estimation">Unconditional Risk Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-risk-estimation-with-time-series-models">Conditional Risk Estimation with Time Series Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🧠 Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

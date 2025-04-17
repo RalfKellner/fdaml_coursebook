@@ -1,0 +1,1587 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Portfolio Optimization &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_pf_optimization';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Risk Management" href="08_risk_management.html" />
+    <link rel="prev" title="Time Series Analysis" href="06_time_series.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/07_pf_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Portfolio Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-portfolios-of-risky-assets">Optimal Portfolios of Risky Assets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-risk-free-with-risky-assets">Combining Risk-Free with Risky Assets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-reality-meets-modern-portfolio-theory">When Reality Meets Modern Portfolio Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-adaptations-and-extensions-of-modern-portfolio-theory">Practical Adaptations and Extensions of Modern Portfolio Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-portfolio-optimization">1. Robust Portfolio Optimization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-and-shrinkage-estimators">2. Resampling and Shrinkage Estimators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-model">3. Black-Litterman Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-models-and-risk-premia-investing">4. Factor Models and Risk Premia Investing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-finance-and-real-world-preferences">5. Behavioral Finance and Real-World Preferences</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-uncertainty-and-portfolio-optimization">Parameter Uncertainty and Portfolio Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-estimation">Shrinkage Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-action">Portfolio Optimization in Action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="portfolio-optimization">
+<h1>Portfolio Optimization<a class="headerlink" href="#portfolio-optimization" title="Link to this heading">#</a></h1>
+<p>When we take a look at the past chapters, we learned:</p>
+<ul class="simple">
+<li><p>fundamental asset classes of financial markets</p></li>
+<li><p>the concept of random variables</p></li>
+<li><p>how to estimate unknown parameters and the estimation uncertainty that comes along</p></li>
+<li><p>we estimated common descriptive statistics of time series data</p></li>
+<li><p>we learned about the principles of linear regression</p></li>
+<li><p>we introduced ourselves with time series analysis</p></li>
+</ul>
+<p>In this chapter we take a look at portfolio optimization as a part of modern portfolio theory. To understand this, we use many aspects of previous chapters such as:</p>
+<ul class="simple">
+<li><p>Random variables</p></li>
+<li><p>Estimating the mean, variance and pairwise covariances between assets. This can be done or at least supported by:</p>
+<ul>
+<li><p>unconditional estimates</p></li>
+<li><p>regression based estimates</p></li>
+<li><p>time-series estimates</p></li>
+</ul>
+</li>
+<li><p>Solve an optimization task</p></li>
+<li><p>Handle estimation uncertainty</p></li>
+</ul>
+<p>Furthermore, portfolio theory is great in builing fundamental knowledge about “natural laws” on financial markets such as the risk-return trade-off, about the challenges for real-life applications of such a theory and the potential inferences you can derive even for your personal life.</p>
+<p><strong>Modern portfolio</strong> theory has been introduced by Harry Markowitz in 1952 who has been rewarded with a Nobel Memorial Price in Economics. Underlying assumptions of this theory are:</p>
+<ul class="simple">
+<li><p>Investors are risk averse</p></li>
+<li><p>Risk is assessed by volatility</p></li>
+<li><p>Given a return level, investors favor investments with lower variance</p></li>
+</ul>
+<p>Let’s start formalizing things a bit. Assume we invest in a set of ( N ) risky assets.</p>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu = (\mu_1, \mu_2, \dots, \mu_N)^\top \)</span> be the vector of <strong>expected returns</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Sigma \)</span> be the <span class="math notranslate nohighlight">\( N \times N \)</span> <strong>covariance matrix</strong> of asset returns.</p></li>
+<li><p><span class="math notranslate nohighlight">\( w = (w_1, w_2, \dots, w_N)^\top \)</span> be the vector of <strong>portfolio weights</strong>, where <span class="math notranslate nohighlight">\( \sum_{i=1}^N w_i = 1 \)</span>.</p></li>
+</ul>
+<p>Then:</p>
+<ul class="simple">
+<li><p>The <strong>expected portfolio return</strong> is:
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}[R_p] = w^\top \mu
+\)</span>$</p></li>
+<li><p>The <strong>portfolio variance</strong> is:
+$<span class="math notranslate nohighlight">\(
+\text{Var}(R_p) = w^\top \Sigma w
+\)</span>$</p></li>
+</ul>
+<p><strong>Note:</strong> Markowitz’s theory applies to any risky assets—not just stocks. While examples often focus on equities due to data availability and clarity of diversification effects, the framework is general and can include bonds, commodities, or any asset with estimable returns and risk. Many textbooks explain Markowitz’s theory by using only stocks as risky assets. We use an example with different asset classes.</p>
+<section id="optimal-portfolios-of-risky-assets">
+<h2>Optimal Portfolios of Risky Assets<a class="headerlink" href="#optimal-portfolios-of-risky-assets" title="Link to this heading">#</a></h2>
+<p>The first steps for understanding Markowitz’s idea of modern portfolio theory are:</p>
+<ol class="arabic simple">
+<li><p>Combining assets with different weightings spans a universe of portfolios with different risk (measured by portfolio variance) and return (measured by the expected portfolio return) profiles</p></li>
+<li><p>The range of different risk and return profiles is limited by dependencies that define the potential of diversification.</p></li>
+<li><p>Only a few of the portfolios within the portfolio universe remain as investments for rationale investors (those on the efficient frontier)</p></li>
+</ol>
+<p>For a better understanding of these steps, we use a fictional example of five risk assets:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Asset</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Expected Return</p></th>
+<th class="head"><p>Volatility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>Equity Index</p></td>
+<td><p>8.00%</p></td>
+<td><p>20%</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>Corporate Bond</p></td>
+<td><p>4.00%</p></td>
+<td><p>10%</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>Gold</p></td>
+<td><p>5.00%</p></td>
+<td><p>15%</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>Bitcoin</p></td>
+<td><p>15.00%</p></td>
+<td><p>50%</p></td>
+</tr>
+<tr class="row-even"><td><p>E</p></td>
+<td><p>Oil</p></td>
+<td><p>7.00%</p></td>
+<td><p>30%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>with covariance matrix:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>D</p></th>
+<th class="head"><p>E</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>0.0400</p></td>
+<td><p>0.0100</p></td>
+<td><p>0.0060</p></td>
+<td><p>0.0250</p></td>
+<td><p>0.0300</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>0.0100</p></td>
+<td><p>0.0100</p></td>
+<td><p>0.0015</p></td>
+<td><p>0.0050</p></td>
+<td><p>0.0090</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>0.0060</p></td>
+<td><p>0.0015</p></td>
+<td><p>0.0225</p></td>
+<td><p>0.0150</p></td>
+<td><p>0.0045</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>0.0250</p></td>
+<td><p>0.0050</p></td>
+<td><p>0.0150</p></td>
+<td><p>0.2500</p></td>
+<td><p>0.0450</p></td>
+</tr>
+<tr class="row-even"><td><p>E</p></td>
+<td><p>0.0300</p></td>
+<td><p>0.0090</p></td>
+<td><p>0.0045</p></td>
+<td><p>0.0450</p></td>
+<td><p>0.0900</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To better understand the dependencies between assets, it’s often helpful to convert the <strong>covariance matrix</strong> into a <strong>correlation matrix</strong>. While covariance depends on the units and magnitudes of returns, correlation standardizes these relationships to a scale between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>We compute the correlation matrix by:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{ij} = \frac{\text{Cov}(R_i, R_j)}{\sigma_i \cdot \sigma_j}
+\]</div>
+<p>Or, in matrix form:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Corr} = \frac{\Sigma}{\sigma \cdot \sigma^\top}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( \sigma \)</span> is the vector of standard deviations. For this example, we have:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>D</p></th>
+<th class="head"><p>E</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>1.00</p></td>
+<td><p>0.50</p></td>
+<td><p>0.15</p></td>
+<td><p>0.25</p></td>
+<td><p>0.50</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>0.50</p></td>
+<td><p>1.00</p></td>
+<td><p>0.10</p></td>
+<td><p>0.10</p></td>
+<td><p>0.30</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>0.15</p></td>
+<td><p>0.10</p></td>
+<td><p>1.00</p></td>
+<td><p>0.20</p></td>
+<td><p>0.10</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>0.25</p></td>
+<td><p>0.10</p></td>
+<td><p>0.20</p></td>
+<td><p>1.00</p></td>
+<td><p>0.30</p></td>
+</tr>
+<tr class="row-even"><td><p>E</p></td>
+<td><p>0.50</p></td>
+<td><p>0.30</p></td>
+<td><p>0.10</p></td>
+<td><p>0.30</p></td>
+<td><p>1.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Thus, for a weighting vector of the individual assets, we use:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mu =
+\begin{bmatrix}
+0.08 \\
+0.04 \\
+0.05 \\
+0.15 \\
+0.07
+\end{bmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma =
+\begin{bmatrix}
+0.0400 &amp; 0.0100 &amp; 0.0060 &amp; 0.0250 &amp; 0.0300 \\
+0.0100 &amp; 0.0100 &amp; 0.0015 &amp; 0.0050 &amp; 0.0090 \\
+0.0060 &amp; 0.0015 &amp; 0.0225 &amp; 0.0150 &amp; 0.0045 \\
+0.0250 &amp; 0.0050 &amp; 0.0150 &amp; 0.2500 &amp; 0.0450 \\
+0.0300 &amp; 0.0090 &amp; 0.0045 &amp; 0.0450 &amp; 0.0900
+\end{bmatrix}
+\end{split}\]</div>
+<p>Note that the covariance and correlation matrix, respectively, have a great impact on the diversification potential of the portfolios which can be created. <strong>Diversification</strong> refers to the practice of spreading investments across multiple assets to reduce the overall risk of a portfolio.</p>
+<p>In the context of modern portfolio theory, diversification exploits the fact that asset returns are not perfectly correlated. When combining assets with less than perfect positive correlation, the overall <strong>portfolio variance</strong> can be reduced — often significantly — even if the individual assets are volatile.</p>
+<p>This is captured mathematically by the portfolio variance:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(R_p) = \sigma_{p}^2 = w^\top \Sigma w = \sum_{i = 1}^N w_i^2 \sigma_i^2 + \sum_{i = 1, i \neq j}^N \sum_{j = 1, i \neq j}^N w_i w_j \sigma_{ij}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_i^2\)</span> is the variance of asset <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(\sigma_{ij}\)</span> is the covariance between asset <span class="math notranslate nohighlight">\(i\)</span> and asset <span class="math notranslate nohighlight">\(j\)</span>. Basically, the portfolio variance is a weighted sum of individual variances and covariances. For perfect correlation, covariances are the highest, thus, <span class="math notranslate nohighlight">\(\text{Var}(R_p)\)</span> is higher than under scenarios without perfect (linear) dependence. The lower pairwise covariances are, the little gets added to the portfolio variance.</p>
+<p>Diversification does not eliminate risk completely — especially <strong>systematic risk</strong> (market-wide risk) — but it <strong>minimizes unsystematic risk</strong>, which is specific to individual assets.</p>
+<p>In our example, diversification arises from:</p>
+<ul class="simple">
+<li><p>Combining equities with commodities (e.g. gold or oil), which tend to behave differently under inflationary or crisis scenarios.</p></li>
+<li><p>Adding high-volatility assets (like Bitcoin) with low correlations to traditional markets.</p></li>
+<li><p>Including moderately correlated assets like corporate bonds, which provide stability but also contribute to return.</p></li>
+</ul>
+<p>In the cell below, we create 5,000 random portfolios by drawing random weights. The only conditions for these weights are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i \geq 0\)</span>, long only investment, no short selling</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_i w_i = 1\)</span>, full investment</p></li>
+</ul>
+<p>With every weight combination, we calculate the expected portfolio return and the portfolio volatility (squre root of its variance). The figure below plots volatility against the expected return for all portfolios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Expected returns and volatilities</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
+<span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
+
+<span class="c1"># Updated correlation matrix</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Convert to covariance matrix</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">correlations</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">std_devs</span><span class="p">,</span> <span class="n">std_devs</span><span class="p">)</span>
+
+<span class="c1"># Simulate long-only, fully-invested portfolios</span>
+<span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_portfolios</span><span class="p">))</span>  <span class="c1"># return, risk, Sharpe</span>
+<span class="n">weights_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>
+    <span class="n">weights_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="n">port_return</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="n">port_risk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span>
+    <span class="n">sharpe</span> <span class="o">=</span> <span class="n">port_return</span> <span class="o">/</span> <span class="n">port_risk</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_return</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_risk</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sharpe</span>
+
+<span class="c1"># Plot the efficient frontier</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sharpe Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Risk (Standard Deviation)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expected Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Efficient Frontier (Mixed Asset Universe incl. Corporate Bond)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d78e98aa455d2ebfd179043ea23987e59a4ccd1b1d683cb485f9fc4f56842021.png" src="_images/d78e98aa455d2ebfd179043ea23987e59a4ccd1b1d683cb485f9fc4f56842021.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+
+<span class="c1"># Expected returns and volatilities</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
+<span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
+
+<span class="c1"># Realistic correlation matrix</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Covariance matrix</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">correlations</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">std_devs</span><span class="p">,</span> <span class="n">std_devs</span><span class="p">)</span>
+
+<span class="c1"># Simulate long-only, fully-invested portfolios</span>
+<span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_portfolios</span><span class="p">))</span>  <span class="c1"># return, risk, Sharpe</span>
+<span class="n">weights_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>
+    <span class="n">weights_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="n">port_return</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="n">port_risk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span>
+    <span class="n">sharpe</span> <span class="o">=</span> <span class="n">port_return</span> <span class="o">/</span> <span class="n">port_risk</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_return</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_risk</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sharpe</span>
+
+<span class="c1"># Efficient frontier: for each return level, find minimum risk</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span>  <span class="c1"># sort by return</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">risks</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create frontier by filtering out portfolios not on the upper edge</span>
+<span class="n">frontier_returns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">frontier_risks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">min_risk_so_far</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">returns</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">risks</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">min_risk_so_far</span><span class="p">:</span>
+        <span class="n">frontier_returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">frontier_risks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">min_risk_so_far</span> <span class="o">=</span> <span class="n">s</span>
+
+<span class="c1"># Reverse to plot in ascending return order</span>
+<span class="n">frontier_returns</span> <span class="o">=</span> <span class="n">frontier_returns</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">frontier_risks</span> <span class="o">=</span> <span class="n">frontier_risks</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated Portfolios&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frontier_risks</span><span class="p">,</span> <span class="n">frontier_returns</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Efficient Frontier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sharpe Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Risk (Standard Deviation)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expected Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Efficient Frontier (with Smooth Frontier Line)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2dbf4cf51490c3ce23e285d6869bb0b4a9b327564364e430190e2f84c93a6e4f.png" src="_images/2dbf4cf51490c3ce23e285d6869bb0b4a9b327564364e430190e2f84c93a6e4f.png" />
+</div>
+</div>
+<p>From an investor’s perspective, we can look at the figure in two ways:</p>
+<ol class="arabic simple">
+<li><p>At a risk level (set by the standard deviation), we can choose among portfolios with different profitability (set by the expected return)</p></li>
+<li><p>At a profit level (set by the expected return), we can choose among portfolios with different risk levels (set by the standard deviation)</p></li>
+</ol>
+<p>Now, if you were a rationale investor, would you still be willing in any of those portfolios? Surely, not!</p>
+<ul class="simple">
+<li><p>At a given risk level, you choose the portfolio with with the highest profit</p></li>
+<li><p>At a given profit, you choose the level with the lowest risk</p></li>
+</ul>
+<p>The portfolios left for you are given on the red line in the figure. Technically, they are defined as an <strong>efficient portfolio</strong> is a portfolio that solves the following constrained optimization problems. There are two equivalent formulations:</p>
+<ol class="arabic simple">
+<li><p>Minimum Risk for a Given Expected Return</p></li>
+</ol>
+<p>Given a target return level <span class="math notranslate nohighlight">\( \mu_p \)</span>, the efficient portfolio minimizes risk:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\min_w \quad &amp; w^\top \Sigma w \\
+\text{s.t.} \quad &amp; w^\top \mu = \mu_p \\
+&amp; \mathbf{1}^\top w = 1 \\
+&amp; w_i \geq 0 \quad \text{(long-only constraint, optional)}
+\end{aligned}
+\end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Maximum Return for a Given Level of Risk</p></li>
+</ol>
+<p>Alternatively, for a given risk level <span class="math notranslate nohighlight">\( \sigma_p \)</span>, the efficient portfolio maximizes expected return:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\max_w \quad &amp; w^\top \mu \\
+\text{s.t.} \quad &amp; w^\top \Sigma w = \sigma_p^2 \\
+&amp; \mathbf{1}^\top w = 1 \\
+&amp; w_i \geq 0 \quad \text{(long-only constraint, optional)}
+\end{aligned}
+\end{split}\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( w \)</span> is the vector of portfolio weights.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mu \)</span> is the vector of expected asset returns.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Sigma \)</span> is the covariance matrix of returns.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{1} \)</span> is a vector of ones to ensure full investment.</p></li>
+<li><p>The optional constraint <span class="math notranslate nohighlight">\( w_i \geq 0 \)</span> enforces <strong>long-only portfolios</strong> (no short selling).</p></li>
+</ul>
+<p>The set of all such solutions forms the <strong>efficient frontier</strong>, representing optimal portfolios that offer the best trade-off between return and risk.</p>
+</section>
+<section id="combining-risk-free-with-risky-assets">
+<h2>Combining Risk-Free with Risky Assets<a class="headerlink" href="#combining-risk-free-with-risky-assets" title="Link to this heading">#</a></h2>
+<p>So far, we have used our knowledge to select one of the efficient portfolios according to our individual risk preferences. However, we have so far omitted an important investment alternative: the <strong>risk-free asset</strong> — such as government bonds or similar instruments that can reasonably be considered risk-free in terms of volatility.</p>
+<p>Risk-free means that the return has no variance: <span class="math notranslate nohighlight">\( \sigma_{rf} = 0 \)</span>. We denote the return of the risk-free asset by <span class="math notranslate nohighlight">\( r_f \)</span>.</p>
+<p>With this extension, investors can allocate their wealth between a portfolio of risky assets and the risk-free asset. As a result, all investors will now hold the <strong>same optimal risky portfolio</strong>, investing only a fraction <span class="math notranslate nohighlight">\( \alpha \)</span> of their capital in it, and the remaining share <span class="math notranslate nohighlight">\( (1 - \alpha) \)</span> in the risk-free asset.</p>
+<p>The <strong>expected return</strong> of the overall portfolio is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu = \alpha \mu_p + \left(1 - \alpha \right) r_f
+\]</div>
+<p>The <strong>volatility</strong> of the portfolio is:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma = \sqrt{ \alpha^2 \sigma_p^2 } = \alpha \sigma_p
+\]</div>
+<p>Varying <span class="math notranslate nohighlight">\( \alpha \)</span> places the investor along a straight line connecting the risk-free rate <span class="math notranslate nohighlight">\( r_f \)</span> and the risky portfolio <span class="math notranslate nohighlight">\( \mu_p \)</span>. This decision represents the trade-off between safety and return. Investors who borrow money to invest more than their total wealth (i.e., <span class="math notranslate nohighlight">\( \alpha &gt; 1 \)</span>) will be positioned <strong>above</strong> the risky portfolio on the line.</p>
+<p>The slope of this line is known as the <strong>Sharpe Ratio</strong>, <span class="math notranslate nohighlight">\( SR_p \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+SR_p = \frac{\mu_p - r_f}{\sigma_p}
+\]</div>
+<p>The Sharpe Ratio measures the <strong>risk-adjusted performance</strong> of a portfolio. It tells the investor how much excess return they receive per unit of risk. Since all investors aim to <strong>maximize</strong> this ratio, they will choose the risky portfolio with the highest Sharpe Ratio — the one that forms the <strong>tangency point</strong> with the efficient frontier.</p>
+<p>This line is known as the <strong>Capital Market Line (CML)</strong> and added to our previous figure and shown below. Once the tangency portfolio is identified, the only decision left for the investor is how much to allocate between this optimal portfolio and the risk-free asset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Expected returns and volatilities</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
+<span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
+
+<span class="c1"># Realistic correlation matrix</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Covariance matrix</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">correlations</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">std_devs</span><span class="p">,</span> <span class="n">std_devs</span><span class="p">)</span>
+
+<span class="c1"># Risk-free rate</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="c1"># Simulate portfolios</span>
+<span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_portfolios</span><span class="p">))</span>  <span class="c1"># return, risk, Sharpe</span>
+<span class="n">weights_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>
+    <span class="n">weights_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="n">port_return</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="n">port_risk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span>
+    <span class="n">sharpe</span> <span class="o">=</span> <span class="p">(</span><span class="n">port_return</span> <span class="o">-</span> <span class="n">rf</span><span class="p">)</span> <span class="o">/</span> <span class="n">port_risk</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_return</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_risk</span>
+    <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sharpe</span>
+
+<span class="c1"># Identify the tangency portfolio (maximum Sharpe Ratio)</span>
+<span class="n">max_sharpe_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">tangency_return</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_sharpe_idx</span><span class="p">]</span>
+<span class="n">tangency_risk</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_sharpe_idx</span><span class="p">]</span>
+
+<span class="c1"># Capital Market Line (line from rf to tangency portfolio)</span>
+<span class="n">cml_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">cml_y</span> <span class="o">=</span> <span class="n">rf</span> <span class="o">+</span> <span class="p">((</span><span class="n">tangency_return</span> <span class="o">-</span> <span class="n">rf</span><span class="p">)</span> <span class="o">/</span> <span class="n">tangency_risk</span><span class="p">)</span> <span class="o">*</span> <span class="n">cml_x</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated Portfolios&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cml_x</span><span class="p">,</span> <span class="n">cml_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Capital Market Line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tangency_risk</span><span class="p">,</span> <span class="n">tangency_return</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tangency Portfolio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">rf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Risk-Free Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sharpe Ratio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Risk (Standard Deviation)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expected Return&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Efficient Frontier with Capital Market Line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5c07de8cb032454400fd3015828c60a4958728618015d67350714435ba5b8cf3.png" src="_images/5c07de8cb032454400fd3015828c60a4958728618015d67350714435ba5b8cf3.png" />
+</div>
+</div>
+</section>
+<section id="when-reality-meets-modern-portfolio-theory">
+<h2>When Reality Meets Modern Portfolio Theory<a class="headerlink" href="#when-reality-meets-modern-portfolio-theory" title="Link to this heading">#</a></h2>
+<p>Modern Portfolio Theory implies that all investors would ultimately allocate part of their wealth into the <strong>same</strong> optimal risky portfolio — the tangency portfolio — and then combine it with the risk-free asset according to their individual risk preferences.</p>
+<p>But in practice, this is <strong>not what we observe</strong>. So where is the gap between theory and reality?</p>
+<ol class="arabic simple">
+<li><p>Estimation uncertainty
+To construct the tangency portfolio, we need to know the <strong>true expected returns</strong> <span class="math notranslate nohighlight">\( \mu \)</span> and the <strong>true covariance matrix</strong> <span class="math notranslate nohighlight">\( \Sigma \)</span> of all risky assets. In reality, these parameters are <strong>unknown</strong> and must be estimated from historical data — which introduces sampling error and model risk.
+(Also, note that we “cheated” in our example by treating broad indices as individual assets.)</p></li>
+<li><p>Oversimplified investor preferences
+MPT assumes that investor preferences are fully described by <strong>mean and variance</strong> — which implies normally distributed returns or quadratic utility. But in reality, investors often care about higher-order moments like skewness and maximum drawdown. For example, two portfolios with the same expected return and volatility may differ drastically in their <strong>tail risk</strong> — and most investors would not be indifferent between them.</p></li>
+<li><p>Investment horizon heterogeneity
+Not all investors have the same <strong>investment horizon</strong>. Some may invest for weeks, others for decades. This affects how returns and risks are estimated — short-term volatilities and correlations can be very different from long-term ones. Thus, the optimal portfolio may differ based on time horizon alone.</p></li>
+</ol>
+<section id="practical-adaptations-and-extensions-of-modern-portfolio-theory">
+<h3>Practical Adaptations and Extensions of Modern Portfolio Theory<a class="headerlink" href="#practical-adaptations-and-extensions-of-modern-portfolio-theory" title="Link to this heading">#</a></h3>
+<p>To address the theoretical shortcomings of Modern Portfolio Theory in real-world applications, both practitioners and researchers have developed several refinements and alternative approaches:</p>
+<section id="robust-portfolio-optimization">
+<h4>1. Robust Portfolio Optimization<a class="headerlink" href="#robust-portfolio-optimization" title="Link to this heading">#</a></h4>
+<p>Traditional optimization is very sensitive to estimation errors in <span class="math notranslate nohighlight">\( \mu \)</span> and <span class="math notranslate nohighlight">\( \Sigma \)</span>. Even small inaccuracies can lead to extreme and unstable weight allocations.</p>
+<p><strong>Robust optimization</strong> techniques explicitly account for <strong>uncertainty in inputs</strong>, e.g., by:</p>
+<ul class="simple">
+<li><p>Using <strong>confidence intervals</strong> or <strong>uncertainty sets</strong> around estimates</p></li>
+<li><p>Penalizing portfolios that are overly sensitive to changes in inputs</p></li>
+<li><p>Seeking allocations that perform well across a range of possible scenarios</p></li>
+</ul>
+<p>These methods often lead to <strong>more stable and diversified portfolios</strong>, even if they slightly sacrifice optimality in-sample.</p>
+</section>
+<section id="resampling-and-shrinkage-estimators">
+<h4>2. Resampling and Shrinkage Estimators<a class="headerlink" href="#resampling-and-shrinkage-estimators" title="Link to this heading">#</a></h4>
+<p>To reduce estimation noise, especially in <span class="math notranslate nohighlight">\( \mu \)</span>, many portfolio managers use:</p>
+<ul class="simple">
+<li><p><strong>Shrinkage estimators</strong> (e.g., Ledoit-Wolf) that blend the empirical covariance matrix with a structured target (like the identity matrix)</p></li>
+<li><p><strong>Resampling</strong> techniques that create many bootstrapped versions of the input data to generate more robust portfolio weights</p></li>
+</ul>
+<p>The idea is to replace “precise but noisy” estimates with “less precise but more stable” ones — improving <strong>out-of-sample performance</strong>.</p>
+</section>
+<section id="black-litterman-model">
+<h4>3. Black-Litterman Model<a class="headerlink" href="#black-litterman-model" title="Link to this heading">#</a></h4>
+<p>The <strong>Black-Litterman model</strong> addresses the unrealistic input assumptions of MPT by:</p>
+<ul class="simple">
+<li><p>Starting with an <strong>equilibrium market portfolio</strong> (e.g., market cap weights)</p></li>
+<li><p>Allowing investors to express <strong>subjective views</strong> on expected returns</p></li>
+<li><p>Combining both in a <strong>Bayesian framework</strong></p></li>
+</ul>
+<p>This results in more intuitive and stable portfolio weights and has become popular in institutional asset management.</p>
+</section>
+<section id="factor-models-and-risk-premia-investing">
+<h4>4. Factor Models and Risk Premia Investing<a class="headerlink" href="#factor-models-and-risk-premia-investing" title="Link to this heading">#</a></h4>
+<p>Rather than modeling asset returns individually, <strong>factor models</strong> (like Fama-French or APT) explain returns through exposure to <strong>systematic risk factors</strong> (e.g., value, momentum, size, quality).</p>
+<p>This approach allows investors to:</p>
+<ul class="simple">
+<li><p>Target specific <strong>risk premia</strong></p></li>
+<li><p>Reduce dimensionality in estimating <span class="math notranslate nohighlight">\( \mu \)</span> and <span class="math notranslate nohighlight">\( \Sigma \)</span></p></li>
+<li><p>Construct portfolios that align with macroeconomic exposures or behavioral patterns</p></li>
+</ul>
+</section>
+<section id="behavioral-finance-and-real-world-preferences">
+<h4>5. Behavioral Finance and Real-World Preferences<a class="headerlink" href="#behavioral-finance-and-real-world-preferences" title="Link to this heading">#</a></h4>
+<p>Finally, <strong>behavioral finance</strong> acknowledges that real investors:</p>
+<ul class="simple">
+<li><p>Are not always rational</p></li>
+<li><p>May care more about <strong>losses than gains</strong> (loss aversion)</p></li>
+<li><p>Prefer <strong>drawdown control</strong> over standard deviation</p></li>
+<li><p>May react emotionally to volatility and news</p></li>
+</ul>
+<p>This has inspired models that incorporate <strong>nonlinear utility</strong>, <strong>drawdown constraints</strong>, or <strong>downside risk measures</strong> (e.g., Conditional Value-at-Risk).</p>
+</section>
+<section id="summary">
+<h4>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h4>
+<p>Modern Portfolio Theory provides a powerful framework, but <strong>practical investing goes beyond the textbook version</strong>. Real-world challenges like estimation error, non-normal distributions, behavioral preferences, and horizon heterogeneity demand <strong>more flexible, robust, and psychologically informed tools</strong> — and that’s exactly where modern finance research and practice continue to evolve.</p>
+</section>
+</section>
+</section>
+<section id="parameter-uncertainty-and-portfolio-optimization">
+<h2>Parameter Uncertainty and Portfolio Optimization<a class="headerlink" href="#parameter-uncertainty-and-portfolio-optimization" title="Link to this heading">#</a></h2>
+<p>To demonstrate the pitfalls of parameter uncertainty for portfolio optimiztion, we use a simulation example. The input values, i.e., expected returns and covariances are as before in this chapter. We simulate the data from a multivariate normal distribution.</p>
+<p>One of the simplest portfolio optimization problems is to find the portfolio with minimum variance, the <strong>minimum variance portfolio</strong>. Formally, we want to solve:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_w \quad w^\top \Sigma w \
+\text{s.t.} \quad \mathbf{1}^\top w = 1
+\]</div>
+<p>This is a quadratic program with a linear equality constraint. The closed-form solution for the unconstrained minimum variance portfolio is:</p>
+<div class="math notranslate nohighlight">
+\[
+w_{\text{mvp}} = \frac{\Sigma^{-1} \mathbf{1}}{\mathbf{1}^\top \Sigma^{-1} \mathbf{1}}
+\]</div>
+<p>Where:
+•	<span class="math notranslate nohighlight">\( \Sigma^{-1} \)</span> is the inverse of the covariance matrix
+•	<span class="math notranslate nohighlight">\( \mathbf{1} \)</span> is a vector of ones</p>
+<p>With our input parameters from before:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mu =
+\begin{bmatrix}
+0.08 \\
+0.04 \\
+0.05 \\
+0.15 \\
+0.07
+\end{bmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma =
+\begin{bmatrix}
+0.0400 &amp; 0.0100 &amp; 0.0060 &amp; 0.0250 &amp; 0.0300 \\
+0.0100 &amp; 0.0100 &amp; 0.0015 &amp; 0.0050 &amp; 0.0090 \\
+0.0060 &amp; 0.0015 &amp; 0.0225 &amp; 0.0150 &amp; 0.0045 \\
+0.0250 &amp; 0.0050 &amp; 0.0150 &amp; 0.2500 &amp; 0.0450 \\
+0.0300 &amp; 0.0090 &amp; 0.0045 &amp; 0.0450 &amp; 0.0900
+\end{bmatrix}
+\end{split}\]</div>
+<p>The optimal weights can be calculated with the formula from above and are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set random seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Step 1: True parameters (as before)</span>
+<span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
+<span class="n">std_devs_monthly</span> <span class="o">=</span> <span class="n">std_devs</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">cov_true</span> <span class="o">=</span> <span class="n">correlations</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">std_devs_monthly</span><span class="p">,</span> <span class="n">std_devs_monthly</span><span class="p">)</span>
+<span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">std_devs</span><span class="p">))</span>
+<span class="n">inv_cov_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov_true</span><span class="p">)</span>
+<span class="n">w_true</span> <span class="o">=</span> <span class="n">inv_cov_true</span> <span class="o">@</span> <span class="n">ones</span> <span class="o">/</span> <span class="p">(</span><span class="n">ones</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">inv_cov_true</span> <span class="o">@</span> <span class="n">ones</span><span class="p">)</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Equity&quot;</span><span class="p">,</span> <span class="s2">&quot;Corp Bond&quot;</span><span class="p">,</span> <span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;Bitcoin&quot;</span><span class="p">,</span> <span class="s2">&quot;Oil&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">asset</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">assets</span><span class="p">,</span> <span class="n">w_true</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Weight for </span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">weight</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Weight for Equity: -0.0338
+Weight for Corp Bond: 0.7364
+Weight for Gold: 0.2906
+Weight for Bitcoin: 0.0001
+Weight for Oil: 0.0066
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we simulate monthly returns for a period of 60 months (approximately five years) and estimate the covariance matrix with the empirical variance and covariance estimators. This estimated covariance matrix is used to determine optimal portfolio weights. We repeat this process for 1,000 times and plot the boxplots of corresponding weights over all simulation runs. You should notice that derived weights using empirical estimates usually do not match the actual optimal weights and sometimes are far off.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">60</span>  <span class="c1"># e.g., 60 months</span>
+<span class="n">mean_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span> <span class="c1"># not used for MVP, but realistic</span>
+
+<span class="n">simulation_runs</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">W_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">simulation_runs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">std_devs</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">sim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">simulation_runs</span><span class="p">):</span>
+    <span class="n">simulated_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">,</span> <span class="n">cov_true</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">cov_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">simulated_returns</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">inv_cov_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov_est</span><span class="p">)</span>
+    <span class="n">w_est</span> <span class="o">=</span> <span class="n">inv_cov_est</span> <span class="o">@</span> <span class="n">ones</span> <span class="o">/</span> <span class="p">(</span><span class="n">ones</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">inv_cov_est</span> <span class="o">@</span> <span class="n">ones</span><span class="p">)</span>
+    <span class="n">W_est</span><span class="p">[</span><span class="n">sim</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">w_est</span>
+
+<span class="c1"># calculate portfolio variance with estimated weights and true covariance matrix</span>
+<span class="n">portfolio_variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="n">w</span> <span class="o">@</span> <span class="n">cov_true</span> <span class="o">@</span> <span class="n">w</span><span class="o">.</span><span class="n">T</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W_est</span>
+<span class="p">])</span>
+
+
+<span class="c1"># 1. Boxplot of estimated weights</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">W_est</span><span class="p">,</span> <span class="n">tick_labels</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated Weight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Estimated MVP Weights Across Simulations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e01fe7bd0261069171df69037fbfacfe9b233c0b4ad91ed127c761911c40059f.png" src="_images/e01fe7bd0261069171df69037fbfacfe9b233c0b4ad91ed127c761911c40059f.png" />
+</div>
+</div>
+<p>To illustrate the economic consequence, we calculate the portfolio variance after each simulation run by replacing the true optimal weights with the estimate optimal weights:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{w}^\top \Sigma \hat{w}
+\]</div>
+<p>The histogram below shows the distribution of resulting variances over all simulation runs. The adverse consequence when our optimal portfolio weights rely on empirical estimates is that risk (measures by variance) is always higher than it should be.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">portfolio_variances</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;teal&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">w_true</span> <span class="o">@</span> <span class="n">cov_true</span> <span class="o">@</span> <span class="n">w_true</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True MVP Variance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Portfolio Variance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of Portfolio Variance Using Estimated MVP Weights&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5b836d80c7fc220d4dda1593720927be6338702b492b6124486bdeecccb03033.png" src="_images/5b836d80c7fc220d4dda1593720927be6338702b492b6124486bdeecccb03033.png" />
+</div>
+</div>
+</section>
+<section id="shrinkage-estimation">
+<h2>Shrinkage Estimation<a class="headerlink" href="#shrinkage-estimation" title="Link to this heading">#</a></h2>
+<p>The last simulation demonstrates that the estimation of the covariance matrix accurately is far from trivial. Especially, when the number of assets is large relative to the number of observations — a situation often encountered in finance — the <strong>sample covariance matrix</strong> becomes an unreliable estimator:</p>
+<ul class="simple">
+<li><p>It is <strong>noisy</strong> and highly sensitive to outliers.</p></li>
+<li><p>It may be <strong>ill-conditioned</strong> or even <strong>not invertible</strong>, especially when assets are highly correlated or the sample size is small.</p></li>
+<li><p>Its <strong>eigenvalues</strong> can be severely distorted, leading to instability in portfolio optimization and risk assessments.</p></li>
+</ul>
+<p>These challenges motivate the use of <strong>regularization techniques</strong>, such as <strong>shrinkage</strong>, which aim to improve estimation by combining the noisy sample covariance matrix with a more stable structured matrix. This results in a covariance estimate that is both <strong>more robust</strong> and <strong>guaranteed to be positive definite</strong> — a key requirement for many financial models.</p>
+<p>One of the most widely used approaches in this category is the <strong>Ledoit-Wolf shrinkage estimator</strong>.</p>
+<p>The <strong>Ledoit-Wolf shrinkage estimator</strong> improves the estimation of the covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> by combining the sample covariance matrix <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> with a structured and well-conditioned <strong>target matrix</strong> <span class="math notranslate nohighlight">\(F\)</span>. The most common choice for <span class="math notranslate nohighlight">\(F\)</span> is a <strong>scaled identity matrix</strong>, which assumes all assets have the same variance and are uncorrelated.</p>
+<p>The shrinkage estimator is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\Sigma}_{\text{LW}} = \delta F + (1 - \delta) \hat{\Sigma}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S\)</span> is the sample covariance matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(F\)</span> is the shrinkage <strong>target matrix</strong> (typically <span class="math notranslate nohighlight">\(F = \bar{\sigma}^2 I\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta \in [0, 1]\)</span> is the <strong>shrinkage intensity</strong>, chosen to minimize mean squared error (MSE)</p></li>
+</ul>
+<p>The target matrix <span class="math notranslate nohighlight">\(F\)</span> is often defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+F = \bar{\sigma}^2 I, \quad \text{with} \quad \bar{\sigma}^2 = \frac{1}{n} \operatorname{tr}(\hat{\Sigma})
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> identity matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\operatorname{tr}(\hat{\Sigma})\)</span> is the <strong>trace</strong> of the sample covariance matrix (i.e., the sum of its diagonal elements)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{\sigma}^2\)</span> is the <strong>average variance</strong> across all assets</p></li>
+</ul>
+<p>The optimal shrinkage intensity <span class="math notranslate nohighlight">\(\delta\)</span> is derived analytically to minimize the expected Frobenius norm of the difference between the estimator and the true covariance matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta^* = \arg \min_{\delta \in [0,1]} \mathbb{E} \left[ \| \hat{\Sigma}_{\text{LW}} - \Sigma \|_F^2 \right]
+\]</div>
+<p>This results in an estimator that:</p>
+<ul class="simple">
+<li><p>Is <strong>always positive definite</strong></p></li>
+<li><p>Improves <strong>conditioning</strong> and <strong>stability</strong></p></li>
+<li><p>Often leads to better <strong>out-of-sample performance</strong> in portfolio optimization</p></li>
+</ul>
+</section>
+<section id="portfolio-optimization-in-action">
+<h2>Portfolio Optimization in Action<a class="headerlink" href="#portfolio-optimization-in-action" title="Link to this heading">#</a></h2>
+<p>Towards the end of this chapter, we take a look at the practical application of portfolio optimizaton and its challenges. We are going to use a rolling window approach. At each point in time, we use an estimation window of the past to estimate optimal portfolio allocations and use them to hold a portfolio for a holding period. In our example, we use a small asset universe of Exchange Traded Funds (ETF) and Bitcoin, in detail, we have Bitcoin and an ETF which tracks the development of:</p>
+<ul class="simple">
+<li><p>the S&amp;P 500</p></li>
+<li><p>the STOXX 600</p></li>
+<li><p>Short term US Treasury Bonds</p></li>
+<li><p>Long term US Treasury Bonds</p></li>
+<li><p>Gold</p></li>
+<li><p>Silver</p></li>
+</ul>
+<p>The data starts in 2015. We use an estimation window of the past five years to estimate optimal portfolio weights, we hold the portfolio for one month. After that month, we estimate new optimal portfolio weights with the past five years, reallocate the portfolio weights accordingly and hold the portfolio for one month. This continues until the end of the time period.</p>
+<p>We use monthly returns to estimate the <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> because this fits to the time perspective of monthly updating. The portfolio performanc is evaluated by daily returns of the full holding period which starts in 2020.</p>
+<p>The mean vector <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> is estimated by the historical estimate. For <span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span>, we compare the empirical and the Ledoit-Wolf estimates. A benchmark is the naive portfolio which holds equal weights for every asset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">riskfolio</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rp</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_07/pf_data.csv&quot;</span><span class="p">)</span>
+    <span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">assets</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;IUSE.L&quot;</span><span class="p">,</span> <span class="s2">&quot;EXSA.DE&quot;</span><span class="p">,</span> <span class="s2">&quot;SHY&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">,</span> <span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]</span>
+    <span class="n">asset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;S&amp;P_ETF&quot;</span><span class="p">,</span> <span class="s2">&quot;STOXX_ETF&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasury_short&quot;</span><span class="p">,</span> <span class="s2">&quot;Treasury_long&quot;</span><span class="p">,</span> <span class="s2">&quot;Bitcoin&quot;</span><span class="p">,</span> <span class="s2">&quot;Gold&quot;</span><span class="p">,</span> <span class="s2">&quot;Silver&quot;</span><span class="p">]</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2015-01-01&quot;</span><span class="p">)</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">asset_names</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">asset_names</span><span class="p">]</span>
+    <span class="n">assets</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_07/pf_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">window_years</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="s1">&#39;MS&#39;</span>  
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="n">window_years</span><span class="p">)</span>
+<span class="n">monthly_dates</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_date</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">optimization_results_hist</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">optimization_results_ledoit</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">naive_pf_returns</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">current_date</span> <span class="ow">in</span> <span class="n">monthly_dates</span><span class="p">:</span>
+    <span class="n">window_start</span> <span class="o">=</span> <span class="n">current_date</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">years</span> <span class="o">=</span> <span class="n">window_years</span><span class="p">)</span>
+    <span class="n">evaluation_end</span> <span class="o">=</span> <span class="n">current_date</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">estimation_data</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">window_start</span><span class="p">:</span><span class="n">current_date</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">evaluation_data</span> <span class="o">=</span> <span class="n">assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">current_date</span><span class="p">:</span><span class="n">evaluation_end</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">estimation_data</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">port_hist</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">Portfolio</span><span class="p">(</span><span class="n">returns</span> <span class="o">=</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">port_hist</span><span class="o">.</span><span class="n">assets_stats</span><span class="p">(</span><span class="n">method_mu</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">method_cov</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">)</span>
+    <span class="n">w_hist</span> <span class="o">=</span> <span class="n">port_hist</span><span class="o">.</span><span class="n">optimization</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;Classic&quot;</span><span class="p">,</span> <span class="n">rm</span> <span class="o">=</span> <span class="s2">&quot;MV&quot;</span><span class="p">,</span> <span class="n">rf</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="s2">&quot;Sharpe&quot;</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">port_ledoit</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">Portfolio</span><span class="p">(</span><span class="n">returns</span> <span class="o">=</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">port_ledoit</span><span class="o">.</span><span class="n">assets_stats</span><span class="p">(</span><span class="n">method_mu</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">method_cov</span><span class="o">=</span><span class="s2">&quot;ledoit&quot;</span><span class="p">)</span>
+    <span class="n">w_ledoit</span> <span class="o">=</span> <span class="n">port_ledoit</span><span class="o">.</span><span class="n">optimization</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;Classic&quot;</span><span class="p">,</span> <span class="n">rm</span> <span class="o">=</span> <span class="s2">&quot;MV&quot;</span><span class="p">,</span> <span class="n">rf</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="s2">&quot;Sharpe&quot;</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">naive_pf_returns</span><span class="p">[</span><span class="n">current_date</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluation_data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">optimization_results_hist</span><span class="p">[</span><span class="n">current_date</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">optimization_results_hist</span><span class="p">[</span><span class="n">current_date</span><span class="p">][</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_hist</span>
+    <span class="n">optimization_results_hist</span><span class="p">[</span><span class="n">current_date</span><span class="p">][</span><span class="s2">&quot;pf_returns&quot;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">evaluation_data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w_hist</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">evaluation_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    
+    <span class="n">optimization_results_ledoit</span><span class="p">[</span><span class="n">current_date</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">optimization_results_ledoit</span><span class="p">[</span><span class="n">current_date</span><span class="p">][</span><span class="s2">&quot;weights&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_ledoit</span>
+    <span class="n">optimization_results_ledoit</span><span class="p">[</span><span class="n">current_date</span><span class="p">][</span><span class="s2">&quot;pf_returns&quot;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">evaluation_data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w_ledoit</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">evaluation_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">optimal_weights_hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;weights&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">optimization_results_hist</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">optimization_results_hist</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">optimal_weights_hist</span> <span class="o">=</span> <span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="n">optimal_weights_ledoit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;weights&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">optimization_results_ledoit</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">optimal_weights_ledoit</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">optimization_results_ledoit</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">optimal_weights_ledoit</span> <span class="o">=</span> <span class="n">optimal_weights_ledoit</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="n">pf_returns_naive</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span>
+    <span class="n">result</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">naive_pf_returns</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">pf_returns_hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;pf_returns&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">optimization_results_hist</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">pf_returns_ledoit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;pf_returns&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">optimization_results_ledoit</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="n">pf_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">pf_returns_naive</span><span class="p">,</span> <span class="n">pf_returns_hist</span><span class="p">,</span> <span class="n">pf_returns_ledoit</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Naive&quot;</span><span class="p">,</span> <span class="s2">&quot;Empirical&quot;</span><span class="p">,</span> <span class="s2">&quot;Ledoit&quot;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">pf_returns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">pf_returns</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Daily discrete returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Comparison of portfolio returns&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Cumulative portfolio value&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Comparison of portfolio value development&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a0fc6ce1da62dfa50c3c121435cc7f3d23b2b0f46eee8fd0b7bfc4f2a5037b6a.png" src="_images/a0fc6ce1da62dfa50c3c121435cc7f3d23b2b0f46eee8fd0b7bfc4f2a5037b6a.png" />
+</div>
+</div>
+<p>The figure above shows the daily returns and cumulative value development (assuming an initial investment of one monetary unit) of the three portfolios during the holdout period. It becomes apparent that the portfolio relying solely on empirical (sample-based) covariance estimates exhibits unusually low variation and delivers the lowest overall performance.</p>
+<p>This behavior can be explained by examining the portfolio weights over time, as shown in the figure below. The empirical covariance approach predominantly allocates its weight to the Gold ETF. Gold is widely regarded as a “safe haven” asset due to its low volatility, but it typically offers lower expected returns compared to riskier assets. The optimizer, prioritizing risk minimization under noisy covariance estimates, favors gold as a relatively stable choice.</p>
+<p>In contrast, the portfolio constructed using the <strong>Ledoit-Wolf shrinkage estimator</strong> shows a more diversified and dynamic allocation pattern. Although it differs from the naive (equally-weighted) strategy, it achieves greater dispersion of weights across assets. This illustrates how the shrinkage estimator regularizes the covariance matrix and enables more balanced portfolio construction.</p>
+<p>It’s important to note that even when using an <strong>unconditional estimator</strong>, changing portfolio weights over time can reflect shifts in the estimated covariance matrix. These shifts may result not from true market dynamics, but from <strong>estimation uncertainty</strong> — that is, natural variation due to changes in the data sample over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cmap</span>
+
+<span class="c1"># Get viridis colors based on number of asset classes</span>
+<span class="n">n_assets</span> <span class="o">=</span> <span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">viridis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_assets</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Evolution of Optimal Portfolio Weights (historical estimates)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">optimal_weights_ledoit</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">optimal_weights_ledoit</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">optimal_weights_ledoit</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Evolution of Optimal Portfolio Weights (Ledoit covariance estimates)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b7e034dbf3d19005cbaaf81945dda03f11a75d77d71ab8e8c3ebff2c158889da.png" src="_images/b7e034dbf3d19005cbaaf81945dda03f11a75d77d71ab8e8c3ebff2c158889da.png" />
+</div>
+</div>
+<p>Besides the graphical interpretation, we can take a look at the descriptive statistics below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">describe_with_moments</span>
+
+<span class="n">pf_returns_descriptive</span> <span class="o">=</span> <span class="n">describe_with_moments</span><span class="p">(</span><span class="n">pf_returns</span><span class="p">)</span>
+<span class="n">pf_returns_descriptive</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Naive</th>
+      <th>Empirical</th>
+      <th>Ledoit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1330.000000</td>
+      <td>1330.000000</td>
+      <td>1330.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.000760</td>
+      <td>0.000204</td>
+      <td>0.000625</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.009343</td>
+      <td>0.002845</td>
+      <td>0.007591</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.099224</td>
+      <td>-0.032663</td>
+      <td>-0.068908</td>
+    </tr>
+    <tr>
+      <th>5%</th>
+      <td>-0.012946</td>
+      <td>-0.003339</td>
+      <td>-0.011471</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000729</td>
+      <td>0.000187</td>
+      <td>0.000853</td>
+    </tr>
+    <tr>
+      <th>95%</th>
+      <td>0.014094</td>
+      <td>0.004320</td>
+      <td>0.011714</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.049208</td>
+      <td>0.023683</td>
+      <td>0.039504</td>
+    </tr>
+    <tr>
+      <th>skew</th>
+      <td>-0.997256</td>
+      <td>-1.405057</td>
+      <td>-0.818058</td>
+    </tr>
+    <tr>
+      <th>kurtosis</th>
+      <td>11.961964</td>
+      <td>30.877844</td>
+      <td>7.820229</td>
+    </tr>
+    <tr>
+      <th>hill_upper</th>
+      <td>0.316863</td>
+      <td>0.413175</td>
+      <td>0.330326</td>
+    </tr>
+    <tr>
+      <th>hill_lower</th>
+      <td>0.396117</td>
+      <td>0.434489</td>
+      <td>0.330950</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can confirm that the volatility is higher for the naive and Ledoit-Wolf portfolio but also results in higher average returns. To evaluate the risk-profit relation, we may take a look at the ratio of average returns to the volatility. This is an empirical estimate of a pseudo Sharpo ratio (<span class="math notranslate nohighlight">\(SR^{*}\)</span>) which ignores the risk free rate:</p>
+<div class="math notranslate nohighlight">
+\[
+SR^{*} = \frac{\hat{\mu}_p}{\hat{\sigma}p}
+\]</div>
+<p>If you take a look in the cell below, we observe that the Ledoit-Wolf approach delivers the highest ratio which indicates that it has the best reward to risk ratio. Notably, it is followed by a naive portfolio weighting and not by the optimized portfolio which uses empirical estimates. This again highlights the challenges of portfolio optimization with respect to estimation uncertainty. Furthermore, the results presented ignore transaction costs which are almost zero for the naive portfolio, but, higher for the optimization approaches with monthly rebalancing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf_returns_descriptive</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">pf_returns_descriptive</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive        0.081314
+Empirical    0.071593
+Ledoit       0.082390
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>In this chapter, we introduced the fundamental principles of portfolio optimization within the framework of modern portfolio theory. We explored how the covariance matrix of asset returns plays a central role in determining optimal allocations, and how different estimation techniques — such as the historical sample estimator and the Ledoit-Wolf shrinkage estimator — impact portfolio construction.</p>
+<p>Through rolling-window backtests, we saw that estimation uncertainty can lead to very different portfolio outcomes, especially when sample sizes are limited or market conditions change. Shrinkage methods provide a practical solution by regularizing the covariance matrix, improving stability and out-of-sample performance.</p>
+<p>While we focused on classical techniques and monthly data, there is a wide range of extensions worth exploring. These include using <strong>daily returns</strong> for more granular estimation, implementing <strong>time-varying covariance models</strong> (e.g., exponentially weighted or GARCH-based estimators), incorporating <strong>alternative risk measures</strong> like Value-at-Risk (VaR) or Conditional Value-at-Risk (CVaR), or even using <strong>machine learning methods</strong> for dynamic portfolio allocation.</p>
+<p>Ultimately, portfolio optimization remains a powerful yet complex tool. Its effectiveness depends heavily on the quality and stability of input parameters, making thoughtful estimation techniques and robust modeling choices essential for practical success.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06_time_series.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Time Series Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="08_risk_management.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Risk Management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-portfolios-of-risky-assets">Optimal Portfolios of Risky Assets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-risk-free-with-risky-assets">Combining Risk-Free with Risky Assets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-reality-meets-modern-portfolio-theory">When Reality Meets Modern Portfolio Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-adaptations-and-extensions-of-modern-portfolio-theory">Practical Adaptations and Extensions of Modern Portfolio Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#robust-portfolio-optimization">1. Robust Portfolio Optimization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-and-shrinkage-estimators">2. Resampling and Shrinkage Estimators</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-model">3. Black-Litterman Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-models-and-risk-premia-investing">4. Factor Models and Risk Premia Investing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-finance-and-real-world-preferences">5. Behavioral Finance and Real-World Preferences</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-uncertainty-and-portfolio-optimization">Parameter Uncertainty and Portfolio Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-estimation">Shrinkage Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-in-action">Portfolio Optimization in Action</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
