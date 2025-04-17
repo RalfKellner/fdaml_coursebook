@@ -7,3 +7,5 @@ chapters:
 - file: 04_empirical_analysis
 - file: 05_regression
 - file: 06_time_series
+- file: 07_pf_optimization
+- file: 08_risk_management

@@ -66,6 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Portfolio Optimization" href="07_pf_optimization.html" />
     <link rel="prev" title="Linear Regression" href="05_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,6 +172,8 @@
 <li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
 </ul>
 
     </div>
@@ -373,9 +376,9 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-ahead-volatility-prediction-with-garch-1-1">One-Step-Ahead Volatility Prediction with GARCH(1,1)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-model-parameters">Interpretation of model parameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-garch-forecasts-to-unconditional-volatility">Comparing GARCH Forecasts to Unconditional Volatility</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-vs-unconditional-mean-and-variance-estimators">Conditional vs Unconditional Mean and Variance Estimators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives">Summary: Modeling Conditional Mean and Variance — Univariate and Multivariate Perspectives</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-mean">Modeling the Conditional Mean</a></li>
@@ -1153,8 +1156,8 @@ L(\xi, \phi, \sigma^2) = \prod_{t=2}^T \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( 
 ==============================================================================
 Dep. Variable:                    R_t   No. Observations:                 2671
 Model:                 ARIMA(1, 0, 0)   Log Likelihood                7933.859
-Date:                Wed, 09 Apr 2025   AIC                         -15861.718
-Time:                        12:45:05   BIC                         -15844.048
+Date:                Thu, 17 Apr 2025   AIC                         -15861.718
+Time:                        20:22:48   BIC                         -15844.048
 Sample:                    01-02-2015   HQIC                        -15855.325
                          - 03-28-2025                                         
 Covariance Type:                  opg                                         
@@ -1388,8 +1391,8 @@ Vol Model:                      GARCH   Log-Likelihood:               -7394.37
 Distribution:                  Normal   AIC:                           14794.7
 Method:            Maximum Likelihood   BIC:                           14814.5
                                         No. Observations:                 5284
-Date:                Wed, Apr 09 2025   Df Residuals:                     5284
-Time:                        12:45:05   Df Model:                            0
+Date:                Thu, Apr 17 2025   Df Residuals:                     5284
+Time:                        20:22:48   Df Model:                            0
                               Volatility Model                              
 ============================================================================
                  coef    std err          t      P&gt;|t|      95.0% Conf. Int.
@@ -1486,8 +1489,9 @@ Unconditional MSE: 35.2074
 </div>
 </div>
 </section>
+</section>
 <section id="economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">
-<h4>Economic Importance of Weak Return Autocorrelation and Persistent Volatility<a class="headerlink" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility" title="Link to this heading">#</a></h4>
+<h3>Economic Importance of Weak Return Autocorrelation and Persistent Volatility<a class="headerlink" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility" title="Link to this heading">#</a></h3>
 <p>Empirical analysis of daily stock returns often reveals that <strong>returns themselves exhibit little to no autocorrelation</strong>, while <strong>volatility is highly persistent</strong>. This observation has several important economic implications:</p>
 <ul class="simple">
 <li><p><strong>Market Efficiency</strong>: The absence of strong autocorrelation in returns supports the Efficient Market Hypothesis (EMH), which posits that asset prices reflect all available information. If returns were predictable based on past returns, it would suggest arbitrage opportunities, violating the EMH.</p></li>
@@ -1495,7 +1499,6 @@ Unconditional MSE: 35.2074
 <li><p><strong>Risk Management</strong>: Since return shocks have long-lasting effects on volatility, models like GARCH are valuable tools for <strong>forecasting risk</strong>. These forecasts feed into portfolio optimization, margin setting, and Value-at-Risk (VaR) models.</p></li>
 </ul>
 <p>In summary, while daily returns themselves may not be predictable, the <strong>predictability of volatility</strong> has deep implications for financial practice, from asset pricing to trading and risk control. For instance, a GARCH(1,1) model may be used to track recent volatility behavior and signal when investors may shift their fundings to safer investments such as bonds.</p>
-</section>
 </section>
 <section id="conditional-vs-unconditional-mean-and-variance-estimators">
 <h3>Conditional vs Unconditional Mean and Variance Estimators<a class="headerlink" href="#conditional-vs-unconditional-mean-and-variance-estimators" title="Link to this heading">#</a></h3>
@@ -1618,6 +1621,15 @@ Unconditional MSE: 35.2074
         <p class="prev-next-title">Linear Regression</p>
       </div>
     </a>
+    <a class="right-next"
+       href="07_pf_optimization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Portfolio Optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1677,9 +1689,9 @@ Unconditional MSE: 35.2074
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-step-ahead-volatility-prediction-with-garch-1-1">One-Step-Ahead Volatility Prediction with GARCH(1,1)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-model-parameters">Interpretation of model parameters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-garch-forecasts-to-unconditional-volatility">Comparing GARCH Forecasts to Unconditional Volatility</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-importance-of-weak-return-autocorrelation-and-persistent-volatility">Economic Importance of Weak Return Autocorrelation and Persistent Volatility</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-vs-unconditional-mean-and-variance-estimators">Conditional vs Unconditional Mean and Variance Estimators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-modeling-conditional-mean-and-variance-univariate-and-multivariate-perspectives">Summary: Modeling Conditional Mean and Variance — Univariate and Multivariate Perspectives</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-the-conditional-mean">Modeling the Conditional Mean</a></li>

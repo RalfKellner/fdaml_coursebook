@@ -172,6 +172,8 @@
 <li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
 </ul>
 
     </div>
@@ -343,6 +345,12 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional distributions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-random-variables">Independence of random variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-normal-distribution">Multivariate Normal Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-function-pdf">Probability Density Function (PDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in Finance</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance-of-linear-combinations">Expected value and variance of linear combinations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-formulation-for-portfolio-return-and-variance">Matrix Formulation for Portfolio Return and Variance</a></li>
@@ -704,12 +712,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.90990216 0.54696811 0.74620458 0.58595744 0.84266536]
+[0.93140764 0.1816757  0.25442657 0.27661748 0.48083429]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/3b41a6c70080d55b91191006169851cd46b5d5767bec975dcfe46dd3cc16b349.png" src="_images/3b41a6c70080d55b91191006169851cd46b5d5767bec975dcfe46dd3cc16b349.png" />
+<img alt="_images/077e781da5de4747da8e95f745ae562bd4cf79fdd738a6f6d1e67d32f78cbd0b.png" src="_images/077e781da5de4747da8e95f745ae562bd4cf79fdd738a6f6d1e67d32f78cbd0b.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -781,7 +789,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6d1316bf0e933618f0ed958394030f085b483a03d2674e5c6165ea83ecc899fe.png" src="_images/6d1316bf0e933618f0ed958394030f085b483a03d2674e5c6165ea83ecc899fe.png" />
+<img alt="_images/ed9a58bcc485699e57649f75bcb8cc4c7191ac8ace13c439f0dea7250468dd36.png" src="_images/ed9a58bcc485699e57649f75bcb8cc4c7191ac8ace13c439f0dea7250468dd36.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -797,7 +805,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15c36fe163011ea037db4a7251a6b46a1117fbcbc8133dba1139138888edf496.png" src="_images/15c36fe163011ea037db4a7251a6b46a1117fbcbc8133dba1139138888edf496.png" />
+<img alt="_images/19a41a195a30451849709dc2cbea695664b61694d3a96ef63235e60e09a3b083.png" src="_images/19a41a195a30451849709dc2cbea695664b61694d3a96ef63235e60e09a3b083.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -852,7 +860,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9113e265f2a5068bd671edac38ca0ee93518e8bea435320e457132d81bf9c337.png" src="_images/9113e265f2a5068bd671edac38ca0ee93518e8bea435320e457132d81bf9c337.png" />
+<img alt="_images/c11d1d1bc45f262ade67954c8d1dbd3dea13f3dd47bfb693bf48741116be5d4d.png" src="_images/c11d1d1bc45f262ade67954c8d1dbd3dea13f3dd47bfb693bf48741116be5d4d.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -950,6 +958,34 @@ $<span class="math notranslate nohighlight">\(F(x_1, x_2) = F_{X_1}(x_1) \cdot F
 <li><p><span class="math notranslate nohighlight">\(\rho = 0\)</span> indicates no linear relationship (uncorrelated)</p></li>
 </ul>
 <p>Correlation is a crucial measure in finance, particularly in portfolio management, risk assessment, and diversification strategies. Take a look at the figure below which shows occurrences of two random variables with different covariance levels.</p>
+<p>For <span class="math notranslate nohighlight">\(n\)</span> random variables, <span class="math notranslate nohighlight">\( X = (X_1, X_2, \dots, X_n)^\top \)</span>, all variances and pairwise covariances are collected in the <strong>covariance matrix</strong> <span class="math notranslate nohighlight">\( \Sigma \)</span> which is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma = \mathbb{E}\left[ (X - \mu)(X - \mu)^\top \right]
+\]</div>
+<p>It has the following structure:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Sigma =
+\begin{bmatrix}
+\text{Var}(X_1) &amp; \text{Cov}(X_1, X_2) &amp; \cdots &amp; \text{Cov}(X_1, X_n) \\
+\text{Cov}(X_2, X_1) &amp; \text{Var}(X_2) &amp; \cdots &amp; \text{Cov}(X_2, X_n) \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\text{Cov}(X_n, X_1) &amp; \text{Cov}(X_n, X_2) &amp; \cdots &amp; \text{Var}(X_n)
+\end{bmatrix}
+\end{split}\]</div>
+<p>The corresponding <strong>correlation matrix</strong> <span class="math notranslate nohighlight">\( R \)</span> is obtained by normalizing the covariances by the standard deviations:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{ij} = \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}}
+\]</div>
+<p>Or in matrix form:</p>
+<div class="math notranslate nohighlight">
+\[
+R = D^{-1/2} \Sigma D^{-1/2}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( D = \text{diag}(\Sigma_{11}, \Sigma_{22}, \dots, \Sigma_{nn}) \)</span> is the diagonal matrix of variances.</p>
+<p>The correlation matrix <span class="math notranslate nohighlight">\( R \)</span> contains only values between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, and describes the <strong>strength and direction of linear dependence</strong> between the variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1030,7 +1066,7 @@ $<span class="math notranslate nohighlight">\(F(x_1, x_2) = F_{X_1}(x_1) \cdot F
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/89ca87fa09f43a8f0b735ff456ab4d74f2fdf0ad5dc46324da0bf612099d4918.png" src="_images/89ca87fa09f43a8f0b735ff456ab4d74f2fdf0ad5dc46324da0bf612099d4918.png" />
+<img alt="_images/0533b1b0c284d338cdbb7448baaac20d35505ebddba7cf096c0cbf1564eee67f.png" src="_images/0533b1b0c284d338cdbb7448baaac20d35505ebddba7cf096c0cbf1564eee67f.png" />
 </div>
 </div>
 <p>It’s important to note that while independence implies zero correlation, the converse is not necessarily true. Two random variables can be uncorrelated but still dependent in a non-linear way. To visualize this, take a look below. Even though very stron non-linear relationships exist, the linear correlation coefficient underestimates the true relationship.</p>
@@ -1116,6 +1152,54 @@ Sine relationship correlation: -0.3822
 </div>
 </div>
 </div>
+</section>
+<section id="multivariate-normal-distribution">
+<h3>Multivariate Normal Distribution<a class="headerlink" href="#multivariate-normal-distribution" title="Link to this heading">#</a></h3>
+<p>In analogy to univariate random variables, multivariate random variables can be modeled by parametric (multivariate) distributions. A very popular, but also simplistic, model is given by the <strong>multivariate normal distribution</strong>. It is a generalization of the one-dimensional (univariate) normal distribution to higher dimensions.</p>
+<p>Let <span class="math notranslate nohighlight">\( \mu \in \mathbb{R}^n \)</span> be a vector of expected values, and let <span class="math notranslate nohighlight">\( \Sigma \in \mathbb{R}^{n \times n} \)</span> be a symmetric, positive semi-definite covariance matrix. Then a random vector <span class="math notranslate nohighlight">\( X \in \mathbb{R}^n \)</span> follows a <strong>multivariate normal distribution</strong> with mean <span class="math notranslate nohighlight">\( \mu \)</span> and covariance matrix <span class="math notranslate nohighlight">\( \Sigma \)</span>, denoted by:</p>
+<div class="math notranslate nohighlight">
+\[
+X \sim \mathcal{N}(\mu, \Sigma)
+\]</div>
+<section id="probability-density-function-pdf">
+<h4>Probability Density Function (PDF)<a class="headerlink" href="#probability-density-function-pdf" title="Link to this heading">#</a></h4>
+<p>The probability density function (PDF) of the multivariate normal distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x) = \frac{1}{(2\pi)^{n/2} |\Sigma|^{1/2}} \exp\left( -\frac{1}{2} (x - \mu)^\top \Sigma^{-1} (x - \mu) \right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( x \in \mathbb{R}^n \)</span> is the realization of <span class="math notranslate nohighlight">\( X \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( |\Sigma| \)</span> is the determinant of the covariance matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Sigma^{-1} \)</span> is the inverse of the covariance matrix</p></li>
+</ul>
+</section>
+<section id="properties">
+<h4>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Every linear combination of normally distributed variables is normally distributed.</p></li>
+<li><p>The marginal distribution of any subset of variables is also multivariate normal.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( X \sim \mathcal{N}(\mu, \Sigma) \)</span>, then <span class="math notranslate nohighlight">\( a^\top X \)</span> is univariate normal for any vector <span class="math notranslate nohighlight">\( a \in \mathbb{R}^n \)</span>.</p></li>
+</ul>
+</section>
+<section id="applications-in-finance">
+<h4>Applications in Finance<a class="headerlink" href="#applications-in-finance" title="Link to this heading">#</a></h4>
+<p>The multivariate normal distribution is often used to model the joint behavior of asset returns:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mu \)</span> represents the <strong>expected returns</strong> of assets.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Sigma \)</span> represents the <strong>covariance matrix</strong> (risk and co-movement between assets).</p></li>
+<li><p>It’s a foundational assumption in <strong>portfolio theory</strong>, <strong>risk management</strong>, and <strong>simulation-based modeling</strong>.</p></li>
+</ul>
+<p>While the multivariate normal distribution is mathematically convenient and widely used in portfolio theory and risk modeling, it comes with important limitations when applied to real financial data:</p>
+<ul class="simple">
+<li><p><strong>Underestimation of Tail Risk</strong>: Asset returns often exhibit <strong>fat tails</strong> (leptokurtosis), meaning extreme losses occur more frequently than predicted by a normal distribution.</p></li>
+<li><p><strong>Symmetry Assumption</strong>: The normal distribution is symmetric, but financial returns often show <strong>negative skewness</strong>, indicating a higher likelihood of large losses than large gains.</p></li>
+<li><p><strong>Constant Correlation</strong>: The standard multivariate normal assumes a <strong>constant covariance structure</strong>, while correlations between asset returns tend to <strong>increase during market stress</strong>, reducing diversification benefits when they are most needed.</p></li>
+<li><p><strong>No Jumps or Volatility Clustering</strong>: The model cannot capture <strong>volatility clustering</strong> or <strong>price jumps</strong>, which are characteristic of real asset returns, especially in high-frequency data.</p></li>
+</ul>
+<p>Because of these limitations, more flexible models (e.g., multivariate t-distributions, copulas, GARCH models) are often used in practice to better capture the empirical features of financial return distributions.</p>
+</section>
 </section>
 <section id="expected-value-and-variance-of-linear-combinations">
 <h3>Expected value and variance of linear combinations<a class="headerlink" href="#expected-value-and-variance-of-linear-combinations" title="Link to this heading">#</a></h3>
@@ -1329,6 +1413,12 @@ $<span class="math notranslate nohighlight">\(\text{Var}(R_p) = \mathbf{w}^T \Si
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional distributions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-random-variables">Independence of random variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-normal-distribution">Multivariate Normal Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density-function-pdf">Probability Density Function (PDF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-finance">Applications in Finance</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance-of-linear-combinations">Expected value and variance of linear combinations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix">Covariance Matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-formulation-for-portfolio-return-and-variance">Matrix Formulation for Portfolio Return and Variance</a></li>
