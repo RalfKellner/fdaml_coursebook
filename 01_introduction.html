@@ -334,11 +334,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-funds">Mutual Funds</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-traded-funds">Exchange Traded Funds</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonds">Bonds</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-coupon-bonds">Zero-coupon bonds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupon-bonds">Coupon bonds</a></li>
@@ -347,6 +343,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-options">Derivatives - Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funds">Funds</a></li>
 </ul>
             </nav>
         </div>
@@ -370,7 +367,7 @@
 <li><p>Commodity markets: Markets for trading physical goods or raw products, such as gold, oil, or agricultural products. The size of commodity markets can vary greatly depending on the specific commodity (e.g., oil, gold, agricultural products). The total trading volume in commodities markets is in the trillions of dollars annually. Commodities are fundamental to the global economy, impacting industries, energy, food, and manufacturing.</p></li>
 <li><p>Cryptocurrency markets: These are digital financial marketplaces where cryptocurrencies, such as Bitcoin, Ethereum, and many others, are traded. Further assets on these markets are various financial products and services within the blockchain and decentralized finance (DeFi) spaces, such as tokenized assets, stablecoins, and financial services that operate without traditional intermediaries. The cryptocurrency market is relatively small compared to traditional financial markets, but it has experienced rapid growth since its inception. The total market capitalization of all cryptocurrencies has fluctuated significantly, reaching over $2 trillion during its peak periods. Despite its smaller size, the cryptocurrency market is notable for its volatility, innovation, and the wide interest it has garnered among investors and technologists.</p></li>
 </ul>
-<p>Capturing all asset classes and their foundations is beyond the scope of a single course. In this course, we mainly focus on the equity market. Besides, we include bonds and options as they represent traditional asset classes as well. Nevertheless, later in this course we aim to analyze mechanisms between different asset classes and include asset classes such as, e.g., FX or cryptocurrencies.</p>
+<p>Capturing all asset classes and their foundations is beyond the scope of a single course. In this course, we mainly focus on the equity market. Nevertheless, we aim to analyze mechanisms between different asset classes and include other asset classes such as, e.g., bonds or cryptocurrencies.</p>
 <section id="stocks">
 <h2>Stocks<a class="headerlink" href="#stocks" title="Link to this heading">#</a></h2>
 <p>Stocks (or Equities) represent ownership in a company. When you buy a stock, you become a shareholder, meaning you own a portion of the company. Shares refer to the individual units of ownership within a stock. A stock is the broad term, while shares denote specific units of it.</p>
@@ -477,7 +474,7 @@ R_t = \frac{S_t - S_{t-1}}{S_{t-1}} = \frac{S_t}{S_{t-1}} - 1
 <img alt="_images/de6a0886985cdf02854f712bcd110bd244288741d9bc0b12f594e457ca74d84e.png" src="_images/de6a0886985cdf02854f712bcd110bd244288741d9bc0b12f594e457ca74d84e.png" />
 </div>
 </div>
-<p>Since stock prices evolve continuously in financial markets, log-returns are often preferred. The log-return <span class="math notranslate nohighlight">\(Z_t\)</span> is defined as:</p>
+<p>Since stock prices evolve continuously in financial markets, log-returns are sometimes preferred. The log-return <span class="math notranslate nohighlight">\(Z_t\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
 \[
 Z_t = \ln \left( \frac{S_t}{S_{t-1}} \right) = \ln S_t - \ln S_{t-1}
@@ -485,7 +482,7 @@ Z_t = \ln \left( \frac{S_t}{S_{t-1}} \right) = \ln S_t - \ln S_{t-1}
 <p>For small price changes, discrete and log-returns are nearly identical. However, for large fluctuations, log-returns are smaller in magnitude due to the logarithmic transformation. The relationship between the two return measures is:</p>
 <div class="math notranslate nohighlight">
 \[
-S_t = \ln (1 + R_t), \quad R_t = e^{R_t} - 1
+S_t = \ln (1 + R_t), \quad R_t = e^{Z_t} - 1
 \]</div>
 <p>Log-returns have useful mathematical properties, particularly additivity over time, making them advantageous for certain financial models and statistical analyses. At an initial investment <span class="math notranslate nohighlight">\(N_0\)</span> at time <span class="math notranslate nohighlight">\(t=0\)</span>, the value in time can be determined by discrete or log-returns. For discrete returns, the value is given by the cumulative product:</p>
 <div class="math notranslate nohighlight">
@@ -507,12 +504,6 @@ V_t = N_0 e^{ \sum_{t' \leq t} Z_{t'}}
 <img alt="_images/5eeab69f0345db09fa39606e705bec09faf6d46bb719c7a8b0c3aa8ceebcb511.png" src="_images/5eeab69f0345db09fa39606e705bec09faf6d46bb719c7a8b0c3aa8ceebcb511.png" />
 </div>
 </div>
-<section id="mutual-funds">
-<h3>Mutual Funds<a class="headerlink" href="#mutual-funds" title="Link to this heading">#</a></h3>
-</section>
-<section id="exchange-traded-funds">
-<h3>Exchange Traded Funds<a class="headerlink" href="#exchange-traded-funds" title="Link to this heading">#</a></h3>
-</section>
 </section>
 <section id="bonds">
 <h2>Bonds<a class="headerlink" href="#bonds" title="Link to this heading">#</a></h2>
@@ -652,7 +643,7 @@ V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + y_t)^t} + \frac{N}{(1 + y_T)^T},
 <section id="term-structure">
 <h3>Term structure<a class="headerlink" href="#term-structure" title="Link to this heading">#</a></h3>
 <p>An important aspect when analyzing the bond market is the <em>term structure</em> which analyzes the impact of maturity on bond prices. Keeping other externalities constant, investors usually demand higher returns for bonds with longer maturity. The reason for this is that cash flows in the distant future are more uncertain which increases risk. If is important to note that only bonds with identical or at least very similar solvency can be compared with respect to maturity. For instance, bonds of companies with very little default risk. In the center of term structure analysis are <em>risk free</em> bonds, usually government bonds. They are called risk free, because except for a few exceptions, governments do not default, thus, the risk of not receiving cash flows when holding the bond until maturity is practically as good as zero. Furthermore, as we are going to learn in later chapters, according to modern portfolio theory, investors invest into a mix of risk free and risky assets. This makes the yields of risk free assets such as government bonds a very integral part of investing.</p>
-<p>In reality, the yield curve sometimes deviates from an upward sloping behavior, and is a valuable tool for financial data analysis. For instance, the figure below demonstrates three empirical shapes at different points in time. On March 5 in 2012, the yield curve exhibits a typical upward sloping behavior capturing investors demand for higher yields if cash flows are more distant (and thus more uncertain). However, at the other dates we observe a u-shaped and even a downwar sloping behavior as well.</p>
+<p>In reality, the yield curve sometimes deviates from an upward sloping behavior, and is a valuable tool for financial data analysis. For instance, the figure below demonstrates three empirical shapes at different points in time. On March 5 in 2012, the yield curve exhibits a typical upward sloping behavior capturing investors demand for higher yields if cash flows are more distant (and thus more uncertain). However, at the other dates we observe a u-shaped and even a downward sloping behavior as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">fred_api_key</span>
@@ -696,7 +687,7 @@ V_0 = \sum_{t = 1}^{T} \frac{C}{(1 + y_t)^t} + \frac{N}{(1 + y_T)^T},
 <li><p>Downward sloping: signal for recession</p></li>
 <li><p>Flat: economic uncertainty</p></li>
 </ul>
-<p>For instance an inverted (downward sloping) yield curve may imply investors’ expectation that yields are going to be lower in the future. This may be due to reduced base rates of central banks which are often used as a tool to stimulate the economy during harsh economic conditions. However, even though inverted yield curves have been observed before before major economic recession in the past decades, it is not certain that a recession must follow. For instance, if you take a look at the figure below, you can see that the yield curve has been inverted for a longer period from 2021-2023 as result for base rate increases by the Federal Reserve in the US to combat inflation. Until today no recession followed. Nevertheless tracking the yield curve by yield differences of short and long term bonds can help us to identify changes in market expectations of investors, e.g., expectations about future monetary policy, inflation or recession.</p>
+<p>For instance an inverted (downward sloping) yield curve may imply investors’ expectation that yields are going to be lower in the future. This may be due to reduced base rates of central banks which are often used as a tool to stimulate the economy during harsh economic conditions. However, even though inverted yield curves have been observed before before major economic recession in the past decades, it is not certain that a recession must follow. For instance, if you take a look at the figure below, you can see that the yield curve has been inverted for a longer period from 2021-2023 as result for base rate increases by the Federal Reserve in the US to combat inflation. No recession followed shortly after that time period. Nevertheless tracking the yield curve by yield differences of short and long term bonds can help us to identify changes in market expectations of investors, e.g., expectations about future monetary policy, inflation or recession.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yields_plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s2">&quot;3Month&quot;</span><span class="p">,</span> <span class="s2">&quot;2Year&quot;</span><span class="p">,</span> <span class="s2">&quot;10Year&quot;</span><span class="p">,</span> <span class="s2">&quot;30Year&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">1.25</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.80</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Market yields for U.S. treasury securities at different maturities&quot;</span><span class="p">,</span> <span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;Yield (%)&quot;</span><span class="p">)</span>
@@ -1034,6 +1025,12 @@ d_2 = d_1 - \sigma \sqrt{T}
 </div>
 </div>
 </section>
+<section id="funds">
+<h2>Funds<a class="headerlink" href="#funds" title="Link to this heading">#</a></h2>
+<p>Investing in exchange-traded funds (ETFs) and mutual funds offers individuals an accessible and diversified way to gain exposure to a wide range of financial assets. Both fund types pool money from multiple investors to purchase a portfolio of stocks, bonds, or other securities, allowing even small investors to benefit from diversification and professional management. These funds are available across various sectors, geographies, and asset classes, catering to different investment goals and risk appetites. Investors can choose between passive funds, which track specific indices, and actively managed funds, where fund managers make strategic decisions to outperform the market.</p>
+<p>Mutual funds are professionally managed investment vehicles that aggregate money from many investors to buy a broad selection of securities. They are typically bought and sold at the end of the trading day at the fund’s net asset value (NAV), which reflects the value of the underlying assets. Mutual funds often come with management fees and may include front-end or back-end sales charges, depending on the fund class. They are ideal for investors who prefer a hands-off approach and are willing to rely on the fund manager’s expertise to adjust the portfolio over time.</p>
+<p>Exchange-traded funds (ETFs), in contrast, trade on stock exchanges much like individual stocks, with prices fluctuating throughout the day based on supply and demand. Most ETFs aim to replicate the performance of a specific index, sector, or commodity, and they generally have lower expense ratios than mutual funds. Because of their trading flexibility, transparency, and typically lower fees, ETFs have become increasingly popular among both individual and institutional investors. They also offer unique features like intraday trading, the ability to use limit orders, and tax efficiency through in-kind redemptions.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1101,11 +1098,7 @@ d_2 = d_1 - \sigma \sqrt{T}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutual-funds">Mutual Funds</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-traded-funds">Exchange Traded Funds</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stocks">Stocks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonds">Bonds</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-coupon-bonds">Zero-coupon bonds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupon-bonds">Coupon bonds</a></li>
@@ -1114,6 +1107,7 @@ d_2 = d_1 - \sigma \sqrt{T}
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-options">Derivatives - Options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funds">Funds</a></li>
 </ul>
   </nav></div>
 
