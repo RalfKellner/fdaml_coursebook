@@ -1,0 +1,1460 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine Learning &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09_machine_learning';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Risk Management" href="08_risk_management.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/09_machine_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categories-of-machine-learning-and-their-use-in-finance">Categories of Machine Learning and Their Use in Finance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-concepts-of-supervised-learning">Core Concepts of Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-with-a-loss-function">Training with a Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-evaluation-on-unseen-data">Generalization and Evaluation on Unseen Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-model-flexibility">Overfitting and Model Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-and-model-tuning">Hyperparameters and Model Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-supervised-learning-tasks">Common Supervised Learning Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-class-classification">Multi-Class Classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-supervised-learning-algorithms">Examples of Supervised Learning Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-parametric-model">A Single Parametric Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-example">Regression Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-example">Classification Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-optimization-results">Interpretation of Optimization Results</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-vs-numerical-optimization">Analytical vs. Numerical Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gradient-descent">Introduction to Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-gradient-descent">Visualizing Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Regression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-model-from-one-parameter-to-d-features">Extending the Model: From One Parameter to <span class="math notranslate nohighlight">\(d\)</span> Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-multiple-features">Linear Regression (Multiple Features)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-multiple-features">Logistic Regression (Multiple Features)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-neural-networks-a-single-hidden-layer">Introducing Neural Networks: A Single Hidden Layer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-neuron">A Single Neuron</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-the-hidden-layer">Constructing the Hidden Layer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer-regression-or-classification">Output Layer: Regression or Classification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-model-evaluation">A Note on Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-clustering">Introduction to Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-clustering-algorithms">Key Characteristics of Clustering Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-and-similarity-in-clustering">Observations and Similarity in Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-as-feature-vectors">Observations as Feature Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-and-similarity-measures">Distance and Similarity Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-dissimilarity">Cosine Dissimilarity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-hierarchical-clustering-in-detail">Understanding Hierarchical Clustering in Detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-agglomerative-clustering">Step-by-Step: Agglomerative Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dendrogram-the-hierarchical-tree">Dendrogram: The Hierarchical Tree</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-hierarchical-clustering">Advantages of Hierarchical Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-clustering-results">Evaluating Clustering Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-evaluation">1. Internal Evaluation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#external-evaluation-when-ground-truth-is-available">2. External Evaluation (When Ground Truth Is Available)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning">
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h1>
+<p>Machine learning (ML) is a subset of artificial intelligence that focuses on algorithms and statistical models enabling systems to learn patterns from data and make predictions or decisions without being explicitly programmed for each specific task. At its core, ML automates the discovery of relationships within data, using methods ranging from linear models and decision trees to deep neural networks and ensemble techniques. In financial data analytics, this capability allows analysts and systems to go beyond traditional econometric models by uncovering non-linear patterns, complex interactions, and subtle anomalies across large and high-frequency datasets.</p>
+<p>The integration of machine learning into financial analytics is transforming how we forecast asset prices, manage risk, detect fraud, and construct portfolios. ML techniques are increasingly used for tasks such as algorithmic trading, credit scoring, sentiment analysis, and asset classification. Their strength lies in adapting to new data, learning from past market behavior, and improving predictive performance over time. This makes them highly valuable in dynamic environments like financial markets, where relationships between variables are often unstable and evolve rapidly.</p>
+<p>However, applying machine learning to financial data also comes with specific challenges. Financial time series are notoriously noisy, non-stationary, and often suffer from limited sample sizes relative to the number of features—a condition known as the “curse of dimensionality.” Moreover, models trained on past data risk overfitting and may fail to generalize to unseen market conditions. The interpretability of complex models also remains a concern, especially in regulated environments where transparency is critical. Addressing these challenges requires a careful balance between model complexity, regularization, domain knowledge, and robust validation procedures.</p>
+<section id="categories-of-machine-learning-and-their-use-in-finance">
+<h2>Categories of Machine Learning and Their Use in Finance<a class="headerlink" href="#categories-of-machine-learning-and-their-use-in-finance" title="Link to this heading">#</a></h2>
+<p>Machine learning methods can be broadly categorized into <strong>supervised</strong>, <strong>unsupervised</strong>, and <strong>reinforcement learning</strong>. Each serves a different purpose and is suited to specific types of problems in financial analytics.</p>
+<p><strong>Supervised learning</strong> involves training a model on labeled data, where the input features and corresponding outcomes (e.g., asset returns, credit defaults) are known. This is particularly common in tasks like stock return prediction, risk classification, and credit scoring. Techniques such as linear regression, support vector machines, random forests, and neural networks fall into this category. The goal is to learn a mapping from inputs to outputs that generalizes well to new, unseen data.</p>
+<p><strong>Unsupervised learning</strong>, on the other hand, deals with unlabeled data. It seeks to discover the underlying structure or patterns in the data, such as clusters or principal components. In finance, unsupervised learning is often used for tasks like anomaly detection (e.g., identifying irregular transactions) and portfolio diversification through factor analysis or clustering of assets.</p>
+<p><strong>Reinforcement learning</strong> is less commonly used but has a large potential for tasks which demand repeated decision making over time, e.g., asset allocation during varying economic conditions. Here, an agent learns to make decisions by interacting with an environment and receiving feedback in the form of rewards or penalties. Over time, the agent improves its strategy to maximize cumulative reward, which can correspond to profit or risk-adjusted return.</p>
+<p>In this chapter, we present a rather general introduction on principles of supervised and unsupervised learning.</p>
+</section>
+<section id="core-concepts-of-supervised-learning">
+<h2>Core Concepts of Supervised Learning<a class="headerlink" href="#core-concepts-of-supervised-learning" title="Link to this heading">#</a></h2>
+<p>Supervised learning revolves around learning a function that maps input features to output labels using a dataset of labeled examples. Many supervised learning algorithms—whether linear models, decision trees, or neural networks—share common foundational concepts. These can be described in a general framework that highlights the structure, training, evaluation, and potential pitfalls of these models.</p>
+<section id="parametric-models">
+<h3>Parametric Models<a class="headerlink" href="#parametric-models" title="Link to this heading">#</a></h3>
+<p>Most supervised learning methods assume a <strong>parametric form</strong> for the underlying relationship between inputs and outputs. Formally, we assume there exists a function <span class="math notranslate nohighlight">\(f(\mathbf{x}; \boldsymbol{\theta})\)</span> that maps input features <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^d\)</span> to an output <span class="math notranslate nohighlight">\(\hat{y} \in \mathbb{R}\)</span> (for regression) or a class probability (for classification), where <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> denotes the parameters of the model.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>In linear regression, <span class="math notranslate nohighlight">\(f(\mathbf{x}; \boldsymbol{\theta}) = \mathbf{x}^\top \boldsymbol{\theta}\)</span>.</p></li>
+<li><p>In neural networks, <span class="math notranslate nohighlight">\(f(\mathbf{x}; \boldsymbol{\theta})\)</span> is a composition of linear and nonlinear transformations defined by network layers.</p></li>
+</ul>
+</section>
+<section id="training-with-a-loss-function">
+<h3>Training with a Loss Function<a class="headerlink" href="#training-with-a-loss-function" title="Link to this heading">#</a></h3>
+<p>The parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> are <strong>calibrated</strong> or estimated by minimizing a <strong>loss function</strong> that quantifies the error between the model’s predictions and the true labels in the training data. For a dataset <span class="math notranslate nohighlight">\(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^n\)</span>, the empirical risk (average loss) is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n \ell(f(\mathbf{x}_i; \boldsymbol{\theta}), y_i)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ell(\cdot, \cdot)\)</span> is the loss function, such as mean squared error (MSE) for regression or cross-entropy for classification.</p>
+</section>
+<section id="generalization-and-evaluation-on-unseen-data">
+<h3>Generalization and Evaluation on Unseen Data<a class="headerlink" href="#generalization-and-evaluation-on-unseen-data" title="Link to this heading">#</a></h3>
+<p>A well-trained model should <strong>generalize</strong> to new, unseen data—not just perform well on the training set. Generalization is typically evaluated using a <strong>test set</strong> or through <strong>cross-validation</strong>, where the model is assessed on samples not used during training. A key measure here is the <strong>generalization error</strong>, which estimates how the model will perform on truly out-of-sample data:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_{(\mathbf{x}, y) \sim \mathcal{P}}[\ell(f(\mathbf{x}; \boldsymbol{\theta}), y)]
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is the true data-generating distribution, which is typically unknown.</p>
+</section>
+<section id="overfitting-and-model-flexibility">
+<h3>Overfitting and Model Flexibility<a class="headerlink" href="#overfitting-and-model-flexibility" title="Link to this heading">#</a></h3>
+<p>As models become more flexible or <strong>complex</strong>, they can fit the training data too closely—capturing not only the signal but also the noise. This phenomenon is known as <strong>overfitting</strong>. It manifests as low training error but high error on the test set. Flexible models (e.g., high-degree polynomials, deep neural networks) are particularly susceptible to this issue.</p>
+</section>
+<section id="regularization">
+<h3>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h3>
+<p>To combat overfitting, models can be <strong>regularized</strong> by adding a penalty term to the loss function that discourages overly complex solutions. A general form of regularized risk is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{\text{reg}}(\boldsymbol{\theta}) = \mathcal{L}(\boldsymbol{\theta}) + \lambda \cdot \Omega(\boldsymbol{\theta})
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega(\boldsymbol{\theta})\)</span> is a regularization term (e.g., <span class="math notranslate nohighlight">\(\|\boldsymbol{\theta}\|_2^2\)</span> for ridge regression, <span class="math notranslate nohighlight">\(\|\boldsymbol{\theta}\|_1\)</span> for lasso) and <span class="math notranslate nohighlight">\(\lambda \geq 0\)</span> controls the strength of regularization. Other ways for regularization exist as well, however, the idea is to “manipulate” the training process in order to avoid the model from adapting its predictions to specifically to the training data.</p>
+</section>
+<section id="hyperparameters-and-model-tuning">
+<h3>Hyperparameters and Model Tuning<a class="headerlink" href="#hyperparameters-and-model-tuning" title="Link to this heading">#</a></h3>
+<p>Supervised learning models often include <strong>hyperparameters</strong>—settings that are not learned from the data directly but significantly influence model performance. Examples include:</p>
+<ul class="simple">
+<li><p>The regularization strength <span class="math notranslate nohighlight">\(\lambda\)</span></p></li>
+<li><p>The learning rate in gradient-based optimization</p></li>
+<li><p>The number of layers in a neural network</p></li>
+<li><p>The depth of a decision tree</p></li>
+</ul>
+<p>These hyperparameters are typically selected through <strong>cross-validation</strong> or <strong>grid/random search</strong>, balancing the trade-off between underfitting and overfitting.</p>
+<p>This conceptual framework provides a unifying lens to understand and compare different supervised learning methods. Despite their diversity, many share this structure of parametric modeling, loss-based training, evaluation on unseen data, and strategies to ensure good generalization.</p>
+</section>
+</section>
+<section id="common-supervised-learning-tasks">
+<h2>Common Supervised Learning Tasks<a class="headerlink" href="#common-supervised-learning-tasks" title="Link to this heading">#</a></h2>
+<p>Supervised learning typically deals with two main types of prediction problems: <strong>regression</strong> and <strong>classification</strong>. While both involve learning a function from inputs to outputs based on labeled data, the nature of the output variable determines the choice of task, model, and evaluation metric.</p>
+<section id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h3>
+<p>In a <strong>regression</strong> task, the goal is to predict a continuous target variable <span class="math notranslate nohighlight">\(y \in \mathbb{R}\)</span> given input features <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^d\)</span>. The model learns a function <span class="math notranslate nohighlight">\(f(\mathbf{x}; \boldsymbol{\theta})\)</span> that estimates the expected value of the target:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = f(\mathbf{x}; \boldsymbol{\theta}) \approx \mathbb{E}[y \mid \mathbf{x}]
+\]</div>
+<p>Common applications of regression in finance include predicting stock returns, yield spreads, or volatility. The most frequently used loss function is the <strong>mean squared error (MSE)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(f(\mathbf{x}), y) = (f(\mathbf{x}) - y)^2
+\]</div>
+<p>Other loss functions include the <strong>mean absolute error (MAE)</strong> or the <strong>Huber loss</strong>, which is more robust to outliers.</p>
+</section>
+<section id="binary-classification">
+<h3>Binary Classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h3>
+<p>In <strong>binary classification</strong>, the target variable takes one of two possible labels, commonly represented as <span class="math notranslate nohighlight">\(y \in \{0, 1\}\)</span>. The model predicts a score <span class="math notranslate nohighlight">\(\hat{p} = f(\mathbf{x}; \boldsymbol{\theta}) \in [0, 1]\)</span> that represents the estimated probability of class 1. The prediction can be thresholded at 0.5 (or another value) to make a hard classification:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{y} =
+\begin{cases}
+1 &amp; \text{if } f(\mathbf{x}; \boldsymbol{\theta}) \geq 0.5 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>A common loss function is the <strong>binary cross-entropy (log loss)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(f(\mathbf{x}), y) = -\left[ y \log f(\mathbf{x}) + (1 - y) \log(1 - f(\mathbf{x})) \right]
+\]</div>
+<p>Binary classification is widely used in finance for tasks like credit default prediction, fraud detection, and up/down movement forecasting.</p>
+</section>
+<section id="multi-class-classification">
+<h3>Multi-Class Classification<a class="headerlink" href="#multi-class-classification" title="Link to this heading">#</a></h3>
+<p>In <strong>multi-class classification</strong>, the target variable <span class="math notranslate nohighlight">\(y\)</span> can take on one of <span class="math notranslate nohighlight">\(K &gt; 2\)</span> discrete values: <span class="math notranslate nohighlight">\(y \in \{1, 2, \dots, K\}\)</span>. The model outputs a probability distribution over the <span class="math notranslate nohighlight">\(K\)</span> classes:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mathbf{p}} = f(\mathbf{x}; \boldsymbol{\theta}) \in \mathbb{R}^K, \quad \sum_{k=1}^K \hat{p}_k = 1
+\]</div>
+<p>The prediction is usually made by taking the class with the highest probability:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \arg \max_k \hat{p}_k
+\]</div>
+<p>The standard loss function is the <strong>categorical cross-entropy</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(f(\mathbf{x}), y) = - \log \hat{p}_y
+\]</div>
+<p>Multi-class classification appears in problems such as assigning financial documents to categories (e.g., ESG, earnings, macro), classifying market regimes, or tagging sentiment levels in financial news.</p>
+<p>These three types of tasks—regression, binary classification, and multi-class classification—form the foundation of supervised learning applications in financial data analytics. Each task guides the choice of model architecture, loss function, evaluation metric, and interpretation of results.</p>
+</section>
+</section>
+<section id="examples-of-supervised-learning-algorithms">
+<h2>Examples of Supervised Learning Algorithms<a class="headerlink" href="#examples-of-supervised-learning-algorithms" title="Link to this heading">#</a></h2>
+<p>Let us take a look at rather simple examples to develop a deeper understanding of the concepts discussed so far.</p>
+<section id="a-single-parametric-model">
+<h3>A Single Parametric Model<a class="headerlink" href="#a-single-parametric-model" title="Link to this heading">#</a></h3>
+<p>To illustrate how supervised learning works in practice, we consider a very simple model: a <strong>single-parameter linear function</strong> of the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(x; \theta) = \theta x
+\]</div>
+<p>This model maps a scalar input <span class="math notranslate nohighlight">\(x\)</span> to an output using the parameter <span class="math notranslate nohighlight">\(\theta\)</span>, which we aim to learn from data. Despite its simplicity, this setup captures the essence of supervised learning: defining a model, choosing a loss function, optimizing parameters, and evaluating performance.</p>
+<p>We will consider both <strong>regression</strong> and <strong>binary classification</strong> tasks using only two or three data points. This helps highlight how the loss function and the learning objective differ between tasks—even with the same model structure.</p>
+<section id="regression-example">
+<h4>Regression Example<a class="headerlink" href="#regression-example" title="Link to this heading">#</a></h4>
+<p>We are given input-output pairs <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and want to minimize the <strong>mean squared error</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{\text{reg}}(\theta) = \frac{1}{n} \sum_{i=1}^n (\theta x_i - y_i)^2
+\]</div>
+</section>
+<section id="classification-example">
+<h4>Classification Example<a class="headerlink" href="#classification-example" title="Link to this heading">#</a></h4>
+<p>For binary classification, the labels <span class="math notranslate nohighlight">\(y_i \in \{0, 1\}\)</span> and we apply a sigmoid to map the output to a probability:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x; \theta) = \sigma(\theta x), \quad \text{where } \sigma(z) = \frac{1}{1 + e^{-z}}
+\]</div>
+<p>We minimize the <strong>binary cross-entropy</strong> loss:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{\text{cls}}(\theta) = -\frac{1}{n} \sum_{i=1}^n \left[y_i \log(\sigma(\theta x_i)) + (1 - y_i) \log(1 - \sigma(\theta x_i))\right]
+\]</div>
+<p>Below is a simple example for both tasks with three data points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">expit</span> <span class="k">as</span> <span class="n">sigmoid</span>  <span class="c1"># sigmoid function</span>
+
+<span class="c1"># Sample data for regression and classification</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">y_reg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">6.1</span><span class="p">])</span>          <span class="c1"># regression targets</span>
+<span class="n">y_cls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>                <span class="c1"># binary classification targets</span>
+
+<span class="c1"># Regression loss function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">regression_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">preds</span> <span class="o">-</span> <span class="n">y_reg</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Classification loss function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classification_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-8</span>  <span class="c1"># for numerical stability</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_cls</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">preds</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_cls</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">preds</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span>
+
+<span class="c1"># Optimize regression</span>
+<span class="n">res_reg</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">regression_loss</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">theta_reg</span> <span class="o">=</span> <span class="n">res_reg</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Optimize classification</span>
+<span class="n">res_cls</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">classification_loss</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">theta_cls</span> <span class="o">=</span> <span class="n">res_cls</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal theta (regression): </span><span class="si">{</span><span class="n">theta_reg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal theta (classification): </span><span class="si">{</span><span class="n">theta_cls</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_plot_reg</span> <span class="o">=</span> <span class="n">theta_reg</span> <span class="o">*</span> <span class="n">x_plot</span>
+<span class="n">y_plot_cls</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">theta_cls</span> <span class="o">*</span> <span class="n">x_plot</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Regression plot</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_reg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot_reg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Regression: $f(x; </span><span class="se">\\</span><span class="s2">theta) = </span><span class="se">\\</span><span class="s2">theta x$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Classification plot</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_cls</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot_cls</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sigmoid(θx)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Classification: $f(x; </span><span class="se">\\</span><span class="s2">theta) = </span><span class="se">\\</span><span class="s2">sigma(</span><span class="se">\\</span><span class="s2">theta x)$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal theta (regression): 2.0500
+Optimal theta (classification): 0.7325
+</pre></div>
+</div>
+<img alt="_images/4a6e6fa4d39f2b0f14eaa6d22c7e9a5db9324194eee212b143cba08ac8d09092.png" src="_images/4a6e6fa4d39f2b0f14eaa6d22c7e9a5db9324194eee212b143cba08ac8d09092.png" />
+</div>
+</div>
+</section>
+<section id="interpretation-of-optimization-results">
+<h4>Interpretation of Optimization Results<a class="headerlink" href="#interpretation-of-optimization-results" title="Link to this heading">#</a></h4>
+<p>The optimization of the regression model using the loss function for mean squared error yields a value of <span class="math notranslate nohighlight">\(\theta\)</span> that closely aligns with the observed data. Since the model is linear and the data approximately follow a linear relationship, the fit is nearly perfect. This demonstrates how a simple parametric model can effectively capture linear patterns when the underlying data are well-aligned with the model assumptions.</p>
+<p>In contrast, the classification model—despite also being optimized using gradient-based methods—does not achieve perfect classification. Specifically, the first data point with label 0 is not confidently predicted as such. This is due to the use of a single parameter <span class="math notranslate nohighlight">\(\theta\)</span> in combination with the sigmoid activation function, which maps inputs to probabilities. The model learns a global decision boundary that cannot perfectly separate all data points with such limited flexibility. This highlights a key limitation: even with an optimal loss, the model’s <strong>capacity</strong> may be insufficient to capture all patterns in the data—particularly when using simple, low-parameter models.</p>
+</section>
+</section>
+<section id="analytical-vs-numerical-optimization">
+<h3>Analytical vs. Numerical Optimization<a class="headerlink" href="#analytical-vs-numerical-optimization" title="Link to this heading">#</a></h3>
+<p>In supervised learning, training a model involves finding the parameters that minimize a loss function. For <strong>simple models</strong> with a small number of parameters and well-behaved (usually convex) loss functions, it is sometimes possible to derive a <strong>closed-form solution</strong>—also called an <strong>analytical solution</strong>. A classic example is <strong>ordinary least squares (OLS)</strong> in linear regression, where the optimal parameters can be computed directly using matrix algebra:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+\]</div>
+<p>This formula minimizes the mean squared error loss for a linear model and provides an exact solution without the need for iterative procedures.</p>
+<p>However, as models become more <strong>complex</strong>—such as when they involve nonlinear functions (e.g., neural networks, decision trees) or non-convex loss landscapes—closed-form solutions no longer exist or are impractical to derive. In such cases, we rely on <strong>numerical optimization methods</strong>, the most common of which is <strong>gradient descent</strong> and its variants (e.g., stochastic gradient descent, Adam, RMSProp).</p>
+<p>Gradient descent works by iteratively adjusting model parameters in the direction that reduces the loss, based on the <strong>gradient</strong> (or derivative) of the loss function with respect to the parameters. These methods are broadly applicable and form the backbone of modern machine learning, particularly in large-scale and deep learning applications.</p>
+<p>In the examples above, we used numerical optimization to find the optimal value of a single parameter <span class="math notranslate nohighlight">\(\theta\)</span>. This approach is general and can be applied even when the loss function is not analytically tractable.</p>
+</section>
+<section id="introduction-to-gradient-descent">
+<h3>Introduction to Gradient Descent<a class="headerlink" href="#introduction-to-gradient-descent" title="Link to this heading">#</a></h3>
+<p>When analytical solutions are not available or feasible, we turn to <strong>iterative optimization algorithms</strong>—the most fundamental of which is <strong>gradient descent</strong>. Gradient descent is a first-order optimization algorithm that minimizes a loss function by iteratively moving in the direction of steepest descent, defined by the <strong>negative gradient</strong> of the loss function with respect to the model parameters.</p>
+<p>The basic idea is simple: we start with an initial guess for the parameters, then repeatedly update them using the rule:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}^{(t+1)} = \boldsymbol{\theta}^{(t)} - \eta \nabla_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta}^{(t)})
+\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(t)}\)</span> is the parameter value at iteration <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> is the <strong>learning rate</strong>, which controls the step size</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta})\)</span> is the gradient of the loss function</p></li>
+</ul>
+<p>The gradient points in the direction of <strong>increasing</strong> loss, so subtracting it leads us downhill on the loss surface, toward a minimum. By repeating this update, we can converge to an optimal or near-optimal solution—even when the loss function is complex and nonlinear.</p>
+<p>Gradient descent is widely used because it is:</p>
+<ul class="simple">
+<li><p><strong>Generic</strong>: it works with nearly any differentiable loss function</p></li>
+<li><p><strong>Scalable</strong>: it extends to high-dimensional parameter spaces</p></li>
+<li><p><strong>Customizable</strong>: many variants exist (e.g., stochastic, mini-batch, momentum, Adam) for different use cases</p></li>
+</ul>
+<p>This method is especially important in machine learning because many models, such as neural networks, are too complex for analytical solutions. In the next section, we’ll visualize how gradient descent works in our simple one-parameter model and build intuition for how it behaves during training.</p>
+</section>
+<section id="visualizing-gradient-descent">
+<h3>Visualizing Gradient Descent<a class="headerlink" href="#visualizing-gradient-descent" title="Link to this heading">#</a></h3>
+<p>To build intuition about how gradient descent works in practice, let us revisit our earlier example with the single-parameter model <span class="math notranslate nohighlight">\(f(x; \theta) = \theta x\)</span> applied to both regression and classification tasks. Below, we plot the loss as a function of <span class="math notranslate nohighlight">\(\theta\)</span> and overlay the <strong>gradient descent steps</strong> taken during optimization.</p>
+<p>These visualizations illustrate the core behavior of gradient descent:</p>
+<ul class="simple">
+<li><p>The <strong>x-axis</strong> represents different values of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p>The <strong>y-axis</strong> shows the corresponding loss for each value</p></li>
+<li><p>The <strong>blue/green curve</strong> shows the entire loss landscape</p></li>
+<li><p>The <strong>red dots</strong> trace the path of gradient descent, starting from an initial guess and moving toward the minimum</p></li>
+</ul>
+<section id="id1">
+<h4>Regression<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>In the regression example, the loss function is convex and smooth—typical for mean squared error with a linear model. Gradient descent moves smoothly and efficiently toward the minimum. Each step reduces the loss, and the size of each step shrinks naturally as the algorithm approaches the minimum.</p>
+<p>This behavior highlights why convex problems are well-suited for gradient descent: the algorithm is guaranteed to find the global minimum (under appropriate conditions on the learning rate).</p>
+</section>
+<section id="classification">
+<h4>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h4>
+<p>In the classification case, the loss landscape (binary cross-entropy combined with a sigmoid activation) is still smooth but no longer symmetric or perfectly convex. Gradient descent still makes consistent progress toward a minimum, but the steps vary more in size and the surface is slightly more curved. This reflects the <strong>nonlinear transformation</strong> introduced by the sigmoid function, which squashes inputs into probabilities between 0 and 1.</p>
+<p>Despite the more complex surface, gradient descent still converges efficiently, demonstrating its robustness even in slightly nonlinear scenarios.</p>
+<p>These plots provide a helpful mental image of what is happening “under the hood” when training machine learning models. In practice, these visual insights generalize to high-dimensional spaces, where gradient descent operates on parameter vectors rather than scalars—but the core principle remains the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Learning rate and initial guess</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">theta_init</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Store steps</span>
+<span class="n">theta_steps_reg</span> <span class="o">=</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">]</span>
+<span class="n">theta_steps_cls</span> <span class="o">=</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">]</span>
+
+<span class="c1"># Gradient of regression loss</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">grad_regression_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">preds</span> <span class="o">-</span> <span class="n">y_reg</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grad</span>
+
+<span class="c1"># Gradient of classification loss</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">grad_classification_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">preds</span> <span class="o">-</span> <span class="n">y_cls</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grad</span>
+
+<span class="c1"># Simulate gradient descent</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">theta_init</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_regression_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">theta_steps_reg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="n">theta</span> <span class="o">=</span> <span class="n">theta_init</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_classification_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">theta_steps_cls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+
+<span class="c1"># Calculate loss values at each step</span>
+<span class="n">loss_steps_reg</span> <span class="o">=</span> <span class="p">[</span><span class="n">regression_loss</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">theta_steps_reg</span><span class="p">]</span>
+<span class="n">loss_steps_cls</span> <span class="o">=</span> <span class="p">[</span><span class="n">classification_loss</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">theta_steps_cls</span><span class="p">]</span>
+
+<span class="c1"># Plotting the gradient descent steps</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Define range of theta values for plotting the loss curves</span>
+<span class="n">theta_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Compute loss values for plotting the curves</span>
+<span class="n">loss_vals_reg</span> <span class="o">=</span> <span class="p">[</span><span class="n">regression_loss</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">theta_vals</span><span class="p">]</span>
+<span class="n">loss_vals_cls</span> <span class="o">=</span> <span class="p">[</span><span class="n">classification_loss</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">theta_vals</span><span class="p">]</span>
+
+<span class="c1"># Regression gradient descent</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta_vals</span><span class="p">,</span> <span class="n">loss_vals_reg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Loss curve&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">theta_steps_reg</span><span class="p">,</span> <span class="n">loss_steps_reg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gradient steps&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gradient Descent on Regression Loss&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">theta$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MSE Loss&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Classification gradient descent</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta_vals</span><span class="p">,</span> <span class="n">loss_vals_cls</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Loss curve&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">theta_steps_cls</span><span class="p">,</span> <span class="n">loss_steps_cls</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gradient steps&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gradient Descent on Classification Loss&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">theta$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Binary Cross-Entropy Loss&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d9b3642b882043ad0a2e3b3f64e053067ef51a89ec1fb9eb3ae131b3f2c5b973.png" src="_images/d9b3642b882043ad0a2e3b3f64e053067ef51a89ec1fb9eb3ae131b3f2c5b973.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="extending-the-model-from-one-parameter-to-d-features">
+<h3>Extending the Model: From One Parameter to <span class="math notranslate nohighlight">\(d\)</span> Features<a class="headerlink" href="#extending-the-model-from-one-parameter-to-d-features" title="Link to this heading">#</a></h3>
+<p>So far, we have examined a simple parametric model with just a single parameter: <span class="math notranslate nohighlight">\(f(x; \theta) = \theta x\)</span>. While this serves well for illustration, most real-world applications require handling <strong>multiple input features</strong>. To increase the model’s flexibility, we generalize this to a <strong>linear model</strong> that can handle input vectors.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^d\)</span> be a <span class="math notranslate nohighlight">\(d\)</span>-dimensional feature vector and <span class="math notranslate nohighlight">\(\boldsymbol{\theta} \in \mathbb{R}^d\)</span> be the corresponding parameter vector. The generalized linear model is:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\mathbf{x}; \boldsymbol{\theta}) = \boldsymbol{\theta}^\top \mathbf{x} = \sum_{j=1}^d \theta_j x_j
+\]</div>
+<p>This model is <strong>linear in the parameters</strong>, but can capture much more complex relationships between features and outputs compared to the one-dimensional case.</p>
+<section id="linear-regression-multiple-features">
+<h4>Linear Regression (Multiple Features)<a class="headerlink" href="#linear-regression-multiple-features" title="Link to this heading">#</a></h4>
+<p>In the regression case, the model still tries to predict a continuous outcome <span class="math notranslate nohighlight">\(y \in \mathbb{R}\)</span>, and we minimize the <strong>mean squared error</strong> over all data points:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n \left( \boldsymbol{\theta}^\top \mathbf{x}_i - y_i \right)^2
+\]</div>
+<p>This model forms the foundation of <strong>multiple linear regression</strong>, and it can still be solved analytically:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the matrix of stacked input vectors and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is the vector of targets.</p>
+</section>
+<section id="logistic-regression-multiple-features">
+<h4>Logistic Regression (Multiple Features)<a class="headerlink" href="#logistic-regression-multiple-features" title="Link to this heading">#</a></h4>
+<p>For binary classification, we combine the linear model with the <strong>sigmoid function</strong> to map the output to a probability:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\mathbf{x}; \boldsymbol{\theta}) = \sigma(\boldsymbol{\theta}^\top \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\theta}^\top \mathbf{x}}}
+\]</div>
+<p>The corresponding loss function is the <strong>binary cross-entropy</strong> over all samples:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{\text{cls}}(\boldsymbol{\theta}) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log(\sigma(\boldsymbol{\theta}^\top \mathbf{x}_i)) + (1 - y_i) \log(1 - \sigma(\boldsymbol{\theta}^\top \mathbf{x}_i)) \right]
+\]</div>
+<p>Unlike linear regression, logistic regression <strong>does not have a closed-form solution</strong> for <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and must be optimized using <strong>numerical methods</strong>, such as gradient descent.</p>
+<p>This transition from a scalar input to a vector of features is a fundamental step toward building powerful machine learning models. It enables the model to capture richer patterns in the data and makes it suitable for real-world financial applications, where datasets often contain dozens or hundreds of relevant variables.</p>
+</section>
+</section>
+<section id="introducing-neural-networks-a-single-hidden-layer">
+<h3>Introducing Neural Networks: A Single Hidden Layer<a class="headerlink" href="#introducing-neural-networks-a-single-hidden-layer" title="Link to this heading">#</a></h3>
+<p>To capture more complex patterns in data, it is often necessary to move beyond purely linear models. A <strong>neural network</strong> provides a structured framework for doing so by composing <strong>non-linear transformations</strong> of the input features. This section introduces the architecture and computation of a basic neural network with <strong>a single hidden layer</strong>.</p>
+<section id="a-single-neuron">
+<h4>A Single Neuron<a class="headerlink" href="#a-single-neuron" title="Link to this heading">#</a></h4>
+<p>A <strong>neuron</strong> in a neural network performs two operations:</p>
+<ol class="arabic simple">
+<li><p><strong>Affine Transformation</strong>:
+$<span class="math notranslate nohighlight">\(
+z = \boldsymbol{w}^\top \mathbf{x} + b
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\mathbf{x} \in \mathbb{R}^d<span class="math notranslate nohighlight">\( is the input vector, \)</span>\boldsymbol{w} \in \mathbb{R}^d<span class="math notranslate nohighlight">\( is the weight vector, and \)</span>b \in \mathbb{R}$ is a bias term.</p></li>
+<li><p><strong>Activation Function</strong>:
+$<span class="math notranslate nohighlight">\(
+h = \phi(z)
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\phi(\cdot)<span class="math notranslate nohighlight">\( is a non-linear activation function such as the ReLU (\)</span>\max(0, z)$), sigmoid, or hyperbolic tangent function. This non-linearity enables the model to approximate complex functions beyond linear decision boundaries.</p></li>
+</ol>
+<p>See the figure below for a few common examples of activation function. It is up to the network architect to select an activation function. As you can see, they all share the charcteristic of non-linearity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define activation functions</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">relu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">sigmoid</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="n">tanh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">leaky_relu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">relu</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ReLU&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sigmoid&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tanh&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">leaky_relu</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Leaky ReLU&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Common Activation Functions&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Activation&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/db1bcc294fa30e1242108b160e4d43655c0fa7a31583286f492af9971cc59829.png" src="_images/db1bcc294fa30e1242108b160e4d43655c0fa7a31583286f492af9971cc59829.png" />
+</div>
+</div>
+</section>
+<section id="constructing-the-hidden-layer">
+<h4>Constructing the Hidden Layer<a class="headerlink" href="#constructing-the-hidden-layer" title="Link to this heading">#</a></h4>
+<p>A <strong>hidden layer</strong> consists of multiple such neurons, each with its own weight vector and bias. Let <span class="math notranslate nohighlight">\(m\)</span> denote the number of neurons in the hidden layer. The transformation from input to hidden layer is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{h} = \phi(\mathbf{W}^\top \mathbf{x} + \mathbf{b})
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W} \in \mathbb{R}^{d \times m}\)</span> is the weight matrix for the hidden layer,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{b} \in \mathbb{R}^m\)</span> is the vector of bias terms,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> is applied element-wise.</p></li>
+</ul>
+<p>The output <span class="math notranslate nohighlight">\(\mathbf{h} \in \mathbb{R}^m\)</span> is the <strong>non-linear transformation</strong> of the original input vector. These hidden features serve as an intermediate representation that can model interactions and non-linear patterns among the original features.</p>
+</section>
+<section id="output-layer-regression-or-classification">
+<h4>Output Layer: Regression or Classification<a class="headerlink" href="#output-layer-regression-or-classification" title="Link to this heading">#</a></h4>
+<p>The output of the hidden layer is then passed to a final layer that performs either regression or classification. This layer is structured identically to the linear or logistic regression models, but instead of using the original input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, it uses the hidden representation <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>:</p>
+<ul class="simple">
+<li><p>For regression:
+$<span class="math notranslate nohighlight">\(
+\hat{y} = \boldsymbol{\theta}^\top \mathbf{h}
+\)</span>$</p></li>
+<li><p>For binary classification:
+$<span class="math notranslate nohighlight">\(
+\hat{y} = \sigma(\boldsymbol{\theta}^\top \mathbf{h})
+\)</span>$</p></li>
+</ul>
+<p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{\theta} \in \mathbb{R}^m\)</span> is the output layer’s weight vector, and <span class="math notranslate nohighlight">\(\sigma(\cdot)\)</span> denotes the sigmoid function.</p>
+<p>This architecture—an input layer, one hidden layer with non-linear activation, and an output layer—constitutes the simplest form of a <strong>feedforward neural network</strong>, also called a <strong>single-layer perceptron</strong>. It provides a foundation for more advanced architectures by enabling the model to learn <strong>non-linear decision boundaries</strong> and <strong>interactions between features</strong>, capabilities which are not available in standard linear models.</p>
+</section>
+</section>
+<section id="a-note-on-model-evaluation">
+<h3>A Note on Model Evaluation<a class="headerlink" href="#a-note-on-model-evaluation" title="Link to this heading">#</a></h3>
+<p>Supervised learning models can be evaluated using a wide variety of <strong>performance metrics</strong>, and the choice of metric often depends on the <strong>type of task</strong> (regression vs. classification) and the <strong>domain-specific goals</strong>. For example, a model used in financial forecasting may prioritize error magnitudes, while a fraud detection model may focus on sensitivity or precision.</p>
+<p>Although we won’t explore these metrics in detail here, it is important to recognize that <strong>evaluation is a critical step</strong> in understanding a model’s effectiveness. The next chapter will introduce and illustrate a selection of commonly used metrics, providing examples for both regression and classification tasks.</p>
+</section>
+</section>
+<section id="introduction-to-clustering">
+<h2>Introduction to Clustering<a class="headerlink" href="#introduction-to-clustering" title="Link to this heading">#</a></h2>
+<p>While supervised learning relies on labeled data to train models, <strong>clustering</strong> is a type of <strong>unsupervised learning</strong> that aims to discover <strong>structure</strong> within a dataset. The primary goal of clustering is to group data points into clusters such that points within the same cluster are more similar to each other than to those in other clusters. Clustering is widely used for exploratory data analysis, anomaly detection, segmentation, and preprocessing for other machine learning tasks.</p>
+<section id="key-characteristics-of-clustering-algorithms">
+<h3>Key Characteristics of Clustering Algorithms<a class="headerlink" href="#key-characteristics-of-clustering-algorithms" title="Link to this heading">#</a></h3>
+<p>Despite their differences, most clustering algorithms share a few core characteristics:</p>
+<ul class="simple">
+<li><p><strong>Unlabeled Data</strong>: Clustering works without any predefined labels. The algorithm must infer the grouping based solely on the input features.</p></li>
+<li><p><strong>Similarity-Based Grouping</strong>: Clusters are formed by measuring similarity or distance between data points. Common distance measures include <strong>Euclidean distance</strong>, <strong>Manhattan distance</strong>, or <strong>cosine similarity</strong>, depending on the nature of the data.</p></li>
+<li><p><strong>Cluster Structure</strong>: Clustering algorithms differ in the types of cluster shapes they can detect:</p>
+<ul>
+<li><p><strong>Centroid-based methods</strong> (e.g., k-means) assume spherical clusters centered around centroids.</p></li>
+<li><p><strong>Density-based methods</strong> (e.g., DBSCAN) detect arbitrary-shaped clusters based on point density.</p></li>
+<li><p><strong>Hierarchical methods</strong> (e.g., agglomerative clustering) build nested clusters by successively merging or splitting groups of points.</p></li>
+</ul>
+</li>
+<li><p><strong>No Ground Truth</strong>: Since clustering is unsupervised, there’s often <strong>no single correct answer</strong>. Instead, the quality of a clustering result depends on the context, the data, and the choice of algorithm and parameters.</p></li>
+<li><p><strong>Scalability and Interpretability</strong>: Some clustering methods (like k-means) are computationally efficient and easy to interpret, while others (like spectral clustering or Gaussian mixture models) offer more flexibility at the cost of increased complexity.</p></li>
+</ul>
+<p>Clustering serves as a valuable first step in many data science workflows, especially when trying to understand the underlying structure of complex financial, behavioral, or high-dimensional data.</p>
+</section>
+<section id="observations-and-similarity-in-clustering">
+<h3>Observations and Similarity in Clustering<a class="headerlink" href="#observations-and-similarity-in-clustering" title="Link to this heading">#</a></h3>
+<p>At the heart of clustering lies the concept of <strong>similarity</strong> (or its inverse, <strong>dissimilarity</strong>) between observations. In order to group similar items together, we must first define a way to <strong>quantify</strong> how alike or different two observations are.</p>
+<section id="observations-as-feature-vectors">
+<h4>Observations as Feature Vectors<a class="headerlink" href="#observations-as-feature-vectors" title="Link to this heading">#</a></h4>
+<p>In clustering, each data point (or observation) is typically represented as a <strong>feature vector</strong> in a <span class="math notranslate nohighlight">\(d\)</span>-dimensional space:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_i = [x_{i1}, x_{i2}, \dots, x_{id}]^\top \in \mathbb{R}^d
+\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span> is the number of observations,</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the number of features (or dimensions),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> represents the <span class="math notranslate nohighlight">\(i\)</span>-th observation.</p></li>
+</ul>
+<p>All clustering algorithms operate on such feature representations, and the choice of <strong>distance metric</strong> directly affects how clusters are formed.</p>
+</section>
+</section>
+<section id="distance-and-similarity-measures">
+<h3>Distance and Similarity Measures<a class="headerlink" href="#distance-and-similarity-measures" title="Link to this heading">#</a></h3>
+<p>There are many ways to quantify similarity or distance between feature vectors. Two of the most common measures are <strong>Euclidean distance</strong> and <strong>cosine dissimilarity</strong>.</p>
+<section id="euclidean-distance">
+<h4>Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h4>
+<p>The <strong>Euclidean distance</strong> between two observations <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{dist}_{\text{Euclidean}}(\mathbf{x}_i, \mathbf{x}_j) = \|\mathbf{x}_i - \mathbf{x}_j\|_2 = \sqrt{\sum_{k=1}^d (x_{ik} - x_{jk})^2}
+\]</div>
+<p>This is the straight-line distance between two points in Euclidean space. It is the default distance metric for algorithms like k-means.</p>
+</section>
+<section id="cosine-dissimilarity">
+<h4>Cosine Dissimilarity<a class="headerlink" href="#cosine-dissimilarity" title="Link to this heading">#</a></h4>
+<p>The <strong>cosine similarity</strong> measures the <strong>angle</strong> between two vectors rather than their magnitude. It is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{sim}_{\text{cosine}}(\mathbf{x}_i, \mathbf{x}_j) = \frac{\mathbf{x}_i^\top \mathbf{x}_j}{\|\mathbf{x}_i\| \cdot \|\mathbf{x}_j\|}
+\]</div>
+<p>This metric is particularly useful when the <strong>direction</strong> of the vector is more informative than its length—for example, in high-dimensional data such as document vectors or normalized financial indicators.</p>
+<ul class="simple">
+<li><p>A cosine similarity of 1 (i.e., dissimilarity of 0) means the vectors point in the same direction.</p></li>
+<li><p>A cosine similarity of 0 means the vectors are orthogonal (completely unrelated).</p></li>
+<li><p>A cosine similarity of -1 means the vectors point in opposite directions.</p></li>
+</ul>
+<p>Choosing the right <strong>distance metric</strong> is crucial in clustering, as it fundamentally defines what it means for observations to be “similar.” Some algorithms are sensitive to this choice, and the appropriate measure often depends on the scale, sparsity, and nature of the features.</p>
+<p>Below are two visualizations to help build intuition for the two distance metrics:</p>
+<ul class="simple">
+<li><p>Left Plot (Euclidean Distance): Shows three points in 2D space. The geometric distance between each pair of points represents their Euclidean distance. This is what clustering algorithms like k-means use to group nearby points.</p></li>
+<li><p>Right Plot (Cosine Similarity): Plots the direction of each vector (normalized to unit length) from the origin. Cosine similarity measures the angle between these vectors, not their absolute position or magnitude. This is useful when direction is more important than size (e.g., in text or normalized data).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distances</span><span class="p">,</span> <span class="n">cosine_distances</span>
+
+<span class="c1"># Create three example 2D points</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>  <span class="c1"># A</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># B</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>   <span class="c1"># C</span>
+<span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+
+<span class="c1"># Compute pairwise distances</span>
+<span class="n">euclid_dists</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">cosine_dists</span> <span class="o">=</span> <span class="n">cosine_distances</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+<span class="c1"># Plotting the points and annotate them</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot Euclidean distances</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Euclidean Distance (Visual Example)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot vectors for cosine distance interpretation</span>
+<span class="n">origin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">point</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="o">*</span><span class="n">origin</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">point</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">point</span><span class="p">)),</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">point</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cosine Dissimilarity (Unit Vectors)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/78089dd3b0287b3004cf3b90ca114d0f855d74ed7f086c3915c0c5cc572721bc.png" src="_images/78089dd3b0287b3004cf3b90ca114d0f855d74ed7f086c3915c0c5cc572721bc.png" />
+</div>
+</div>
+<p>And this is how the euclidean distance matrix would look like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Convert distance matrices to DataFrames for display</span>
+<span class="n">df_euclidean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">euclid_dists</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">df_cosine</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cosine_dists</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">df_euclidean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.000000</td>
+      <td>1.414214</td>
+      <td>3.162278</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>1.414214</td>
+      <td>0.000000</td>
+      <td>2.828427</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>3.162278</td>
+      <td>2.828427</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And the cosine dissimilarities which are defined by <span class="math notranslate nohighlight">\(\text{dissim}_{\text{cosine}}(\mathbf{x}_i, \mathbf{x}_j) = 1 - \text{sim}_{\text{cosine}}(\mathbf{x}_i, \mathbf{x}_j)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_cosine</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.000000</td>
+      <td>0.007722</td>
+      <td>0.349209</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.007722</td>
+      <td>0.000000</td>
+      <td>0.260060</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.349209</td>
+      <td>0.260060</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="understanding-hierarchical-clustering-in-detail">
+<h3>Understanding Hierarchical Clustering in Detail<a class="headerlink" href="#understanding-hierarchical-clustering-in-detail" title="Link to this heading">#</a></h3>
+<p>We discuss hierarchical clustering as we show a financial application of it in the next chapter. <strong>Hierarchical clustering</strong> is a method that builds a hierarchy of nested clusters, offering both a clustering solution and a tree-like view of how clusters relate to each other. This approach is particularly useful for visualizing similarity structures in data, as it doesn’t require specifying the number of clusters in advance.</p>
+<p>We will focus here on the <strong>agglomerative</strong> (bottom-up) version of hierarchical clustering.</p>
+<section id="step-by-step-agglomerative-clustering">
+<h4>Step-by-Step: Agglomerative Clustering<a class="headerlink" href="#step-by-step-agglomerative-clustering" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Start with each point as its own cluster</strong>:
+Every observation is treated as an individual cluster. With <span class="math notranslate nohighlight">\(n\)</span> data points, we begin with <span class="math notranslate nohighlight">\(n\)</span> clusters.</p></li>
+<li><p><strong>Compute the distance matrix</strong>:
+Calculate the pairwise distances between all clusters using a chosen metric (e.g., Euclidean distance). Initially, these are just the distances between individual points.</p></li>
+<li><p><strong>Merge the two closest clusters</strong>:
+Find the pair of clusters with the smallest distance between them and merge them into a new cluster.</p></li>
+<li><p><strong>Update the distance matrix</strong>:
+After merging, recompute the distances between the new cluster and all other clusters. This step requires a <strong>linkage criterion</strong>, which defines how the distance between clusters is calculated. Common linkage methods include:</p>
+<ul class="simple">
+<li><p><strong>Single linkage</strong>: Minimum distance between any pair of points in the two clusters.</p></li>
+<li><p><strong>Complete linkage</strong>: Maximum distance between any pair of points.</p></li>
+<li><p><strong>Average linkage</strong>: Average of all pairwise distances between points in the clusters.</p></li>
+<li><p><strong>Ward linkage</strong>: Merges clusters based on minimizing the increase in within-cluster variance.</p></li>
+</ul>
+</li>
+<li><p><strong>Repeat</strong>:
+Continue merging and updating distances until all data points are grouped into a single cluster.</p></li>
+</ol>
+</section>
+<section id="dendrogram-the-hierarchical-tree">
+<h4>Dendrogram: The Hierarchical Tree<a class="headerlink" href="#dendrogram-the-hierarchical-tree" title="Link to this heading">#</a></h4>
+<p>The result of agglomerative clustering is a <strong>dendrogram</strong>, a binary tree structure where:</p>
+<ul class="simple">
+<li><p>Leaves represent individual observations,</p></li>
+<li><p>Branches represent cluster merges,</p></li>
+<li><p>The height of the branches indicates the distance (or dissimilarity) at which merges occurred.</p></li>
+</ul>
+<p>By “cutting” the dendrogram at a chosen height, we can produce a flat clustering with a specified number of clusters.</p>
+<p>In the figure below, you can see a minimum example with six observations and Ward linkage asa distance metric:</p>
+<ul class="simple">
+<li><p>Left: The dendrogram from hierarchical clustering using Ward linkage. The height of the branches shows how far apart clusters are when they merge.</p></li>
+<li><p>Right: A scatter plot of the original observations, labeled as <span class="math notranslate nohighlight">\(P_1\)</span> to <span class="math notranslate nohighlight">\(P_6\)</span>, showing their true spatial relationships.</p></li>
+</ul>
+<p>If we decide to split the data into two clusters, we cut the tree at the upper level and end up with a cluster including observations (<span class="math notranslate nohighlight">\(P_2, P_3, P_4\)</span>) and a cluster with observations (<span class="math notranslate nohighlight">\(P_1, P_5, P_6\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.cluster.hierarchy</span><span class="w"> </span><span class="kn">import</span> <span class="n">dendrogram</span><span class="p">,</span> <span class="n">linkage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_blobs</span>
+
+<span class="c1"># Generate sample data</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Compute linkage matrix using different methods (we&#39;ll use &#39;ward&#39; here)</span>
+<span class="n">linkage_matrix</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ward&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a subplot with dendrogram and scatter plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plot dendrogram</span>
+<span class="n">dendrogram</span><span class="p">(</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dendrogram (Ward Linkage)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Data Points&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Distance&quot;</span><span class="p">)</span>
+
+<span class="c1"># Scatter plot of original observations</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original Observations&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature 1&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Feature 2&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/936242b8bcb65ba12294ba4610055d35f910871282adff1d6c737d9175a26dfe.png" src="_images/936242b8bcb65ba12294ba4610055d35f910871282adff1d6c737d9175a26dfe.png" />
+</div>
+</div>
+</section>
+<section id="advantages-of-hierarchical-clustering">
+<h4>Advantages of Hierarchical Clustering<a class="headerlink" href="#advantages-of-hierarchical-clustering" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>No need to specify number of clusters</strong> ahead of time.</p></li>
+<li><p>Provides a full view of the data’s nested structure.</p></li>
+<li><p>Flexible distance and linkage methods allow it to adapt to different data shapes.</p></li>
+</ul>
+</section>
+<section id="limitations">
+<h4>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Computationally expensive</strong> for large datasets.</p></li>
+<li><p><strong>Sensitive to noise and outliers</strong>, especially with single linkage.</p></li>
+</ul>
+<p>Hierarchical clustering is particularly useful for exploratory analysis in finance, bioinformatics, and text mining—anywhere the relationship structure is as important as the clustering itself. In the next section, we’ll visualize a small example and explore how different linkage methods affect the result.</p>
+</section>
+</section>
+<section id="evaluating-clustering-results">
+<h3>Evaluating Clustering Results<a class="headerlink" href="#evaluating-clustering-results" title="Link to this heading">#</a></h3>
+<p>Unlike supervised learning, clustering typically operates without labeled data, which makes <strong>evaluation</strong> more challenging. Still, it is essential to assess the <strong>quality</strong> and <strong>usefulness</strong> of the clustering. There are two broad types of clustering evaluation:</p>
+<section id="internal-evaluation">
+<h4>1. Internal Evaluation<a class="headerlink" href="#internal-evaluation" title="Link to this heading">#</a></h4>
+<p>Internal metrics evaluate clustering based on the structure and cohesion of the resulting clusters <strong>without requiring ground truth labels</strong>. These metrics quantify how well the clusters are formed based on intra-cluster similarity and inter-cluster separation.</p>
+<p>Common internal metrics:</p>
+<ul class="simple">
+<li><p><strong>Silhouette Score</strong>: Combines cohesion (how close points in the same cluster are) and separation (how far apart clusters are). Values range from -1 to 1; higher is better.</p></li>
+<li><p><strong>Davies–Bouldin Index</strong>: Measures the average “similarity” between each cluster and its most similar one. Lower values indicate better clustering.</p></li>
+<li><p><strong>Calinski–Harabasz Index</strong>: Ratio of between-cluster dispersion to within-cluster dispersion. Higher values indicate better-defined clusters.</p></li>
+</ul>
+<p>These metrics are useful for comparing clustering results with different algorithms or parameters (e.g., number of clusters <span class="math notranslate nohighlight">\(k\)</span>).</p>
+</section>
+<section id="external-evaluation-when-ground-truth-is-available">
+<h4>2. External Evaluation (When Ground Truth Is Available)<a class="headerlink" href="#external-evaluation-when-ground-truth-is-available" title="Link to this heading">#</a></h4>
+<p>When true labels are available (e.g., in a benchmarking dataset), external evaluation compares the clustering result to the actual labels.</p>
+<p>Common external metrics:</p>
+<ul class="simple">
+<li><p><strong>Adjusted Rand Index (ARI)</strong>: Measures the agreement between true and predicted clusterings, corrected for chance. Values range from -1 to 1.</p></li>
+<li><p><strong>Normalized Mutual Information (NMI)</strong>: Measures shared information between predicted and true labels. Values range from 0 to 1.</p></li>
+<li><p><strong>Fowlkes–Mallows Index</strong>: Based on pairwise comparison of data points. Higher values indicate better clustering.</p></li>
+</ul>
+<p>Clustering evaluation is highly context-dependent. When no ground truth is available—as is often the case in financial or customer segmentation tasks—<strong>internal metrics and domain expertise</strong> are essential for assessing whether the clusters are meaningful and useful.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08_risk_management.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Risk Management</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categories-of-machine-learning-and-their-use-in-finance">Categories of Machine Learning and Their Use in Finance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-concepts-of-supervised-learning">Core Concepts of Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-models">Parametric Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-with-a-loss-function">Training with a Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-and-evaluation-on-unseen-data">Generalization and Evaluation on Unseen Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-model-flexibility">Overfitting and Model Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-and-model-tuning">Hyperparameters and Model Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-supervised-learning-tasks">Common Supervised Learning Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-class-classification">Multi-Class Classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-supervised-learning-algorithms">Examples of Supervised Learning Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-parametric-model">A Single Parametric Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-example">Regression Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-example">Classification Example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-optimization-results">Interpretation of Optimization Results</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-vs-numerical-optimization">Analytical vs. Numerical Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gradient-descent">Introduction to Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-gradient-descent">Visualizing Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Regression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-the-model-from-one-parameter-to-d-features">Extending the Model: From One Parameter to <span class="math notranslate nohighlight">\(d\)</span> Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-multiple-features">Linear Regression (Multiple Features)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-multiple-features">Logistic Regression (Multiple Features)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-neural-networks-a-single-hidden-layer">Introducing Neural Networks: A Single Hidden Layer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-neuron">A Single Neuron</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-the-hidden-layer">Constructing the Hidden Layer</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer-regression-or-classification">Output Layer: Regression or Classification</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-model-evaluation">A Note on Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-clustering">Introduction to Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-clustering-algorithms">Key Characteristics of Clustering Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-and-similarity-in-clustering">Observations and Similarity in Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#observations-as-feature-vectors">Observations as Feature Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-and-similarity-measures">Distance and Similarity Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean Distance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-dissimilarity">Cosine Dissimilarity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-hierarchical-clustering-in-detail">Understanding Hierarchical Clustering in Detail</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-agglomerative-clustering">Step-by-Step: Agglomerative Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dendrogram-the-hierarchical-tree">Dendrogram: The Hierarchical Tree</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-hierarchical-clustering">Advantages of Hierarchical Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-clustering-results">Evaluating Clustering Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-evaluation">1. Internal Evaluation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#external-evaluation-when-ground-truth-is-available">2. External Evaluation (When Ground Truth Is Available)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

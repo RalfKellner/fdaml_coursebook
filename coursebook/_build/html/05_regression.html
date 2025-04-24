@@ -174,6 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_machine_learning.html">Machine Learning</a></li>
 </ul>
 
     </div>
@@ -437,22 +438,22 @@
 <p>By fitting a straight line to observed data, the linear regression model estimates how changes in the independent variable(s) influence the dependent variable. This makes it a powerful method for risk modeling, factor analysis, forecasting, and performance attribution — all of which are essential in asset management, portfolio construction, and financial research. In this chapter, we will build intuition for the model, understand how to estimate and interpret it, and explore its limitations and assumptions in the context of financial time series.</p>
 <section id="model-specification">
 <h2>Model specification<a class="headerlink" href="#model-specification" title="Link to this heading">#</a></h2>
-<p>In the multiple linear regression model, we describe a dependent random variable <span class="math notranslate nohighlight">\(Y\)</span> as a linear function of multiple independent variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_k\)</span>:</p>
+<p>In the multiple linear regression model, we describe a dependent random variable <span class="math notranslate nohighlight">\(Y\)</span> as a linear function of multiple independent variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_d\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-Y = \alpha + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k + \varepsilon
+Y = \alpha + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_d X_d + \varepsilon
 \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Y\)</span>: Dependent variable (e.g., asset return)</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_1, \dots, X_k\)</span>: Independent variables (e.g., market return, interest rate, volatility)</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_1, \dots, X_d\)</span>: Independent variables (e.g., market return, interest rate, volatility)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta_0\)</span>: Intercept term</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta_1, \dots, \beta_k\)</span>: Slope coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1, \dots, \beta_d\)</span>: Slope coefficients</p></li>
 <li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span>: Error term</p></li>
 </ul>
 <p>For a sample of <span class="math notranslate nohighlight">\(n\)</span> observations, the model becomes:</p>
 <div class="math notranslate nohighlight">
 \[
-y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_k x_{ik} + \varepsilon_i \quad \text{for } i = 1, 2, \dots, n
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_d x_{id} + \varepsilon_i \quad \text{for } i = 1, 2, \dots, n
 \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y_i\)</span>: Observed value of the dependent variable</p></li>
@@ -467,8 +468,8 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_k x_{ik} + \vare
 <p>Where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of dependent variable values</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is an <span class="math notranslate nohighlight">\(n \times (k+1)\)</span> matrix including a column of ones for the intercept</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> is a <span class="math notranslate nohighlight">\((k+1) \times 1\)</span> vector of coefficients</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is an <span class="math notranslate nohighlight">\(n \times (d+1)\)</span> matrix including a column of ones for the intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> is a <span class="math notranslate nohighlight">\((d+1) \times 1\)</span> vector of coefficients</p></li>
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{\varepsilon}\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of residuals</p></li>
 </ul>
 <p>The OLS estimator minimizes the <strong>sum of squared residuals</strong>:</p>
@@ -602,14 +603,14 @@ Y = \beta_0 + \beta_1 D_1 + \beta_2 D_2 + \varepsilon
 <p>To interpret the results of an ordinary least squares (OLS) regression correctly and ensure the validity of statistical inference (e.g., confidence intervals, p-values), certain assumptions must hold. These assumptions are typically stated in the context of the <strong>population model</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-Y = \beta_0 + \beta_1 X_1 + \dots + \beta_k X_k + \varepsilon
+Y = \beta_0 + \beta_1 X_1 + \dots + \beta_d X_d + \varepsilon
 \]</div>
 <section id="linearity">
 <h3>1. <strong>Linearity</strong><a class="headerlink" href="#linearity" title="Link to this heading">#</a></h3>
-<p>The relationship between the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> and the independent variables <span class="math notranslate nohighlight">\(X_1, \dots, X_k\)</span> is <strong>linear in parameters</strong>. That is, the expected value of <span class="math notranslate nohighlight">\(Y\)</span> is a linear function of the <span class="math notranslate nohighlight">\(X\)</span>’s:</p>
+<p>The relationship between the dependent variable <span class="math notranslate nohighlight">\(Y\)</span> and the independent variables <span class="math notranslate nohighlight">\(X_1, \dots, X_d\)</span> is <strong>linear in parameters</strong>. That is, the expected value of <span class="math notranslate nohighlight">\(Y\)</span> is a linear function of the <span class="math notranslate nohighlight">\(X\)</span>’s:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb{E}[Y | X_1, \dots, X_k] = \beta_0 + \beta_1 X_1 + \dots + \beta_k X_k
+\mathbb{E}[Y | X_1, \dots, X_d] = \beta_0 + \beta_1 X_1 + \dots + \beta_d X_d
 \]</div>
 <p>Violation: Nonlinear patterns in data → model misspecification.</p>
 </section>
@@ -901,7 +902,7 @@ R^2 = 1 - \frac{\text{SSR}}{\text{SST}}
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\bar{R}^2 = 1 - \left( \frac{\text{SSR} / (n - k - 1)}{\text{SST} / (n - 1)} \right)
+\bar{R}^2 = 1 - \left( \frac{\text{SSR} / (n - d - 1)}{\text{SST} / (n - 1)} \right)
 \]</div>
 <p>Where <span class="math notranslate nohighlight">\(k\)</span> is the number of explanatory variables (excluding the intercept), and <span class="math notranslate nohighlight">\(n\)</span> is the number of observations.</p>
 </section>
@@ -1060,8 +1061,8 @@ R_{i,t} - R_{f,t}  = \alpha_i + \beta_i R_{m,t} + \varepsilon_t
 Dep. Variable:          excess_return   R-squared:                       0.548
 Model:                            OLS   Adj. R-squared:                  0.548
 Method:                 Least Squares   F-statistic:                     3049.
-Date:                Wed, 23 Apr 2025   Prob (F-statistic):               0.00
-Time:                        09:37:15   Log-Likelihood:                 7544.4
+Date:                Thu, 24 Apr 2025   Prob (F-statistic):               0.00
+Time:                        12:10:26   Log-Likelihood:                 7544.4
 No. Observations:                2515   AIC:                        -1.508e+04
 Df Residuals:                    2513   BIC:                        -1.507e+04
 Df Model:                           1                                         
@@ -1098,8 +1099,8 @@ Notes:
 Dep. Variable:          excess_return   R-squared:                       0.461
 Model:                            OLS   Adj. R-squared:                  0.456
 Method:                 Least Squares   F-statistic:                     100.1
-Date:                Wed, 23 Apr 2025   Prob (F-statistic):           2.14e-17
-Time:                        09:37:15   Log-Likelihood:                 169.02
+Date:                Thu, 24 Apr 2025   Prob (F-statistic):           2.14e-17
+Time:                        12:10:26   Log-Likelihood:                 169.02
 No. Observations:                 119   AIC:                            -334.0
 Df Residuals:                     117   BIC:                            -328.5
 Df Model:                           1                                         
@@ -1211,8 +1212,8 @@ R_{i,t} - R_{f,t}  = \alpha_i + \beta_m R_{m,t} + \beta_s \cdot \text{SMB}_t + \
 Dep. Variable:          excess_return   R-squared:                       0.601
 Model:                            OLS   Adj. R-squared:                  0.601
 Method:                 Least Squares   F-statistic:                     1262.
-Date:                Wed, 23 Apr 2025   Prob (F-statistic):               0.00
-Time:                        09:37:15   Log-Likelihood:                 7701.5
+Date:                Thu, 24 Apr 2025   Prob (F-statistic):               0.00
+Time:                        12:10:26   Log-Likelihood:                 7701.5
 No. Observations:                2515   AIC:                        -1.540e+04
 Df Residuals:                    2511   BIC:                        -1.537e+04
 Df Model:                           3                                         
@@ -1251,8 +1252,8 @@ Notes:
 Dep. Variable:          excess_return   R-squared:                       0.529
 Model:                            OLS   Adj. R-squared:                  0.516
 Method:                 Least Squares   F-statistic:                     42.98
-Date:                Wed, 23 Apr 2025   Prob (F-statistic):           1.05e-18
-Time:                        09:37:15   Log-Likelihood:                 177.00
+Date:                Thu, 24 Apr 2025   Prob (F-statistic):           1.05e-18
+Time:                        12:10:26   Log-Likelihood:                 177.00
 No. Observations:                 119   AIC:                            -346.0
 Df Residuals:                     115   BIC:                            -334.9
 Df Model:                           3                                         
