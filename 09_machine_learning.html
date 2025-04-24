@@ -826,18 +826,17 @@ f(\mathbf{x}; \boldsymbol{\theta}) = \sigma(\boldsymbol{\theta}^\top \mathbf{x})
 <section id="a-single-neuron">
 <h4>A Single Neuron<a class="headerlink" href="#a-single-neuron" title="Link to this heading">#</a></h4>
 <p>A <strong>neuron</strong> in a neural network performs two operations:</p>
-<ol class="arabic simple">
-<li><p><strong>Affine Transformation</strong>:
-$<span class="math notranslate nohighlight">\(
+<p><strong>Affine Transformation</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
 z = \boldsymbol{w}^\top \mathbf{x} + b
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\mathbf{x} \in \mathbb{R}^d<span class="math notranslate nohighlight">\( is the input vector, \)</span>\boldsymbol{w} \in \mathbb{R}^d<span class="math notranslate nohighlight">\( is the weight vector, and \)</span>b \in \mathbb{R}$ is a bias term.</p></li>
-<li><p><strong>Activation Function</strong>:
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^d\)</span> is the input vector, <span class="math notranslate nohighlight">\(\boldsymbol{w} \in \mathbb{R}^d\)</span> is the weight vector, and <span class="math notranslate nohighlight">\(b \in \mathbb{R}\)</span> is a bias term.</p>
+<p><strong>Activation Function</strong>:
 $<span class="math notranslate nohighlight">\(
 h = \phi(z)
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>\phi(\cdot)<span class="math notranslate nohighlight">\( is a non-linear activation function such as the ReLU (\)</span>\max(0, z)$), sigmoid, or hyperbolic tangent function. This non-linearity enables the model to approximate complex functions beyond linear decision boundaries.</p></li>
-</ol>
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> is a non-linear activation function such as the ReLU (<span class="math notranslate nohighlight">\(\max(0, z)\)</span>), sigmoid, or hyperbolic tangent function. This non-linearity enables the model to approximate complex functions beyond linear decision boundaries.</p>
 <p>See the figure below for a few common examples of activation function. It is up to the network architect to select an activation function. As you can see, they all share the charcteristic of non-linearity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -892,15 +891,19 @@ where \)</span>\phi(\cdot)<span class="math notranslate nohighlight">\( is a non
 <h4>Output Layer: Regression or Classification<a class="headerlink" href="#output-layer-regression-or-classification" title="Link to this heading">#</a></h4>
 <p>The output of the hidden layer is then passed to a final layer that performs either regression or classification. This layer is structured identically to the linear or logistic regression models, but instead of using the original input <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, it uses the hidden representation <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>:</p>
 <ul class="simple">
-<li><p>For regression:
-$<span class="math notranslate nohighlight">\(
-\hat{y} = \boldsymbol{\theta}^\top \mathbf{h}
-\)</span>$</p></li>
-<li><p>For binary classification:
-$<span class="math notranslate nohighlight">\(
-\hat{y} = \sigma(\boldsymbol{\theta}^\top \mathbf{h})
-\)</span>$</p></li>
+<li><p>For regression:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \boldsymbol{\theta}^\top \mathbf{h}
+\]</div>
+<ul class="simple">
+<li><p>For binary classification:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \sigma(\boldsymbol{\theta}^\top \mathbf{h})
+\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{\theta} \in \mathbb{R}^m\)</span> is the output layer’s weight vector, and <span class="math notranslate nohighlight">\(\sigma(\cdot)\)</span> denotes the sigmoid function.</p>
 <p>This architecture—an input layer, one hidden layer with non-linear activation, and an output layer—constitutes the simplest form of a <strong>feedforward neural network</strong>, also called a <strong>single-layer perceptron</strong>. It provides a foundation for more advanced architectures by enabling the model to learn <strong>non-linear decision boundaries</strong> and <strong>interactions between features</strong>, capabilities which are not available in standard linear models.</p>
 </section>
