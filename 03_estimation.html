@@ -174,6 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_machine_learning.html">Machine Learning</a></li>
 </ul>
 
     </div>
@@ -713,7 +714,7 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(n)p
     <span class="n">close_prices</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_03/00_index_price_data.csv&quot;</span><span class="p">)</span>
 <span class="n">close_prices</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SP500&quot;</span><span class="p">,</span> <span class="s2">&quot;STOXX600&quot;</span><span class="p">]</span>
 
-<span class="n">daily_returns</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">daily_returns</span> <span class="o">=</span> <span class="n">close_prices</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">split_date</span> <span class="o">=</span> <span class="s2">&quot;2022-02-28&quot;</span>
 <span class="n">trainining_data</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">split_date</span><span class="p">),</span> <span class="p">:]</span>
 <span class="n">test_data</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">split_date</span><span class="p">):,</span> <span class="p">:]</span>
@@ -731,8 +732,8 @@ BIC = -2 \log L(\boldsymbol{\theta}) + \log(n)p
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean abolute error for the estimated expected value is:
 
              SP500  STOXX600
-training   0.00646  0.006353
-test      0.007784  0.006243
+training  0.646041  0.635311
+test      0.778415  0.624277
 </pre></div>
 </div>
 </div>
@@ -833,21 +834,21 @@ f(Y) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sigma \sqrt{\nu \pi} \Gamma\le
   <tbody>
     <tr>
       <th>normal</th>
-      <td>765.649514</td>
-      <td>-1527.299028</td>
-      <td>-1520.396951</td>
-      <td>2666.664092</td>
-      <td>-5329.328184</td>
-      <td>-5319.963967</td>
+      <td>-307.355139</td>
+      <td>618.710279</td>
+      <td>625.612356</td>
+      <td>-1008.261716</td>
+      <td>2020.523433</td>
+      <td>2029.887650</td>
     </tr>
     <tr>
       <th>t</th>
-      <td>784.174095</td>
-      <td>-1562.348190</td>
-      <td>-1551.995075</td>
-      <td>2696.680374</td>
-      <td>-5387.360748</td>
-      <td>-5373.314422</td>
+      <td>-288.830558</td>
+      <td>583.661116</td>
+      <td>594.014232</td>
+      <td>-978.245528</td>
+      <td>1962.491056</td>
+      <td>1976.537382</td>
     </tr>
   </tbody>
 </table>

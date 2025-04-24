@@ -174,6 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_machine_learning.html">Machine Learning</a></li>
 </ul>
 
     </div>
@@ -497,6 +498,7 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
     <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
 <span class="p">}</span>
 
+<span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">spx</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
 
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -512,9 +514,9 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
     <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
     <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;S&amp;P 500 Daily Discrete Returns in %&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -524,10 +526,10 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" src="_images/6b567478917af9cf9920bdc3d8368e8bf1e4cdf33f2ef5f3be2b37b4cdb477a9.png" />
+<img alt="_images/493cc43687fbc1c9169cc89bc5404b1027df3aaff46ef715c738d389e628f8f1.png" src="_images/493cc43687fbc1c9169cc89bc5404b1027df3aaff46ef715c738d389e628f8f1.png" />
 </div>
 </div>
-<p>The cell below determines descriptive statistics for the daily returns from the figure above. We take a look at these statistics over the full period, only the crisis periods and the non-crisis periods. Examining these statistics holistically shows that financial crises are not just higher-volatility periods, but structurally different in terms of tail risk and asymmetry.</p>
+<p>The cell below determines descriptive statistics for the daily returns (in %) from the figure above. We take a look at these statistics over the full period, only the crisis periods and the non-crisis periods. Examining these statistics holistically shows that financial crises are not just higher-volatility periods, but structurally different in terms of tail risk and asymmetry.</p>
 <p>During the crisis period:</p>
 <ul class="simple">
 <li><p>The hill estimator for the lower tail is higher</p></li>
@@ -554,13 +556,13 @@ X_{(1)} = 15.0,\quad X_{(2)} = 12.3,\quad X_{(3)} = 10.0,\quad X_{(4)} = 8.5,\qu
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   Full       Crisis   Non-Crisis
 count       7104.000000  1985.000000  5119.000000
-mean           0.000359    -0.000909     0.000851
-std            0.012165     0.016865     0.009709
-min           -0.119841    -0.119841    -0.068657
-5%            -0.018504    -0.027018    -0.014689
-50%            0.000671    -0.000364     0.000872
-95%            0.017459     0.023888     0.015411
-max            0.115800     0.115800     0.093828
+mean           0.035915    -0.090873     0.085080
+std            1.216486     1.686457     0.970877
+min          -11.984055   -11.984055    -6.865684
+5%            -1.850352    -2.701834    -1.468929
+50%            0.067102    -0.036434     0.087229
+95%            1.745879     2.388821     1.541078
+max           11.580037    11.580037     9.382774
 skew          -0.180188    -0.178286     0.177337
 kurtosis       9.510842     6.397881     6.280152
 hill_upper     0.390793     0.388954     0.328835
@@ -577,8 +579,8 @@ hill_lower     0.381063     0.363625     0.347228
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">returns_non_crisis</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Non-Crisis&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">returns_crisis</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Crisis&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of S&amp;P 500 Returns with Emphasis on Tails&quot;</span><span class="p">)</span>
+<span class="c1">#plt.xlim(-0.12, 0.12)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of S&amp;P 500 Returns (in %) with Emphasis on Tails&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daily Return&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -589,7 +591,7 @@ hill_lower     0.381063     0.363625     0.347228
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/49f8b4a89820d3f653be80d30b4b07432d1e71bc0a660071a9eb6ebbd7c62855.png" src="_images/49f8b4a89820d3f653be80d30b4b07432d1e71bc0a660071a9eb6ebbd7c62855.png" />
+<img alt="_images/7d9dcaf5ce52661232abbe4e4796af9e93c920492fa1a91b3f2c77cdc162455c.png" src="_images/7d9dcaf5ce52661232abbe4e4796af9e93c920492fa1a91b3f2c77cdc162455c.png" />
 </div>
 </div>
 </section>
@@ -622,6 +624,7 @@ hill_lower     0.381063     0.363625     0.347228
 <span class="p">}</span>
 
 <span class="n">bond_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
+<span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;SHY&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">bond_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;SHY&quot;</span><span class="p">,</span> <span class="s2">&quot;IEF&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bond_returns</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">])</span>
@@ -640,7 +643,7 @@ hill_lower     0.381063     0.363625     0.347228
     <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sovereign Bond ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sovereign Bond ETF Daily Returns (in %)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -650,7 +653,7 @@ hill_lower     0.381063     0.363625     0.347228
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7f786ab029c743387e03bbce88ff409b699a49a44dca349929f56f18a969706a.png" src="_images/7f786ab029c743387e03bbce88ff409b699a49a44dca349929f56f18a969706a.png" />
+<img alt="_images/0b956baa98b331541afce73f5c9f65342022931f9c5242ac4c87639e6878b84a.png" src="_images/0b956baa98b331541afce73f5c9f65342022931f9c5242ac4c87639e6878b84a.png" />
 </div>
 </div>
 <p>Taking a look at the descriptive statistics below, we observe a higher average return during crisis periods in comparison to non-crisis periods. This characterizes a higher demand and on average higher positve price changes during critical times. At the same time, volatility and adverse return realizations (quantified by the lower 5%-quantile) are higher during crisis periods, however, moderate in comparison to the stock index.</p>
@@ -707,66 +710,66 @@ hill_lower     0.381063     0.363625     0.347228
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.000151</td>
-      <td>0.000076</td>
-      <td>0.000364</td>
-      <td>0.000084</td>
-      <td>0.000083</td>
-      <td>0.000074</td>
+      <td>0.015090</td>
+      <td>0.007602</td>
+      <td>0.036365</td>
+      <td>0.008362</td>
+      <td>0.008300</td>
+      <td>0.007360</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.004333</td>
-      <td>0.000961</td>
-      <td>0.005546</td>
-      <td>0.001212</td>
-      <td>0.003865</td>
-      <td>0.000866</td>
+      <td>0.433334</td>
+      <td>0.096094</td>
+      <td>0.554596</td>
+      <td>0.121191</td>
+      <td>0.386544</td>
+      <td>0.086581</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>-0.025072</td>
-      <td>-0.006566</td>
-      <td>-0.025072</td>
-      <td>-0.005614</td>
-      <td>-0.018489</td>
-      <td>-0.006566</td>
+      <td>-2.507230</td>
+      <td>-0.656582</td>
+      <td>-2.507230</td>
+      <td>-0.561360</td>
+      <td>-1.848871</td>
+      <td>-0.656582</td>
     </tr>
     <tr>
       <th>5%</th>
-      <td>-0.006827</td>
-      <td>-0.001325</td>
-      <td>-0.008538</td>
-      <td>-0.001795</td>
-      <td>-0.006145</td>
-      <td>-0.001217</td>
+      <td>-0.682674</td>
+      <td>-0.132492</td>
+      <td>-0.853804</td>
+      <td>-0.179531</td>
+      <td>-0.614514</td>
+      <td>-0.121712</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.000238</td>
+      <td>0.023766</td>
       <td>0.000000</td>
-      <td>0.000495</td>
-      <td>0.000118</td>
-      <td>0.000187</td>
+      <td>0.049550</td>
+      <td>0.011791</td>
+      <td>0.018703</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>95%</th>
-      <td>0.006850</td>
-      <td>0.001608</td>
-      <td>0.008892</td>
-      <td>0.002159</td>
-      <td>0.006101</td>
-      <td>0.001437</td>
+      <td>0.685049</td>
+      <td>0.160801</td>
+      <td>0.889185</td>
+      <td>0.215946</td>
+      <td>0.610091</td>
+      <td>0.143658</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.034262</td>
-      <td>0.009974</td>
-      <td>0.026416</td>
-      <td>0.007094</td>
-      <td>0.034262</td>
-      <td>0.009974</td>
+      <td>3.426173</td>
+      <td>0.997421</td>
+      <td>2.641645</td>
+      <td>0.709425</td>
+      <td>3.426173</td>
+      <td>0.997421</td>
     </tr>
     <tr>
       <th>skew</th>
@@ -977,6 +980,7 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
     <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
 <span class="p">}</span>
 
+<span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;R_t&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">btc</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
 
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -994,7 +998,7 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
     <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bitcoin Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bitcoin Daily Returns in (%)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -1004,7 +1008,7 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a3d1cb713e0b802661bba79c023dba066cfa1fa42665dcb04bbe40acca406a8.png" src="_images/7a3d1cb713e0b802661bba79c023dba066cfa1fa42665dcb04bbe40acca406a8.png" />
+<img alt="_images/a3071e4e6c45b89a134e3405f77900b7dbb2a0dac8ac7a795e56e465a03c7190.png" src="_images/a3071e4e6c45b89a134e3405f77900b7dbb2a0dac8ac7a795e56e465a03c7190.png" />
 </div>
 </div>
 <p>The descriptive statistics show that Bitcoin is by far more risky and profitable than the S&amp;P 500 index. This underlines its reputation as a speculative asset. Furthermore, it also exhibits less profit and more risk during financial crisis periods within the last ten years.</p>
@@ -1025,13 +1029,13 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   Full      Crisis   Non-Crisis
 count       3745.000000  563.000000  3182.000000
-mean           0.002148   -0.000606     0.002636
-std            0.036077    0.038599     0.035597
-min           -0.371695   -0.371695    -0.211449
-5%            -0.055066   -0.060252    -0.053428
-50%            0.001297   -0.001287     0.001656
-95%            0.057392    0.052732     0.059416
-max            0.252472    0.181878     0.252472
+mean           0.214841   -0.060646     0.263584
+std            3.607707    3.859898     3.559650
+min          -37.169539  -37.169539   -21.144862
+5%            -5.506610   -6.025194    -5.342838
+50%            0.129743   -0.128661     0.165616
+95%            5.739182    5.273204     5.941556
+max           25.247169   18.187756    25.247169
 skew          -0.129039   -1.597136     0.208620
 kurtosis       7.652910   17.814366     5.021953
 hill_upper     0.405980    0.443347     0.377081
@@ -1073,6 +1077,7 @@ hill_lower     0.367757    0.385532     0.378051
     <span class="s2">&quot;inflation_ukraine_2022&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Inflation &amp; Ukraine War&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-12&quot;</span><span class="p">},</span>
 <span class="p">}</span>
 
+<span class="n">commodity_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">commodity_returns</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;GLD&quot;</span><span class="p">,</span> <span class="s2">&quot;SLV&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">commodity_returns</span><span class="p">[</span><span class="s2">&quot;Crisis Label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
 
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">crisis_periods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1092,7 +1097,7 @@ hill_lower     0.367757    0.385532     0.378051
     <span class="n">midpoint</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">midpoint</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">period</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Commodity ETF Daily Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Commodity ETF Daily Returns (in %)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Return ($R_t$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -1102,7 +1107,7 @@ hill_lower     0.367757    0.385532     0.378051
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/77f01c86dde4af536634d1d54b623e2ffd12b375ba798f22550bf9caac98fcef.png" src="_images/77f01c86dde4af536634d1d54b623e2ffd12b375ba798f22550bf9caac98fcef.png" />
+<img alt="_images/49157f81c5a9514fad169a008a6928df01a53c7bce92e5033d6d28c79f197633.png" src="_images/49157f81c5a9514fad169a008a6928df01a53c7bce92e5033d6d28c79f197633.png" />
 </div>
 </div>
 <p>In comparison between both precious metals, silver seems to be a more risky and more profitable asset than gold. In comparison to the other assets they seem to lay between bonds and stocks regarding their risk-profitability profile.</p>
@@ -1159,66 +1164,66 @@ hill_lower     0.367757    0.385532     0.378051
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.000399</td>
-      <td>0.000416</td>
-      <td>-0.000150</td>
-      <td>-0.001277</td>
-      <td>0.000496</td>
-      <td>0.000716</td>
+      <td>0.039910</td>
+      <td>0.041582</td>
+      <td>-0.014950</td>
+      <td>-0.127704</td>
+      <td>0.049634</td>
+      <td>0.071588</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.008884</td>
-      <td>0.016714</td>
-      <td>0.010298</td>
-      <td>0.018469</td>
-      <td>0.008608</td>
-      <td>0.016370</td>
+      <td>0.888392</td>
+      <td>1.671441</td>
+      <td>1.029823</td>
+      <td>1.846853</td>
+      <td>0.860806</td>
+      <td>1.637025</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>-0.053694</td>
-      <td>-0.135926</td>
-      <td>-0.039888</td>
-      <td>-0.123448</td>
-      <td>-0.053694</td>
-      <td>-0.135926</td>
+      <td>-5.369441</td>
+      <td>-13.592593</td>
+      <td>-3.988826</td>
+      <td>-12.344775</td>
+      <td>-5.369441</td>
+      <td>-13.592593</td>
     </tr>
     <tr>
       <th>5%</th>
-      <td>-0.014043</td>
-      <td>-0.024992</td>
-      <td>-0.016053</td>
-      <td>-0.028918</td>
-      <td>-0.013428</td>
-      <td>-0.024121</td>
+      <td>-1.404263</td>
+      <td>-2.499190</td>
+      <td>-1.605297</td>
+      <td>-2.891843</td>
+      <td>-1.342799</td>
+      <td>-2.412128</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>0.000522</td>
-      <td>0.000597</td>
-      <td>-0.000150</td>
-      <td>-0.000798</td>
-      <td>0.000576</td>
-      <td>0.000634</td>
+      <td>0.052196</td>
+      <td>0.059667</td>
+      <td>-0.014982</td>
+      <td>-0.079789</td>
+      <td>0.057588</td>
+      <td>0.063407</td>
     </tr>
     <tr>
       <th>95%</th>
-      <td>0.014873</td>
-      <td>0.026809</td>
-      <td>0.015219</td>
-      <td>0.026773</td>
-      <td>0.014710</td>
-      <td>0.026773</td>
+      <td>1.487311</td>
+      <td>2.680898</td>
+      <td>1.521903</td>
+      <td>2.677306</td>
+      <td>1.471032</td>
+      <td>2.677339</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>0.049038</td>
-      <td>0.091429</td>
-      <td>0.044180</td>
-      <td>0.091429</td>
-      <td>0.049038</td>
-      <td>0.089985</td>
+      <td>4.903838</td>
+      <td>9.142859</td>
+      <td>4.417959</td>
+      <td>9.142859</td>
+      <td>4.903838</td>
+      <td>8.998477</td>
     </tr>
     <tr>
       <th>skew</th>
