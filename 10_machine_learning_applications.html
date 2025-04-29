@@ -1,0 +1,1208 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine Learning in Finance &#8212; Financial Data Analytics and Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_machine_learning_applications';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Machine Learning" href="09_machine_learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Financial Data Analytics and Machine Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_welcome.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_introduction.html">Asset classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_random_variables.html">Random variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estimation.html">Estimation and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_empirical_analysis.html">Empirical Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_time_series.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pf_optimization.html">Portfolio Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_machine_learning.html">Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning in Finance</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/10_machine_learning_applications.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning in Finance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-assets-by-dependence">Clustering Assets by Dependence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-metrics">Distance Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-based-on-correlation">Distance Based on Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-distance-metrics">Clustering with Distance Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-number-of-clusters">Choosing the Number of Clusters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-bisection-in-hierarchical-clustering">Recursive Bisection in Hierarchical Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode-recursive-bisection-for-weight-allocation-by-variance-contribution">Pseudocode: Recursive Bisection for Weight Allocation By Variance Contribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-bisection-procedure">Recursive Bisection Procedure:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-advantages-of-hierarchical-clustering-for-portfolio-allocation">Potential Advantages of Hierarchical Clustering for Portfolio Allocation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#literature">Literature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-machine-learning-to-prediction">Applications of Machine Learning to Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-asset-returns">Predicting Asset Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-price-trends">Predicting Price Trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-in-finance">
+<h1>Machine Learning in Finance<a class="headerlink" href="#machine-learning-in-finance" title="Link to this heading">#</a></h1>
+<p>Machine learning has rapidly become an important tool in finance, offering the potential to uncover complex patterns and improve decision-making across a variety of tasks. However, applying machine learning in financial contexts is far from straightforward. A key challenge stems from the large noise-to-signal ratio typical of financial data: true underlying structures often drown in random fluctuations, making it difficult to extract reliable information. As a result, finding simple, consistently successful use cases for machine learning in finance remains an ongoing challenge.</p>
+<p>Nevertheless, the past decade has witnessed a significant rise in academic research applying machine learning to financial problems. Most of this work has centered around supervised learning — for example, predicting asset returns, classifying credit risk, or estimating the probability of default — and unsupervised learning, particularly clustering methods that group assets based on return similarities or risk factors. These approaches aim to tackle classic financial tasks with new tools, offering alternative ways to model complex dependencies, capture nonlinearities, and exploit hidden structures in data.</p>
+<p>Beyond prediction and clustering, machine learning is increasingly used for anomaly detection (such as identifying fraudulent transactions), portfolio construction, risk management, and the analysis of unstructured data like news articles, earnings calls, and regulatory filings. These broader applications show that machine learning can contribute to many aspects of finance beyond mere forecasting.</p>
+<p>At the same time, practitioners and researchers must be cautious. Machine learning methods often prioritize predictive accuracy at the cost of interpretability — a trade-off that is particularly critical in finance, where understanding model behavior is essential for regulatory compliance, investment decisions, and model risk management. Furthermore, most machine learning algorithms assume relatively stable data-generating processes, whereas financial markets are notoriously non-stationary: patterns can shift abruptly during crises or regime changes. This means models trained on past data may fail badly when market conditions evolve.</p>
+<p>Another important concern is model risk and overfitting. Because financial datasets, despite their size, are often limited relative to the complexity of financial markets, machine learning models can easily overfit — capturing noise rather than meaningful signals. Rigorous out-of-sample testing, cross-validation, and robustness checks are necessary to ensure that models genuinely add value rather than exploiting chance patterns in historical data.</p>
+<p>In this chapter, we take a look at a few examples for clustering and supervised learning. As we discussed portfolio optimization in a previous chapter, we start with the use of clustering to determine portfolio allocations.</p>
+<section id="clustering-assets-by-dependence">
+<h2>Clustering Assets by Dependence<a class="headerlink" href="#clustering-assets-by-dependence" title="Link to this heading">#</a></h2>
+<p>In the previous chapter, we introduced clustering as a method for finding structure in data by grouping together observations that are similar to each other while ensuring that different groups remain as distinct as possible. Clustering algorithms seek to maximize within-group similarity and between-group dissimilarity, creating meaningful partitions of the data.</p>
+<p>In many general machine learning applications, similarity between observations is often measured using metrics such as Euclidean distance or cosine similarity, depending on the nature of the data and the problem at hand. These measures work well when differences in magnitude or orientation capture the relationships of interest.</p>
+<p>However, when we move into the financial domain — particularly when clustering assets such as stocks, bonds, or funds — it becomes more appropriate to define similarity in terms of statistical dependence rather than just geometric distance. A common and intuitive way to capture dependence between financial assets is through correlation measures, such as Pearson correlation (capturing linear relationships) or Spearman correlation (capturing monotonic relationships). In this setting, assets that move together closely over time are considered similar, even if their absolute levels or volatilities differ.</p>
+<p>Let us go through the steps of clustering several assets by their correlation matrix step by step. Below is a heatmap which displays a correlation matrix of daily discrete returns for ten US stock market listed companies. Stock returns often come along with relatively high levels of positive correlation. This can be observed in our example as well, nevertheless, the landscape of correlation pairs is heterogen which gives us the possibility to form stock groups which are less correlated between. As a consequence if we distribute wealth accordingly, we may benefit from diversification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Define tickers and their sectors</span>
+<span class="n">tickers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;AAPL&quot;</span><span class="p">:</span> <span class="s2">&quot;Apple Inc. (Technology)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JNJ&quot;</span><span class="p">:</span> <span class="s2">&quot;Johnson &amp; Johnson (Healthcare)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XOM&quot;</span><span class="p">:</span> <span class="s2">&quot;Exxon Mobil Corp. (Energy)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JPM&quot;</span><span class="p">:</span> <span class="s2">&quot;JPMorgan Chase &amp; Co. (Financials)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WMT&quot;</span><span class="p">:</span> <span class="s2">&quot;Walmart Inc. (Consumer Staples)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NVDA&quot;</span><span class="p">:</span> <span class="s2">&quot;NVIDIA Corp. (Semiconductors)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DIS&quot;</span><span class="p">:</span> <span class="s2">&quot;Walt Disney Co. (Communication Services)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BA&quot;</span><span class="p">:</span> <span class="s2">&quot;Boeing Co. (Industrials)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NKE&quot;</span><span class="p">:</span> <span class="s2">&quot;Nike Inc. (Consumer Discretionary)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PLD&quot;</span><span class="p">:</span> <span class="s2">&quot;Prologis Inc. (Real Estate)&quot;</span>
+<span class="p">}</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_10/asset_returns_clustering.csv&quot;</span><span class="p">)</span>
+    <span class="n">returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">returns</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">returns</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tickers</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2020-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2024-12-31&quot;</span><span class="p">,</span> <span class="n">auto_adjust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">returns</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_10/asset_returns_clustering.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;shrink&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Asset Returns Correlation Heatmap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/73e7273b8ae547eeaf13bbd17c2307a4701a254877ce07f45f10397d7ce720c0.png" src="_images/73e7273b8ae547eeaf13bbd17c2307a4701a254877ce07f45f10397d7ce720c0.png" />
+</div>
+</div>
+<section id="distance-metrics">
+<h3>Distance Metrics<a class="headerlink" href="#distance-metrics" title="Link to this heading">#</a></h3>
+<p>Hierarchical clustering algorithms are build upon dissimularity rather than similarity. This is why we need to transform the similarity measures correlation into a dissimilarity measure. Therefore, we need a <strong>distance metric</strong>: a function that quantifies how “far apart” two objects are from each other. A <strong>distance metric</strong> <span class="math notranslate nohighlight">\(d(x, y)\)</span> must satisfy the following four properties:</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity</strong></p>
+<p>The distance between any two points is always non-negative:</p>
+<div class="math notranslate nohighlight">
+\[
+    d(x, y) \geq 0 \quad \text{for all} \quad x, y
+    \]</div>
+</li>
+<li><p><strong>Identity of Indiscernibles</strong></p>
+<p>The distance between two points is zero if and only if they are identical:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) = 0 \quad \text{if and only if} \quad x = y
+   \]</div>
+</li>
+<li><p><strong>Symmetry</strong></p>
+<p>The distance from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(y\)</span> is the same as the distance from <span class="math notranslate nohighlight">\(y\)</span> to <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, y) = d(y, x)
+   \]</div>
+</li>
+<li><p><strong>Triangle Inequality</strong></p>
+<p>The direct distance from <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(z\)</span> is always less than or equal to the sum of the distances via a third point <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   d(x, z) \leq d(x, y) + d(y, z)
+   \]</div>
+</li>
+</ol>
+<p>These properties ensure that distances behave in a way that is consistent with our geometric intuition.</p>
+</section>
+<section id="distance-based-on-correlation">
+<h3>Distance Based on Correlation<a class="headerlink" href="#distance-based-on-correlation" title="Link to this heading">#</a></h3>
+<p>A popular transformation that turns a correlation coefficient into a valid distance metric is:</p>
+<div class="math notranslate nohighlight">
+\[
+d_{ij} = \sqrt{\frac{1 - \rho_{ij}}{2}}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho_{ij}\)</span> is the correlation between asset <span class="math notranslate nohighlight">\(i\)</span> and asset <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+<p>This transformation ensures that:</p>
+<ul class="simple">
+<li><p>Perfectly correlated assets (<span class="math notranslate nohighlight">\(\rho = 1\)</span>) have a distance of <span class="math notranslate nohighlight">\(d = 0\)</span>,</p></li>
+<li><p>Perfectly anti-correlated assets (<span class="math notranslate nohighlight">\(\rho = -1\)</span>) have a distance of <span class="math notranslate nohighlight">\(d = 1\)</span>,</p></li>
+<li><p>The resulting distance satisfies non-negativity, identity of indiscernibles, symmetry, and the triangle inequality.</p></li>
+</ul>
+<p>This correlation-based distance is widely used for clustering assets in financial applications such as portfolio construction and risk management. Below you can take a look how the distance matrix looks like using the pairwise correlation values from the cell above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">corr</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">corr</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;shrink&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Asset Returns Distance Heatmap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/11217c523703ddae782a62a6c8c7e4ca24ccd3e3510e47ffc46a321df25aa5de.png" src="_images/11217c523703ddae782a62a6c8c7e4ca24ccd3e3510e47ffc46a321df25aa5de.png" />
+</div>
+</div>
+</section>
+<section id="clustering-with-distance-metrics">
+<h3>Clustering with Distance Metrics<a class="headerlink" href="#clustering-with-distance-metrics" title="Link to this heading">#</a></h3>
+<p>To understand in a more detailed way how we cluster according to the distance matrix, we go through the first steps iteratively using the example from above. We start hierarchical clustering using <strong>single linkage</strong> (minimum distance between clusters) based on the following distance matrix.</p>
+<p><strong>Step 1</strong>: Start with each asset as its own cluster:</p>
+<ul class="simple">
+<li><p>Clusters: {AAPL}, {BA}, {DIS}, {JNJ}, {JPM}, {NKE}, {NVDA}, {PLD}, {WMT}, {XOM}</p></li>
+</ul>
+<p><strong>Step 2</strong>: Find the <strong>smallest distance</strong> between any two clusters.</p>
+<p>From the distance matrix:</p>
+<ul class="simple">
+<li><p>The smallest distance is between <strong>NVDA</strong> and <strong>AAPL</strong>:</p>
+<ul>
+<li><p>Distance(NVDA, AAPL) = <strong>0.4437</strong></p></li>
+</ul>
+</li>
+</ul>
+<p>-&gt; Merge {NVDA} and {AAPL} into a new cluster {NVDA, AAPL}.</p>
+<p><strong>Step 3</strong>: Update the distance matrix.</p>
+<ul class="simple">
+<li><p>In <strong>single linkage</strong>, the distance between a cluster and another point (or cluster) is the <strong>minimum distance</strong> between any member of the two groups.</p></li>
+<li><p>For example:</p>
+<ul>
+<li><p>Distance({NVDA, AAPL}, BA) = min(distance(NVDA, BA), distance(AAPL, BA)).</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Step 4</strong>: Find the next smallest distance.</p>
+<p>From the updated matrix:</p>
+<ul class="simple">
+<li><p>The next smallest distance is between <strong>BA</strong> and <strong>JPM</strong>:</p>
+<ul>
+<li><p>Distance(BA, JPM) = <strong>0.4624</strong></p></li>
+</ul>
+</li>
+</ul>
+<p>-&gt; Merge {BA} and {JPM} into a new cluster {BA, JPM}.</p>
+<p><strong>Step 5</strong>: Update the distance matrix again.</p>
+<ul class="simple">
+<li><p>New cluster: {BA, JPM}.</p></li>
+<li><p>Distances to other clusters are computed using the <strong>minimum</strong> distance rule.</p></li>
+</ul>
+<p><strong>Step 6</strong>: Find the next smallest distance.</p>
+<p>From the updated matrix:</p>
+<ul class="simple">
+<li><p>Distance between <strong>XOM</strong> and {BA, JPM}:</p>
+<ul>
+<li><p>Distance(XOM, BA) = 0.510</p></li>
+<li><p>Distance(XOM, JPM) = 0.465</p></li>
+<li><p>Minimum = <strong>0.465</strong></p></li>
+</ul>
+</li>
+</ul>
+<p>-&gt; Merge {XOM} with {BA, JPM} into a larger cluster {BA, JPM, XOM}.</p>
+<p><strong>Step 7</strong>: Continue the process.</p>
+<p>At each step:</p>
+<ul class="simple">
+<li><p>Find the <strong>smallest available distance</strong>,</p></li>
+<li><p>Merge the corresponding clusters,</p></li>
+<li><p>Update the distance matrix according to <strong>single linkage</strong> (minimum distance between points across clusters),</p></li>
+<li><p>Repeat until all assets are merged into one single cluster.</p></li>
+</ul>
+<section id="important-notes">
+<h4>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Single linkage</strong> forms “chains” by always connecting the closest available clusters.</p></li>
+<li><p>It is <strong>easy to perform manually</strong> because only the <strong>minimum distance</strong> matters.</p></li>
+<li><p>After each merge, the number of clusters reduces by one.</p></li>
+<li><p>The clustering process can be visualized using a <strong>dendrogram</strong>, where the height of each merge represents the distance at which clusters were joined.</p></li>
+</ul>
+<p>The dendogram for our example can be found in the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.cluster.hierarchy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">squareform</span> 
+
+<span class="n">pairwise_distances</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+<span class="n">linkage_matrix</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">pairwise_distances</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">optimal_ordering</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span> 
+<span class="n">dendrogram</span><span class="p">(</span>
+    <span class="n">linkage_matrix</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>  
+    <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>     
+    <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">color_threshold</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> 
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Hierarchical Clustering Dendrogram (Ward Linkage) - Asset Distances&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ce05d2316f857561f49662cdaa89cee2cd73e2b9e666b76d4659222d6c9d41ef.png" src="_images/ce05d2316f857561f49662cdaa89cee2cd73e2b9e666b76d4659222d6c9d41ef.png" />
+</div>
+</div>
+<p>While <strong>single linkage</strong> is simple to understand and implement, it has some important limitations. Single linkage tends to produce long, “chain-like” clusters where new points are added based only on local proximity, often leading to poorly separated and elongated clusters. This effect, known as the <strong>chaining phenomenon</strong>, can result in clusters that are not compact or meaningful when analyzing financial assets.</p>
+<p>In contrast, <strong>Ward linkage</strong> focuses on minimizing the <strong>total within-cluster variance</strong> at each step. When two clusters are merged, Ward’s method chooses the pair whose combination results in the smallest possible increase in the overall within-cluster sum of squares. As a result, clusters produced by Ward linkage are typically more <strong>compact</strong>, <strong>spherical</strong>, and <strong>well-separated</strong>, making the clustering results more interpretable and stable — important properties when dealing with noisy and high-dimensional financial data.</p>
+<p>Because of these advantages, Ward linkage is often preferred in financial clustering applications where clear and robust groupings of assets are desired. Take a look below how our example looks like when using Ward linkage. We are going to continue with this hierarchical clustering tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.cluster.hierarchy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">squareform</span> 
+
+<span class="n">pairwise_distances</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+<span class="n">linkage_matrix</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">pairwise_distances</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;ward&quot;</span><span class="p">,</span> <span class="n">optimal_ordering</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span> 
+<span class="n">dendrogram</span><span class="p">(</span>
+    <span class="n">linkage_matrix</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>  
+    <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>     
+    <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">color_threshold</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> 
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Hierarchical Clustering Dendrogram (Ward Linkage) - Asset Distances&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ec3caaa539be67b8ef8b7864bd22918525602848c72609d096b07b7a4ad72a8c.png" src="_images/ec3caaa539be67b8ef8b7864bd22918525602848c72609d096b07b7a4ad72a8c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="choosing-the-number-of-clusters">
+<h3>Choosing the Number of Clusters<a class="headerlink" href="#choosing-the-number-of-clusters" title="Link to this heading">#</a></h3>
+<p>As discussed in the previous chapter, hierarchical clustering requires the user to determine the final number of clusters. Conceptually, this is equivalent to <strong>cutting the dendrogram vertically</strong> at a certain height: all branches connected below the cut form separate clusters.</p>
+<p>The number of clusters can be selected based on a <strong>fixed value</strong> chosen by the user, either according to prior knowledge, interpretability, or practical needs. Alternatively, more <strong>objective measures</strong> can be used to guide the decision. One common approach is to compute the <strong>standardized silhouette score</strong>, which evaluates how similar an object is to its own cluster compared to other clusters. A higher silhouette score typically indicates more clearly separated and internally cohesive clusters, providing a useful metric for selecting an appropriate number of clusters in a data-driven way.</p>
+<p>The <strong>silhouette score</strong> measures how well an object is matched to its own cluster compared to other clusters. For each observation <span class="math notranslate nohighlight">\(i\)</span>, the silhouette score <span class="math notranslate nohighlight">\(s(i)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}
+\]</div>
+<p>Given an observation <span class="math notranslate nohighlight">\(i\)</span> belonging to cluster <span class="math notranslate nohighlight">\(C_i\)</span>:</p>
+<ul class="simple">
+<li><p>The <strong>intra-cluster distance</strong> <span class="math notranslate nohighlight">\(a(i)\)</span> is defined as the average distance between <span class="math notranslate nohighlight">\(i\)</span> and all other points within the same cluster <span class="math notranslate nohighlight">\(C_i\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+a(i) = \frac{1}{|C_i| - 1} \sum_{\substack{j \in C_i \\ j \neq i}} d(i, j)
+\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|C_i|\)</span> is the number of points in cluster <span class="math notranslate nohighlight">\(C_i\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(i, j)\)</span> is the distance between observations <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>The <strong>nearest-cluster distance</strong> <span class="math notranslate nohighlight">\(b(i)\)</span> is defined as the minimum average distance between <span class="math notranslate nohighlight">\(i\)</span> and all points in a different cluster <span class="math notranslate nohighlight">\(C\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+b(i) = \min_{C \neq C_i} \left( \frac{1}{|C|} \sum_{j \in C} d(i, j) \right)
+\]</div>
+<p>where the minimum is taken over all clusters <span class="math notranslate nohighlight">\(C\)</span> different from <span class="math notranslate nohighlight">\(C_i\)</span>.</p>
+<p>Thus:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a(i)\)</span> measures how well <span class="math notranslate nohighlight">\(i\)</span> is assigned to its own cluster (lower is better),</p></li>
+<li><p><span class="math notranslate nohighlight">\(b(i)\)</span> measures how far <span class="math notranslate nohighlight">\(i\)</span> is from its “best” neighboring cluster (higher is better).</p></li>
+</ul>
+<p>The silhouette score <span class="math notranslate nohighlight">\(s(i)\)</span> ranges between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(+1\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s(i) \approx +1\)</span> indicates that the observation is well matched to its own cluster and poorly matched to neighboring clusters.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s(i) \approx 0\)</span> indicates that the observation lies close to the decision boundary between two clusters.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s(i) \approx -1\)</span> indicates that the observation may have been assigned to the wrong cluster.</p></li>
+</ul>
+<p>The overall <strong>silhouette score</strong> for a clustering solution is the average <span class="math notranslate nohighlight">\(s(i)\)</span> across all observations. A higher average silhouette score indicates better-defined and more separated clusters.</p>
+<p>The silhouette score provides a simple way to evaluate the quality of a clustering. It compares how tightly grouped each point is within its own cluster (small <span class="math notranslate nohighlight">\(a(i)\)</span>) against how far away it is from the next nearest cluster (large <span class="math notranslate nohighlight">\(b(i)\)</span>). A good clustering will have high within-cluster similarity and low between-cluster similarity, leading to silhouette scores close to <span class="math notranslate nohighlight">\(+1\)</span>.</p>
+<p>In the hierarichal clustering literature, it is proposed to standardize the silhoutte scores by averaging and dividing through their standard deviation. For a given number of clusters, we can determine the standardized silhouette score:</p>
+<div class="math notranslate nohighlight">
+\[
+q = \frac{\frac{1}{n} \sum_{i=1}^n s(i)} {\sqrt{\frac{1}{n} \sum_{i=1}^n \left( s(i) - \frac{1}{n} \sum_{i=1}^n s(i) \right)^2}}
+\]</div>
+<p>Finally, we choose the number of clusters which maximizes <span class="math notranslate nohighlight">\(q\)</span>. The cell below determines it for up to five clusters. We observe that three would be the best number of clusters in our example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.cluster.hierarchy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_samples</span>
+
+<span class="n">cluster_lvls</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">hr</span><span class="o">.</span><span class="n">cut_tree</span><span class="p">(</span><span class="n">linkage_matrix</span><span class="p">),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">level_k</span> <span class="o">=</span> <span class="n">cluster_lvls</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">cluster_lvls</span> <span class="o">=</span> <span class="n">cluster_lvls</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">cluster_lvls</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">level_k</span>
+<span class="n">cluster_k</span> <span class="o">=</span> <span class="n">cluster_lvls</span><span class="o">.</span><span class="n">nunique</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">max_k</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">scores_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cluster_k</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">scores_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_k</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span> <span class="c1">#np.sqrt(n)</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">cluster_lvls</span><span class="p">[</span><span class="n">level_k</span><span class="p">[</span><span class="n">cluster_k</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k</span><span class="p">)]]</span>  
+        <span class="n">b</span> <span class="o">=</span> <span class="n">silhouette_samples</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+        <span class="n">scores_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">b</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+
+<span class="n">scores_list</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scores_list</span><span class="p">)</span>
+<span class="n">k_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scores_list</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">cluster_k</span><span class="p">[</span><span class="n">k_index</span><span class="p">]</span>
+<span class="n">scores_list</span> <span class="o">=</span> <span class="n">scores_list</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+<span class="n">scores_list</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Cluster number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          q  Cluster number
+0      -inf               1
+1  1.393510               2
+2  1.403226               3
+3  1.338488               4
+4  1.088693               5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recursive-bisection-in-hierarchical-clustering">
+<h3>Recursive Bisection in Hierarchical Clustering<a class="headerlink" href="#recursive-bisection-in-hierarchical-clustering" title="Link to this heading">#</a></h3>
+<p>Now, we approach the question how to use the structure which has been revealed by clustering. An important concept in applying hierarchical clustering to practical problems, such as portfolio allocation, is <strong>recursive bisection</strong>. This approach involves traversing the clustering tree (dendrogram) from the top down and repeatedly splitting clusters into two subclusters at each step.</p>
+<p>The key idea is to treat the dendrogram as a decision tree: starting with all assets grouped into a single cluster, the algorithm splits this cluster into two subgroups based on the clustering structure (typically from a linkage method like Ward or single linkage). Each subgroup is then recursively split again, until all leaves (individual assets) are reached.</p>
+<p>Recursive bisection provides a structured way to exploit the hierarchy uncovered by clustering. It enables the user to assign values—such as weights, risks, or labels—to smaller and smaller groups while preserving the global structure of the data. This top-down traversal forms the backbone of algorithms like <strong>Hierarchical Risk Parity (HRP)</strong>, but has also been adapted in various ways for tasks such as asset allocation, feature grouping, and model ensembling.</p>
+<p>For instance, assume we want to allocate money to the assets in our example with an emphasis on risk reduction (measured by volatilty). As clusters are derived on correlation, we know that correlation within cluster groups are higher than between cluster groups. While many different ideas have been provided in the academic literature, we follow a simplified recursive bisection.</p>
+</section>
+<section id="pseudocode-recursive-bisection-for-weight-allocation-by-variance-contribution">
+<h3>Pseudocode: Recursive Bisection for Weight Allocation By Variance Contribution<a class="headerlink" href="#pseudocode-recursive-bisection-for-weight-allocation-by-variance-contribution" title="Link to this heading">#</a></h3>
+<p>The following algorithm recursively traverses a dendrogram to allocate weights across assets based on risk contributions. It assumes that the dendrogram provides a binary tree structure of asset groupings.</p>
+<section id="inputs">
+<h4>Inputs:<a class="headerlink" href="#inputs" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Dendrogram representing the hierarchical clustering</p></li>
+<li><p>Covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> of asset returns</p></li>
+<li><p>Minimum cluster size (optional stopping condition)</p></li>
+</ul>
+</section>
+<section id="initialization">
+<h4>Initialization:<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Assign equal initial weights to all assets:<br />
+For each asset <span class="math notranslate nohighlight">\(i\)</span>:<br />
+<span class="math notranslate nohighlight">\(w_i \leftarrow 1\)</span></p></li>
+</ul>
+</section>
+<section id="recursive-bisection-procedure">
+<h4>Recursive Bisection Procedure:<a class="headerlink" href="#recursive-bisection-procedure" title="Link to this heading">#</a></h4>
+<p>a. From the top of the dendogram split the cluster into <code class="docutils literal notranslate"><span class="pre">left</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code> subclusters based on the dendrogram.</p>
+<p>b. Compute the <strong>risk measure (RM)</strong> of each subcluster using the assumption to build a naive portfolio for each subcluster:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{RM}_1 = \sqrt{w_1^T \Sigma_1 w_1} \\
+\text{RM}_2 = \sqrt{w_2^T \Sigma_2 w_2}
+\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_1\)</span>, <span class="math notranslate nohighlight">\(\Sigma_1\)</span>: weights and covariance submatrix for the left cluster,</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_2\)</span>, <span class="math notranslate nohighlight">\(\Sigma_2\)</span>: weights and covariance submatrix for the right cluster.</p></li>
+</ul>
+<p>d. Compute the <strong>risk weight</strong>:
+$<span class="math notranslate nohighlight">\(
+\alpha = 1 - \frac{\text{RM}_1}{\text{RM}_1 + \text{RM}_2}
+\)</span>$</p>
+<p>e. Scale weights of the two subclusters:</p>
+<ul class="simple">
+<li><p>For all assets in the <strong>left cluster</strong>:<br />
+<span class="math notranslate nohighlight">\(w_i \leftarrow \alpha \cdot w_i\)</span></p></li>
+<li><p>For all assets in the <strong>right cluster</strong>:<br />
+<span class="math notranslate nohighlight">\(w_i \leftarrow (1 - \alpha) \cdot w_i\)</span></p></li>
+</ul>
+<p>f. If the optimal number of clusters is reached <strong>stop</strong>, otherwise restart with step <em>a</em> for the next level of the dendogram.</p>
+<p>After the weights have been determined, the weight for each company in the same cluster (at optimal cluster level) is the same, however weights are inverse proportional of the risk for the cluster portfolios. I.e., members of clusters with higher risk have lower weights. Finally, the weights are normalized to <span class="math notranslate nohighlight">\(\sum_i w_i = 1, w_i \geq 0 \forall i = 1, ..., n\)</span>.</p>
+<p>If you take a look in the dendogram above, you observe that the first split creates two subgroups:</p>
+<ul class="simple">
+<li><p>Left: XOM, BA, JPM, DIS</p></li>
+<li><p>Right: NKE, AAPL, NVDA, PLD, JNJ, WMT</p></li>
+</ul>
+<p>If we determine the variance for a naive portfolio of the left group we get: <span class="math notranslate nohighlight">\(RM_1 = 0.00037\)</span> and for the right group we get: <span class="math notranslate nohighlight">\(RM_2 = 0.00058\)</span>. This results in a weighting factor <span class="math notranslate nohighlight">\(\alpha = 0.6106\)</span> because the left portfolio is less risky. Take a look in the cell output below which tracks the determination and updating of weights until the three clusters (optimal number according to silhouette scores) is reaced.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">assetslist</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">root</span><span class="p">,</span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">hr</span><span class="o">.</span><span class="n">to_tree</span><span class="p">(</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">nodes_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">dist</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">])</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">nodes_1</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">idx</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">assetslist</span><span class="p">)</span>
+
+<span class="n">clustering_inds</span> <span class="o">=</span> <span class="n">hr</span><span class="o">.</span><span class="n">fcluster</span><span class="p">(</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;maxclust&quot;</span><span class="p">)</span>
+<span class="n">clusters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">i</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">clustering_inds</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">clustering_inds</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clustering_inds</span><span class="p">):</span>
+    <span class="n">clusters</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">cov</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">nbr</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">[:</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">is_leaf</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># skip leaf-nodes</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">get_left</span><span class="p">()</span><span class="o">.</span><span class="n">pre_order</span><span class="p">()</span>  <span class="c1"># lambda i: i.id) # get left cluster</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">get_right</span><span class="p">()</span><span class="o">.</span><span class="n">pre_order</span><span class="p">()</span>  <span class="c1"># lambda i: i.id) # get right cluster</span>
+        <span class="n">left_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">right_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">left_risk</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">right_risk</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">left_cluster</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">right_cluster</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">left_set</span><span class="p">):</span>
+                <span class="n">cov_left</span> <span class="o">=</span> <span class="n">cov</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+                <span class="n">n_tmp</span> <span class="o">=</span> <span class="n">cov_left</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">n_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_tmp</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_tmp</span>
+                <span class="n">left_risk_</span> <span class="o">=</span> <span class="n">n_weights</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov_left</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">n_weights</span><span class="p">)</span>
+
+                <span class="n">left_risk</span> <span class="o">+=</span> <span class="n">left_risk_</span>
+
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">right_set</span><span class="p">):</span>
+                <span class="n">cov_right</span> <span class="o">=</span> <span class="n">cov</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">clusters</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+                <span class="n">n_tmp</span> <span class="o">=</span> <span class="n">cov_right</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">n_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_tmp</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_tmp</span>
+                <span class="n">right_risk_</span> <span class="o">=</span> <span class="n">n_weights</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov_right</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">n_weights</span><span class="p">)</span>
+
+                <span class="n">right_risk</span> <span class="o">+=</span> <span class="n">right_risk_</span>
+                
+        <span class="n">alpha_1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">left_risk</span> <span class="o">/</span> <span class="p">(</span><span class="n">left_risk</span> <span class="o">+</span> <span class="n">right_risk</span><span class="p">)</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">*=</span> <span class="n">alpha_1</span>  
+    <span class="n">weights</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_1</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The variance of the left portfolio at dendogram level </span><span class="si">{</span><span class="n">nbr</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">left_risk</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The variance of the left portfolio at dendogram level </span><span class="si">{</span><span class="n">nbr</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">right_risk</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The risk based weightig for the left portfolio at dendogram level </span><span class="si">{</span><span class="n">nbr</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">alpha_1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The updated weights after determining the risk contribution at dendogram level </span><span class="si">{</span><span class="n">nbr</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The variance of the left portfolio at dendogram level 1 is: 0.000370
+The variance of the left portfolio at dendogram level 1 is: 0.000580
+The risk based weightig for the left portfolio at dendogram level 1 is: 0.6106
+The updated weights after determining the risk contribution at dendogram level 1 is:
+--------------------------------------------------
+AAPL    0.389399
+BA      0.610601
+DIS     0.610601
+JNJ     0.389399
+JPM     0.610601
+NKE     0.389399
+NVDA    0.389399
+PLD     0.389399
+WMT     0.389399
+XOM     0.610601
+dtype: float64
+--------------------------------------------------
+The variance of the left portfolio at dendogram level 2 is: 0.000432
+The variance of the left portfolio at dendogram level 2 is: 0.000147
+The risk based weightig for the left portfolio at dendogram level 2 is: 0.2542
+The updated weights after determining the risk contribution at dendogram level 2 is:
+--------------------------------------------------
+AAPL    0.098987
+BA      0.610601
+DIS     0.610601
+JNJ     0.290412
+JPM     0.610601
+NKE     0.098987
+NVDA    0.098987
+PLD     0.290412
+WMT     0.290412
+XOM     0.610601
+dtype: float64
+--------------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the weights at this stage are not normalized. So in a last step, we inta-cluster weights and multiply them with the weights determined above. The intra-cluster weights are simple weights which assume we only invest into a single cluster. For instance, if we build a naive portfolio for the cluster with NKE, AAPL and NVDA, each asset weight is <span class="math notranslate nohighlight">\(1/3\)</span>, if we do the same for the cluster with four companies each asset weight is <span class="math notranslate nohighlight">\(1/4\)</span> etc. Note that naive portfolios are just a choice in this book to keep things simple. For this stage as well as for the left/right portfolio grouping intra-cluster weights can be derived by other approaches such as minimum variance or maximum Sharpe ratio optimization.</p>
+<p>In our example, we end up with final weights which are shown in the figure below. Companies in the cluster with JPM, DIS, XOM and BA have the largest portfolio allocations as this cluster has the lowest risk. In the remaining group, more money is distributed to WMT, JNJ and PLD because in comparison to NKE, APPL and NVDA, the former cluster has little risk than the last one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">riskfolio</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">clustered_assets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">hr</span><span class="o">.</span><span class="n">cut_tree</span><span class="p">(</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">cov</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">clustered_assets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">clustered_assets</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">cluster_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster</span><span class="p">),</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cluster_weights</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">*=</span> <span class="n">cluster_weights</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">plot_pie</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">others</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b58ebf5bb17dfc8c4fafa19298b11c5f2d0eb04bd284b6303dcbe2d1244690de.png" src="_images/b58ebf5bb17dfc8c4fafa19298b11c5f2d0eb04bd284b6303dcbe2d1244690de.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="potential-advantages-of-hierarchical-clustering-for-portfolio-allocation">
+<h3>Potential Advantages of Hierarchical Clustering for Portfolio Allocation<a class="headerlink" href="#potential-advantages-of-hierarchical-clustering-for-portfolio-allocation" title="Link to this heading">#</a></h3>
+<p>Applications of hierarchical clustering for determining portfolio allocation have been developed due to practical shortcomings of traditional portfolio optimization. Portfolios constructed by these approaches often have better ouf of sample performance. A few argumets why this is the case are:</p>
+<ul class="simple">
+<li><p><strong>Captures asset dependencies naturally</strong><br />
+Hierarchical clustering organizes assets based on their pairwise relationships (e.g., correlations), allowing the portfolio structure to reflect real-world similarities and differences between assets.</p></li>
+<li><p><strong>Reduces reliance on covariance matrix inversion</strong><br />
+Traditional mean-variance optimization requires inverting the covariance matrix, which can be unstable and sensitive to estimation errors. Hierarchical methods avoid direct inversion, improving robustness.</p></li>
+<li><p><strong>Creates interpretable asset groupings</strong><br />
+Clustering reveals natural groups of assets (e.g., sectors, factors) which can be intuitively understood and incorporated into allocation decisions.</p></li>
+<li><p><strong>Provides structured diversification</strong><br />
+By splitting allocations across increasingly smaller and more similar groups, hierarchical methods promote diversification at multiple levels (between sectors, then within sectors, etc.).</p></li>
+<li><p><strong>Handles noisy financial data more robustly</strong><br />
+Clustering focuses on relative relationships between assets rather than absolute estimates, making the resulting allocations less sensitive to estimation noise.</p></li>
+<li><p><strong>Flexible with different risk measures</strong><br />
+Recursive bisection and allocation schemes based on clustering can accommodate various risk measures (variance, Value-at-Risk, Expected Shortfall), offering flexibility depending on investment objectives.</p></li>
+<li><p><strong>Scales well with large asset universes</strong><br />
+Hierarchical methods can handle a large number of assets without requiring unrealistic amounts of data to estimate stable covariance structures.</p></li>
+<li><p><strong>Aligns with real-world investment constraints</strong><br />
+Grouping assets first by similarity can make it easier to integrate practical constraints (such as sector caps, regional exposure limits) into portfolio construction.</p></li>
+</ul>
+</section>
+<section id="literature">
+<h3>Literature<a class="headerlink" href="#literature" title="Link to this heading">#</a></h3>
+<p>Note that this subsection described the idea of hierarchical clustering for portfolio allocation. A few academic contributions have developed and advanced these concepts. If you are interested in the details, you may want to go through:</p>
+<ul class="simple">
+<li><p>López de Prado M. (2016) Building diversified portfolios that outperform out of sample. J Portfolio Manag 42(4):59–69. <a class="reference external" href="https://doi.org/10.3905/jpm.2016.42.4.059">https://doi.org/10.3905/jpm.2016.42.4.059</a></p></li>
+<li><p>Raffinot T. (2017) Hierarchical clustering-based asset allocation. J Portfolio Manag 44(2):89–99. <a class="reference external" href="https://doi.org/10.3905/jpm.2018.44.2.089">https://doi.org/10.3905/jpm.2018.44.2.089</a></p></li>
+<li><p>Raffinot T. (2018) The hierarchical equal risk contribution portfolio. <a class="reference external" href="https://doi.org/10.2139/ssrn">https://doi.org/10.2139/ssrn</a>. 3237540</p></li>
+<li><p>López de Prado M., J. Lewis M. (2019) Detection of false investment strategies using unsupervised learning methods. Quantit Financ 19(9):1555–1565. <a class="reference external" href="https://doi.org/10.1080/14697688.2019">https://doi.org/10.1080/14697688.2019</a>. 1622311</p></li>
+</ul>
+</section>
+</section>
+<section id="applications-of-machine-learning-to-prediction">
+<h2>Applications of Machine Learning to Prediction<a class="headerlink" href="#applications-of-machine-learning-to-prediction" title="Link to this heading">#</a></h2>
+<p>Having introduced key concepts for organizing and clustering financial assets, we now turn to another major application of machine learning in finance: the <strong>prediction of asset returns</strong> and <strong>directional price movements</strong>. In recent years, a growing body of academic research has explored the use of machine learning techniques to forecast excess returns and classify whether asset prices will move up or down.</p>
+<p>These studies typically apply supervised learning models to historical financial and economic data, aiming to uncover complex patterns that traditional linear models might miss. Common approaches include regression-based models for return prediction and classification models for forecasting price direction. In the following sections, we review selected examples from the top literature, illustrating how machine learning methods are used in practice to address the challenges of return predictability in noisy and dynamic financial environments.</p>
+<section id="predicting-asset-returns">
+<h3>Predicting Asset Returns<a class="headerlink" href="#predicting-asset-returns" title="Link to this heading">#</a></h3>
+<p>Three popular academic contributions which tackle regression taks with a large number of machine learning algorithms are:</p>
+<ul class="simple">
+<li><p>Gu S., Kelly, B., Dacheng, X. (2020) Empirical asset pricing via machine learning. Review of Financial Studies 33(5):2223-2273. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa009">https://doi.org/10.1093/rfs/hhaa009</a></p></li>
+<li><p>Bianchi D., Büchner M., Tamoni A. (2021) Bond risk premimums with machine learning. Review of Financial Studies 34(2):1046-1089. <a class="reference external" href="https://doi.org/10.1093/rfs/hhaa062">https://doi.org/10.1093/rfs/hhaa062</a></p></li>
+<li><p>Bali T.G., Beckmeyer H., Mörke M., Weigert F. (2023) Option returns predictability with machine learning and big data. Review of Financial Studies 36(9):3548-3602. <a class="reference external" href="https://doi.org/10.1093/rfs/hhad017">https://doi.org/10.1093/rfs/hhad017</a></p></li>
+</ul>
+<p>There are many similarities between these papers except for the asset class for which they create predictions. Gu et al. (2020) predict excess returns of stocks, Bianchi et al. (2021) predict bond returns and Bali et al. (2023) option returns. What unites these papers is that they use a large amount of data with a relatively long history. The data frequency is usually at a monthly level.</p>
+<p>Each paper uses a training, validation and test set to estimate parameters, optimize hyperparameters and evaluate true out of sample performance. Usually these data subsamples are used in a rolling manner over time. The evaluation is done by a pseudo coefficient of determination. The original <strong>coefficient of determination</strong> is denoted as <span class="math notranslate nohighlight">\(R^2\)</span> and measures the proportion of the variance in the dependent variable that is predictable from the independent variables.</p>
+<p>Formally, <span class="math notranslate nohighlight">\(R^2\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}} = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{SS}_{\text{res}} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2\)</span> is the <strong>residual sum of squares</strong>, representing the unexplained variance,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{SS}_{\text{tot}} = \sum_{i=1}^{n} (y_i - \bar{y})^2\)</span> is the <strong>total sum of squares</strong>, representing the total variance in the data,</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> are the observed values,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}_i\)</span> are the predicted values from the model,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{y}\)</span> is the mean of the observed values.</p></li>
+</ul>
+<p>The residual sum of squares is lower, the closer predictions of the model <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> are to the actual realizations <span class="math notranslate nohighlight">\(y_i\)</span>. The total sum of squares can be interpreted as the performance of a naive prediction model which excludes feature variables and predicts each observation with the average realization <span class="math notranslate nohighlight">\(\bar{y}\)</span>. The better the model is in identifying the relationship between feature variables and the target variable (asset returns), the closer its predictions should be in comparison to the naive prediction.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R^2 = 1\)</span>: perfect prediction; the model explains all variability in the response variable.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2 = 0\)</span>: the model explains no variability beyond the mean of the data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 &lt; R^2 &lt; 1\)</span>: the model explains a portion of the variability.</p></li>
+<li><p>In some cases (especially in out-of-sample evaluations), <span class="math notranslate nohighlight">\(R^2\)</span> can be negative, indicating that the model performs worse than simply predicting the mean.</p></li>
+</ul>
+<p>In comparison, academic contributions in the financial domain often use a slightly different definition which replaces <span class="math notranslate nohighlight">\(\bar{y}\)</span> with <span class="math notranslate nohighlight">\(0\)</span> which gives us:</p>
+<div class="math notranslate nohighlight">
+\[
+R_{adj}^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} y_i^2}
+\]</div>
+<p>That means the naive prediction against which the machine learning algorithms do compete states that the (excess) returns is equal to zero. The out of sample values of this adjusted metric seem relatively low, e.g., <span class="math notranslate nohighlight">\(R_{adj}^2 = 0.004\)</span> for the best model to predict monthly excess returns of stocks. Nevertheless, the results are remarkable because of market efficiency. For efficient markets, it should be impossible to consistently outperform random guessing. The comparison to simpler models in these papers show that traditional and less flexible models such as linear regression fail to generate positive values for <span class="math notranslate nohighlight">\(R_{adj}^2\)</span>. If the positive value is enough in the presence of transaction costs and other market frictions depends on the management of these prediction signals. Note that each of these papers also reveal the most important features for prediction. This is an essential step for economicly meaningful applications of machine learning algorithms.</p>
+</section>
+<section id="predicting-price-trends">
+<h3>Predicting Price Trends<a class="headerlink" href="#predicting-price-trends" title="Link to this heading">#</a></h3>
+<p>Another publication from a top tier financial journal is given by:</p>
+<ul class="simple">
+<li><p>Jiang J., Kelly B., Dacheng X. (2023) (Re-)Imag(in)ing price trends. The Journal of Finance 78(6):3193-3249. <a class="reference external" href="https://doi.org/10.1111/jofi.13268">https://doi.org/10.1111/jofi.13268</a></p></li>
+</ul>
+<p>Forward neural networks as discussed in the last chapter may be seen as the simplest architecture for this flexible model family. The paper by Jiang et al. (2023) utilizes the architecture of Convolutional Neural Networks (CNN) to predict if stock prices move up or down within a period of the near future. CNNs are popular for their usefulness of image processing. I.e., whenever an image is the input to create an output prediction, CNNs are a natural choice given the way their convolutional architecture processes this input data.</p>
+<p>In the paper, <strong>OHLC charts</strong> are used as image input. The task is a binary classification which predicts if the stock price rises or not. See the cell for an example OHLC chart. An OHLC chart (Open-High-Low-Close chart) is a type of financial chart used to represent the price movements of an asset over a specific period, such as a day, week, or month. Each observation is visualized using a vertical line and two horizontal ticks:</p>
+<ul class="simple">
+<li><p>The <strong>vertical line</strong> spans from the <strong>low</strong> to the <strong>high</strong> price during the period.</p></li>
+<li><p>A <strong>left-facing tick</strong> marks the <strong>opening price</strong>, and a <strong>right-facing tick</strong> marks the <strong>closing price</strong>.</p></li>
+</ul>
+<p>This format provides a compact summary of four key data points for each time interval:</p>
+<ul class="simple">
+<li><p><strong>Open</strong>: The first traded price in the interval.</p></li>
+<li><p><strong>High</strong>: The highest price reached.</p></li>
+<li><p><strong>Low</strong>: The lowest price reached.</p></li>
+<li><p><strong>Close</strong>: The last traded price.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mdates</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Generate sample OHLC data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2023-01-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">open_prices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">close_prices</span> <span class="o">=</span> <span class="n">open_prices</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">high_prices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">open_prices</span><span class="p">,</span> <span class="n">close_prices</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">low_prices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">open_prices</span><span class="p">,</span> <span class="n">close_prices</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">ohlc_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span>
+    <span class="s2">&quot;Open&quot;</span><span class="p">:</span> <span class="n">open_prices</span><span class="p">,</span>
+    <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="n">high_prices</span><span class="p">,</span>
+    <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="n">low_prices</span><span class="p">,</span>
+    <span class="s2">&quot;Close&quot;</span><span class="p">:</span> <span class="n">close_prices</span>
+<span class="p">})</span>
+
+<span class="c1"># Prepare for plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">dates_num</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ohlc_data</span><span class="p">)):</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span> <span class="k">if</span> <span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Open&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;red&#39;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dates_num</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dates_num</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Low&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;High&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">dates_num</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dates_num</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[</span><span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Open&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ohlc_data</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis_date</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simple OHLC Chart&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Price&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/65ea3085796cfd5307af32d4e245abbb273bb827ee7c1bf4a37c75132eaa437c.png" src="_images/65ea3085796cfd5307af32d4e245abbb273bb827ee7c1bf4a37c75132eaa437c.png" />
+</div>
+</div>
+<p>The paper revisits the idea of trend-based return predictability by applying deep learning, specifically convolutional neural networks (CNNs), to images of stock price charts. Instead of relying on predefined technical indicators like momentum or reversal, the authors use CNNs to automatically learn which patterns in stock price and volume plots are predictive of future returns.</p>
+<p>As input to the model historical price and volume data (OHLC, moving average, volume) are transformed into black-and-white images. This includes 5-, 20-, and 60-day intervals, representing weekly, monthly, and quarterly time frames. A CNN is trained to classify whether the return following a price pattern will be positive or not, for various forecast horizons. Probabilities of future positive returns are estimated, and stocks are sorted into deciles based on these predictions to form portfolios.</p>
+<p>The most important findings are:</p>
+<ul class="simple">
+<li><p>CNN-based predictions significantly outperform traditional strategies like momentum and short-term reversal, especially at short horizons.</p></li>
+<li><p>Equal-weight long-short portfolios formed using CNN signals yield very high out-of-sample Sharpe ratios (up to <strong>7.2</strong>), compared to much lower Sharpe ratios from traditional strategies.</p></li>
+<li><p>CNN-based strategies remain profitable even after accounting for transaction costs and when rebalancing at lower frequencies.</p></li>
+<li><p>The models generalize well: short-term image patterns can predict long-term returns, and models trained on U.S. stocks also work in international markets.</p></li>
+<li><p>Interpretation of the CNN is difficult, but the authors provide some insights by approximating the model with logistic regressions and highlighting pattern-based features (e.g., prices closing near recent lows predict higher returns).</p></li>
+</ul>
+<p>The paper is a notable advancement in the literature on technical analysis and machine learning in finance for several reasons:</p>
+<ul class="simple">
+<li><p><strong>Nonlinear Feature Extraction</strong>: By using CNNs, the authors bypass the need for manual feature engineering. The model directly learns from raw pixel data, enabling the discovery of complex, nonlinear patterns.</p></li>
+<li><p><strong>Bridging Technical Analysis and Empirical Finance</strong>: The paper shows that techniques inspired by traditional chart-based technical analysis can be formalized and enhanced using modern deep learning, achieving stronger performance and better generalization.</p></li>
+<li><p><strong>Transfer Learning and Robustness</strong>: The finding that models trained on U.S. data perform well internationally and across different time scales adds practical relevance. It supports the idea that certain price formation mechanisms are consistent across contexts.</p></li>
+<li><p><strong>Challenges Remain</strong>: While results are impressive, interpretability remains an issue. Moreover, high-frequency trading strategies based on CNN predictions involve substantial turnover, though lower-frequency applications remain feasible.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>While this chapter has focused on selected applications of machine learning in finance—such as asset clustering, return prediction, and the use of image-based models—many other promising areas remain. Techniques like credit risk classification, fraud detection, and asset allocation through reinforcement learning are actively being explored and applied in both academic research and industry.</p>
+<p>The goal of this chapter is not to provide an exhaustive overview, but rather to give readers a solid understanding of how machine learning methods are being adapted to the unique challenges and characteristics of financial data. These include high noise-to-signal ratios, non-stationarity, the importance of interpretability, and the need for robust out-of-sample performance.</p>
+<p>By highlighting a few concrete examples and practical techniques, we hope to equip readers with a foundation to critically engage with the growing body of machine learning applications in finance—and to inspire further exploration of this rapidly evolving field.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_machine_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Machine Learning</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-assets-by-dependence">Clustering Assets by Dependence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-metrics">Distance Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-based-on-correlation">Distance Based on Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-distance-metrics">Clustering with Distance Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-number-of-clusters">Choosing the Number of Clusters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-bisection-in-hierarchical-clustering">Recursive Bisection in Hierarchical Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocode-recursive-bisection-for-weight-allocation-by-variance-contribution">Pseudocode: Recursive Bisection for Weight Allocation By Variance Contribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">Initialization:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-bisection-procedure">Recursive Bisection Procedure:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-advantages-of-hierarchical-clustering-for-portfolio-allocation">Potential Advantages of Hierarchical Clustering for Portfolio Allocation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#literature">Literature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-machine-learning-to-prediction">Applications of Machine Learning to Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-asset-returns">Predicting Asset Returns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-price-trends">Predicting Price Trends</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Prof. Dr. Ralf Kellner
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

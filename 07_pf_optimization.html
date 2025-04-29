@@ -175,6 +175,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Portfolio Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_risk_management.html">Risk Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_machine_learning.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_machine_learning_applications.html">Machine Learning in Finance</a></li>
 </ul>
 
     </div>
@@ -667,14 +668,13 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/91d1501c3353724434e9810853c20246e744427e4a785a1a1c5c6b754466f64d.png" src="_images/91d1501c3353724434e9810853c20246e744427e4a785a1a1c5c6b754466f64d.png" />
+<img alt="_images/3e2a3ae6774fec1c66ad4b4b1bd38496d49affacff446a19e38c0f6c07af4454.png" src="_images/3e2a3ae6774fec1c66ad4b4b1bd38496d49affacff446a19e38c0f6c07af4454.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
 
 <span class="c1"># Expected returns and volatilities</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
@@ -744,7 +744,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/36ca63c689f7616a8e43d7c4ec0387e462e81926e31443b37087689e9a0f60cb.png" src="_images/36ca63c689f7616a8e43d7c4ec0387e462e81926e31443b37087689e9a0f60cb.png" />
+<img alt="_images/044afc6c9103fefe4ae61242bbe1b164182d55cf4d0fcaeb93c9d1e8281b8b75.png" src="_images/044afc6c9103fefe4ae61242bbe1b164182d55cf4d0fcaeb93c9d1e8281b8b75.png" />
 </div>
 </div>
 <p>From an investor’s perspective, we can look at the figure in two ways:</p>
@@ -884,7 +884,7 @@ SR_p = \frac{\mu_p - r_f}{\sigma_p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/083579bb32e1f2b49f14308ea8e234e7443be7863717e08e0d124cbb4d5582d6.png" src="_images/083579bb32e1f2b49f14308ea8e234e7443be7863717e08e0d124cbb4d5582d6.png" />
+<img alt="_images/a24e6abfab8f8bd85bafb5f616767f51926ca74f1922db4bf853efa805306e55.png" src="_images/a24e6abfab8f8bd85bafb5f616767f51926ca74f1922db4bf853efa805306e55.png" />
 </div>
 </div>
 </section>
@@ -1274,10 +1274,7 @@ F = \bar{\sigma}^2 I, \quad \text{with} \quad \bar{\sigma}^2 = \frac{1}{n} \oper
 <p>It’s important to note that even when using an <strong>unconditional estimator</strong>, changing portfolio weights over time can reflect shifts in the estimated covariance matrix. These shifts may result not from true market dynamics, but from <strong>estimation uncertainty</strong> — that is, natural variation due to changes in the data sample over time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cmap</span>
-
-<span class="c1"># Get viridis colors based on number of asset classes</span>
-<span class="n">n_assets</span> <span class="o">=</span> <span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_assets</span> <span class="o">=</span> <span class="n">optimal_weights_hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">viridis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_assets</span><span class="p">))</span>
 
