@@ -627,7 +627,7 @@ E(X) = \begin{cases}
 <p>The <strong>variance</strong> measures how much realizations of a random variable vary and is defined by:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-Var(X) = E(X-E(X))^2 =
+Var(X) = E \left[(X-E(X))^2\right] =
 			\begin{cases}
 			\sum_i (x_i - E(X))^2 \cdot f(x_i)   &amp; x \text{ discrete} \\
 			\int_{-\infty}^{\infty} (x - E(X))^2 \cdot f(x) dx  &amp; x \text{ continuous}
@@ -653,16 +653,13 @@ Var(X) = E(X-E(X))^2 =
 <li><p>The deciles divide the data into ten equal parts.</p></li>
 <li><p>The percentiles divide the data into 100 equal parts (e.g., the 90th percentile means 90% of the data is below that value).</p></li>
 </ul>
-<p>Quantiles are particularly useful in finance, and statistics, where measures such as Value-at-Risk (VaR) use quantiles to assess the probability of extreme losses. The  <span class="math notranslate nohighlight">\(\alpha\)</span>-quantile (also called the  <span class="math notranslate nohighlight">\(\alpha\)</span>-th percentile) of <span class="math notranslate nohighlight">\(X\)</span> is the smallest value <span class="math notranslate nohighlight">\(x_{\alpha}\)</span> such that:</p>
-<div class="math notranslate nohighlight">
-\[
-P(X \leq x_{\alpha}) = F(x_{\alpha}) \geq \alpha.
-\]</div>
-<p>Alternatively, this can be written as:</p>
+<p>Quantiles are particularly useful in finance, and statistics, where measures such as Value-at-Risk (VaR) use quantiles to assess the probability of extreme losses. The  <span class="math notranslate nohighlight">\(\alpha\)</span>-quantile (also called the  <span class="math notranslate nohighlight">\(\alpha\)</span>-th percentile) of <span class="math notranslate nohighlight">\(X\)</span> is the smallest value <span class="math notranslate nohighlight">\(x_{\alpha}\)</span> such that: <span class="math notranslate nohighlight">\(P(X \leq x_{\alpha}) = F(x_{\alpha}) \geq \alpha\)</span>.</p>
+<p>This can be written as:</p>
 <div class="math notranslate nohighlight">
 \[
 x_{\alpha} = \inf \{ x \in \mathbb{R} \mid F(x) \geq \alpha \}.
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(\inf\)</span> is the largest value which is less or equal to the set of values <span class="math notranslate nohighlight">\(\{ x \in \mathbb{R} \mid F(x) \geq \alpha \}\)</span>.</p>
 <p>This means that at least <span class="math notranslate nohighlight">\(\alpha \times\)</span> 100%  of the probability mass is less than or equal to  <span class="math notranslate nohighlight">\(x_{\alpha}\)</span>. For continuous distributions, the quantile is unique and is obtained using the inverse of the CDF:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -682,9 +679,101 @@ F^{-1} (\alpha) = \frac{\ln (1 - \alpha)}{-\lambda}
 <p>To determine, the, e.g., 90% quantile, with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>, we calculate:</p>
 <div class="math notranslate nohighlight">
 \[
-x_{0.90} = -\ln(0.10) \approx 2.302.
+x_{0.90} = -\ln(0.10) \approx 2.3026.
 \]</div>
 <p>If <span class="math notranslate nohighlight">\(X\)</span> is the arrival of new information in minutes, this means that for about 90% of all time when new information arrives, the wating time is below <span class="math notranslate nohighlight">\(2.302\)</span> minutes. This also means that for about 10% it takes longer than <span class="math notranslate nohighlight">\(2.302\)</span> minutes.</p>
+<p>Note, how this is in line with the general definition of the quantile. Below you can see various values <span class="math notranslate nohighlight">\(x\)</span> and the corresponding values for <span class="math notranslate nohighlight">\(F(x)\)</span>. Theoretically, all values above <span class="math notranslate nohighlight">\(2.3025\)</span> fulfill the requirement <span class="math notranslate nohighlight">\(F(x) \geq 0.90\)</span>. The <span class="math notranslate nohighlight">\(\inf\)</span> operator in the quantile definition makes sure that we choose the smallest possible value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">expon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">2.302</span><span class="p">,</span> <span class="mf">2.303</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+<span class="n">F_x</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">F_x</span> <span class="o">=</span> <span class="n">F_x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>F_x</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.3020</td>
+      <td>0.899941</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.3021</td>
+      <td>0.899951</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.3022</td>
+      <td>0.899961</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.3023</td>
+      <td>0.899971</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.3024</td>
+      <td>0.899981</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.3025</td>
+      <td>0.899991</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2.3026</td>
+      <td>0.900001</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2.3027</td>
+      <td>0.900011</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2.3028</td>
+      <td>0.900021</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2.3029</td>
+      <td>0.900031</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 <section id="generation-of-random-variables">
 <h2>Generation of random variables<a class="headerlink" href="#generation-of-random-variables" title="Link to this heading">#</a></h2>
@@ -714,12 +803,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.34208901 0.70959859 0.92752102 0.84413287 0.87811162]
+[0.89800786 0.08007957 0.53723528 0.30314782 0.15863963]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/9f879d2694192915ef25ca212711e5a7e04cfbd158ac39878910dd403d27f12e.png" src="_images/9f879d2694192915ef25ca212711e5a7e04cfbd158ac39878910dd403d27f12e.png" />
+<img alt="_images/8af72bdc97460723181d78090c694d4552eff9a64d8064bf680cd920edcc8d14.png" src="_images/8af72bdc97460723181d78090c694d4552eff9a64d8064bf680cd920edcc8d14.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -791,7 +880,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d9b80e3795a7433079cb04a48b0e6f881f1ff385c1d09d221be15b6e37394d19.png" src="_images/d9b80e3795a7433079cb04a48b0e6f881f1ff385c1d09d221be15b6e37394d19.png" />
+<img alt="_images/1b812690dfc19ae29b1f573a56fb10029da731eac7cd42c5be5e30d348851962.png" src="_images/1b812690dfc19ae29b1f573a56fb10029da731eac7cd42c5be5e30d348851962.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -807,7 +896,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2239a0f19117d376da73929eedd6966de892a99c0b0e1e6a61414bb89d22b5f3.png" src="_images/2239a0f19117d376da73929eedd6966de892a99c0b0e1e6a61414bb89d22b5f3.png" />
+<img alt="_images/1d9fbb7a71bfa672d1755b174b3edc31e7633b37cdd4ec0229e4e9ea34061a25.png" src="_images/1d9fbb7a71bfa672d1755b174b3edc31e7633b37cdd4ec0229e4e9ea34061a25.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -862,7 +951,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/54ada8e562a42e8b6b07fe43fc18b4eded5985802194f113ab715e3f1cbe0c64.png" src="_images/54ada8e562a42e8b6b07fe43fc18b4eded5985802194f113ab715e3f1cbe0c64.png" />
+<img alt="_images/e70e105c7bb78cf119beba8076a5ad8e6292bf1c7e3adf490ca231520ea65b32.png" src="_images/e70e105c7bb78cf119beba8076a5ad8e6292bf1c7e3adf490ca231520ea65b32.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -951,7 +1040,7 @@ $<span class="math notranslate nohighlight">\(F(x_1, x_2) = F_{X_1}(x_1) \cdot F
 <p>Covariance measures how two random variables vary together. A positive covariance indicates that the variables tend to move in the same direction, while a negative covariance indicates that they tend to move in opposite directions. If the covariance is zero, the variables are said to be <strong>uncorrelated</strong>.</p>
 <p>The <strong>correlation coefficient</strong> between <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span> is a standardized measure of their linear relationship, defined as:</p>
 <div class="math notranslate nohighlight">
-\[\rho(X_1, X_2) = \frac{\text{Cov}(X_1, X_2)}{\sqrt{\text{Var}(X_1)\text{Var}(X_2)}} = \frac{\text{Cov}(X_1, X_2)}{\sigma_{X_1}\sigma_{X_2}}\]</div>
+\[\rho(X_1, X_2) = \frac{\text{Cov}(X_1, X_2)}{\sqrt{\text{Var}(X_1)} \sqrt{\text{Var}(X_2)}} = \frac{\text{Cov}(X_1, X_2)}{\sigma_{X_1}\sigma_{X_2}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma_{X_i}^2\)</span> is the variance of <span class="math notranslate nohighlight">\(X_i\)</span>.</p>
 <p>The correlation coefficient always lies between -1 and 1:</p>
 <ul class="simple">
@@ -1068,7 +1157,7 @@ R = D^{-1/2} \Sigma D^{-1/2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a4a4d053064a52dd2bb4777b3339bcce0ca740884578cb9cf20ffe2e3d49bd73.png" src="_images/a4a4d053064a52dd2bb4777b3339bcce0ca740884578cb9cf20ffe2e3d49bd73.png" />
+<img alt="_images/e4a288399f9db30277579844cb2348588f3e4036937fc7b263784025c1ca84c3.png" src="_images/e4a288399f9db30277579844cb2348588f3e4036937fc7b263784025c1ca84c3.png" />
 </div>
 </div>
 <p>It’s important to note that while independence implies zero correlation, the converse is not necessarily true. Two random variables can be uncorrelated but still dependent in a non-linear way. To visualize this, take a look below. Even though very stron non-linear relationships exist, the linear correlation coefficient underestimates the true relationship.</p>
