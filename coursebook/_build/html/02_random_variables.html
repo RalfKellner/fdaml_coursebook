@@ -339,7 +339,13 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-how-fat-tails-impact-the-maximum-drawdown">Example: How Fat Tails Impact the Maximum Drawdown</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-price-paths">Simulating price paths</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-multivariate-random-variables">Definition of multivariate random variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous-multivariate-distributions">Discrete and continuous multivariate distributions</a></li>
@@ -803,12 +809,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.89800786 0.08007957 0.53723528 0.30314782 0.15863963]
+[0.31121593 0.14356032 0.69606988 0.47820547 0.50596058]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/8af72bdc97460723181d78090c694d4552eff9a64d8064bf680cd920edcc8d14.png" src="_images/8af72bdc97460723181d78090c694d4552eff9a64d8064bf680cd920edcc8d14.png" />
+<img alt="_images/6b5e74a4babcf318cfa69e43cc6aea20a3a688504858ac1f194b9cc7d17f1c05.png" src="_images/6b5e74a4babcf318cfa69e43cc6aea20a3a688504858ac1f194b9cc7d17f1c05.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -880,7 +886,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1b812690dfc19ae29b1f573a56fb10029da731eac7cd42c5be5e30d348851962.png" src="_images/1b812690dfc19ae29b1f573a56fb10029da731eac7cd42c5be5e30d348851962.png" />
+<img alt="_images/59e1958ecce63a04e5ff3909c1815e189cfdee4e0f9eabe30ae0c3a868da2b00.png" src="_images/59e1958ecce63a04e5ff3909c1815e189cfdee4e0f9eabe30ae0c3a868da2b00.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -896,7 +902,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1d9fbb7a71bfa672d1755b174b3edc31e7633b37cdd4ec0229e4e9ea34061a25.png" src="_images/1d9fbb7a71bfa672d1755b174b3edc31e7633b37cdd4ec0229e4e9ea34061a25.png" />
+<img alt="_images/8676d41dea9342a33ce76d1d5a0f9c98e5712f3b539abbc2bf38c7968efe4af1.png" src="_images/8676d41dea9342a33ce76d1d5a0f9c98e5712f3b539abbc2bf38c7968efe4af1.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -951,7 +957,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e70e105c7bb78cf119beba8076a5ad8e6292bf1c7e3adf490ca231520ea65b32.png" src="_images/e70e105c7bb78cf119beba8076a5ad8e6292bf1c7e3adf490ca231520ea65b32.png" />
+<img alt="_images/42f91526460b479ab73990d1a1e99cf6f5cb2d11dc968538eade5c6acaafdf57.png" src="_images/42f91526460b479ab73990d1a1e99cf6f5cb2d11dc968538eade5c6acaafdf57.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -961,6 +967,301 @@ In reality, we typically draw a random sample of data and analyze it. By using s
 <li><p>Exploring “What If” Scenarios:
 Simulation serves as a powerful tool for scenario analysis, allowing us to examine a range of possible outcomes under different conditions. For example, it can help us explore the potential impact of financial turmoil on markets. Of course, simulation is inherently dependent on the assumptions made when selecting a model for data generation. However, if the model successfully captures realistic data patterns, its simulation results can still provide valuable insights—even if real-world data does not exactly match the simulated outcomes.</p></li>
 </ol>
+<section id="example-how-fat-tails-impact-the-maximum-drawdown">
+<h3>Example: How Fat Tails Impact the Maximum Drawdown<a class="headerlink" href="#example-how-fat-tails-impact-the-maximum-drawdown" title="Link to this heading">#</a></h3>
+<p>In this example, we will simulate the evolution of a stock price over time based on two different distributional assumptions for daily log-returns: (1) a normal distribution without heavy tails and (2) a Student t distribution with heavy tails. The <strong>Maximum Drawdown (MDD)</strong> is a key risk metric that measures the largest peak-to-trough decline of a financial asset over a given time period. It is defined as the maximum observed loss from a peak to a subsequent trough before the asset price reaches a new peak.</p>
+<p><strong>Definition</strong></p>
+<p>The maximum drawdown for a single price path can be formally defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+MDD = \max_{t \in [0, T]} \left( \frac{\text{Peak}_t - \text{Trough}_t}{\text{Peak}_t} \right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><strong>Peak</strong> is the maximum observed price up to a given time,</p></li>
+<li><p><strong>Trough</strong> is the lowest observed price after the peak but before a new peak is reached.</p></li>
+</ul>
+<p>Below you can see an example for the maximum drawdown for Apple in the time period from January 2024 until May 2025.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_02/apple_prices.csv&quot;</span><span class="p">)</span>
+    <span class="n">prices</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">prices</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+    <span class="n">prices</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">prices</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;2024-01-01&quot;</span><span class="p">)[</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span>
+    <span class="n">prices</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/chapter_02/apple_prices.csv&quot;</span><span class="p">)</span>
+    
+<span class="n">price_series</span> <span class="o">=</span> <span class="n">prices</span>
+<span class="n">running_max</span> <span class="o">=</span> <span class="n">price_series</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span>
+
+<span class="c1"># Calculate the drawdown</span>
+<span class="n">drawdown</span> <span class="o">=</span> <span class="p">(</span><span class="n">price_series</span> <span class="o">/</span> <span class="n">running_max</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Find the maximum drawdown</span>
+<span class="n">mdd</span> <span class="o">=</span> <span class="n">drawdown</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="c1"># Find the peak and trough corresponding to the MDD</span>
+<span class="n">trough_index</span> <span class="o">=</span> <span class="n">drawdown</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">]</span>
+<span class="n">peak_index</span> <span class="o">=</span> <span class="n">price_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">trough_index</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">peak_price</span> <span class="o">=</span> <span class="n">price_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">peak_index</span><span class="p">]</span>
+<span class="n">trough_price</span> <span class="o">=</span> <span class="n">price_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trough_index</span><span class="p">]</span>
+
+<span class="c1"># Plot the price series</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">price_series</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Stock Price&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">peak_price</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;AAPL&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Peak&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">trough_price</span><span class="p">[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trough&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">peak_index</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">peak_price</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;AAPL&quot;</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">trough_index</span><span class="p">],</span> <span class="p">[</span><span class="n">trough_price</span><span class="p">[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+<span class="c1"># Annotations</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Apple Stock Price with Maximum Drawdown&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Price&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f5b967ae57431ae85cfa931e220ef827c813ea3bc6941c23cd0b4e835d519428.png" src="_images/f5b967ae57431ae85cfa931e220ef827c813ea3bc6941c23cd0b4e835d519428.png" />
+</div>
+</div>
+<section id="simulating-price-paths">
+<h4>Simulating price paths<a class="headerlink" href="#simulating-price-paths" title="Link to this heading">#</a></h4>
+<p>To simulate price paths for Apple, we use daily log-returns and</p>
+<div class="math notranslate nohighlight">
+\[
+S_t = S_0 \cdot \exp\left(\sum_{t' \leq t} r_{t'}\right)
+\]</div>
+<p>to determine price evolution, where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r_{t'}\)</span> is the daily log-return,</p></li>
+<li><p>the sum <span class="math notranslate nohighlight">\(\sum_{t' \leq t} r_{t'}\)</span> represents the cumulative log-return over the time period.</p></li>
+</ul>
+<p>This formulation directly reflects the way stock prices are typically simulated in practice, where the final price is the initial price multiplied by the exponential of the cumulative sum of daily returns.</p>
+<p>This means in the first step, we need to simulate a series of <span class="math notranslate nohighlight">\(t\)</span> log-returns. For comparison, we use a normal and a student t distribution as choices for log-returns.</p>
+<p>The normal distribution is defined by two parameters and its density function is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x | \mu, \sigma) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mu \)</span> is the mean,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \sigma \)</span> is the standard deviation,</p></li>
+<li><p><span class="math notranslate nohighlight">\( x \)</span> is the random variable.</p></li>
+</ul>
+<p><strong>Key Properties:</strong></p>
+<ul class="simple">
+<li><p>Symmetric around the mean.</p></li>
+<li><p>Light tails (rapidly decreasing probability as you move away from the mean).</p></li>
+<li><p>The mean and standard deviation are directly specified by the parameters.</p></li>
+</ul>
+<p>The student t distribution is a continuous probability distribution with a density function defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x | \nu, \mu, \sigma) = \frac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu \pi} \sigma \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{(x - \mu)^2}{\nu \sigma^2}\right)^{-\frac{\nu + 1}{2}}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \nu \)</span> is the degrees of freedom,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mu \)</span> is the location parameter (mean),</p></li>
+<li><p><span class="math notranslate nohighlight">\( \sigma \)</span> is the scale parameter (not the standard deviation).</p></li>
+</ul>
+<p><strong>Key Properties:</strong></p>
+<ul class="simple">
+<li><p>The mean is <span class="math notranslate nohighlight">\( \mu \)</span> for <span class="math notranslate nohighlight">\( \nu &gt; 1 \)</span>.</p></li>
+<li><p>The variance is defined as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Var} = \frac{\nu \sigma^2}{\nu - 2}, \quad \text{for} \quad \nu &gt; 2
+\]</div>
+<ul class="simple">
+<li><p>As <span class="math notranslate nohighlight">\( \nu \)</span> approaches infinity, the distribution approaches the normal distribution.</p></li>
+<li><p>Heavy tails, meaning a higher probability for extreme values compared to the normal distribution.</p></li>
+<li><p>The standard deviation is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{SD} = \sigma \sqrt{\frac{\nu}{\nu - 2}}
+\]</div>
+<p>for <strong><span class="math notranslate nohighlight">\( \nu &gt; 2 \)</span></strong>. This heavier tail behavior is crucial in financial modeling, where extreme price movements are more common than a normal distribution would suggest. So let us find out how this impacts the maximum drawdown.</p>
+<p>In the next chapter, you are going to learn how to estimate the parameters of these distributions for given data. In the cell below, you can see how the estimated density curves look in comparison to the empirical distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">log_returns</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Estimate normal distribution parameters</span>
+<span class="n">normal_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_returns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">normal_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">log_returns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Estimate Student-t distribution parameters using MLE</span>
+<span class="n">student_t_params</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">log_returns</span><span class="p">)</span>
+<span class="n">student_t_df</span><span class="p">,</span> <span class="n">student_t_mu</span><span class="p">,</span> <span class="n">student_t_sigma</span> <span class="o">=</span> <span class="n">student_t_params</span>
+<span class="k">if</span> <span class="n">student_t_df</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">student_standard_deviation</span> <span class="o">=</span> <span class="n">student_t_sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">student_t_df</span> <span class="o">/</span> <span class="p">(</span><span class="n">student_t_df</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Print the estimated parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal Distribution Parameters:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean (mu): </span><span class="si">{</span><span class="n">normal_mu</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard Deviation (sigma): </span><span class="si">{</span><span class="n">normal_sigma</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student-t Distribution Parameters:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degrees of Freedom (df): </span><span class="si">{</span><span class="n">student_t_df</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean (mu): </span><span class="si">{</span><span class="n">student_t_mu</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scale (sigma): </span><span class="si">{</span><span class="n">student_t_sigma</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard Deviation (sigma): </span><span class="si">{</span><span class="n">student_standard_deviation</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">log_returns</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Empirical Data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate x values for the fitted distributions</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">log_returns</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">log_returns</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Plot the normal distribution</span>
+<span class="n">normal_pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">normal_mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">normal_sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">normal_pdf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal Fit&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot the Student-t distribution</span>
+<span class="n">student_t_pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">student_t_df</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">student_t_mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">student_t_sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">student_t_pdf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Student-t Fit&quot;</span><span class="p">)</span>
+
+<span class="c1"># Annotations</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Empirical Distribution vs. Fitted Normal and Student-t Distributions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Log-Returns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normal Distribution Parameters:
+Mean (mu): 0.0002
+Standard Deviation (sigma): 0.0189
+
+Student-t Distribution Parameters:
+Degrees of Freedom (df): 2.8440
+Mean (mu): 0.0012
+Scale (sigma): 0.0111
+Standard Deviation (sigma): 0.0204
+</pre></div>
+</div>
+<img alt="_images/c656804860213779dc6d814bf717a19c5c946f5a882e09b8cb6a6720f0bf2ad6.png" src="_images/c656804860213779dc6d814bf717a19c5c946f5a882e09b8cb6a6720f0bf2ad6.png" />
+</div>
+</div>
+<p>In the cell below, we simulate 10,000 price paths. For each path we draw <span class="math notranslate nohighlight">\(t=252\)</span> log-returns either from the fitted normal or the student t distribution and calculate the stock price path. The figure below shows and example of 100 simulated price paths for both distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation Parameters</span>
+<span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Initial stock price, adjust this based on your data</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">252</span>  <span class="c1"># Number of trading days (1 year)</span>
+<span class="n">num_paths</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Number of simulated paths</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Generate Daily Log-Returns for Normal</span>
+<span class="n">normal_log_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">normal_mu</span><span class="p">,</span> <span class="n">normal_sigma</span><span class="p">,</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">))</span>
+
+<span class="c1"># Generate Daily Log-Returns for Student-t</span>
+<span class="n">student_t_log_returns</span> <span class="o">=</span> <span class="n">student_t_mu</span> <span class="o">+</span> <span class="n">student_t_sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="n">student_t_df</span><span class="p">,</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">num_paths</span><span class="p">))</span>
+
+<span class="c1"># Simulate Price Paths</span>
+<span class="n">normal_price_paths</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">normal_log_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">student_t_price_paths</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">student_t_log_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Plot a Sample of the Simulated Paths</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>  <span class="c1"># Plot only 10 paths for clarity</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">normal_price_paths</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">student_t_price_paths</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simulated Stock Price Paths Normal Distribution (Log-Returns)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Trading Days&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Stock Price&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simulated Stock Price Paths Student t Distribution (Log-Returns)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Trading Days&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Stock Price&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/217d0b18ef5d41b56d297111197c280c4641e6540c5b4d894ea4d7bd4a13d612.png" src="_images/217d0b18ef5d41b56d297111197c280c4641e6540c5b4d894ea4d7bd4a13d612.png" />
+</div>
+</div>
+<p>For each simulation path, we can determine the MDD and take a look at all those 10,000 MDD values in the histogram below. We observe significant differences. As the student t distribution is symmetric and has heavy tails its returns are in tendency more extreme in both directions. Under rare adverse scenarios this leads to higher MDD realizations. At the same time, positive more extreme returns also reduce higher MDD realizations on average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate Maximum Drawdown for Each Path</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_max_drawdowns</span><span class="p">(</span><span class="n">price_paths</span><span class="p">):</span>
+    <span class="n">max_drawdowns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">price_paths</span><span class="o">.</span><span class="n">T</span><span class="p">:</span>
+        <span class="n">peak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">drawdown</span> <span class="o">=</span> <span class="p">(</span><span class="n">peak</span> <span class="o">-</span> <span class="n">path</span><span class="p">)</span> <span class="o">/</span> <span class="n">peak</span>
+        <span class="n">max_drawdowns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">drawdown</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">max_drawdowns</span>
+
+<span class="n">normal_max_drawdowns</span> <span class="o">=</span> <span class="n">calculate_max_drawdowns</span><span class="p">(</span><span class="n">normal_price_paths</span><span class="p">)</span>
+<span class="n">student_t_max_drawdowns</span> <span class="o">=</span> <span class="n">calculate_max_drawdowns</span><span class="p">(</span><span class="n">student_t_price_paths</span><span class="p">)</span>
+
+<span class="c1"># Summary Statistics</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">summary_statistics</span><span class="p">(</span><span class="n">max_drawdowns</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">expected_drawdown</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">max_drawdowns</span><span class="p">)</span>
+    <span class="n">max_drawdown</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">max_drawdowns</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=== </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> Distribution ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Maximum Drawdown: </span><span class="si">{</span><span class="n">expected_drawdown</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum Observed Drawdown: </span><span class="si">{</span><span class="n">max_drawdown</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">summary_statistics</span><span class="p">(</span><span class="n">normal_max_drawdowns</span><span class="p">,</span> <span class="s2">&quot;Normal&quot;</span><span class="p">)</span>
+<span class="n">summary_statistics</span><span class="p">(</span><span class="n">student_t_max_drawdowns</span><span class="p">,</span> <span class="s2">&quot;Student-t&quot;</span><span class="p">)</span>
+
+<span class="c1"># Histogram of Maximum Drawdowns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">normal_max_drawdowns</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">student_t_max_drawdowns</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;indianred&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Student-t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Maximum Drawdowns (1000 Simulated Paths)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Maximum Drawdown&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Normal Distribution ===
+Expected Maximum Drawdown: 27.86%
+Maximum Observed Drawdown: 69.47%
+
+=== Student-t Distribution ===
+Expected Maximum Drawdown: 21.91%
+Maximum Observed Drawdown: 92.93%
+</pre></div>
+</div>
+<img alt="_images/515c6fe74c6733136f65532f58ef01473835037816c1534479bbfd3cb857a127.png" src="_images/515c6fe74c6733136f65532f58ef01473835037816c1534479bbfd3cb857a127.png" />
+</div>
+</div>
+</section>
+</section>
 </section>
 <section id="multivariate-random-variables">
 <h2>Multivariate random variables<a class="headerlink" href="#multivariate-random-variables" title="Link to this heading">#</a></h2>
@@ -1157,7 +1458,7 @@ R = D^{-1/2} \Sigma D^{-1/2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e4a288399f9db30277579844cb2348588f3e4036937fc7b263784025c1ca84c3.png" src="_images/e4a288399f9db30277579844cb2348588f3e4036937fc7b263784025c1ca84c3.png" />
+<img alt="_images/6422640c7d3517f577cfdeb832506b77428d5b10f913380daca5c16f2a5ea1ed.png" src="_images/6422640c7d3517f577cfdeb832506b77428d5b10f913380daca5c16f2a5ea1ed.png" />
 </div>
 </div>
 <p>It’s important to note that while independence implies zero correlation, the converse is not necessarily true. Two random variables can be uncorrelated but still dependent in a non-linear way. To visualize this, take a look below. Even though very stron non-linear relationships exist, the linear correlation coefficient underestimates the true relationship.</p>
@@ -1496,7 +1797,13 @@ $<span class="math notranslate nohighlight">\(\text{Var}(R_p) = \mathbf{w}^T \Si
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals">Fundamentals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-moments-and-quantiles">Central moments and quantiles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-of-random-variables">Generation of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-how-fat-tails-impact-the-maximum-drawdown">Example: How Fat Tails Impact the Maximum Drawdown</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-price-paths">Simulating price paths</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-random-variables">Multivariate random variables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-multivariate-random-variables">Definition of multivariate random variables</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-and-continuous-multivariate-distributions">Discrete and continuous multivariate distributions</a></li>
