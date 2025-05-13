@@ -377,9 +377,11 @@
 <p>Each method presents distinct advantages depending on sample sizes, underlying assumptions, and research objectives, with their complementary strengths driving statistical modeling across disciplines from economics to biology. This chapter reviews concepts of OLS and MLE. Afterwards, we examine further important concepts related to estimation, i.e., estimation uncertainty as well as variance and bias of estimators.</p>
 <section id="ordinary-least-squares">
 <h2>Ordinary Least Squares<a class="headerlink" href="#ordinary-least-squares" title="Link to this heading">#</a></h2>
-<p>Even though OLS is a general concept, it usually is used to estimate the expected value. In the simplest case, we can consider a model with a single parameter μ (the population mean), where we aim to estimate this parameter from a sample of observations.</p>
+<p>Even though OLS is a general concept, it usually is used to estimate the expected value. In the simplest case, we can consider a model with a single parameter <span class="math notranslate nohighlight">\(\mu\)</span> (the population mean), where we aim to estimate this parameter from a sample of observations.</p>
 <p>Consider the model:
-$<span class="math notranslate nohighlight">\(Y = \mu + \varepsilon\)</span>$</p>
+$<span class="math notranslate nohighlight">\(
+Y = \mu + \varepsilon
+\)</span>$</p>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Y\)</span> is a random variable</p></li>
@@ -452,7 +454,12 @@ $<span class="math notranslate nohighlight">\(Y = \mu + \varepsilon\)</span>$</p
 <div class="math notranslate nohighlight">
 \[\text{Bias}(\hat{\theta}) = E[\hat{\theta}] - \theta\]</div>
 <p>Bias measures the systematic deviation of an estimator from the true parameter value. An unbiased estimator, on average, yields the correct value of the parameter being estimated. However, any individual estimate from a sample may still differ from the true parameter value due to sampling variability.</p>
-<p>For example, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is an unbiased estimator of the population mean <span class="math notranslate nohighlight">\(\mu\)</span> because <span class="math notranslate nohighlight">\(E[\bar{X}] = \mu\)</span>. In contrast, the sample variance with denominator <span class="math notranslate nohighlight">\(n\)</span> (instead of <span class="math notranslate nohighlight">\(n-1\)</span>) is a biased estimator of the population variance.</p>
+<p>For example, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is an unbiased estimator of the population mean <span class="math notranslate nohighlight">\(\mu\)</span> because <span class="math notranslate nohighlight">\(E[\bar{X}] = \mu\)</span> if <span class="math notranslate nohighlight">\(X\)</span> is independent and identically distributed. This can be formally derived by:</p>
+<div class="math notranslate nohighlight">
+\[
+E[\bar{X}] = E \left( \frac{1}{n} \sum_{i=1}^n X_i \right) \overbrace{=}^{\text{linearity of expectation}} \frac{1}{n} \sum_{i=1}^n E(X_i) \overbrace{=}^{\text{i.i.d}} = \frac{1}{n} n E(X_i) = E(X_i) = \mu
+\]</div>
+<p>In contrast, the sample variance with denominator <span class="math notranslate nohighlight">\(n\)</span> (instead of <span class="math notranslate nohighlight">\(n-1\)</span>) is a biased estimator of the population variance. For some readers it may be easier to picture the consequence of no bias in a simulation setting or a setting which allows us to draw a large number of different samples. For a given sample, we determine the esimate by using the formula of the estimtor. The average of all estimates converges to the true value if the estimator is unbiased.</p>
 </section>
 <section id="variance">
 <h3>Variance<a class="headerlink" href="#variance" title="Link to this heading">#</a></h3>
@@ -466,7 +473,7 @@ $<span class="math notranslate nohighlight">\(Y = \mu + \varepsilon\)</span>$</p
 \[\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + [\text{Bias}(\hat{\theta})]^2\]</div>
 <p>This relationship illustrates the bias-variance tradeoff: sometimes accepting a small bias can substantially reduce variance, resulting in a lower overall MSE.</p>
 <p>The example below samples data with different sample sizes from a normal distribution with an expected value. For sample sizes of <span class="math notranslate nohighlight">\(\lbrace 5, 30, 100 \rbrace\)</span>, we draw random samples with <span class="math notranslate nohighlight">\(\mu = 50\)</span> for 10,000 times and use the OLS estimator to record estimates. The figure below shows histograms of these estimates. The wider empirical distributions of estimates with a smaller sample size demonstrate a higher variability among estimates. The mean of the estimates is very close to the true value of <span class="math notranslate nohighlight">\(\mu\)</span> which demonstrates the unbiasedness of the estimator.</p>
-<p>It is very important to understand that in realizy, we do not know the true value and usually build inferences on a single data sample!</p>
+<p>It is very important to understand that in reality, we do not know the true value and usually build inferences on a single data sample!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -589,7 +596,7 @@ L(\theta) = \left(1 - \theta\right) \cdot \theta \cdot \theta \cdot \theta \cdot
 <p>Let us write this in a shorter form, hereby, <span class="math notranslate nohighlight">\(n = 10\)</span> is the number of all observations:</p>
 <div class="math notranslate nohighlight">
 \[
-L(\theta) = \theta^{\sum_{i=1}^n Y_i} \cdot \left(1 - \theta\right)^{n - \sum_t \sum_{i=1}^n Y_i}
+L(\theta) = \theta^{\sum_{i=1}^n Y_i} \cdot \left(1 - \theta\right)^{n - \sum_{i=1}^n Y_i}
 \]</div>
 <p>Now, applying the log-transformation, we get:</p>
 <div class="math notranslate nohighlight">
@@ -739,28 +746,7 @@ test      0.778415  0.624277
 </div>
 </div>
 </div>
-<p>As a second example we estimate the parameters of a normal and a student t distribution for the STOXX 600 using the training data. Afterwards, we determine the AIC and the BIC for training and test data.</p>
-<p>The density of the normal distribution is defined as:</p>
-<div class="math notranslate nohighlight">
-\[f(Y) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(Y-\mu)^2}{2\sigma^2}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> are parameters representing the expected value and variance. The density of the student t distribution can be defined as:</p>
-<div class="math notranslate nohighlight">
-\[
-f(Y) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sigma \sqrt{\nu \pi} \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{(Y - \mu)^2}{\nu \sigma^2} \right)^{-\frac{\nu+1}{2}}
-\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the location parameter (shifts the distribution),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the scale parameter (controls the spread),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\nu\)</span> is the degrees of freedom (df),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Gamma(\cdot)\)</span> is the gamma function.</p></li>
-</ul>
-<p>The degrees of freedom impact the tails of the distribution. Lower values indicate higher probability masses in the tails, thus, a greater probability for experiencing more extreme events. This is why, the student t distribution is often more realistic for financial returns. It is also a good example for a distribution where the parameters do not exactly match specific moments. The expected value only exists for <span class="math notranslate nohighlight">\(\nu &gt; 1\)</span>, if <span class="math notranslate nohighlight">\(\nu \leq 1\)</span> the expected value does not exist and is infinte, respectively. The variance only exists for <span class="math notranslate nohighlight">\(\nu &gt; 2\)</span>. If this condition is met, the variance can be calculated by:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Var}[Y] = \sigma^2 \cdot \frac{\nu}{\nu - 2}, \quad \text{for } \nu &gt; 2.
-\]</div>
-<p>The output below shows that according to all metrics, the student distribution would be a better fit for the returns of the STOXX 600. This is true for training and test data.</p>
+<p>As a second example we estimate the parameters of a normal and a student t distribution for the STOXX 600 using the training data. Afterwards, we determine the AIC and the BIC for training and test data. The output below shows that according to all metrics, the student distribution would be a better fit for the returns of the STOXX 600. This is true for training and test data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">t</span>
