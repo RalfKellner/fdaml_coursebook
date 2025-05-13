@@ -809,12 +809,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.31121593 0.14356032 0.69606988 0.47820547 0.50596058]
+[0.34596477 0.3876952  0.27314905 0.43730169 0.25067127]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/6b5e74a4babcf318cfa69e43cc6aea20a3a688504858ac1f194b9cc7d17f1c05.png" src="_images/6b5e74a4babcf318cfa69e43cc6aea20a3a688504858ac1f194b9cc7d17f1c05.png" />
+<img alt="_images/34b83d1f917438081e6e740375896748506920ebe5cb44e1f6915079c15f37cc.png" src="_images/34b83d1f917438081e6e740375896748506920ebe5cb44e1f6915079c15f37cc.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -886,7 +886,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/59e1958ecce63a04e5ff3909c1815e189cfdee4e0f9eabe30ae0c3a868da2b00.png" src="_images/59e1958ecce63a04e5ff3909c1815e189cfdee4e0f9eabe30ae0c3a868da2b00.png" />
+<img alt="_images/7d070a746239d15ac4858fcba98264fae6e6ca7440885c26dc2298c1c5555abd.png" src="_images/7d070a746239d15ac4858fcba98264fae6e6ca7440885c26dc2298c1c5555abd.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -902,7 +902,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8676d41dea9342a33ce76d1d5a0f9c98e5712f3b539abbc2bf38c7968efe4af1.png" src="_images/8676d41dea9342a33ce76d1d5a0f9c98e5712f3b539abbc2bf38c7968efe4af1.png" />
+<img alt="_images/cf1d4dce26c9f458eabd95a3f7d6d4314adf675ba6e6d45089b3e3ac8ff2ad9f.png" src="_images/cf1d4dce26c9f458eabd95a3f7d6d4314adf675ba6e6d45089b3e3ac8ff2ad9f.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -957,7 +957,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/42f91526460b479ab73990d1a1e99cf6f5cb2d11dc968538eade5c6acaafdf57.png" src="_images/42f91526460b479ab73990d1a1e99cf6f5cb2d11dc968538eade5c6acaafdf57.png" />
+<img alt="_images/a92596b43424d3b2c130109ce268f6b2150e5d72887bd464740203d6d4311eaf.png" src="_images/a92596b43424d3b2c130109ce268f6b2150e5d72887bd464740203d6d4311eaf.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -1082,7 +1082,7 @@ f(x | \nu, \mu, \sigma) = \frac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu 
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\text{Var} = \frac{\nu \sigma^2}{\nu - 2}, \quad \text{for} \quad \nu &gt; 2
+\text{Var}(X) = \frac{\nu \sigma^2}{\nu - 2}, \quad \text{for} \quad \nu &gt; 2
 \]</div>
 <ul class="simple">
 <li><p>As <span class="math notranslate nohighlight">\( \nu \)</span> approaches infinity, the distribution approaches the normal distribution.</p></li>
@@ -1091,7 +1091,7 @@ f(x | \nu, \mu, \sigma) = \frac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu 
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\text{SD} = \sigma \sqrt{\frac{\nu}{\nu - 2}}
+\text{SD}(X) = \sigma \sqrt{\frac{\nu}{\nu - 2}}
 \]</div>
 <p>for <strong><span class="math notranslate nohighlight">\( \nu &gt; 2 \)</span></strong>. This heavier tail behavior is crucial in financial modeling, where extreme price movements are more common than a normal distribution would suggest. So let us find out how this impacts the maximum drawdown.</p>
 <p>In the next chapter, you are going to learn how to estimate the parameters of these distributions for given data. In the cell below, you can see how the estimated density curves look in comparison to the empirical distribution.</p>
@@ -1632,9 +1632,13 @@ f_X(x) = \frac{1}{(2\pi)^{n/2} |\Sigma|^{1/2}} \exp\left( -\frac{1}{2} (x - \mu)
 <h3>Matrix Formulation for Portfolio Return and Variance<a class="headerlink" href="#matrix-formulation-for-portfolio-return-and-variance" title="Link to this heading">#</a></h3>
 <p>For a portfolio with weight vector <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1, w_2, \ldots, w_n)^T\)</span> and a vector of asset returns <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)^T\)</span> with expected returns <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (E[X_1], E[X_2], \ldots, E[X_n])^T\)</span>, we can express the portfolio expected return and variance using matrix notation:</p>
 <p><strong>Portfolio Expected Return:</strong>
-$<span class="math notranslate nohighlight">\(E[R_p] = \mathbf{w}^T \boldsymbol{\mu} = \sum_{i=1}^n w_i E[X_i]\)</span>$</p>
+$<span class="math notranslate nohighlight">\(
+E[R_p] = \mathbf{w}^T \boldsymbol{\mu} = \sum_{i=1}^n w_i E[X_i]
+\)</span>$</p>
 <p><strong>Portfolio Variance:</strong>
-$<span class="math notranslate nohighlight">\(\text{Var}(R_p) = \mathbf{w}^T \Sigma \mathbf{w} = \sum_{i=1}^n \sum_{j=1}^n w_i w_j \text{Cov}(X_i, X_j)\)</span>$</p>
+$<span class="math notranslate nohighlight">\(
+\text{Var}(R_p) = \mathbf{w}^T \Sigma \mathbf{w} = \sum_{i=1}^n \sum_{j=1}^n w_i w_j \text{Cov}(X_i, X_j)
+\)</span>$</p>
 <p>This matrix formulation is not only more compact but also computationally efficient for large portfolios. It provides an elegant framework for portfolio optimization problems, such as determining the weights that minimize portfolio variance for a given expected return.</p>
 <p>When <span class="math notranslate nohighlight">\(\sum_{i=1}^n w_i = 1\)</span> (weights sum to 1) and no short selling is allowed (<span class="math notranslate nohighlight">\(w_i \geq 0\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>), the set of all possible portfolios in the risk-return space forms the <strong>efficient frontier</strong>, which is the central concept in Markowitz portfolio theory.</p>
 <p>Depending on expectations, variances and covariances different portfolios can be formed by choosing different weights <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. We come back later to this, but for the puropose of demonstration, take a look in the figure below. This shows the cumulative portfolio returns for three portfolios which are formed with the same assets, however, using different portfolio weights.</p>
