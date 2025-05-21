@@ -420,13 +420,13 @@ X_{(\lfloor np + 1 \rfloor)} &amp; \text{ if } np \text{ is not an integer }
 <p>Another interesting estimator for financial data, originating from extreme value theory, is the Hill estimator. We will not delve into its theoretical underpinnings but instead focus on its definition and interpretation. Given independent and identically distributed random variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>, we define the order statistics sorted in descending order as <span class="math notranslate nohighlight">\(X_{(1,n)} \geq X_{(2,n)} \geq \dots \geq X_{(n,n)}\)</span>. The Hill estimator based on the top <span class="math notranslate nohighlight">\(k\)</span> largest observations is defined as:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{\xi}{k, n} = \frac{1}{k} \sum_{j = 1}^k \left( \ln X_{(j,n)} - \ln X_{(k+1,n)} \right)
+\hat{\xi}_{k, n} = \frac{1}{k} \sum_{j = 1}^k \left( \ln X_{(j,n)} - \ln X_{(k+1,n)} \right)
 \]</div>
 <p>This quantity estimates the tail index <span class="math notranslate nohighlight">\(\xi\)</span>, which governs the heaviness of the distribution’s upper tail. Larger values of <span class="math notranslate nohighlight">\(\hat{\xi}_{k,n}\)</span> indicate a heavier tail, meaning a higher likelihood of extreme positive values.</p>
 <p>Since this estimator targets the upper tail, it is more sensitive to large (positive) outliers. In financial applications, however, we are often more concerned with the lower tail—that is, with extreme negative outcomes such as large losses or negative returns. To apply the Hill estimator to the lower tail, a common technique is to multiply all observations by -1, effectively reflecting the distribution, and then apply the same formula to the resulting data.</p>
-<p>One important practical consideration is the choice of <span class="math notranslate nohighlight">\(k\)</span>, the number of top order statistics used in the Hill estimator. In empirical work, k is typically chosen to correspond to a high-order quantile, for example, the largest 5% to 10% of the sample. The goal is to find a range of <span class="math notranslate nohighlight">\(k\)</span> values over which the estimates <span class="math notranslate nohighlight">\(\hat{\xi}{k,n}\)</span> remain relatively stable. This stability is often assessed visually using a Hill plot, where <span class="math notranslate nohighlight">\(\hat{\xi}{k,n}\)</span> is plotted against <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>One important practical consideration is the choice of <span class="math notranslate nohighlight">\(k\)</span>, the number of top order statistics used in the Hill estimator. In empirical work, k is typically chosen to correspond to a high-order quantile, for example, the largest 5% to 10% of the sample. The goal is to find a range of <span class="math notranslate nohighlight">\(k\)</span> values over which the estimates <span class="math notranslate nohighlight">\(\hat{\xi}_{k,n}\)</span> remain relatively stable. This stability is often assessed visually using a Hill plot, where <span class="math notranslate nohighlight">\(\hat{\xi}_{k,n}\)</span> is plotted against <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <p>While this pragmatic approach does not guarantee that the assumptions of extreme value theory are fully satisfied, it still provides a useful approximation of the distribution’s tail behavior. In particular, it allows us to compare how “extreme” the realizations of one dataset are relative to another, even if the exact theoretical conditions are not met.</p>
-<p>When we talk about heavy tails in a distribution, we’re interested in how often extreme values—like very large asset returns or losses—occur. Some distributions, like the Normal, make extreme values very unlikely. Others, like the Pareto or Cauchy, allow for much more dramatic extremes.</p>
+<p>When we talk about heavy tails in a distribution, we’re interested in extreme values—like very large asset returns or losses—occur. Some distributions, like the Normal, make extreme values very unlikely. Others, like the Pareto or Cauchy, allow for much more dramatic extremes.</p>
 <p>The Hill estimator is a simple way to quantify how heavy the upper tail of a distribution is, using only the largest values in a dataset. Here’s a way to think about it:</p>
 <ul class="simple">
 <li><p>imagine lining up your data from largest to smallest.</p></li>
@@ -437,17 +437,17 @@ X_{(\lfloor np + 1 \rfloor)} &amp; \text{ if } np \text{ is not an integer }
 If the drop-off is gradual, the tail is heavy: extremely large values are more likely.</p>
 <p>The Hill estimator looks at how big jumps between the largest values are — but it does so on a log scale. Taking logarithms helps us do two things:</p>
 <ol class="arabic simple">
-<li><p>Measure relative differences rather than absolute ones — this makes sense when values are very large (e.g., <span class="math notranslate nohighlight">\(1000 vs. \)</span>2000 is a more meaningful difference than <span class="math notranslate nohighlight">\(1 vs. \)</span>2 in some contexts).</p></li>
+<li><p>Measure relative differences rather than absolute ones — this makes sense when values are very large (e.g., <span class="math notranslate nohighlight">\(1000 \text{ vs. } 2000\)</span> is a more meaningful difference than <span class="math notranslate nohighlight">\(1 \text{ vs. } 2\)</span> in some contexts).</p></li>
 <li><p>Flatten the scale so that we can average the gaps between extreme values more effectively.</p></li>
 </ol>
-<p>By comparing each of the top k values to the (k+1)-th largest (i.e., the smallest of the “extreme” group), and doing so on a log scale, we get a summary number: the Hill estimate.</p>
+<p>By comparing each of the top <span class="math notranslate nohighlight">\(k\)</span> values to the (<span class="math notranslate nohighlight">\(k+1\)</span>)-th largest (i.e., the smallest of the “extreme” group), and doing so on a log scale, we get a summary number: the Hill estimate.</p>
 <ul class="simple">
 <li><p>If the Hill estimate is high, it means that the top values don’t decay very quickly — the distribution has a heavy tail, and we might expect more large outliers.</p></li>
 <li><p>If it’s low, it means the extreme values fall off quickly — the tail is light, and outliers are less likely.</p></li>
 </ul>
 <p>In finance, this helps us answer questions like:</p>
 <p>“How risky is this asset in terms of rare, extreme losses or gains?”</p>
-<p>Just to clarify, how the estimation is done. Suppose we have the following dataset (e.g., returns or positive losses): <span class="math notranslate nohighlight">\(X = \lbrace2.1, 3.5, 4.0, 5.8, 6.2, 7.1, 8.5, 10.0, 12.3, 15.0\rbrace\)</span></p>
+<p>Just to clarify, how the estimation is done. Suppose we have the following dataset: <span class="math notranslate nohighlight">\(X = \lbrace2.1, 3.5, 4.0, 5.8, 6.2, 7.1, 8.5, 10.0, 12.3, 15.0\rbrace\)</span></p>
 <p>First, sort in  descending order and sort the data from largest to smallest to get the order statistics:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -821,7 +821,7 @@ hill_lower     0.381063     0.363625     0.347228
 \[
 \hat{\sigma}_{\text{annual}} = \sqrt{252} \cdot \hat{\sigma}_{\text{daily}}
 \]</div>
-<p>This transformation is based on the simplified assumption that daily observations are independent and identically distributed random variables. We learned in Chapter 1 that log-returns are additive over time. This means that if we want to determine, e.g., the annual return, we can simply sum over daily return within that year. Together with the independent and identically distributed assumption, the volatility of every day’s log return is the same. Thus, as shown in Chapter 2, the variance for a sum of random variables:</p>
+<p>This transformation is based on the simplified assumption that daily observations are independent and identically distributed random variables. We learned in Chapter 1 that log-returns are additive over time. This means that if we want to determine, e.g., the annual return, we can simply sum over daily returns within that year. Together with the independent and identically distributed assumption, the volatility of every day’s log return is the same. Thus, as shown in Chapter 2, the variance for a sum of random variables:</p>
 <div class="math notranslate nohighlight">
 \[Y = a_1 X_1 + a_2 X_2 + \ldots + a_n X_n = \sum_{i=1}^n a_i X_i\]</div>
 <p>simplifies from:</p>
@@ -832,16 +832,12 @@ hill_lower     0.381063     0.363625     0.347228
 \[\text{Var}(Y) = \sum_{i=1}^n \text{Var}(X_i) = n \cdot \text{Var}(X)\]</div>
 <p>This means for a sum of <span class="math notranslate nohighlight">\(n=252\)</span> log-returns (one year has approximately <span class="math notranslate nohighlight">\(252\)</span> trading days). The variance is <span class="math notranslate nohighlight">\(252\)</span> times the daily variance estimate.</p>
 <p>In the figure below, at every point in time, we use the past <span class="math notranslate nohighlight">\(21\)</span> days to determine a daily volatility estimate, this is annualized and multiplied by <span class="math notranslate nohighlight">\(100\)</span> (as the VIX is in per cent). Thus, at every day, we can compare the volatility estimate of historical data (blue line) to the one which is build on investors’ perception what is going to happen within the next 30 calender days.</p>
-<div class="highlight-{Why notranslate"><div class="highlight"><pre><span></span>
-The **VIX** measures the **market&#39;s expectation of volatility over the next 30 calendar days**, derived from S&amp;P 500 option prices with maturities between 23 and 37 days. It is a **forward-looking** measure.
-
-To compare this to **historical volatility**, we use a **21-day rolling window** because:
-
-- There are roughly **21 trading days in a typical month**.
-- This aligns with the VIX&#39;s 30-day horizon, which is based on calendar days.
-- It allows for a meaningful comparison between **past realized volatility** and **expected future volatility**.
-</pre></div>
-</div>
+<p>We use a 21-day rolling window because:</p>
+<ul class="simple">
+<li><p>There are roughly 21 trading days in a typical month.</p></li>
+<li><p>This aligns with the VIX’s 30-day horizon, which is based on calendar days.</p></li>
+<li><p>It allows for a meaningful comparison between past realized volatility and expected future volatility.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
@@ -939,7 +935,7 @@ To compare this to **historical volatility**, we use a **21-day rolling window**
 <li><p>This “variance risk premium” can cause the VIX to overestimate actual future volatility.</p></li>
 </ul>
 </li>
-<li><p>Behavioral factors**:</p>
+<li><p>Behavioral factors:</p>
 <ul>
 <li><p>During crises or uncertainty, investors tend to overreact, pushing VIX up even if actual volatility hasn’t materialized yet.</p></li>
 <li><p>In calm periods, the VIX might remain elevated if uncertainty about future events lingers.</p></li>
@@ -1282,7 +1278,7 @@ hill_lower     0.367757    0.385532     0.378051
 </div>
 <p>Due to their correlation, it is interesting how their prices evolve over time. For this purpose, the gold-to-silver ratio measures how many ounces of silver are equivalent in price to one ounce of gold. Historically, this ratio has averaged between 55 and 65, though it has experienced wide swings depending on market conditions. A high ratio (e.g., above 80) suggests that silver is relatively undervalued compared to gold, while a low ratio (e.g., below 40) may indicate the opposite. Investors and traders often watch this ratio for mean-reversion opportunities, or as a signal of shifts in monetary policy expectations, inflation risk, or economic momentum.</p>
 <p>When comparing ETF prices such as GLD (gold) and SLV (silver), we can apply the same concepts used in spot price analysis, including the gold-to-silver ratio and their historical correlation. These ETFs are designed to closely track the spot prices of physical metals, so analyzing their price movements provides a practical and accessible way to study the relationship between gold and silver in financial markets.</p>
-<p>In the figure below, we compare the GLD to SLV ETF prices. We observe a variation of the gold-to-silver ration around its average over time. This indicates a characteristic which is called mean-reversion and very popular in finance.</p>
+<p>In the figure below, we compare the GLD to SLV ETF prices. We observe a variation of the gold-to-silver ratio around its average over time. This indicates a characteristic which is called mean-reversion and very popular in finance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>

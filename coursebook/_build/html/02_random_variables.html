@@ -809,12 +809,12 @@ f(x) = \frac{1}{b-a}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First random observations:
 ===========================================================================
-[0.9020805  0.35012967 0.98732199 0.93522668 0.41054251]
+[0.4433757  0.76071803 0.8858761  0.35158447 0.75811044]
 ===========================================================================
 Visualization of all random variables below:
 </pre></div>
 </div>
-<img alt="_images/e6a2d37d2605a0bcabfae1df24b001a7720603d04cf0a4aefd623f91ddbfebec.png" src="_images/e6a2d37d2605a0bcabfae1df24b001a7720603d04cf0a4aefd623f91ddbfebec.png" />
+<img alt="_images/9ea5d1df0cf44dc77d42b4c9d625b226d18352c4b947445952c35681cabfb884.png" src="_images/9ea5d1df0cf44dc77d42b4c9d625b226d18352c4b947445952c35681cabfb884.png" />
 </div>
 </div>
 <p>With uniform random variables, we can simulate data of any distribution for which we can determine the inverse quantile relationship. Remember, that a cumultive distribution function maps realizations to probabilities, <span class="math notranslate nohighlight">\(F: \mathbb{R} \to [0, 1]\)</span>, and a quantile function basically goes backwards, <span class="math notranslate nohighlight">\(F^{-1}: [0, 1] \to \mathbb{R}\)</span>. If we interpret uniform random variables (on <span class="math notranslate nohighlight">\([0, 1]\)</span>) as probabilities and if we are able to determine <span class="math notranslate nohighlight">\(F^{-1}\)</span>, we can create real values which stem from the distribution <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, respectively.</p>
@@ -886,7 +886,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/88fda79d9ff0275abce7bf3f3ec5ff6fb64b4d2728417b7a1254d59d8233e962.png" src="_images/88fda79d9ff0275abce7bf3f3ec5ff6fb64b4d2728417b7a1254d59d8233e962.png" />
+<img alt="_images/76eb70eb6fca6ff2ead989d634811b4d48e7651ef94a9233cfde918f75e98c50.png" src="_images/76eb70eb6fca6ff2ead989d634811b4d48e7651ef94a9233cfde918f75e98c50.png" />
 </div>
 </div>
 <p>If we insert the same uniform numbers into the inverse of an exponential distribution, we observe that the histogram of simulated observations below look very much alike the density curve of an exponentially distributed random variable.</p>
@@ -902,7 +902,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{x - \mu}{\sigm
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/827227f1a3956774be284b4dd881422a5ba0266a1851fc3fb4a0c2c961c1250b.png" src="_images/827227f1a3956774be284b4dd881422a5ba0266a1851fc3fb4a0c2c961c1250b.png" />
+<img alt="_images/7f2c734144f5793a154e895d353ed8b5a29c55e0208cbec8bec578091b0b7d1f.png" src="_images/7f2c734144f5793a154e895d353ed8b5a29c55e0208cbec8bec578091b0b7d1f.png" />
 </div>
 </div>
 <p>This procedure can be formalized by two steps:</p>
@@ -957,7 +957,7 @@ F(x) =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1e11f9fa0b25bc081c85afe4041d6fa12f1b33f8dfc4355f9d21f7f7392940ef.png" src="_images/1e11f9fa0b25bc081c85afe4041d6fa12f1b33f8dfc4355f9d21f7f7392940ef.png" />
+<img alt="_images/76b49a2a7df727cc26a17fdc87b6ca8bbc5cf4570250a01ec91cda9cb4809a89.png" src="_images/76b49a2a7df727cc26a17fdc87b6ca8bbc5cf4570250a01ec91cda9cb4809a89.png" />
 </div>
 </div>
 <p>For this course, two key aspects emphasize the use of simulation:</p>
@@ -1631,14 +1631,16 @@ f_X(x) = \frac{1}{(2\pi)^{n/2} |\Sigma|^{1/2}} \exp\left( -\frac{1}{2} (x - \mu)
 <section id="matrix-formulation-for-portfolio-return-and-variance">
 <h3>Matrix Formulation for Portfolio Return and Variance<a class="headerlink" href="#matrix-formulation-for-portfolio-return-and-variance" title="Link to this heading">#</a></h3>
 <p>For a portfolio with weight vector <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1, w_2, \ldots, w_n)^T\)</span> and a vector of asset returns <span class="math notranslate nohighlight">\(\mathbf{X} = (X_1, X_2, \ldots, X_n)^T\)</span> with expected returns <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (E[X_1], E[X_2], \ldots, E[X_n])^T\)</span>, we can express the portfolio expected return and variance using matrix notation:</p>
-<p><strong>Portfolio Expected Return:</strong>
-$<span class="math notranslate nohighlight">\(
+<p><strong>Portfolio Expected Return:</strong></p>
+<div class="math notranslate nohighlight">
+\[
 E[R_p] = \mathbf{w}^T \boldsymbol{\mu} = \sum_{i=1}^n w_i E[X_i]
-\)</span>$</p>
-<p><strong>Portfolio Variance:</strong>
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p><strong>Portfolio Variance:</strong></p>
+<div class="math notranslate nohighlight">
+\[
 \text{Var}(R_p) = \mathbf{w}^T \Sigma \mathbf{w} = \sum_{i=1}^n \sum_{j=1}^n w_i w_j \text{Cov}(X_i, X_j)
-\)</span>$</p>
+\]</div>
 <p>This matrix formulation is not only more compact but also computationally efficient for large portfolios. It provides an elegant framework for portfolio optimization problems, such as determining the weights that minimize portfolio variance for a given expected return.</p>
 <p>When <span class="math notranslate nohighlight">\(\sum_{i=1}^n w_i = 1\)</span> (weights sum to 1) and no short selling is allowed (<span class="math notranslate nohighlight">\(w_i \geq 0\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>), the set of all possible portfolios in the risk-return space forms the <strong>efficient frontier</strong>, which is the central concept in Markowitz portfolio theory.</p>
 <p>Depending on expectations, variances and covariances different portfolios can be formed by choosing different weights <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. We come back later to this, but for the puropose of demonstration, take a look in the figure below. This shows the cumulative portfolio returns for three portfolios which are formed with the same assets, however, using different portfolio weights.</p>

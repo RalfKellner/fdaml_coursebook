@@ -378,10 +378,11 @@
 <section id="ordinary-least-squares">
 <h2>Ordinary Least Squares<a class="headerlink" href="#ordinary-least-squares" title="Link to this heading">#</a></h2>
 <p>Even though OLS is a general concept, it usually is used to estimate the expected value. In the simplest case, we can consider a model with a single parameter <span class="math notranslate nohighlight">\(\mu\)</span> (the population mean), where we aim to estimate this parameter from a sample of observations.</p>
-<p>Consider the model:
-$<span class="math notranslate nohighlight">\(
+<p>Consider the model:</p>
+<div class="math notranslate nohighlight">
+\[
 Y = \mu + \varepsilon
-\)</span>$</p>
+\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Y\)</span> is a random variable</p></li>
@@ -390,7 +391,9 @@ Y = \mu + \varepsilon
 </ul>
 <p>The Ordinary Least Squares approach aims to find the value of <span class="math notranslate nohighlight">\(\mu\)</span> that minimizes the sum of squared deviations between a series <span class="math notranslate nohighlight">\(Y_1, Y_2, ..., Y_n\)</span> which are assumed to be independent and identically distributed:</p>
 <div class="math notranslate nohighlight">
-\[S(\mu) = \sum_{i=1}^n (Y_i - \mu)^2\]</div>
+\[
+S(\mu) = \sum_{i=1}^n (Y_i - \mu)^2
+\]</div>
 <p>To find the minimum, we take the derivative with respect to <span class="math notranslate nohighlight">\(\mu\)</span> and set it equal to zero:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial S(\mu)}{\partial \mu} = -2\sum_{i=1}^n (Y_i - \mu) = 0\]</div>
