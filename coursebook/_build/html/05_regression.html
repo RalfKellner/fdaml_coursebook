@@ -356,6 +356,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-as-a-distributional-model">Linear Regression as a Distributional Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-in-linear-regression-is-different-from-zero">Hypothesis Testing in Linear Regression: Is β Different from Zero?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypotheses">The Hypotheses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-statistic-t-test">The Test Statistic (t-Test)</a></li>
@@ -486,7 +487,7 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_d x_{id} + \vare
 <p>Predictions of the model for each observation are given by:</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_k x_{ik} \quad \text{for } i = 1, 2, \dots, n
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_2 x_{i2} + \dots + \hat{\beta}_d x_{id} \quad \text{for } i = 1, 2, \dots, n
 \]</div>
 <p>This framework allows us to study how multiple variables jointly explain variations in an outcome — a common setup in empirical asset pricing and financial econometrics.</p>
 <section id="understanding-the-impact-of-intercept-and-slope">
@@ -696,6 +697,33 @@ Y = \beta_0 + \beta_1 X_1 + \dots + \beta_d X_d + \varepsilon
 </div>
 <p>Understanding these assumptions is key to knowing <strong>when OLS is trustworthy</strong>, and when to consider alternatives like <strong>robust standard errors</strong>, <strong>GARCH models</strong>, or <strong>nonlinear regressions</strong>.</p>
 </section>
+</section>
+<section id="linear-regression-as-a-distributional-model">
+<h2>Linear Regression as a Distributional Model<a class="headerlink" href="#linear-regression-as-a-distributional-model" title="Link to this heading">#</a></h2>
+<p>Linear regression is traditionally introduced as a method for modeling the conditional expectation of a response variable Y given a set of predictors <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. However, beyond simply modeling the mean, linear regression also implies a distributional assumption about the target variable.</p>
+<p>The reason for this is that the error term is a random variable with <span class="math notranslate nohighlight">\(E(\varepsilon) = 0\)</span> and constant variance <span class="math notranslate nohighlight">\(\text{Var}(\varepsilon) = \sigma^2\)</span>. This implies:</p>
+<div class="math notranslate nohighlight">
+\[
+Y_i \sim \mathcal{D}(\mu_i, \sigma^2, \mathbf{\theta}), \quad \text{with } \mu_i = \mathbf{x}_i^\top \boldsymbol{\beta}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> represents a distributional model with possible additional parameters <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>. Thus, each response <span class="math notranslate nohighlight">\(Y_i\)</span> is drawn from a distribution with a mean (expectation) that depends on the individual covariates, and a shared variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> across all observations. Each observation <span class="math notranslate nohighlight">\(Y_i\)</span> has a specific expected value:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[Y_i \mid \mathbf{x}_i] = \mu_i = \mathbf{x}_i^\top \boldsymbol{\beta}
+\]</div>
+<p>The regression model provides individualized predictions for each observation. These are point estimates for the conditional mean of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>. The assumption for a constant variance implies that the variation around the expected value is identical for every observation. This is known as the homoskedasticity assumption. Hence, while the mean structure is individualized, the noise structure is global.</p>
+<p>Putting it all together:</p>
+<ul class="simple">
+<li><p>Each <span class="math notranslate nohighlight">\(Y_i\)</span> is modeled as coming from its own normal distribution:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Y_i \sim \mathcal{D}(\mu_i, \sigma^2, \mathbf{\theta}) \quad \text{with } \mu_i = \mathbf{x}_i^\top \boldsymbol{\beta}
+\]</div>
+<ul class="simple">
+<li><p>These distributions differ in their mean <span class="math notranslate nohighlight">\(\mu_i\)</span>, but share the same variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+<p>This view aligns with the distributional regression framework, where one models not only the mean but potentially other parameters of the response distribution (e.g., variance, skewness) conditional on predictors. In classical linear regression, the mean is flexible, but the variance is fixed.</p>
 </section>
 <section id="hypothesis-testing-in-linear-regression-is-different-from-zero">
 <h2>Hypothesis Testing in Linear Regression: Is β Different from Zero?<a class="headerlink" href="#hypothesis-testing-in-linear-regression-is-different-from-zero" title="Link to this heading">#</a></h2>
@@ -1062,8 +1090,8 @@ R_{i,t} - R_{f,t}  = \alpha_i + \beta_i R_{m,t} + \varepsilon_t
 Dep. Variable:          excess_return   R-squared:                       0.548
 Model:                            OLS   Adj. R-squared:                  0.548
 Method:                 Least Squares   F-statistic:                     3049.
-Date:                Wed, 21 May 2025   Prob (F-statistic):               0.00
-Time:                        08:03:39   Log-Likelihood:                 7544.4
+Date:                Wed, 28 May 2025   Prob (F-statistic):               0.00
+Time:                        09:28:49   Log-Likelihood:                 7544.4
 No. Observations:                2515   AIC:                        -1.508e+04
 Df Residuals:                    2513   BIC:                        -1.507e+04
 Df Model:                           1                                         
@@ -1100,8 +1128,8 @@ Notes:
 Dep. Variable:          excess_return   R-squared:                       0.461
 Model:                            OLS   Adj. R-squared:                  0.456
 Method:                 Least Squares   F-statistic:                     100.1
-Date:                Wed, 21 May 2025   Prob (F-statistic):           2.14e-17
-Time:                        08:03:39   Log-Likelihood:                 169.02
+Date:                Wed, 28 May 2025   Prob (F-statistic):           2.14e-17
+Time:                        09:28:49   Log-Likelihood:                 169.02
 No. Observations:                 119   AIC:                            -334.0
 Df Residuals:                     117   BIC:                            -328.5
 Df Model:                           1                                         
@@ -1213,8 +1241,8 @@ R_{i,t} - R_{f,t}  = \alpha_i + \beta_m R_{m,t} + \beta_s \cdot \text{SMB}_t + \
 Dep. Variable:          excess_return   R-squared:                       0.601
 Model:                            OLS   Adj. R-squared:                  0.601
 Method:                 Least Squares   F-statistic:                     1262.
-Date:                Wed, 21 May 2025   Prob (F-statistic):               0.00
-Time:                        08:03:39   Log-Likelihood:                 7701.5
+Date:                Wed, 28 May 2025   Prob (F-statistic):               0.00
+Time:                        09:28:49   Log-Likelihood:                 7701.5
 No. Observations:                2515   AIC:                        -1.540e+04
 Df Residuals:                    2511   BIC:                        -1.537e+04
 Df Model:                           3                                         
@@ -1253,8 +1281,8 @@ Notes:
 Dep. Variable:          excess_return   R-squared:                       0.529
 Model:                            OLS   Adj. R-squared:                  0.516
 Method:                 Least Squares   F-statistic:                     42.98
-Date:                Wed, 21 May 2025   Prob (F-statistic):           1.05e-18
-Time:                        08:03:39   Log-Likelihood:                 177.00
+Date:                Wed, 28 May 2025   Prob (F-statistic):           1.05e-18
+Time:                        09:28:49   Log-Likelihood:                 177.00
 No. Observations:                 119   AIC:                            -346.0
 Df Residuals:                     115   BIC:                            -334.9
 Df Model:                           3                                         
@@ -1640,6 +1668,7 @@ R_{i,t} = \alpha_i + \beta_{i1} F_{1,t} + \beta_{i2} F_{2,t} + \dots + \varepsil
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-as-a-distributional-model">Linear Regression as a Distributional Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-in-linear-regression-is-different-from-zero">Hypothesis Testing in Linear Regression: Is β Different from Zero?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypotheses">The Hypotheses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-statistic-t-test">The Test Statistic (t-Test)</a></li>
