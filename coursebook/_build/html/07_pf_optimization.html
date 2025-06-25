@@ -414,7 +414,7 @@ $<span class="math notranslate nohighlight">\(
 \text{Var}(R_p) = w^\top \Sigma w
 \)</span>$</p></li>
 </ul>
-<p><strong>Note:</strong> Markowitz’s theory applies to any risky assets—not just stocks. While examples often focus on equities due to data availability and clarity of diversification effects, the framework is general and can include bonds, commodities, or any asset with estimable returns and risk. Many textbooks explain Markowitz’s theory by using only stocks as risky assets. We use an example with different asset classes.</p>
+<p><strong>Note:</strong> Markowitz’s theory applies to any risky assets—not just stocks. While examples often focus on equities due to data availability and clarity of diversification effects, the framework is general and can include bonds, commodities, or any asset with estimatable returns and risk. Many textbooks explain Markowitz’s theory by using only stocks as risky assets. We use an example with different asset classes.</p>
 <section id="optimal-portfolios-of-risky-assets">
 <h2>Optimal Portfolios of Risky Assets<a class="headerlink" href="#optimal-portfolios-of-risky-assets" title="Link to this heading">#</a></h2>
 <p>The first steps for understanding Markowitz’s idea of modern portfolio theory are:</p>
@@ -626,60 +626,6 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
 <span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
 
-<span class="c1"># Updated correlation matrix</span>
-<span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">]</span>
-<span class="p">])</span>
-
-<span class="c1"># Convert to covariance matrix</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">correlations</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">std_devs</span><span class="p">,</span> <span class="n">std_devs</span><span class="p">)</span>
-
-<span class="c1"># Simulate long-only, fully-invested portfolios</span>
-<span class="n">num_portfolios</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_portfolios</span><span class="p">))</span>  <span class="c1"># return, risk, Sharpe</span>
-<span class="n">weights_list</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_portfolios</span><span class="p">):</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>
-    <span class="n">weights_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-
-    <span class="n">port_return</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-    <span class="n">port_risk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span>
-    <span class="n">sharpe</span> <span class="o">=</span> <span class="n">port_return</span> <span class="o">/</span> <span class="n">port_risk</span>
-
-    <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_return</span>
-    <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_risk</span>
-    <span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sharpe</span>
-
-<span class="c1"># Plot the efficient frontier</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sharpe Ratio&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Risk (Standard Deviation)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Expected Return&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Efficient Frontier (Mixed Asset Universe incl. Corporate Bond)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/c76ea879752be35c96f2c52d869bd4834b3fa3622142097e3fc63ec704eac198.png" src="_images/c76ea879752be35c96f2c52d869bd4834b3fa3622142097e3fc63ec704eac198.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># Expected returns and volatilities</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
-<span class="n">std_devs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">])</span>
-
 <span class="c1"># Realistic correlation matrix</span>
 <span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">],</span>
@@ -744,7 +690,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/462f45dd8b83a28802c586c178d1682ba2120f515b16c02c63fba424c2cb93d6.png" src="_images/462f45dd8b83a28802c586c178d1682ba2120f515b16c02c63fba424c2cb93d6.png" />
+<img alt="_images/a75802affd193edbe648dc095d315eb9793c9c48e3a85efed50165e343e1cd9e.png" src="_images/a75802affd193edbe648dc095d315eb9793c9c48e3a85efed50165e343e1cd9e.png" />
 </div>
 </div>
 <p>From an investor’s perspective, we can look at the figure in two ways:</p>
@@ -757,7 +703,7 @@ $<span class="math notranslate nohighlight">\(
 <li><p>At a given risk level, you choose the portfolio with with the highest profit</p></li>
 <li><p>At a given profit, you choose the level with the lowest risk</p></li>
 </ul>
-<p>The portfolios left for you are given on the red line in the figure. Technically, they are defined as an <strong>efficient portfolio</strong> is a portfolio that solves the following constrained optimization problems. There are two equivalent formulations:</p>
+<p>The portfolios left for you are given on the red line in the figure. Technically, they are defined as an <strong>efficient portfolio</strong> which is a portfolio that solves the following constrained optimization problems. There are two equivalent formulations:</p>
 <ol class="arabic simple">
 <li><p>Minimum Risk for a Given Expected Return</p></li>
 </ol>
@@ -884,7 +830,7 @@ SR_p = \frac{\mu_p - r_f}{\sigma_p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3f9762d4707a7aefcfe035443356d0599d81d2256c8a02a239fa1252f16fa7d7.png" src="_images/3f9762d4707a7aefcfe035443356d0599d81d2256c8a02a239fa1252f16fa7d7.png" />
+<img alt="_images/2d84354c740a2c5ff2cc4f67fdf7e8ae969fd9a3029403c87e104f847391162a.png" src="_images/2d84354c740a2c5ff2cc4f67fdf7e8ae969fd9a3029403c87e104f847391162a.png" />
 </div>
 </div>
 </section>
@@ -893,13 +839,11 @@ SR_p = \frac{\mu_p - r_f}{\sigma_p}
 <p>Modern Portfolio Theory implies that all investors would ultimately allocate part of their wealth into the <strong>same</strong> optimal risky portfolio — the tangency portfolio — and then combine it with the risk-free asset according to their individual risk preferences.</p>
 <p>But in practice, this is <strong>not what we observe</strong>. So where is the gap between theory and reality?</p>
 <ol class="arabic simple">
-<li><p>Estimation uncertainty
-To construct the tangency portfolio, we need to know the <strong>true expected returns</strong> <span class="math notranslate nohighlight">\( \mu \)</span> and the <strong>true covariance matrix</strong> <span class="math notranslate nohighlight">\( \Sigma \)</span> of all risky assets. In reality, these parameters are <strong>unknown</strong> and must be estimated from historical data — which introduces sampling error and model risk.
+<li><p>Estimation uncertainty: To construct the tangency portfolio, we need to know the <strong>true expected returns</strong> <span class="math notranslate nohighlight">\( \mu \)</span> and the <strong>true covariance matrix</strong> <span class="math notranslate nohighlight">\( \Sigma \)</span> of all risky assets. In reality, these parameters are <strong>unknown</strong> and must be estimated from historical data — which introduces sampling error and model risk.
 (Also, note that we “cheated” in our example by treating broad indices as individual assets.)</p></li>
-<li><p>Oversimplified investor preferences
-MPT assumes that investor preferences are fully described by <strong>mean and variance</strong> — which implies normally distributed returns or quadratic utility. But in reality, investors often care about higher-order moments like skewness and maximum drawdown. For example, two portfolios with the same expected return and volatility may differ drastically in their <strong>tail risk</strong> — and most investors would not be indifferent between them.</p></li>
-<li><p>Investment horizon heterogeneity
-Not all investors have the same <strong>investment horizon</strong>. Some may invest for weeks, others for decades. This affects how returns and risks are estimated — short-term volatilities and correlations can be very different from long-term ones. Thus, the optimal portfolio may differ based on time horizon alone.</p></li>
+<li><p>Oversimplified investor preferences: MPT assumes that investor preferences are fully described by <strong>mean and variance</strong> — which implies normally distributed returns or quadratic utility. But in reality, investors often care about higher-order moments like skewness and maximum drawdown. For example, two portfolios with the same expected return and volatility may differ drastically in their <strong>tail risk</strong> — and most investors would not be indifferent between them.</p></li>
+<li><p>Investment horizon heterogeneity: Not all investors have the same <strong>investment horizon</strong>. Some may invest for weeks, others for decades. This affects how returns and risks are estimated — short-term volatilities and correlations can be very different from long-term ones. Thus, the optimal portfolio may differ based on time horizon alone.</p></li>
+<li><p>Investment preferences: Investors may have different goals or exclude certain investment types on purpose. For instance, an investor might want to invest into climate friendly assets to hedge against financial risk of climate change.</p></li>
 </ol>
 <section id="practical-adaptations-and-extensions-of-modern-portfolio-theory">
 <h3>Practical Adaptations and Extensions of Modern Portfolio Theory<a class="headerlink" href="#practical-adaptations-and-extensions-of-modern-portfolio-theory" title="Link to this heading">#</a></h3>
@@ -975,9 +919,11 @@ Not all investors have the same <strong>investment horizon</strong>. Some may in
 \[
 w_{\text{mvp}} = \frac{\Sigma^{-1} \mathbf{1}}{\mathbf{1}^\top \Sigma^{-1} \mathbf{1}}
 \]</div>
-<p>Where:
-•	<span class="math notranslate nohighlight">\( \Sigma^{-1} \)</span> is the inverse of the covariance matrix
-•	<span class="math notranslate nohighlight">\( \mathbf{1} \)</span> is a vector of ones</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \Sigma^{-1} \)</span> is the inverse of the covariance matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{1} \)</span> is a vector of ones</p></li>
+</ul>
 <p>With our input parameters from before:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1048,7 +994,7 @@ Weight for Oil: 0.0066
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">60</span>  <span class="c1"># e.g., 60 months</span>
-<span class="n">mean_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span> <span class="c1"># not used for MVP, but realistic</span>
+<span class="n">mean_returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span> <span class="c1"># not used for MVP</span>
 
 <span class="n">simulation_runs</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">W_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">simulation_runs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">std_devs</span><span class="p">)))</span>
@@ -1126,7 +1072,7 @@ Weight for Oil: 0.0066
 \]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(S\)</span> is the sample covariance matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\Sigma}\)</span> is the sample covariance matrix</p></li>
 <li><p><span class="math notranslate nohighlight">\(F\)</span> is the shrinkage <strong>target matrix</strong> (typically <span class="math notranslate nohighlight">\(F = \bar{\sigma}^2 I\)</span>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\delta \in [0, 1]\)</span> is the <strong>shrinkage intensity</strong>, chosen to minimize mean squared error (MSE)</p></li>
 </ul>
@@ -1442,6 +1388,14 @@ dtype: float64
 <p>Through rolling-window backtests, we saw that estimation uncertainty can lead to very different portfolio outcomes, especially when sample sizes are limited or market conditions change. Shrinkage methods provide a practical solution by regularizing the covariance matrix, improving stability and out-of-sample performance.</p>
 <p>While we focused on classical techniques and monthly data, there is a wide range of extensions worth exploring. These include using <strong>daily returns</strong> for more granular estimation, implementing <strong>time-varying covariance models</strong> (e.g., exponentially weighted or GARCH-based estimators), incorporating <strong>alternative risk measures</strong> like Value-at-Risk (VaR) or Conditional Value-at-Risk (CVaR), or even using <strong>machine learning methods</strong> for dynamic portfolio allocation.</p>
 <p>Ultimately, portfolio optimization remains a powerful yet complex tool. Its effectiveness depends heavily on the quality and stability of input parameters, making thoughtful estimation techniques and robust modeling choices essential for practical success.</p>
+<p>The main takeaways are:</p>
+<ul class="simple">
+<li><p>As long as pairwise dependencies are not perfect, strategically selecting allocations into different assets can be used to change the profit-risk character of a portfolio</p></li>
+<li><p>Deciding rational reduces the universe of portfolios to a subset of efficient portfolios</p></li>
+<li><p>In theory, only one portfolio is selected by investors in combination with a risk-free asset</p></li>
+<li><p>In reality, optimal portfolios are challenged by estimation uncertainty and can not be identified</p></li>
+<li><p>Several approaches such as shrinkage estimators exist to reduce the impact of estimation uncertainty</p></li>
+</ul>
 </section>
 </section>
 
